@@ -10,5 +10,27 @@
 
 {% block body %}
 
+<div id="nav">
+    <a href="/">home</a> ;
+    <a href="#">rules</a> ;
+    <a href="#">post</a>
+    <br/>
+    <a href="#">top 50</a> ;
+    <a href="#">random</a> ;
+    <a href="#">search</a>
+</div>
+
+<div class="hr"></div>
+
+<div id="content">
+
+    <h2>{% block pagetitle %}{% endblock %}</h2>
+
+    {% block content %}{% endblock %}
+
+</div>
+
+<div class="hr"></div>
+
 
 {% endblock body %}

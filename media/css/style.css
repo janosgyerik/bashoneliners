@@ -1,0 +1,92 @@
+/* 
+ * File: style.css
+ * Purpose: general-purpose stylesheet with solid conventions.
+ * */
+
+/* Begin Various Tags */
+
+    body {
+	font-family: Tahoma, Verdana, Arial, sans-serif;
+	font-size: 10pt;
+	color: black;
+	margin: 0;
+	padding: 0;
+	border: 0;
+    }
+
+    acronym, abbr {
+	cursor: help;
+    }
+
+    hr {
+	display: none;
+    }
+
+    img {
+	border: none;
+	vertical-align: middle;
+    }
+
+/* End Various Tags */
+
+
+/* Begin Images */
+
+    img.centered {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+    }
+
+    img.alignright {
+	padding: 4px;
+	margin: 0 0 2px 7px;
+	display: inline;
+    }
+
+    img.alignleft {
+	padding: 4px;
+	margin: 0 7px 2px 0;
+	display: inline;
+    }
+
+/* End Images */
+
+
+/* Begin Utility Classes */
+
+    .floatleft {
+	float: left;
+	margin-right: 1em;
+    }
+
+    .floatright {
+	float: right;
+	margin-left: 1em;
+    }
+
+    .alignright {
+	text-align: right;
+    }
+
+    .center {
+	text-align: center;
+    }
+
+    .clear {
+	clear: both;
+    }
+
+    .hidden {
+	display: none;
+    }
+	    
+    .screen-reader-text {
+	position: absolute;
+	left: -1000em;
+    }
+
+/* End Utility Classes */
+
+
+/* eof */

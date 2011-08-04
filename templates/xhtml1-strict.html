@@ -1,0 +1,41 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+	<title>{% block title %}{% endblock %}</title>
+
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+	<meta name="author" content="Janos Gyerik info@titan2x.com" />
+	<meta name="copyright" content="Janos Gyerik info@titan2x.com" />
+	<meta name="keywords" content="{% block keywords %}{% endblock %}" />
+	<meta name="description" content="{% block description %}{% endblock %}" />
+
+	<!--
+	<script type="text/javascript" src="/media/js/jquery.js"></script>
+	<script type="text/javascript" src="/media/js/jquery-ui.js"></script>
+	<script type="text/javascript" src="/media/js/jquery.cookie.js"></script>
+	-->
+	{% block javascript_src %}{% endblock %}
+	{% block custom_javascript_src %}{% endblock %}
+
+	<link rel="stylesheet" type="text/css" href="/media/css/style.css"></link>
+	<link rel="stylesheet" type="text/css" href="/media/css/layout.css"></link>
+	<link rel="stylesheet" type="text/css" href="/media/css/nav.css"></link>
+	<link rel="stylesheet" type="text/css" href="/media/css/titan2x.css"></link>
+	{% block css %}{% endblock %}
+	{% block custom_css %}{% endblock %}
+	
+	<script type="text/javascript">
+	    <!--
+		{% block javascript %}
+		{% endblock %}
+	    //-->
+	</script>
+    </head>
+
+<body>
+
+{% block body %}
+{% endblock %}
+
+</body>
+</html>

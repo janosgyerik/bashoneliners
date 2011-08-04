@@ -1,0 +1,45 @@
+get going
+=========
+- model
+	- OneLiner
+		: line
+		: summary
+		: explanation
+	- Hacker < DjangoUser
+		: twitter fields
+		: stackoverflow fields
+		: blog
+		: homepage
+	- Vote
+		: OneLiner
+		: Hacker
+	- Tag
+		: OneLiner
+	- Comment
+		: OneLiner
+		: Hacker
+
+
+'just ok' design
+================
+- show oneliners
+- add a oneliner as anon
+- sign up
+- cool design
+- meta
+	- keywords
+	- description
+
+
+after cool design
+=================
+- show oneliners
+- add a oneliner as anon
+- add a oneliner as member
+- member profile editor
+
+
+polish
+======
+- rss
+

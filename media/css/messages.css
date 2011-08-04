@@ -1,0 +1,107 @@
+/* 
+ * File: messages.css
+ * Purpose: define the style of message boxes and inline messages
+ *
+ * */
+
+.success { color: #66a; }
+.failure { color: red; }
+.error { color: red; }
+.warning { color: #a0a; }
+.notice { color: #080; }
+
+.verbatim {
+    background-color: #cdd;
+    border: 1px dashed black;
+    padding: .5em;
+    font-family: monospace;
+    white-space: pre;
+}
+
+.verbatim-copyable {
+    background-color: #cdd;
+    border: 1px dashed black;
+    padding: .5em;
+    font-family: monospace;
+}
+
+div.success {
+    background-color: #ddf;
+    border: 1px solid #88f;
+    padding: 1em;
+    text-align: left ! important;
+    font-style: italic;
+    margin: 1em 0;
+}
+div.success ul {
+    margin: 0;
+}
+
+div.failure {
+    background-color: #fdd;
+    border: 1px solid #f88;
+    padding: 1em;
+    text-align: left ! important;
+    font-style: italic;
+    margin: 1em 0;
+}
+div.failure ul {
+    margin: 0;
+}
+
+div.error {
+    background-color: #fdd;
+    border: 1px solid #f88;
+    padding: 1em;
+    text-align: left ! important;
+    font-style: italic;
+    margin: 1em 0;
+}
+div.error ul {
+    margin: 0;
+}
+
+div.warning {
+    background-color: #fdf;
+    border: 1px solid #f8f;
+    padding: 1em;
+    text-align: left ! important;
+    font-style: italic;
+    margin: 1em 0;
+}
+div.warning ul {
+    margin: 0;
+}
+
+div.notice {
+    background-color: #dfd;
+    border: 1px solid #8f8;
+    padding: 1em;
+    text-align: left ! important;
+    font-style: italic;
+    margin: 1em 0;
+}
+div.notice ul {
+    margin: 0;
+}
+
+div.news {
+    background-color: #ffa;
+    border: 1px solid #cc0;
+    padding: 1em;
+    text-align: left ! important;
+    font-style: italic;
+    margin: 1em 0;
+}
+
+div.debug {
+    background-color: #ddd;
+    border: 1px solid #ccc;
+    padding: 1em;
+    text-align: left ! important;
+    font-style: italic;
+    margin: 1em 0;
+    color: #888;
+}
+
+/* eof */

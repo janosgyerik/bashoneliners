@@ -61,4 +61,14 @@ a.fancy[href^="mailto:"] {
     padding-left: 15px;
 }
 
+#nav a span {
+    padding: .5em;
+    border: 1px solid transparent;
+    line-height: 3em;
+}
+
+#nav a:hover span {
+    border: 1px solid #aaa;
+}
+
 /* eof */

@@ -54,15 +54,6 @@ a img {
     border: 1px solid #ccc;
 }
 
-/*
-code {
-    line-height: 1.3em;
-    padding: 0 .5em;
-    font-family: "Courier New", Courier, monospace;
-    background: #fff7f0;
-    border: 1px solid #ccc;
-}
-    */
 code {
     line-height: 1.3em;
     padding: 0 .5em;
@@ -73,17 +64,13 @@ code {
     color: blue;
 }
 
-.oneliner .summary {
-    margin: 1.5em;
-}
-
-.oneliner .explanation {
+.oneliner .summary, .oneliner .explanation, .oneliner .caveats {
     margin: 1.5em;
 }
 
 .oneliner .eof {
     font-family: "Courier New", Courier, monospace;
-    color: #00030f;
+    color: #a0a3af;
     font-weight: bold;
     text-align: center;
 }

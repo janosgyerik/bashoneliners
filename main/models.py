@@ -28,7 +28,7 @@ class OneLiner(models.Model):
 
     line = models.TextField()
     summary = models.TextField()
-    explanation = models.TextField()
+    explanation = models.TextField(blank=True)
     caveats = models.TextField(blank=True)
 
     is_published = models.BooleanField(default=False)

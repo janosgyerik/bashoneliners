@@ -35,11 +35,21 @@ We are in a very very early stage of development but we will progress rapidly.
 	{{ oneliner.summary }}
     </div>
 
+    {% if oneliner.explanation %}
     <div class="explanation">
+	<h3>Explanation</h3>
 	{{ oneliner.explanation|nst|safe }}
     </div>
+    {% endif %}
 
-    <div class="eof">EOF</div>
+    {% if oneliner.caveats %}
+    <div class="caveats">
+	<h3>Caveats</h3>
+	{{ oneliner.caveats|nst|safe }}
+    </div>
+    {% endif %}
+
+    <div class="eof">### EOF ###</div>
 </div>
 {% endfor %}
 

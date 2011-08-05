@@ -14,7 +14,7 @@ from bashoneliners.main.models import Hacker, OneLiner
 
 def index(request):
     params = {
-	    'oneliners': OneLiner.objects.all()
+	    'oneliners': OneLiner.objects.all().order_by('-pk')
 	    }
     return render_to_response('main/index.html', params)
 

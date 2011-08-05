@@ -21,5 +21,8 @@ def index(request):
 def oneliner(request, pk):
     return index(request)
 
+def rules(request):
+    return render_to_response('main/rules.html')
+
 
 # eof

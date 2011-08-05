@@ -1,12 +1,29 @@
 {% extends "base.html" %}
 
-{% block pagetitle %}Bash One Liners{% endblock %}
+{% block pagetitle %}bashoneliners.com{% endblock %}
 
 {% block keywords %}{% endblock %}
 
 {% block description %}{% endblock %}
 
 {% block content %}
+
+<p>
+O hi, we aim to collect here <strong>*good*</strong> bash/ksh oneliners.
+We are in a very very early stage of development but we will progress rapidly.
+</p>
+
+<h3>Features in the making</h3>
+
+<ul>
+    <li>Create account, login. Members will be able to post oneliners.</li>
+    <li>Vote on a oneliner. Members will be able to vote up or down a oneliner.</li>
+    <li>Comment on a oneliner. Members will be able to comment on oneliners and make suggestions.</li>
+</ul>
+
+<p>At the moment we are trying to define the posting rules, <a href="/main/rules/">see the rules page</a>.</p>
+
+<h2>latest 50</h2>
 
 {% for oneliner in oneliners %}
 <div class="oneliner">

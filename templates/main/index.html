@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}Bash One Liners{% endblock %}
+{% block pagetitle %}Bash One Liners{% endblock %}
 
 {% block keywords %}{% endblock %}
 
@@ -8,5 +8,20 @@
 
 {% block content %}
 
+{% for oneliner in oneliners %}
+<div class="oneliner">
+    <pre>$ {{ oneliner.line }}</pre>
+
+    <div class="summary">
+	{{ oneliner.summary }}
+    </div>
+
+    <div class="explanation">
+	{{ oneliner.explanation }}
+    </div>
+
+    <div class="eof">EOF</div>
+</div>
+{% endfor %}
 
 {% endblock %}

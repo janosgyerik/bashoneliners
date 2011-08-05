@@ -16,9 +16,19 @@ def randomstring(length=16):
 
 class Hacker(DjangoUser):
     twitter = models.SlugField(max_length=100, blank=True, null=True)
+    #stackoverflow
+    #blog
+    #homepage
 
     # Use UserManager to get the create_user method, etc.
     objects = UserManager()
+
+class OneLiner(models.Model):
+    line = models.TextField()
+    summary = models.TextField()
+    explanation = models.TextField()
+
+    hacker = models.ForeignKey(Hacker)
 
 
 # eof

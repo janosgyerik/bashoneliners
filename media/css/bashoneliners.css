@@ -44,7 +44,7 @@ a img {
     line-height: 1.3em;
     margin: 1em;
     padding: 1em;
-    overflow: auto;
+    white-space: normal;
     font-family: "Courier New", Courier, monospace;
     background: #fff7f0;
     border: 1px solid #ccc;

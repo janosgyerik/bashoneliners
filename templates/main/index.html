@@ -10,7 +10,7 @@
 
 {% for oneliner in oneliners %}
 <div class="oneliner">
-    <pre>$ {{ oneliner.line }}</pre>
+    <pre>{% for line in oneliner.lines %}$ {{ line }}<br/>{% endfor %}</pre>
 
     <div class="summary">
 	{{ oneliner.summary }}

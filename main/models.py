@@ -24,11 +24,19 @@ class Hacker(DjangoUser):
     objects = UserManager()
 
 class OneLiner(models.Model):
+    hacker = models.ForeignKey(Hacker)
+
     line = models.TextField()
     summary = models.TextField()
     explanation = models.TextField()
+    caveats = models.TextField(blank=True)
 
-    hacker = models.ForeignKey(Hacker)
+    is_published = models.BooleanField(default=False)
+
+    created_dt = models.DateTimeField(default=datetime.now)
+
+    def lines(self):
+	return [x for x in self.line.split('\n') if x.strip() != '']
 
 
 # eof

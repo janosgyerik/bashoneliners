@@ -1,9 +1,6 @@
 get going
 =========
-- add datetime
 - simple text processing
-- multi-line oneliners
-- fix todo
 
 
 'just ok' design

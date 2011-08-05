@@ -1,34 +1,18 @@
 get going
 =========
-- model
-	- OneLiner
-		: line
-		: summary
-		: explanation
-	- Hacker < DjangoUser
-		: twitter fields
-		: stackoverflow fields
-		: blog
-		: homepage
-	- Vote
-		: OneLiner
-		: Hacker
-	- Tag
-		: OneLiner
-	- Comment
-		: OneLiner
-		: Hacker
+- add datetime
+- simple text processing
+- multi-line oneliners
+- fix todo
 
 
 'just ok' design
 ================
-- show oneliners
-- add a oneliner as anon
 - sign up
-- cool design
 - meta
 	- keywords
 	- description
+- cool design
 
 
 after cool design

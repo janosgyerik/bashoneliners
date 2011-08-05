@@ -38,5 +38,8 @@ class OneLiner(models.Model):
     def lines(self):
 	return [x for x in self.line.split('\n') if x.strip() != '']
 
+    def __unicode__(self):
+	return self.line
+
 
 # eof

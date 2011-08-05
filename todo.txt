@@ -1,6 +1,7 @@
 get going
 =========
-- simple text processing
+- simple text processing with nst
+- Summary, Explanation, Caveats as DL?
 
 
 'just ok' design

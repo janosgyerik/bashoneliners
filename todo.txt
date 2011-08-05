@@ -1,6 +1,5 @@
 get going
 =========
-- simple text processing with nst
 - Summary, Explanation, Caveats as DL?
 
 

@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 
+{% load nst %}
+
 {% block pagetitle %}bashoneliners.com{% endblock %}
 
 {% block keywords %}{% endblock %}
@@ -34,7 +36,7 @@ We are in a very very early stage of development but we will progress rapidly.
     </div>
 
     <div class="explanation">
-	{{ oneliner.explanation }}
+	{{ oneliner.explanation|nst|safe }}
     </div>
 
     <div class="eof">EOF</div>

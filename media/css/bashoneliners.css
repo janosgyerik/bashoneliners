@@ -54,6 +54,25 @@ a img {
     border: 1px solid #ccc;
 }
 
+/*
+code {
+    line-height: 1.3em;
+    padding: 0 .5em;
+    font-family: "Courier New", Courier, monospace;
+    background: #fff7f0;
+    border: 1px solid #ccc;
+}
+    */
+code {
+    line-height: 1.3em;
+    padding: 0 .5em;
+    font-family: "Courier New", Courier, monospace;
+    background: #ddf;
+    border: 1px solid #aaf;
+    font-weight: medium;
+    color: blue;
+}
+
 .oneliner .summary {
     margin: 1.5em;
 }

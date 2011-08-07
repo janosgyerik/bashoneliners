@@ -16,6 +16,8 @@ next
 - meta
 	- keywords
 	- description
+- clean up css
+- valid xhtml
 
 
 important

@@ -3,7 +3,6 @@ next
 - profile
 - edit profile
 - posting
-	- post oneliner
 	- list of own oneliners
 	- edit oneliner
 	- vote up / down

@@ -94,5 +94,12 @@ form dl dt {
     font-weight: bold;
 }
 
+p.author {
+    line-height: 16px;
+    text-align: right;
+    font-style: italic;
+    color: silver;
+}
+
 
 /* eof */

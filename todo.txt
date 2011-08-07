@@ -1,26 +1,38 @@
-get going
-=========
-- Summary, Explanation, Caveats as DL?
-
-
-'just ok' design
-================
-- sign up
+next
+====
+- accounts
+	- create account
+	- login
+	- edit profile
+- posting
+	- post oneliner
+	- list of own oneliners
+	- edit oneliner
+	- vote up / down
+- oneliner display
+	- show hacker
+	- show date
+	- show votes
 - meta
 	- keywords
 	- description
-- cool design
 
 
-after cool design
-=================
-- show oneliners
-- add a oneliner as anon
-- add a oneliner as member
-- member profile editor
+important
+=========
+- commenting
 
 
-polish
-======
+not critical
+============
+- turn - lists into ul and # lists into ol
+- logo, better header
+- better design
+
+
+polish, maybe
+=============
 - rss
+- show voter details
+
 

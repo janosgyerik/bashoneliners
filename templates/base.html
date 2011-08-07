@@ -13,8 +13,13 @@
 <div id="nav">
     <a href="/"><span>home</span></a> ;
     <a href="/main/rules"><span>rules</span></a> ;
-    <a class="comingsoon" href="#"><span>login / sign up</span></a> ;
-    <a class="comingsoon" href="#"><span>post</span></a>
+    {% if user.is_authenticated %}
+    <a class="comingsoon" href="#"><span>profile</span></a> ;
+    <a class="comingsoon" href="#"><span>post a one-liner</span></a> ;
+    <a class="comingsoon" href="#"><span>logout</span></a>
+    {% else %}
+    <a class="comingsoon" href="#"><span>login / sign up</span></a>
+    {% endif %}
     <br/>
     <a class="comingsoon" href="#"><span>top 50</span></a> ;
     <a href="/"><span>latest 50</span></a> ;

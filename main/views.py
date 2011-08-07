@@ -10,19 +10,30 @@ from bashoneliners.main.models import Hacker, OneLiner
 #
 
 
+''' helper methods '''
+
+def get_common_params(request):
+    params = {
+	    'user': request.user,
+	    }
+    return params
+
+
 ''' url handlers '''
 
 def index(request):
-    params = {
-	    'oneliners': OneLiner.objects.filter(is_published=True).order_by('-pk')
-	    }
+    params = get_common_params(request)
+    params['oneliners'] = OneLiner.objects.filter(is_published=True).order_by('-pk')
+
     return render_to_response('main/index.html', params)
 
 def oneliner(request, pk):
     return index(request)
 
 def rules(request):
-    return render_to_response('main/rules.html')
+    params = get_common_params(request)
+
+    return render_to_response('main/rules.html', params)
 
 
 # eof

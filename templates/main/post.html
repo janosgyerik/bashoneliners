@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% load nst %}
+
+{% block pagetitle %}Post a one-liner{% endblock %}
+
+{% block keywords %}{% endblock %}
+
+{% block description %}{% endblock %}
+
+{% block content %}
+
+<form action="" method="post">{% csrf_token %}
+    <div class="non-field-errors">{{ form.non_field_errors }}</div>
+    <div class="oneliner">
+	<dl>
+	    <dt><label for="id_line">The one-liner</label></dt>
+	    <dd>
+	    <div class="error">{{ form.line.errors }}</div>
+	    <pre>{{ form.line }}</pre>
+	    </dd>
+
+	    <dt>Brief summary</dt>
+	    <dd>
+	    <div class="error">{{ form.summary.errors }}</div>
+	    <div class="summary">
+		{{ form.summary }}
+	    </div>
+	    </dd>
+
+	    <dt>Detailed explanation</dt>
+	    <dd>
+	    <div class="error">{{ form.explanation.errors }}</div>
+	    <div class="explanation">
+		{{ form.explanation }}
+	    </div>
+	    </dd>
+
+	    <dt>Caveats (if any)</dt>
+	    <dd>
+	    <div class="error">{{ form.caveats.errors }}</div>
+	    <div class="caveats">
+		{{ form.caveats }}
+	    </div>
+	    </dd>
+
+	    <dt>Published</dt>
+	    <dd>
+	    <div class="error">{{ form.is_published.errors }}</div>
+		{{ form.is_published }}
+	    </dd>
+	</dl>
+
+	<p><input type="submit"></p>
+    </div>
+</form>
+
+{% endblock %}

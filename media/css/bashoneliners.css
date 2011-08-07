@@ -90,5 +90,9 @@ form ul li input {
     margin: 1em;
 }
 
+form dl dt {
+    font-weight: bold;
+}
+
 
 /* eof */

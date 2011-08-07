@@ -34,7 +34,7 @@ class OneLiner(models.Model):
 
     is_published = models.BooleanField(default=False)
 
-    created_dt = models.DateTimeField(default=datetime.now)
+    created_dt = models.DateTimeField(default=datetime.now, blank=True)
 
     def lines(self):
 	return [x for x in self.line.split('\n') if x.strip() != '']
@@ -56,6 +56,9 @@ class OneLiner(models.Model):
 
     def __unicode__(self):
 	return self.summary
+
+    class Meta:
+	get_latest_by = 'pk'
 
 
 class Vote(models.Model):

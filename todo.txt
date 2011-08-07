@@ -1,9 +1,7 @@
 next
 ====
-- accounts
-	- create account
-	- login
-	- edit profile
+- profile
+- edit profile
 - posting
 	- post oneliner
 	- list of own oneliners
@@ -23,6 +21,14 @@ next
 important
 =========
 - commenting
+
+
+code cleansing
+==============
+- accounts module
+	- login
+	- create account
+	- profile
 
 
 not critical

@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+
+{% block pagetitle %}{% trans 'Create account' %}{% endblock %}
+
+{% block content %}
+
+<form action="" method="post">{% csrf_token %}
+    <div>
+	{% if form.errors %}
+	    <p class="error">
+	    {% blocktrans count form.errors.items|length as counter %}Please correct the error below.{% plural %}Please correct the errors below.{% endblocktrans %}
+	    </p>
+	{% endif %}
+	
+	<ul>
+	    {% for field in form %}
+	    <li>
+		{{ field.label_tag }}
+		<span class="error">{{ field.errors }}</span>
+		<div>{{ field }}</div>
+	    </li>
+	    {% endfor %}
+	</ul>
+
+	<p><input type="submit" value="Create account" /></p>
+    </div>
+</form>
+
+{% endblock %}

@@ -31,6 +31,12 @@ def index(request):
 
     return render_to_response('main/index.html', params)
 
+def top_n(request, num):
+    params = get_common_params(request)
+    params['oneliners'] = OneLiner.objects.filter(is_published=True).order_by('-vote')
+
+    return render_to_response('main/top_n.html', params)
+
 def oneliner(request, pk):
     return index(request)
 

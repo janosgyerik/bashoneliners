@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models import Count
 from django.contrib.auth.models import User as DjangoUser
 from django.contrib.auth.models import UserManager
 
@@ -53,6 +54,10 @@ class OneLiner(models.Model):
 
     def get_votes_down(self):
 	return self.vote_set.filter(up=False).count()
+
+    @staticmethod
+    def top(limit=50):
+	return OneLiner.objects.filter(vote__up=True).annotate(votes=Count('vote')).order_by('-votes')[:limit]
 
     def __unicode__(self):
 	return self.summary

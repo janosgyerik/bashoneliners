@@ -58,4 +58,35 @@ class VoteTests(TestCase):
 	self.assertEquals(self.jacks_oneliner.get_votes(), (1, 1))
 
 
+class TopTests(TestCase):
+    def setUp(self):
+	self.jack = Util.new_hacker('jack')
+	self.jacks_oneliner = Util.new_oneliner(self.jack, 'echo jack')
+
+	self.mike = Util.new_hacker('mike')
+	self.mikes_oneliner = Util.new_oneliner(self.mike, 'echo mike')
+
+    def test_top(self):
+	u1 = Util.new_hacker('u1')
+	u2 = Util.new_hacker('u2')
+	u3 = Util.new_hacker('u3')
+
+	self.jacks_oneliner.vote_up(u1)
+	self.assertEquals(OneLiner.top()[0], self.jacks_oneliner)
+
+	self.mikes_oneliner.vote_up(u1)
+	self.mikes_oneliner.vote_up(u2)
+	self.assertEquals(OneLiner.top()[0], self.mikes_oneliner)
+
+	self.jacks_oneliner.vote_up(u2)
+	self.jacks_oneliner.vote_up(u3)
+	self.assertEquals(OneLiner.top()[0], self.jacks_oneliner)
+
+	u4 = Util.new_hacker('u4')
+	u5 = Util.new_hacker('u5')
+	self.mikes_oneliner.vote_down(u4)
+	self.mikes_oneliner.vote_down(u5)
+	self.assertEquals(OneLiner.top()[0], self.jacks_oneliner)
+
+
 # eof

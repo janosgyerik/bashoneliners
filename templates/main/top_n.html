@@ -1,7 +1,5 @@
 {% extends "base.html" %}
 
-{% load nst %}
-
 {% block pagetitle %}top 50{% endblock %}
 
 {% block keywords %}{% endblock %}
@@ -10,38 +8,6 @@
 
 {% block content %}
 
-{% for oneliner in oneliners %}
-<div class="oneliner">
-    <p class="author">
-	@<span>{{ oneliner.hacker.username }}</span> 
-	on <span>{{ oneliner.created_dt }}</span>
-	#
-	{{ oneliner.get_votes_up }} <img src="/media/icons/thumbsup.png"/>
-	{{ oneliner.get_votes_down }} <img src="/media/icons/thumbsdown.png"/>
-    </p>
-
-    <pre>{% for line in oneliner.lines %}$ {{ line }}<br/>{% endfor %}</pre>
-
-    <div class="summary">
-	{{ oneliner.summary }}
-    </div>
-
-    {% if oneliner.explanation %}
-    <div class="explanation">
-	<h3>Explanation</h3>
-	{{ oneliner.explanation|nst|safe }}
-    </div>
-    {% endif %}
-
-    {% if oneliner.caveats %}
-    <div class="caveats">
-	<h3>Caveats</h3>
-	{{ oneliner.caveats|nst|safe }}
-    </div>
-    {% endif %}
-
-    <div class="eof">### EOF ###</div>
-</div>
-{% endfor %}
+{% include 'main/oneliners.html' %}
 
 {% endblock %}

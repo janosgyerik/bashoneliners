@@ -10,6 +10,15 @@
 
 {% block content %}
 
+<p>Please only post <a href="/main/rules/">*good* one-liners</a>. Make sure your one-liner is:</p>
+
+<ul>
+    <li>Useful, practical for someone using bash, ksh family of shells.</li>
+    <li>Short, clear, easy to understand.</li>
+    <li>Something very interesting or cool.</li>
+</ul>
+
+
 <form action="" method="post">{% csrf_token %}
     <div class="non-field-errors">{{ form.non_field_errors }}</div>
     <div class="oneliner">

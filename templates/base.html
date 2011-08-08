@@ -14,7 +14,7 @@
     <a href="/"><span>home</span></a> ;
     <a href="/main/rules"><span>rules</span></a> ;
     {% if user.is_authenticated %}
-    <a class="comingsoon" href="/accounts/profile/"><span>profile</span></a> ;
+    <a class="comingsoon" href="/accounts/profile/"><span><img src="/media/icons/user.png"/>{{ user.username }}</span></a> ;
     <a href="/main/post"><span>post a one-liner</span></a> ;
     <a href="/accounts/logout/"><span>logout</span></a>
     {% else %}

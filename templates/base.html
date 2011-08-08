@@ -29,6 +29,11 @@
 
 <div id="content">
 
+    <div class="floatright plus1">
+	{% include 'facebook.html' %}
+	{% include 'plusone.html' %}
+    </div>
+
     <h2>{% block pagetitle %}{% endblock %}</h2>
 
     {% block content %}{% endblock %}

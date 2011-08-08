@@ -35,7 +35,7 @@ class PostOneLinerForm(forms.ModelForm):
 		'summary',
 		'explanation',
 		'caveats',
-		'is_published',
+		#'is_published',
 		)
 
 

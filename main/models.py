@@ -33,7 +33,7 @@ class OneLiner(models.Model):
     explanation = models.TextField(blank=True)
     caveats = models.TextField(blank=True)
 
-    is_published = models.BooleanField(default=False)
+    is_published = models.BooleanField(default=True)
 
     created_dt = models.DateTimeField(default=datetime.now, blank=True)
 

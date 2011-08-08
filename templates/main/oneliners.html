@@ -7,7 +7,6 @@
 	on <span>{{ oneliner.created_dt }}</span>
 	#
 	{{ oneliner.get_votes_up }} <img src="/media/icons/thumbsup.png"/>
-	{{ oneliner.get_votes_down }} <img src="/media/icons/thumbsdown.png"/>
     </p>
 
     <pre>{% for line in oneliner.lines %}$ {{ line }}<br/>{% endfor %}</pre>

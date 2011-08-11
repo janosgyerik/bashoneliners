@@ -1,5 +1,6 @@
 next
 ====
+- voting like on stackoverflow, but disabled for now
 - profile
 - edit profile
 - posting

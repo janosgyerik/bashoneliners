@@ -5,10 +5,6 @@
     <p class="author">
 	@<span>{{ oneliner.hacker.username }}</span> 
 	on <span>{{ oneliner.created_dt }}</span>
-	<!--
-	#
-	{{ oneliner.get_votes_up }} <img src="/media/icons/thumbsup.png"/>
-	-->
     </p>
 
     <table class="oneliner">
@@ -16,7 +12,7 @@
 	    <td class="votecell">
 		<div class="vote">
 		    <a class="vote-up-off" title="Cool one-liner! I can use this! (click again to undo)">vote up</a>
-		    <span class="vote-count">0</span>
+		    <span class="vote-count">{{ oneliner.get_votes_up }}</span>
 		    <a class="vote-down-off" title="Not cool. I cannot use this! (click again to undo)">vote down</a>
 		    <a class="star-off" title="This is a favourite one-liner. (click again to undo)">favourite</a>
 		</div>

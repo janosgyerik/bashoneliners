@@ -26,10 +26,10 @@
 	    <dt><label for="id_line">The one-liner</label></dt>
 	    <dd>
 	    <div class="error">{{ form.line.errors }}</div>
-	    <pre>{{ form.line }}</pre>
+	    <div class="summary">{{ form.line }}</div>
 	    </dd>
 
-	    <dt>Brief summary</dt>
+	    <dt>What it does, in one sentence</dt>
 	    <dd>
 	    <div class="error">{{ form.summary.errors }}</div>
 	    <div class="summary">
@@ -37,7 +37,7 @@
 	    </div>
 	    </dd>
 
-	    <dt>Detailed explanation</dt>
+	    <dt>How it works, in detail</dt>
 	    <dd>
 	    <div class="error">{{ form.explanation.errors }}</div>
 	    <div class="explanation">

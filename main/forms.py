@@ -25,7 +25,7 @@ class PostOneLinerForm(forms.ModelForm):
 
 	widgets = {
 		'line': forms.Textarea(attrs={'cols': 80, 'rows': 3, }),
-		'summary': forms.Textarea(attrs={'cols': 80, 'rows': 3, }),
+		'summary': forms.TextInput(attrs={'size': 100, }),
 		'explanation': forms.Textarea(attrs={'cols': 80, 'rows': 10, }),
 		'caveats': forms.Textarea(attrs={'cols': 80, 'rows': 3, }),
 		}

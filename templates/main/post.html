@@ -23,18 +23,18 @@
     <div class="non-field-errors">{{ form.non_field_errors }}</div>
     <div class="oneliner">
 	<dl>
-	    <dt><label for="id_line">The one-liner</label></dt>
-	    <dd>
-	    <div class="error">{{ form.line.errors }}</div>
-	    <div class="summary">{{ form.line }}</div>
-	    </dd>
-
-	    <dt>What it does, in one sentence</dt>
+	    <dt>Summary of the one-liner, what it does in one sentence</dt>
 	    <dd>
 	    <div class="error">{{ form.summary.errors }}</div>
 	    <div class="summary">
 		{{ form.summary }}
 	    </div>
+	    </dd>
+
+	    <dt><label for="id_line">The one-liner</label></dt>
+	    <dd>
+	    <div class="error">{{ form.line.errors }}</div>
+	    <div class="summary">{{ form.line }}</div>
 	    </dd>
 
 	    <dt>How it works, in detail</dt>

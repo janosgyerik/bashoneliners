@@ -45,6 +45,11 @@ def rules(request):
 
     return render_to_response('main/rules.html', params)
 
+def mission(request):
+    params = get_common_params(request)
+
+    return render_to_response('main/mission.html', params)
+
 @login_required
 def post(request):
     params = get_common_params(request)

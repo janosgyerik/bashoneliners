@@ -2,14 +2,10 @@
 
 {% for oneliner in oneliners %}
 <div class="oneliner">
-    <p class="author">
-	@<span>{{ oneliner.hacker.username }}</span> 
-	on <span>{{ oneliner.created_dt }}</span>
-    </p>
 
     <table class="oneliner">
 	<tr>
-	    <td class="votecell">
+	    <td class="votecell hidden">
 		<div class="vote">
 		    <a class="vote-up-off" title="Cool one-liner! I can use this! (click again to undo)">vote up</a>
 		    <span class="vote-count">{{ oneliner.get_votes_up }}</span>
@@ -18,11 +14,16 @@
 		</div>
 	    </td>
 	    <td>
-		<pre>{% for line in oneliner.lines %}$ {{ line }}<br/>{% endfor %}</pre>
-
 		<div class="summary">
 		    {{ oneliner.summary|nst|safe }}
 		</div>
+
+		<p class="author">
+		    by @<span>{{ oneliner.hacker.username }}</span> 
+		    on <span>{{ oneliner.created_dt }}</span>
+		</p>
+
+		<pre>{% for line in oneliner.lines %}<span class="prompt">$ </span>{{ line }}<br/>{% endfor %}</pre>
 
 		{% if oneliner.explanation %}
 		<div class="explanation">
@@ -33,12 +34,12 @@
 
 		{% if oneliner.caveats %}
 		<div class="caveats">
-		    <h3>Caveats</h3>
+		    <h3>Limitations</h3>
 		    {{ oneliner.caveats|nst|safe }}
 		</div>
 		{% endif %}
 
-		<div class="eof">### EOF ###</div>
+		<div class="eof">EOF</div>
 	    </td>
 	</tr>
     </table>

@@ -2,10 +2,18 @@
 
 {% load i18n %}
 
-{% block pagetitle %}{% trans 'Profile' %}{% endblock %}
+{% block pagetitle %}Hi {{ user.username|capfirst }}!{% endblock %}
 
 {% block content %}
 
-<p>Coming soon!</p>
+<p class="warning">This page is not implemented yet. Soon you will see here:</p>
+
+<ul>
+    <li>One-liners you posted. You will be able to edit them and change their published/draft status.</li>
+    <li>One-liners you bookmarked.</li>
+    <li>One-liners you voted on.</li>
+    <li>Your simple profile information, twitter name, etc.</li>
+</ul>
+
 
 {% endblock %}

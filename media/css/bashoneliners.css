@@ -178,5 +178,10 @@ td.votecell .vote-count {
     color: red;
 }
 
+dl.mission dt {
+    font-variant: small-caps;
+    text-transform: uppercase;
+}
+
 
 /* eof */

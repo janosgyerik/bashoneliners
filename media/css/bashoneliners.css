@@ -1,24 +1,22 @@
 body {
     margin: 0px 20px;
-    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-family: "UbuntuBeta Regular",Ubuntu,"Bitstream Vera Sans","DejaVu Sans",Tahoma,sans-serif;
     font-size: 12px;
-    line-height: 16px;
+    line-height: 18px;
     color: black;
     background-color: white;
     min-width: 800px;
 }
 
-a {
+#nav a {
     color: #888;
     text-decoration: none;
+    font-variant: small-caps;
+    text-transform: uppercase;
 }
 
 a.comingsoon {
     color: #ddd;
-}
-
-a:hover {
-    text-decoration: underline;
 }
 
 a img {
@@ -41,11 +39,22 @@ a img {
 .oneliner pre {
     line-height: 1.3em;
     margin: 1em;
+    margin-top: 0.3em;
     padding: 1em;
     white-space: normal;
     font-family: "Courier New", Courier, monospace;
-    background: #fff7f0;
-    border: 1px solid #ccc;
+
+    background: #334;
+    color: white;
+    border: 2px inset #888;
+
+    background: #ddd;
+    color: black;
+    border: 1px solid #aaa;
+}
+
+.oneliner pre .prompt {
+    color: #253;
 }
 
 code {
@@ -60,6 +69,13 @@ code {
 
 .oneliner .summary, .oneliner .explanation, .oneliner .caveats {
     margin: 1.5em;
+}
+
+.oneliner .summary {
+    margin: .5em;
+    color: #253;
+    font-size: 18px;
+    line-height: 22px;
 }
 
 .oneliner .eof {
@@ -95,10 +111,11 @@ form dl dt {
 }
 
 p.author {
-    line-height: 16px;
     text-align: right;
     font-style: italic;
     color: silver;
+    margin: 0;
+    margin-right: 1em;
 }
 
 .socialbtn {
@@ -155,6 +172,10 @@ td.votecell .vote-count {
     vertical-align: baseline;
     text-align: center;
     font-family: Arial,Liberation Sans,DejaVu Sans,sans-serif;
+}
+
+.warning {
+    color: red;
 }
 
 

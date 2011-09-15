@@ -27,6 +27,10 @@
 	vertical-align: middle;
     }
 
+    dt {
+	font-weight: bold;
+    }
+
 /* End Various Tags */
 
 

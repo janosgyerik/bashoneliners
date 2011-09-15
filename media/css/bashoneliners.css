@@ -15,7 +15,7 @@ body {
     text-transform: uppercase;
 }
 
-a.comingsoon {
+#nav a.comingsoon {
     color: #ddd;
 }
 

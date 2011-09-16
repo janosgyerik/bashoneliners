@@ -1,26 +1,36 @@
-next
-====
-- voting like on stackoverflow, but disabled for now
-- profile
-- edit profile
-- posting
-	- list of own oneliners
-	- edit oneliner
-	- vote up / down
-- oneliner display
-	- show hacker
-	- show date
-	- show votes
-- meta
-	- keywords
-	- description
-- clean up css
-- valid xhtml
+Essential
+=========
+- Minimal profile: name
+- link to author's profile
+- Valid xhtml
+- META
+- Hide Explanation etc by default, make it expandable
+- Merge RULES into POST
+- Valid xhtml
+- bug: need to escape content inside {{ }}
 
 
 important
 =========
-- commenting
+- Profile page with own posts and bookmarks/favourites
+	- list of own oneliners
+	- edit oneliner
+	- votes placed
+	- bookmarks
+- Search
+- rss
+- Voting
+- TOP 50
+- RST text editor for Explanation etc
+- Commenting
+- /oneliner/pk/
+- logo, better header
+
+
+easy
+====
+- DEBUG = false on PROD
+- @bashoneliners.com, update email on site
 
 
 code cleansing
@@ -29,18 +39,6 @@ code cleansing
 	- login
 	- create account
 	- profile
-
-
-not critical
-============
-- turn - lists into ul and # lists into ol
-- logo, better header
-- better design
-
-
-polish, maybe
-=============
-- rss
-- show voter details
+- css
 
 

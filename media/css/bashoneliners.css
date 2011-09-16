@@ -118,6 +118,10 @@ p.author {
     margin-right: 1em;
 }
 
+.author a {
+    color: silver;
+}
+
 .socialbtn {
     margin: 1em 0;
 }

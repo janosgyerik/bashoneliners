@@ -27,7 +27,6 @@ important
 
 easy
 ====
-- DEBUG = false on PROD
 - @bashoneliners.com, update email on site
 
 

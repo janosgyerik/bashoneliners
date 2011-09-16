@@ -2,7 +2,6 @@ Essential
 =========
 - Minimal profile: name
 - link to author's profile
-- bug: need to escape content inside {{ }}
 - Valid xhtml
 - Hide Explanation etc by default, make it expandable
 - Valid xhtml

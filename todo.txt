@@ -2,12 +2,11 @@ Essential
 =========
 - Minimal profile: name
 - link to author's profile
+- bug: need to escape content inside {{ }}
 - Valid xhtml
 - META
 - Hide Explanation etc by default, make it expandable
-- Merge RULES into POST
 - Valid xhtml
-- bug: need to escape content inside {{ }}
 
 
 important

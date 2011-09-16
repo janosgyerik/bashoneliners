@@ -40,11 +40,6 @@ def top_n(request, num):
 def oneliner(request, pk):
     return index(request)
 
-def rules(request):
-    params = get_common_params(request)
-
-    return render_to_response('main/rules.html', params)
-
 def mission(request):
     params = get_common_params(request)
 

@@ -4,7 +4,6 @@ Essential
 - link to author's profile
 - bug: need to escape content inside {{ }}
 - Valid xhtml
-- META
 - Hide Explanation etc by default, make it expandable
 - Valid xhtml
 

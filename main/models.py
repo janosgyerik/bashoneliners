@@ -28,8 +28,8 @@ class Hacker(DjangoUser):
 class OneLiner(models.Model):
     hacker = models.ForeignKey(Hacker)
 
+    summary = models.CharField(max_length=200)
     line = models.TextField()
-    summary = models.TextField()
     explanation = models.TextField(blank=True)
     caveats = models.TextField('Limitations', blank=True)
 

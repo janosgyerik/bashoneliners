@@ -178,6 +178,10 @@ td.votecell .vote-count {
     color: red;
 }
 
+.message {
+    font-style: italic;
+}
+
 dl.mission dt {
     font-variant: small-caps;
     text-transform: uppercase;

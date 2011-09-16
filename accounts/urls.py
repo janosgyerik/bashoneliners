@@ -19,6 +19,9 @@ urlpatterns = patterns('django.contrib.auth.views',
 
 urlpatterns += patterns('bashoneliners.accounts.views',
     (r'^create_user/$', 'create_user'),
+)
+
+urlpatterns += patterns('bashoneliners.main.views',
     (r'^profile/$', 'profile'),
 )
 

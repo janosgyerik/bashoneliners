@@ -1,10 +1,9 @@
 Essential
 =========
-- Minimal profile: name
-- link to author's profile
-- Valid xhtml
+- add email to signup form, need it for resetpw
+	- make it unique
 - Hide Explanation etc by default, make it expandable
-- Valid xhtml
+- remove beta text from front
 
 
 important
@@ -22,6 +21,8 @@ important
 - Commenting
 - /oneliner/pk/
 - logo, better header
+- Valid xhtml
+- open id login
 
 
 easy

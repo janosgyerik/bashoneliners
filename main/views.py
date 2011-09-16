@@ -45,6 +45,21 @@ def mission(request):
 
     return render_to_response('main/mission.html', params)
 
+def profile(request, user_id=None):
+    params = get_common_params(request)
+
+    try:
+	hacker = Hacker.objects.get(pk=user_id)
+    except:
+	hacker = Hacker.objects.get(pk=request.user.pk)
+
+    params['hacker'] = hacker
+    params['oneliners'] = OneLiner.objects.filter(hacker=hacker).order_by('-pk')
+    if hacker.pk == request.user.pk:
+	params['owner'] = True
+
+    return render_to_response('main/profile.html', params)
+
 @login_required
 def post(request):
     params = get_common_params(request)

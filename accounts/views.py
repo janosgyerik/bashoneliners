@@ -27,7 +27,4 @@ def create_user(request, template_name='registration/create_user_form.html'):
 	'form': form,
 	}, context_instance=RequestContext(request))
 
-def profile(request, template_name='registration/profile.html'):
-    return render_to_response(template_name, { 'user': request.user })
-
 # eof

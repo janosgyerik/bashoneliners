@@ -34,6 +34,9 @@ a img {
 
 #content h2 {
     text-align: center;
+    font-variant: small-caps;
+    text-transform: uppercase;
+    margin-top: 1.5em;
 }
 
 .oneliner pre {

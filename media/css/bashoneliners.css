@@ -85,6 +85,18 @@ code {
     text-align: center;
 }
 
+.oneliner .details-trigger {
+    background: url(/media/images/plusminus.jpg) no-repeat;
+    cursor: pointer;
+    padding-left: 22px;
+    margin-left: 1em;
+    height: 17px;
+    color: blue;
+}
+.oneliner .details-trigger-active {
+    background-position: left bottom;
+}
+
 form .error {
     color: red;
 }

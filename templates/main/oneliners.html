@@ -25,21 +25,26 @@
 
 		<pre>{% for line in oneliner.lines %}<span class="prompt">$ </span>{{ line }}<br/>{% endfor %}</pre>
 
-		{% if oneliner.explanation %}
-		<div class="explanation">
-		    <h3>Explanation</h3>
-		    {{ oneliner.explanation|nst|safe }}
-		</div>
+		{% if oneliner.explanation or oneliner.caveats %}
+		<div class="details-trigger">Details...</div>
 		{% endif %}
+		<div class="details hidden">
+		    {% if oneliner.explanation %}
+		    <div class="explanation">
+			<h3>Explanation</h3>
+			{{ oneliner.explanation|nst|safe }}
+		    </div>
+		    {% endif %}
 
-		{% if oneliner.caveats %}
-		<div class="caveats">
-		    <h3>Limitations</h3>
-		    {{ oneliner.caveats|nst|safe }}
+		    {% if oneliner.caveats %}
+		    <div class="caveats">
+			<h3>Limitations</h3>
+			{{ oneliner.caveats|nst|safe }}
+		    </div>
+		    {% endif %}
+
+		    <div class="hidden eof">EOF</div>
 		</div>
-		{% endif %}
-
-		<div class="eof">EOF</div>
 	    </td>
 	</tr>
     </table>
@@ -48,3 +53,12 @@
 <p class="message">No one-liners, yet.</p>
 {% endfor %}
 
+<script type="text/javascript">
+    <!--
+    $(document).ready(function() {
+	    $('.details-trigger').click(function() {
+		$(this).toggleClass('details-trigger-active').next().toggle('slow');
+	    });
+    });
+    //-->
+</script>

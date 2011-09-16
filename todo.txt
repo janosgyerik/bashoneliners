@@ -2,7 +2,6 @@ Essential
 =========
 - add email to signup form, need it for resetpw
 	- make it unique
-- remove beta text from front
 - fix urls in base
 
 

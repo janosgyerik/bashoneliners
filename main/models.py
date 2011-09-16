@@ -24,6 +24,9 @@ class Hacker(DjangoUser):
     # Use UserManager to get the create_user method, etc.
     objects = UserManager()
 
+    def __unicode__(self):
+	return ', '.join([x for x in (self.username, self.email, self.twitter) if x])
+
 
 class OneLiner(models.Model):
     hacker = models.ForeignKey(Hacker)

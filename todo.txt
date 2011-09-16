@@ -1,13 +1,6 @@
-Essential
-=========
-- add email to signup form, need it for resetpw
-	- make it unique
-
-
 important
 =========
 - Profile page with own posts and bookmarks/favourites
-	- list of own oneliners
 	- edit oneliner
 	- votes placed
 	- bookmarks

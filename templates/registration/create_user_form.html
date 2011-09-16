@@ -13,16 +13,20 @@
 	    {% blocktrans count form.errors.items|length as counter %}Please correct the error below.{% plural %}Please correct the errors below.{% endblocktrans %}
 	    </p>
 	{% endif %}
+
+	<div class="non-field-errors">{{ form.non_field_errors }}</div>
 	
-	<ul>
+	<dl>
 	    {% for field in form %}
-	    <li>
-		{{ field.label_tag }}
-		<span class="error">{{ field.errors }}</span>
-		<div>{{ field }}</div>
-	    </li>
+	    <dt>{{ field.label_tag }}</dt>
+	    <dd>
+	    <div class="error">{{ field.errors }}</div>
+	    <div>
+		{{ field }}
+	    </div>
+	    </dd>
 	    {% endfor %}
-	</ul>
+	</dl>
 
 	<p><input type="submit" value="Create account" /></p>
     </div>

@@ -20,6 +20,8 @@ def get_common_params(request):
     params = {
 	    'user': request.user,
 	    }
+    if request.META['HTTP_USER_AGENT'].startswith('W3C_VALIDATOR'):
+	params['w3c'] = True
     return params
 
 

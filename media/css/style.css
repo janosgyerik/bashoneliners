@@ -90,6 +90,13 @@
 	left: -1000em;
     }
 
+    .validators {
+	text-align: right;
+    }
+    .validators a {
+	margin-left: .5em;
+    }
+
 /* End Utility Classes */
 
 

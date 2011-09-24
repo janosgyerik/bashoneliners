@@ -1,0 +1,29 @@
+[
+    {
+        "pk": 2, 
+        "model": "main.hacker", 
+        "fields": {
+            "user_permissions": [], 
+            "twitter": "", 
+            "groups": []
+        }
+    }, 
+    {
+        "pk": 3, 
+        "model": "main.hacker", 
+        "fields": {
+            "user_permissions": [], 
+            "twitter": null, 
+            "groups": []
+        }
+    }, 
+    {
+        "pk": 5, 
+        "model": "main.hacker", 
+        "fields": {
+            "user_permissions": [], 
+            "twitter": null, 
+            "groups": []
+        }
+    }
+]

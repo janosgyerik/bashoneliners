@@ -1,5 +1,4 @@
 sqlite3.db
-main/fixtures
 tmp
 settings.py
 scripts/settings.py

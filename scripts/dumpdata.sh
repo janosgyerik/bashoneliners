@@ -13,6 +13,7 @@ dumpdata() {
     python manage.py dumpdata $mod.$obj --indent 4 > $file && echo Dumped to $file
 }
 
+dumpdata User auth $fixtures_dir/auth.User.json
 dumpdata Hacker
 dumpdata OneLiner
 

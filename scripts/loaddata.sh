@@ -11,6 +11,7 @@ loaddata() {
     test $file && python manage.py loaddata $file || echo File missing: $file
 }
 
+loaddata auth.User 
 loaddata Hacker
 loaddata OneLiner
 

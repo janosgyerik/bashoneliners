@@ -17,11 +17,6 @@ important
 - Valid xhtml
 
 
-easy
-====
-- setup email forwarding for @bashoneliners.com and update email on site
-
-
 code cleansing
 ==============
 - accounts module

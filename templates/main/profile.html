@@ -2,7 +2,7 @@
 
 {% load i18n %}
 
-{% block pagetitle %}{{ hacker.username }}{% endblock %}
+{% block pagetitle %}{{ hacker.get_full_name|default:hacker.username }}{% endblock %}
 
 {% block content %}
 

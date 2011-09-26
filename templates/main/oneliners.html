@@ -19,7 +19,7 @@
 		</div>
 
 		<p class="author">
-		by <a href="{% url bashoneliners.main.views.profile oneliner.hacker.pk %}"><span>{{ oneliner.hacker.username }}</span> </a>
+		by <a href="{% url bashoneliners.main.views.profile oneliner.hacker.pk %}"><span>{{ oneliner.hacker.get_full_name|default:oneliner.hacker.username }}</span> </a>
 		    on <span>{{ oneliner.created_dt }}</span>
 		</p>
 

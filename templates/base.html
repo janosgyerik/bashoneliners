@@ -12,7 +12,7 @@
 
 <div id="nav">
     {% if user.is_authenticated %}
-    <a href="{% url bashoneliners.main.views.profile %}"><span>{{ user.username }}</span></a> ;
+    <a href="{% url bashoneliners.main.views.profile %}"><span>{{ user.get_full_name|default:user.username }}</span></a> ;
     <a href="{% url bashoneliners.main.views.post %}"><span>post a one-liner</span></a> ;
     <a href="{% url django.contrib.auth.views.logout %}"><span>logout</span></a>
     {% else %}

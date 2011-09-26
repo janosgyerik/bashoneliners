@@ -1,3 +1,8 @@
+Requirements
+============
+* python-openid - if you want to use OpenID authentication
+
+
 Setup
 =====
 1. Create settings.py from sample

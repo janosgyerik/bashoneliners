@@ -9,6 +9,7 @@ urlpatterns = patterns('',
     (r'^$', include('bashoneliners.main.urls')),
     (r'^main/', include('bashoneliners.main.urls')),
     (r'^accounts/', include('bashoneliners.accounts.urls')),
+    (r'^openid/', include('bashoneliners.django_openid_auth.urls')),
 
     # Uncomment the admin/doc line below to enable admin documentation:
     (r'^admin/doc/', include('django.contrib.admindocs.urls')),

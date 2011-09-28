@@ -10,23 +10,69 @@
 <p class="error">Your username and password didn't match. Please try again.</p>
 {% endif %}
 
-<form method="post" action="{% url django.contrib.auth.views.login %}">
-{% csrf_token %}
-<table>
-<tr>
-    <td>{{ form.username.label_tag }}</td>
-    <td>{{ form.username }}</td>
-</tr>
-<tr>
-    <td>{{ form.password.label_tag }}</td>
-    <td>{{ form.password }}</td>
-</tr>
+<table class="login-or-openid">
+    <tr>
+	<td class="login-or-openid">
+	    <form method="post" action="{% url django.contrib.auth.views.login %}">
+	    {% csrf_token %}
+	    <table>
+	    <tr>
+		<td>{{ form.username.label_tag }}</td>
+		<td>{{ form.username }}</td>
+	    </tr>
+	    <tr>
+		<td>{{ form.password.label_tag }}</td>
+		<td>{{ form.password }}</td>
+	    </tr>
+	    </table>
+
+	    <input type="submit" value="Login" />
+	    <input type="hidden" name="next" value="{{ next }}" />
+	    </form>
+	    <p><a href="{% url django.contrib.auth.views.password_reset %}">Forgot your password?</a></p>
+	    <p><a href="{% url bashoneliners.accounts.views.create_user %}">Don't have an account yet?</a></p>
+	</td>
+	<td class="login-or-openid">
+	    <div><strong>Or,</strong> you can sign in using OpenID:</div>
+	    <ul class="openid-providers">
+		<li class="google"></li>
+		<li class="yahoo"></li>
+	    </ul>
+	    <div class="clear"><br/></div>
+	    <form method="post" action="/openid/login/"><div>
+	    {% csrf_token %}
+	    <label for="id_openid_identifier"><strong>Or,</strong> other OpenID provider: </label><input type="text" id="id_openid_identifier" class="openid" name="openid_identifier" maxlength="255" size="30" />
+		<input name="bsignin" type="submit" value="Login" />
+	    </form>
+	    <form id="openid-form-hidden" method="post" action="/openid/login/" class="hidden"><div>
+	    {% csrf_token %}
+		<input type="hidden" id="id_openid_identifier_hidden" name="openid_identifier"/>
+		<input name="bsignin" type="submit" value="Login" />
+	    </div></form>
+
+	</td>
+    </tr>
 </table>
 
-<input type="submit" value="login" />
-<input type="hidden" name="next" value="{{ next }}" />
-</form>
-<p><a href="{% url django.contrib.auth.views.password_reset %}">Forgot your password?</a></p>
-<p><a href="{% url bashoneliners.accounts.views.create_user %}">Don't have an account yet?</a></p>
+<script type="text/javascript">
+    <!--
+    function submitOpenIdLogin(url) {
+	$('#id_openid_identifier_hidden').val(url);
+	$('#openid-form-hidden').submit();
+    }
+    $(document).ready(function() {
+	    $('.openid-providers .google').click(function() {
+		submitOpenIdLogin('https://www.google.com/accounts/o8/id');
+	    });
+	    $('.openid-providers .yahoo').click(function() {
+		submitOpenIdLogin('http://yahoo.com');
+	    });
+	    $('.openid-providers .wordpress').click(function() {
+		submitOpenIdLogin('http://wordpress.com');
+	    });
+    });
+    //-->
+</script>
+
 
 {% endblock %}

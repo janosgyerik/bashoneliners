@@ -14,7 +14,7 @@ dumpdata() {
 }
 
 dumpdata User auth $fixtures_dir/auth.User.json
-dumpdata Hacker
+dumpdata HackerProfile
 dumpdata OneLiner
 
 # eof

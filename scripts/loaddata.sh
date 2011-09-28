@@ -12,7 +12,7 @@ loaddata() {
 }
 
 loaddata auth.User 
-loaddata Hacker
+loaddata HackerProfile
 loaddata OneLiner
 
 # eof

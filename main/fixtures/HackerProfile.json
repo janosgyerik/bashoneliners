@@ -1,0 +1,23 @@
+[
+    {
+        "pk": 2, 
+        "model": "main.hackerprofile", 
+        "fields": {
+            "user": 2
+        }
+    }, 
+    {
+        "pk": 3, 
+        "model": "main.hackerprofile", 
+        "fields": {
+            "user": 3
+        }
+    }, 
+    {
+        "pk": 5, 
+        "model": "main.hackerprofile", 
+        "fields": {
+            "user": 5
+        }
+    }
+]

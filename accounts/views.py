@@ -6,10 +6,10 @@ from django.core.urlresolvers import reverse as reverse_url
 from django.http import HttpResponseRedirect
 from django import forms
 
-from django.contrib.auth import authenticate as django_authenticate
-from django.contrib.auth import login as django_login
+from django.contrib.auth import authenticate
+from django.contrib.auth import login
 
-from bashoneliners.main.models import Hacker, DjangoUser
+from bashoneliners.main.models import HackerProfile, User
 
 class UserCreationFormWithEmail(UserCreationForm):
     class Meta:
@@ -25,7 +25,7 @@ class UserCreationFormWithEmail(UserCreationForm):
 	if email is None or len(email) == 0:
 	    raise forms.ValidationError('This field is required.')
 
-	if DjangoUser.objects.filter(email=email).count() > 0:
+	if User.objects.filter(email=email).count() > 0:
 	    raise forms.ValidationError('This email address is already used.')
 
 	return email
@@ -33,21 +33,22 @@ class UserCreationFormWithEmail(UserCreationForm):
 
 def create_user(request, template_name='registration/create_user_form.html'):
     if request.method == 'POST':
-	form = UserCreationFormWithEmail(request.POST)
-	if form.is_valid():
-	    hacker = Hacker.objects.create_user(form.cleaned_data['username'], '', form.cleaned_data['password1'])
-	    hacker.email = form.cleaned_data['email']
-	    hacker.save()
+        form = UserCreationFormWithEmail(request.POST)
+        if form.is_valid():
+            user = User.objects.create_user(form.cleaned_data['username'], '', form.cleaned_data['password1'])
+            user.email = form.cleaned_data['email']
+            user.save()
 
-	    django_user = django_authenticate(username=form.cleaned_data['username'], password=form.cleaned_data['password1'])
-	    django_login(request, django_user)
+            user = authenticate(username=form.cleaned_data['username'], password=form.cleaned_data['password1'])
+            login(request, user)
 
-	    return HttpResponseRedirect('/')
+            return HttpResponseRedirect('/')
     else:
-	form = UserCreationFormWithEmail()
+        form = UserCreationFormWithEmail()
 
     return render_to_response(template_name, {
-	'form': form,
-	}, context_instance=RequestContext(request))
+        'form': form,
+        }, context_instance=RequestContext(request))
+
 
 # eof

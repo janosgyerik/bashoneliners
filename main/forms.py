@@ -16,8 +16,8 @@ from bashoneliners.main.models import OneLiner
 ''' forms '''
 
 class PostOneLinerForm(forms.ModelForm):
-    def save(self, hacker):
-	self.instance.hacker = hacker
+    def save(self, user):
+	self.instance.user = user
 	return super(PostOneLinerForm, self).save()
 
     class Meta:

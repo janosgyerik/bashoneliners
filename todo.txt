@@ -1,7 +1,5 @@
 important
 =========
-- openid: change login page to offer gmail login
-- maybe subclassing DjangoUser is not good practice and should be eliminated
 - Profile page with own posts and bookmarks/favourites
 	- edit oneliner
 	- votes placed

@@ -1,7 +1,7 @@
 from django.db import models
 from django.db.models import Count
-from django.contrib.auth.models import User as DjangoUser
-from django.contrib.auth.models import UserManager
+from django.contrib.auth.models import User
+from django.db.models.signals import post_save
 
 from datetime import datetime
 import random, string, re
@@ -12,24 +12,28 @@ import random, string, re
 def randomstring(length=16):
     return ''.join(random.choice(string.letters) for i in xrange(length))
 
+def create_user_profile(sender, instance, created, **kwargs):
+    if created:
+	HackerProfile.objects.get_or_create(user=instance)
+
+post_save.connect(create_user_profile, sender=User)
 
 ''' Core models '''
 
-class Hacker(DjangoUser):
-    twitter = models.SlugField(max_length=100, blank=True, null=True)
+class HackerProfile(models.Model):
+    user = models.OneToOneField(User)
+
+    #twitter = models.SlugField(max_length=100, blank=True, null=True)
     #stackoverflow
     #blog
     #homepage
 
-    # Use UserManager to get the create_user method, etc.
-    objects = UserManager()
-
     def __unicode__(self):
-	return ', '.join([x for x in (self.username, self.email, self.twitter) if x])
+	return ', '.join([x for x in (self.user.username, self.user.email) if x])
 
 
 class OneLiner(models.Model):
-    hacker = models.ForeignKey(Hacker)
+    user = models.ForeignKey(User)
 
     summary = models.CharField(max_length=200)
     line = models.TextField()
@@ -43,11 +47,11 @@ class OneLiner(models.Model):
     def lines(self):
 	return [x for x in self.line.split('\n') if x.strip() != '']
 
-    def vote_up(self, hacker):
-	Vote.vote_up(hacker, self)
+    def vote_up(self, user):
+	Vote.vote_up(user, self)
 
-    def vote_down(self, hacker):
-	Vote.vote_down(hacker, self)
+    def vote_down(self, user):
+	Vote.vote_down(user, self)
 
     def get_votes(self):
 	return (self.get_votes_up(), self.get_votes_down())
@@ -70,39 +74,39 @@ class OneLiner(models.Model):
 
 
 class Vote(models.Model):
-    hacker = models.ForeignKey(Hacker)
+    user = models.ForeignKey(User)
     oneliner = models.ForeignKey(OneLiner)
     up = models.BooleanField(default=True)
 
     created_dt = models.DateTimeField(default=datetime.now)
 
     @staticmethod
-    def vote(hacker, oneliner, updown):
-	if oneliner.hacker == hacker:
+    def vote(user, oneliner, updown):
+	if oneliner.user == user:
 	    return
 
 	try:
-	    oneliner.vote_set.get(hacker=hacker, up=updown)
+	    oneliner.vote_set.get(user=user, up=updown)
 	    return
 	except:
 	    pass
 
-	oneliner.vote_set.filter(hacker=hacker).delete()
-	Vote(hacker=hacker, oneliner=oneliner, up=updown).save()
+	oneliner.vote_set.filter(user=user).delete()
+	Vote(user=user, oneliner=oneliner, up=updown).save()
 
     @staticmethod
-    def vote_up(hacker, oneliner):
-	Vote.vote(hacker, oneliner, True)
+    def vote_up(user, oneliner):
+	Vote.vote(user, oneliner, True)
 
     @staticmethod
-    def vote_down(hacker, oneliner):
-	Vote.vote(hacker, oneliner, False)
+    def vote_down(user, oneliner):
+	Vote.vote(user, oneliner, False)
 
     def __unicode__(self):
-	return '%s %s %s' % (self.hacker.full_name, ('--', '++')[self.up], self.oneliner.summary)
+	return '%s %s %s' % (self.user.full_name, ('--', '++')[self.up], self.oneliner.summary)
 
     class Meta:
-	unique_together = (('hacker', 'oneliner',),)
+	unique_together = (('user', 'oneliner',),)
 
 
 # eof

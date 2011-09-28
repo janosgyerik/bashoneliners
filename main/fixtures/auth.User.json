@@ -12,7 +12,7 @@
             "last_login": "2011-09-24 17:55:15", 
             "groups": [], 
             "user_permissions": [], 
-            "password": "*",
+            "password": "!", 
             "email": "info@titan2x.com", 
             "date_joined": "2011-08-05 13:58:01"
         }
@@ -30,7 +30,7 @@
             "last_login": "2011-08-30 04:22:06", 
             "groups": [], 
             "user_permissions": [], 
-            "password": "*", 
+            "password": "!", 
             "email": "", 
             "date_joined": "2011-08-30 04:22:06"
         }
@@ -48,7 +48,7 @@
             "last_login": "2011-09-21 22:16:38", 
             "groups": [], 
             "user_permissions": [], 
-            "password": "*", 
+            "password": "!", 
             "email": "noah@spahn.tv", 
             "date_joined": "2011-09-21 22:16:38"
         }

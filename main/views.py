@@ -3,7 +3,7 @@ from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import *
 from django.template import RequestContext
 
-from bashoneliners.main.models import Hacker, OneLiner, DjangoUser
+from bashoneliners.main.models import HackerProfile, OneLiner, User
 from bashoneliners.main.forms import PostOneLinerForm
 
 from datetime import datetime
@@ -58,17 +58,11 @@ def profile(request, user_id=None):
     if user_id is None:
 	user_id = request.user.pk
 
-    try:
-	hacker = Hacker.objects.get(pk=user_id)
-    except:
-	user = DjangoUser.objects.get(pk=user_id)
-	hacker = Hacker(user_ptr_id=user.pk)
-	hacker.__dict__.update(user.__dict__)
-	hacker.save()
+    user = User.objects.get(pk=user_id)
 
-    params['hacker'] = hacker
-    params['oneliners'] = OneLiner.objects.filter(hacker=hacker).order_by('-pk')
-    if hacker.pk == request.user.pk:
+    params['hacker'] = user
+    params['oneliners'] = OneLiner.objects.filter(user=user).order_by('-pk')
+    if user == request.user:
 	params['owner'] = True
 
     return render_to_response('main/profile.html', params)
@@ -80,7 +74,7 @@ def post(request):
     if request.method == 'POST':
 	form = PostOneLinerForm(request.POST)
 	if form.is_valid():
-	    new_oneliner = form.save(request.user.hacker)
+	    new_oneliner = form.save(request.user)
 	    return redirect(index)
     else:
 	form = PostOneLinerForm()

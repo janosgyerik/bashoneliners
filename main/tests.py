@@ -1,17 +1,17 @@
 from django.test import TestCase
 
-from main.models import Hacker, OneLiner, Vote
+from main.models import User, OneLiner, Vote
 
 class Util:
     @staticmethod
-    def new_hacker(username):
-	hacker = Hacker(username=username)
-	hacker.save()
-	return hacker
+    def new_user(username):
+	user = User(username=username)
+	user.save()
+	return user
 
     @staticmethod
-    def new_oneliner(hacker, line):
-	oneliner = OneLiner(hacker=hacker, line=line)
+    def new_oneliner(user, line):
+	oneliner = OneLiner(user=user, line=line)
 	oneliner.save()
 	return oneliner
 
@@ -22,13 +22,13 @@ class Util:
 
 class VoteTests(TestCase):
     def setUp(self):
-	self.jack = Util.new_hacker('jack')
+	self.jack = Util.new_user('jack')
 	self.jacks_oneliner = Util.new_oneliner(self.jack, 'echo jack')
 
-	self.mike = Util.new_hacker('mike')
+	self.mike = Util.new_user('mike')
 	self.mikes_oneliner = Util.new_oneliner(self.mike, 'echo mike')
 
-	self.frank = Util.new_hacker('frank')
+	self.frank = Util.new_user('frank')
 	self.franks_oneliner = Util.new_oneliner(self.frank, 'echo frank')
 
     def test_multiple_vote_tolerance(self):
@@ -60,16 +60,16 @@ class VoteTests(TestCase):
 
 class TopTests(TestCase):
     def setUp(self):
-	self.jack = Util.new_hacker('jack')
+	self.jack = Util.new_user('jack')
 	self.jacks_oneliner = Util.new_oneliner(self.jack, 'echo jack')
 
-	self.mike = Util.new_hacker('mike')
+	self.mike = Util.new_user('mike')
 	self.mikes_oneliner = Util.new_oneliner(self.mike, 'echo mike')
 
     def test_top(self):
-	u1 = Util.new_hacker('u1')
-	u2 = Util.new_hacker('u2')
-	u3 = Util.new_hacker('u3')
+	u1 = Util.new_user('u1')
+	u2 = Util.new_user('u2')
+	u3 = Util.new_user('u3')
 
 	self.jacks_oneliner.vote_up(u1)
 	self.assertEquals(OneLiner.top()[0], self.jacks_oneliner)
@@ -82,8 +82,8 @@ class TopTests(TestCase):
 	self.jacks_oneliner.vote_up(u3)
 	self.assertEquals(OneLiner.top()[0], self.jacks_oneliner)
 
-	u4 = Util.new_hacker('u4')
-	u5 = Util.new_hacker('u5')
+	u4 = Util.new_user('u4')
+	u5 = Util.new_user('u5')
 	self.mikes_oneliner.vote_down(u4)
 	self.mikes_oneliner.vote_down(u5)
 	self.assertEquals(OneLiner.top()[0], self.jacks_oneliner)

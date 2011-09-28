@@ -54,25 +54,23 @@
     </tr>
 </table>
 
-<script type="text/javascript">
-    <!--
-    function submitOpenIdLogin(url) {
-	$('#id_openid_identifier_hidden').val(url);
-	$('#openid-form-hidden').submit();
-    }
-    $(document).ready(function() {
-	    $('.openid-providers .google').click(function() {
-		submitOpenIdLogin('https://www.google.com/accounts/o8/id');
-	    });
-	    $('.openid-providers .yahoo').click(function() {
-		submitOpenIdLogin('http://yahoo.com');
-	    });
-	    $('.openid-providers .wordpress').click(function() {
-		submitOpenIdLogin('http://wordpress.com');
-	    });
-    });
-    //-->
-</script>
-
-
 {% endblock %}
+
+{% block ready %}
+	function submitOpenIdLogin(url) {
+	    $('#id_openid_identifier_hidden').val(url);
+	    $('#openid-form-hidden').submit();
+	}
+	$('.openid-providers .google').click(function() {
+	    submitOpenIdLogin('https://www.google.com/accounts/o8/id');
+	});
+	$('.openid-providers .yahoo').click(function() {
+	    submitOpenIdLogin('http://yahoo.com');
+	});
+	$('.openid-providers .wordpress').click(function() {
+	    submitOpenIdLogin('http://wordpress.com');
+	});
+
+	$('#id_username').focus();
+{% endblock %}
+

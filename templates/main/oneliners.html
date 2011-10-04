@@ -15,7 +15,7 @@
 	    </td>
 	    <td>
 		<div class="summary">
-		    {{ oneliner.summary|capfirst }}
+		    <a href="{% url bashoneliners.main.views.oneliner oneliner.pk %}">{{ oneliner.summary|capfirst }}</a>
 		</div>
 
 		<p class="author">

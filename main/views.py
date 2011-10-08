@@ -45,11 +45,12 @@ def top_n(request, num):
     return render_to_response('main/top_n.html', params)
 
 def oneliner(request, pk):
-    return index(request)
+    params = get_common_params(request)
+    params['oneliners'] = OneLiner.objects.filter(pk=pk)
+    return render_to_response('main/index.html', params)
 
 def mission(request):
     params = get_common_params(request)
-
     return render_to_response('main/mission.html', params)
 
 def profile(request, user_id=None):

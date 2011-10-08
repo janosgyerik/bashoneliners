@@ -1,7 +1,8 @@
 from django.db import models
 from django.db.models import Count
-from django.contrib.auth.models import User
 from django.db.models.signals import post_save
+from django.contrib.syndication.views import Feed
+from django.contrib.auth.models import User
 
 from datetime import datetime
 import random, string, re
@@ -66,6 +67,9 @@ class OneLiner(models.Model):
     def top(limit=50):
 	return OneLiner.objects.filter(vote__up=True).annotate(votes=Count('vote')).order_by('-votes')[:limit]
 
+    def get_absolute_url(self):
+	return "/main/oneliner/%i/" % self.pk
+
     def __unicode__(self):
 	return self.summary
 
@@ -107,6 +111,15 @@ class Vote(models.Model):
 
     class Meta:
 	unique_together = (('user', 'oneliner',),)
+
+
+class LatestEntries(Feed):
+    title = "BashOneLiners Syndication Feed"
+    link = "/feed/"
+    description = "Latest Items posted to bashoneliners.com"
+
+    def items(self):
+	return OneLiner.objects.filter(is_published=True).order_by('-pk')
 
 
 # eof

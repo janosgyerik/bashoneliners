@@ -81,6 +81,11 @@ code {
     line-height: 22px;
 }
 
+.oneliner .summary a {
+    color: inherit;
+    text-decoration: inherit;
+}
+
 .oneliner .eof {
     font-family: "Courier New", Courier, monospace;
     color: #a0a3af;

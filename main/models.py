@@ -121,5 +121,8 @@ class LatestEntries(Feed):
     def items(self):
 	return OneLiner.objects.filter(is_published=True).order_by('-pk')
 
+    def item_description(self, item):
+	return item.line
+
 
 # eof

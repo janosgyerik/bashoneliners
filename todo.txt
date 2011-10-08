@@ -5,12 +5,10 @@ important
 	- votes placed
 	- bookmarks
 - Search
-- rss
 - Voting
 - TOP 50
 - RST text editor for Explanation etc
 - Commenting
-- /oneliner/pk/
 - logo, better header
 - Valid xhtml
 

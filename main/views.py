@@ -47,7 +47,7 @@ def top_n(request, num):
 def oneliner(request, pk):
     params = get_common_params(request)
     params['oneliners'] = OneLiner.objects.filter(pk=pk)
-    return render_to_response('main/index.html', params)
+    return render_to_response('main/oneliner.html', params)
 
 def mission(request):
     params = get_common_params(request)

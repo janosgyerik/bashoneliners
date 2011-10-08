@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% load nst %}
+
+{% block pagetitle %}One-Liner{% endblock %}
+
+{% block content %}
+
+{% include 'main/oneliners.html' %}
+
+{% endblock %}
+
+{% block ready %}
+	$('.details-trigger').remove();
+	$('.details').show();
+{% endblock %}

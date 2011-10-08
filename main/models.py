@@ -111,10 +111,9 @@ class Vote(models.Model):
 		unique_together = (('hacker', 'oneliner',),)
 
 class LatestEntries(Feed):
-	title = "My Tumblelog: Links"
-	link = "/tumblelog/"
-	description = "Latest Items posted to mysite.com"
-	description_template = 'feeds/description.html'
+	title = "BashOneLiners Syndication Feed"
+	link = "/feed/"
+	description = "Latest Items posted to bashoneliners.com"
 
 	def items(self):
 		# return OneLiner.objects.all.order_by('-pub_date')[:10]

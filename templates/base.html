@@ -1,5 +1,9 @@
 {% extends "xhtml1-strict.html" %}
 
+{% block javascript_src %}
+	<script type="text/javascript" src="/media/js/bashoneliners.js"></script>
+{% endblock javascript_src %}
+
 {% block css %}
 {% endblock css %}
 
@@ -26,7 +30,8 @@
     <a href="/main/top/50/"><span>top 50</span></a> ;
     -->
     <a href="{% url bashoneliners.main.views.index %}"><span>latest 50</span></a> ;
-    <a class="comingsoon" href="#"><span>Search</span></a>
+    <a href="#" id="search" class="comingsoon"><span>Search</span></a>
+    <input type="text" class="hidden" id="search-query" />
 </div>
 
 <div class="hr"></div>

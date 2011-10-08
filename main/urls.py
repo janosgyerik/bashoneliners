@@ -9,5 +9,4 @@ urlpatterns = patterns('bashoneliners.main.views',
     (r'^profile/$', 'profile'),
     (r'^top/(?P<num>\d+)/$', 'top_n'),
 )
-
 # eof

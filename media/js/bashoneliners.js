@@ -8,30 +8,14 @@
  * Date: Sat Oct  8 06:38:28 CEST 2011
  */
 
-function setupSearch() {
-    $('#search').click(function(e) {
-	e.preventDefault();
-	$('#search-query').toggle('fast', function() {
-	    if ($('#search-query').is(':visible')) {
-		$('#search-query').focus();
-	    }
-	});
-    });
-    $('#search-query').keypress(function(e) {
-	if (e.which == 13) {
-	    e.preventDefault();
-	    if ($('.oneliners').size() > 0) {
-		// replace items in .oneliners using AJAX
-	    }
-	    else {
-		$('#search-form').submit();
-	    }
-	}
+function bind_details_trigger(obj) {
+    obj.find('.details-trigger').click(function() {
+	$(this).toggleClass('details-trigger-active').next().toggle('slow');
     });
 }
 
 $(document).ready(function() {
-    //setupSearch();
+    bind_details_trigger($('div.oneliners'));
 });
 
 // eof

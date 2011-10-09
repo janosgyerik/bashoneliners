@@ -85,6 +85,10 @@
 	display: none;
     }
 	    
+    .invisible {
+	visibility: hidden;
+    }
+	    
     .screen-reader-text {
 	position: absolute;
 	left: -1000em;

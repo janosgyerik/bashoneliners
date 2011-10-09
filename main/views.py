@@ -101,7 +101,7 @@ def search_ajax(request):
 	if form.is_valid():
 	    params['oneliners'] = OneLiner.search(form.cleaned_data.get('query'))
 
-    return render_to_response('main/oneliners-search.html', params)
+    return render_to_response('main/oneliners.html', params)
 
 
 # eof

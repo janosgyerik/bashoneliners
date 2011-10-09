@@ -31,7 +31,7 @@ function setupSearch() {
 }
 
 $(document).ready(function() {
-    setupSearch();
+    //setupSearch();
 });
 
 // eof

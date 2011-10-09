@@ -89,4 +89,21 @@ class TopTests(TestCase):
 	self.assertEquals(OneLiner.top()[0], self.jacks_oneliner)
 
 
+class SearchTests(TestCase):
+    def setUp(self):
+	self.jack = Util.new_user('jack')
+	self.jacks_oneliner = Util.new_oneliner(self.jack, 'echo jack')
+
+	self.mike = Util.new_user('mike')
+	self.mikes_oneliner = Util.new_oneliner(self.mike, 'echo mike')
+
+    def test_search(self):
+	self.assertEquals(OneLiner.search('echo').count(), 2)
+	self.assertEquals(OneLiner.search('echo jack').count(), 1)
+	self.assertEquals(OneLiner.search('echo mike').count(), 1)
+	self.assertEquals(OneLiner.search('jack')[0], self.jacks_oneliner)
+	self.assertEquals(OneLiner.search('echo jack')[0], self.jacks_oneliner)
+	self.assertEquals(OneLiner.search('echo mike')[0], self.mikes_oneliner)
+
+
 # eof

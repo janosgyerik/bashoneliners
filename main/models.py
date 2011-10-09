@@ -1,17 +1,29 @@
 from django.db import models
-from django.db.models import Count
+from django.db.models import Count, Q
 from django.db.models.signals import post_save
 from django.contrib.syndication.views import Feed
 from django.contrib.auth.models import User
 
 from datetime import datetime
-import random, string, re
+import random
+import string
+import re
 
 
 ''' Helper methods '''
 
 def randomstring(length=16):
     return ''.join(random.choice(string.letters) for i in xrange(length))
+
+def get_query_terms(query):
+    if query is None:
+	return ()
+
+    query = query.strip()
+    if query == '':
+	return ()
+
+    return re.split(r' +', query)
 
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
@@ -66,6 +78,18 @@ class OneLiner(models.Model):
     @staticmethod
     def top(limit=50):
 	return OneLiner.objects.filter(vote__up=True).annotate(votes=Count('vote')).order_by('-votes')[:limit]
+
+    @staticmethod
+    def search(query=None, limit=50):
+	qq = Q()
+	for term in get_query_terms(query):
+	    sub_qq = Q()
+	    sub_qq |= Q(summary__icontains=term)
+	    sub_qq |= Q(line__icontains=term)
+	    sub_qq |= Q(explanation__icontains=term)
+	    sub_qq |= Q(caveats__icontains=term)
+	    qq &= Q(sub_qq)
+	return OneLiner.objects.filter(qq)[:limit]
 
     def get_absolute_url(self):
 	return "/main/oneliner/%i/" % self.pk

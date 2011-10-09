@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% load nst %}
+
+{% block pagetitle %}Search{% endblock %}
+
+{% block content %}
+
+<form action="" method="post" id="search-form" style="text-align: center">
+    {{ form.query }}
+
+    <div id="search-loading" class="invisible">
+	<img src="/media/images/loading.gif" alt="" title="" /> Loading ...
+    </div>
+
+    <div id="search-errors" class="hidden error">
+	An error occurred during search.
+    </div>
+</form>
+
+<div id="search-results" class="hidden">
+
+<h2>Results</h2>
+
+{% include 'main/oneliners.html' %}
+
+</div>
+
+{% endblock %}
+
+{% block ready %}
+	function search_success(html) {
+	    $('#search-results .oneliners').html($(html).html());
+	    bind_details_trigger($('#search-results div.oneliners'));
+	    $('#search-results').show();
+	}
+
+	function search_error(err) {
+	    $('#search-errors').show();
+	}
+
+	function search_completed() {
+	    $('#search-loading').css('visibility', 'hidden');
+	}
+
+	$('#search-form').submit(function(e) {
+	    e.preventDefault();
+	    $('#search-loading').css('visibility', 'visible');
+	    $('#search-errors').hide();
+
+	    var options = {
+		'url': '{% url bashoneliners.main.views.search_ajax %}',
+		'type': 'POST',
+		'data': { 'query': $('#id_query').val() },
+		'success': search_success,
+		'error': search_error,
+		'complete': search_completed
+	    };
+	    $.ajax(options);
+	});
+
+	$('#id_query').focus();
+{% endblock %}

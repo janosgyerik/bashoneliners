@@ -31,7 +31,7 @@
     -->
     <a href="{% url bashoneliners.main.views.index %}"><span>latest 50</span></a> ;
     <a href="/feed/"><span>RSS</span></a> ;
-    <a href="#" id="search" class="comingsoon"><span>Search</span></a>
+    <a href="{% url bashoneliners.main.views.search %}"><span>Search</span></a>
 </div>
 
 <div class="hr"></div>
@@ -50,6 +50,8 @@
     {% block content %}{% endblock %}
 
 </div>
+
+<div class="clear"></div>
 
 <div class="hr"></div>
 

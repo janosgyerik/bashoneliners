@@ -1,10 +1,12 @@
+See Trello for a more up to date near-term todo list!
+https://trello.com/board/main/4e7da3cf5a94680b35000893
+
 important
 =========
 - Profile page with own posts and bookmarks/favourites
 	- edit oneliner
 	- votes placed
 	- bookmarks
-- Search
 - Voting
 - TOP 50
 - RST text editor for Explanation etc

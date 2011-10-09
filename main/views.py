@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import *
 from django.template import RequestContext
 
 from bashoneliners.main.models import HackerProfile, OneLiner, User
-from bashoneliners.main.forms import PostOneLinerForm
+from bashoneliners.main.forms import PostOneLinerForm, SearchOneLinerForm
 
 from datetime import datetime
 
@@ -35,13 +35,11 @@ def get_common_params(request):
 def index(request):
     params = get_common_params(request)
     params['oneliners'] = OneLiner.objects.filter(is_published=True).order_by('-pk')
-
     return render_to_response('main/index.html', params)
 
 def top_n(request, num):
     params = get_common_params(request)
     params['oneliners'] = OneLiner.top()
-
     return render_to_response('main/top_n.html', params)
 
 def oneliner(request, pk):
@@ -83,6 +81,27 @@ def post(request):
     params['form'] = form
 
     return render_to_response('main/post.html', params, context_instance=RequestContext(request))
+
+def search(request):
+    params = get_common_params(request)
+    params['form'] = SearchOneLinerForm()
+    return render_to_response('main/search.html', params)
+
+def search_ajax(request):
+    params = {}
+
+    if request.method == 'POST':
+	form = SearchOneLinerForm(request.POST)
+    elif request.method == 'GET':
+	form = SearchOneLinerForm(request.GET)
+    else:
+	form = None
+
+    if form is not None:
+	if form.is_valid():
+	    params['oneliners'] = OneLiner.search(form.cleaned_data.get('query'))
+
+    return render_to_response('main/oneliners-search.html', params)
 
 
 # eof

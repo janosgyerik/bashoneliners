@@ -39,6 +39,10 @@ a img {
     margin-top: 1.5em;
 }
 
+.oneliners .message {
+    text-align: center;
+}
+
 .oneliner pre {
     line-height: 1.3em;
     margin: 1em;
@@ -105,7 +109,7 @@ code {
     background-position: left bottom;
 }
 
-form .error {
+.error {
     color: red;
 }
 
@@ -255,6 +259,11 @@ ul.openid-providers li.wordpress {
 }
 ul.openid-providers li.wordpress:hover {
     background-position: 300px 100px;
+}
+
+#search-loading {
+    text-align: center;
+    margin: .5em 0;
 }
 
 

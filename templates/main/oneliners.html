@@ -50,7 +50,7 @@
 	</table>
     </div>
     {% empty %}
-    <p class="message">No one-liners, yet.</p>
+    <p class="message">{% block oneliners_empty %}No one-liners, yet.{% endblock %}</p>
     {% endfor %}
 </div>
 

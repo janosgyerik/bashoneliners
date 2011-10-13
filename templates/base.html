@@ -14,6 +14,7 @@
 
 {% block body %}
 
+{% if searchform %}
 <div id="searchbox">
     <form id="search-form" method="get" action="{% url bashoneliners.main.views.search %}">
 	
@@ -30,6 +31,7 @@
 
     </form>
 </div>
+{% endif %}
 
 <div id="nav">
     {% if user.is_authenticated %}

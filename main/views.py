@@ -17,8 +17,14 @@ from datetime import datetime
 ''' helper methods '''
 
 def get_common_params(request):
+    if request.method == 'GET':
+	searchform = SearchOneLinerForm(request.GET)
+    else:
+	searchform = SearchOneLinerForm()
+
     params = {
 	    'user': request.user,
+	    'searchform': searchform,
 	    }
 
     try:
@@ -84,15 +90,17 @@ def post(request):
 
 def search(request):
     params = get_common_params(request)
-    params['form'] = SearchOneLinerForm()
+    form = params['searchform']
+
+    if form.is_valid():
+	params['oneliners'] = OneLiner.search(form.cleaned_data.get('query'))
+
     return render_to_response('main/search.html', params)
 
 def search_ajax(request):
     params = {}
 
-    if request.method == 'POST':
-	form = SearchOneLinerForm(request.POST)
-    elif request.method == 'GET':
+    if request.method == 'GET':
 	form = SearchOneLinerForm(request.GET)
     else:
 	form = None

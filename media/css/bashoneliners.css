@@ -8,6 +8,11 @@ body {
     min-width: 800px;
 }
 
+#searchbox {
+    margin: 10px 0 0 190px;
+    float: left;
+}
+
 #nav a {
     color: #888;
     text-decoration: none;

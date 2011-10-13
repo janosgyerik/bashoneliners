@@ -39,7 +39,7 @@ class PostOneLinerForm(forms.ModelForm):
 		)
 
 class SearchOneLinerForm(forms.Form):
-    query = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'size': 100}))
+    query = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'size': 60}))
 
 
 # eof

@@ -14,6 +14,23 @@
 
 {% block body %}
 
+<div id="searchbox">
+    <form id="search-form" method="get" action="{% url bashoneliners.main.views.search %}">
+	
+	<div>
+	    Search: {{ searchform.query }}
+	    <span id="search-loading" class="invisible">
+		<img src="/media/images/loading.gif" alt="" title="" />
+	    </span>
+
+	    <span id="search-errors" class="hidden error">
+		An error occurred during search.
+	    </span>
+	</div>
+
+    </form>
+</div>
+
 <div id="nav">
     {% if user.is_authenticated %}
     <a href="{% url bashoneliners.main.views.profile %}"><span>{{ user.username }}</span></a> ;
@@ -30,8 +47,7 @@
     <a href="/main/top/50/"><span>top 50</span></a> ;
     -->
     <a href="{% url bashoneliners.main.views.index %}"><span>latest 50</span></a> ;
-    <a href="/feed/"><span>RSS</span></a> ;
-    <a href="{% url bashoneliners.main.views.search %}"><span>Search</span></a>
+    <a href="/feed/"><span>RSS</span></a>
 </div>
 
 <div class="hr"></div>
@@ -64,6 +80,8 @@
 <script type="text/javascript">
     <!--
     $(document).ready(function() {
+	//$('#id_query').focus();
+
 	{% block ready %}{% endblock %}
     });
     //-->

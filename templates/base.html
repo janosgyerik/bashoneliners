@@ -20,13 +20,8 @@
 	
 	<div>
 	    Search: {{ searchform.query }}
-	    <span id="search-loading" class="hidden">
-		<img src="/media/images/loading.gif" alt="" title="" />
-	    </span>
-
-	    <span id="search-errors" class="hidden error">
-		An error occurred during search.
-	    </span>
+	    <span id="search-loading"></span>
+	    <span id="search-errors" class="error"></span>
 	</div>
 
     </form>
@@ -88,5 +83,19 @@
     });
     //-->
 </script>
+
+<div id="templates" class="hidden" >
+    <noscript>
+	<div>Everything below here are supposed to be hidden...</div>
+    </noscript>
+
+    <span class="search-loading">
+	<img src="/media/images/loading.gif" alt="" title="" />
+    </span>
+
+    <span class="search-errors">
+	An error occurred during search.
+    </span>
+</div>
 
 {% endblock body %}

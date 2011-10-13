@@ -17,17 +17,17 @@
 	}
 
 	function search_error(err) {
-	    $('#search-errors').show();
+	    $('#search-errors').append($('#templates .search-errors').html());
 	}
 
 	function search_completed() {
-	    $('#search-loading').hide();
+	    $('#search-loading').empty();
 	}
 
 	$('#search-form').submit(function(e) {
 	    e.preventDefault();
-	    $('#search-loading').show();
-	    $('#search-errors').hide();
+	    $('#search-loading').append($('#templates .search-loading').html());
+	    $('#search-errors').empty();
 
 	    var options = {
 		'url': '{% url bashoneliners.main.views.search_ajax %}',

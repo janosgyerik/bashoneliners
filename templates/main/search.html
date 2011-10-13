@@ -21,12 +21,12 @@
 	}
 
 	function search_completed() {
-	    $('#search-loading').css('visibility', 'hidden');
+	    $('#search-loading').hide();
 	}
 
 	$('#search-form').submit(function(e) {
 	    e.preventDefault();
-	    $('#search-loading').css('visibility', 'visible');
+	    $('#search-loading').show();
 	    $('#search-errors').hide();
 
 	    var options = {

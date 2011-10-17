@@ -78,6 +78,8 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
 )
 
+AUTH_PROFILE_MODULE = 'bashoneliners.main.models.HackerProfile'
+
 AUTHENTICATION_BACKENDS = (
 	'django_openid_auth.auth.OpenIDBackend',
 	'django.contrib.auth.backends.ModelBackend',
@@ -87,7 +89,7 @@ OPENID_CREATE_USERS = True
 OPENID_UPDATE_DETAILS_FROM_SREG = True
 
 LOGIN_URL = '/openid/login/'
-LOGIN_REDIRECT_URL = '/accounts/profile'
+LOGIN_REDIRECT_URL = '/main/profile'
 
 ROOT_URLCONF = 'bashoneliners.urls'
 
@@ -107,7 +109,6 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'django.contrib.admindocs',
     'bashoneliners.main',
-    'bashoneliners.accounts',
     'bashoneliners.django_openid_auth',
 )
 

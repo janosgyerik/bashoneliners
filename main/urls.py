@@ -13,6 +13,9 @@ urlpatterns = patterns('bashoneliners.main.views',
 
     (r'^search/$', 'search'),
     (r'^search_ajax/$', 'search_ajax'),
+
+    (r'^login/$', 'login'),
+    (r'^logout/$', 'logout'),
 )
 
 # eof

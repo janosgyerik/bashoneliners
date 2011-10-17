@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block pagetitle %}Login{% endblock %}
+
+{% block content %}
+
+<p>Choose an OpenID provider to login:</p>
+<ul class="openid-providers">
+    <li class="google"></li>
+    <li class="yahoo"></li>
+</ul>
+<div class="clear"></div>
+
+<form id="openid-form" method="post" action="/openid/login/"><div>
+{% csrf_token %}
+<label for="id_openid_identifier"><strong>Or,</strong> enter other OpenID provider URL: </label><input type="text" id="id_openid_identifier" class="openid" name="openid_identifier" maxlength="255" size="30" />
+    <input name="bsignin" type="submit" value="Login" />
+</div></form>
+
+<p><em>If you would like us to add more OpenID provider shortcuts, please email us at <a href="mailto:bashoneliners@lists.launchpad.net">bashoneliners@lists.launchpad.net</a>. Or, if you would like to implement that yourself please head over to our <a href="{% url bashoneliners.main.views.mission %}">mission statement</a> for details.</em></p>
+
+{% endblock %}
+
+{% block ready %}
+	function submitOpenIdLogin(url) {
+	    $('#id_openid_identifier').val(url);
+	    $('#openid-form').submit();
+	}
+	$('.openid-providers .google').click(function() {
+	    submitOpenIdLogin('https://www.google.com/accounts/o8/id');
+	});
+	$('.openid-providers .yahoo').click(function() {
+	    submitOpenIdLogin('http://yahoo.com');
+	});
+	$('.openid-providers .wordpress').click(function() {
+	    submitOpenIdLogin('http://wordpress.com');
+	});
+
+	$('#id_username').focus();
+{% endblock %}
+

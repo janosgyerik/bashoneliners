@@ -2,6 +2,7 @@ from django.shortcuts import render_to_response, redirect
 from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import *
 from django.template import RequestContext
+from django.contrib.auth import logout as django_logout
 
 from bashoneliners.main.models import HackerProfile, OneLiner, User
 from bashoneliners.main.forms import PostOneLinerForm, SearchOneLinerForm
@@ -111,5 +112,12 @@ def search_ajax(request):
 
     return render_to_response('main/oneliners.html', params)
 
+def login(request):
+    params = get_common_params(request)
+    return render_to_response('main/login.html', params, context_instance=RequestContext(request))
+
+def logout(request):
+    django_logout(request)
+    return index(request)
 
 # eof

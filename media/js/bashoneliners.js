@@ -9,7 +9,7 @@
  */
 
 function bind_details_trigger(obj) {
-    obj.find('.details-trigger').click(function() {
+    $('<div class="details-trigger">Details...</div>').insertBefore(obj.find('.details')).click(function() {;
 	$(this).toggleClass('details-trigger-active').next().toggle('slow');
     });
 }

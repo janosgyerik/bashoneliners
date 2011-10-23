@@ -88,6 +88,7 @@ code {
     color: #253;
     font-size: 18px;
     line-height: 22px;
+    font-weight: normal;
 }
 
 .oneliner .summary a {

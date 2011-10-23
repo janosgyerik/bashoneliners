@@ -3,51 +3,34 @@
 <div class="oneliners">
     {% for oneliner in oneliners %}
     <div class="oneliner">
-	<table class="oneliner">
-	    <tr>
-		<td class="votecell hidden">
-		    <div class="vote">
-			<a class="vote-up-off" title="Cool one-liner! I can use this! (click again to undo)">vote up</a>
-			<span class="vote-count">{{ oneliner.get_votes_up }}</span>
-			<a class="vote-down-off" title="Not cool. I cannot use this! (click again to undo)">vote down</a>
-			<a class="star-off" title="This is a favourite one-liner. (click again to undo)">favourite</a>
-		    </div>
-		</td>
-		<td>
-		    <div class="summary">
-			<a href="{% url bashoneliners.main.views.oneliner oneliner.pk %}">{{ oneliner.summary|capfirst }}</a>
-		    </div>
+	<h3 class="summary">
+	    <a href="{% url bashoneliners.main.views.oneliner oneliner.pk %}">{{ oneliner.summary|capfirst }}</a>
+	</h3>
 
-		    <p class="author">
-		    by <a href="{% url bashoneliners.main.views.profile oneliner.user.pk %}"><span>{{ oneliner.user.username }}</span> </a>
-			on <span>{{ oneliner.created_dt }}</span>
-		    </p>
+	<p class="author">
+	by <a href="{% url bashoneliners.main.views.profile oneliner.user.pk %}"><span>{{ oneliner.user.username }}</span> </a>
+	    on <span>{{ oneliner.created_dt }}</span>
+	</p>
 
-		    <pre>{% for line in oneliner.lines %}<span class="prompt">$ </span>{{ line }}<br/>{% endfor %}</pre>
+	<pre>{% for line in oneliner.lines %}<span class="prompt">$ </span>{{ line }}<br/>{% endfor %}</pre>
 
-		    {% if oneliner.explanation or oneliner.caveats %}
-		    <div class="details-trigger">Details...</div>
-		    {% endif %}
-		    <div class="details hidden">
-			{% if oneliner.explanation %}
-			<div class="explanation">
-			    <h3>Explanation</h3>
-			    {{ oneliner.explanation|nst|safe }}
-			</div>
-			{% endif %}
+	{% if oneliner.explanation or oneliner.caveats %}
+	<div class="details hidden">
+	    {% if oneliner.explanation %}
+	    <div class="explanation">
+		<h3>Explanation</h3>
+		{{ oneliner.explanation|nst|safe }}
+	    </div>
+	    {% endif %}
 
-			{% if oneliner.caveats %}
-			<div class="caveats">
-			    <h3>Limitations</h3>
-			    {{ oneliner.caveats|nst|safe }}
-			</div>
-			{% endif %}
-
-			<div class="hidden eof">EOF</div>
-		    </div>
-		</td>
-	    </tr>
-	</table>
+	    {% if oneliner.caveats %}
+	    <div class="caveats">
+		<h3>Limitations</h3>
+		{{ oneliner.caveats|nst|safe }}
+	    </div>
+	    {% endif %}
+	</div>
+	{% endif %}
     </div>
     {% empty %}
     <p class="message">No matching one-liners.</p>

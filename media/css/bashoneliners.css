@@ -221,50 +221,10 @@ dl.mission dt {
     text-transform: uppercase;
 }
 
-table.login-or-openid td.login-or-openid {
-    vertical-align: top;
-    width: 50%;
-    margin-right: 4em;
-    padding-right: 4em;
-}
-
 input.openid {
     background: url(/openid/logo.gif) no-repeat;
     background-position: 0 50%;
     padding-left: 16px;
-}
-
-ul.openid-providers {
-    width: 480px;
-    margin: 1em 0;
-    padding: 0;
-    list-style: none;
-}
-ul.openid-providers li {
-    background: url('/media/images/openid-sprites.png');
-    width: 150px;
-    height: 50px;
-    float: left;
-    margin: 0 5px;
-    cursor: pointer;
-}
-ul.openid-providers li.google {
-    background-position: 0px 450px;
-}
-ul.openid-providers li.google:hover {
-    background-position: 300px 450px;
-}
-ul.openid-providers li.yahoo {
-    background-position: 0px 50px;
-}
-ul.openid-providers li.yahoo:hover {
-    background-position: 300px 50px;
-}
-ul.openid-providers li.wordpress {
-    background-position: 0px 100px;
-}
-ul.openid-providers li.wordpress:hover {
-    background-position: 300px 100px;
 }
 
 #search-loading {

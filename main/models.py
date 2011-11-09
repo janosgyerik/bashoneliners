@@ -50,7 +50,7 @@ class OneLiner(models.Model):
 
     summary = models.CharField(max_length=200)
     line = models.TextField()
-    explanation = models.TextField(blank=True)
+    explanation = models.TextField()
     caveats = models.TextField('Limitations', blank=True)
 
     is_published = models.BooleanField(default=True)

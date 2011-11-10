@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% load nst %}
+
+{% block pagetitle %}Source code{% endblock %}
+
+{% block keywords %}{% endblock %}
+
+{% block description %}{% endblock %}
+
+{% block content %}
+
+<p>This is an open-source project, and we are looking for contributors. You can find the source code here:</p>
+<p><a href="https://launchpad.net/bashoneliners">https://launchpad.net/bashoneliners</a></p>
+
+<p>If you would like to participate in developing this site, please contact us at <a href="mailto:bashoneliners@lists.launchpad.net">bashoneliners@lists.launchpad.net</a> and let's start the conversation!</p>
+
+<dl>
+    <dt>Task management, upcoming features</dt>
+    <dd>
+	<a href="https://trello.com/board/main/4e7da3cf5a94680b35000893">https://trello.com/board/main/4e7da3cf5a94680b35000893</a>
+    </dd>
+
+    <dt>Mailing list address</dt>
+    <dd><a href="mailto:bashoneliners@lists.launchpad.net">bashoneliners@lists.launchpad.net</a></dd>
+
+    <dt>Mailing list public archive</dt>
+    <dd><a href="https://lists.launchpad.net/bashoneliners/">https://lists.launchpad.net/bashoneliners/</a></dd>
+
+    <dt>Get the source code</dt>
+    <dd>
+	<pre>bzr branch lp:bashoneliners</pre>
+	<p>If you prefer Git or Subversion, it can be arranged, please drop as an email.</p>
+    </dd>
+
+</dl>
+
+<p>Please also read our <a href="{% url bashoneliners.main.views.mission %}">mission statement</a>, as it is the foundation of this project.</p>
+
+{% endblock %}

@@ -3,12 +3,8 @@ https://trello.com/board/main/4e7da3cf5a94680b35000893
 
 important
 =========
-- rewrite 'wanna do it...'
 - rename caveats col to limitations
 - add wishlist feature
-- adjust texts and links
-	- mission statement
-	- source code
 - Change 'Details...' to 
 	'View explanation...', 
 	'View limitations...', 

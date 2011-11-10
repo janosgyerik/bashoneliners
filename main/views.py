@@ -91,6 +91,10 @@ def oneliner(request, pk):
     params['oneliners'] = OneLiner.objects.filter(pk=pk)
     return render_to_response('main/oneliner.html', params)
 
+def sourcecode(request):
+    params = get_common_params(request)
+    return render_to_response('main/sourcecode.html', params)
+
 def mission(request):
     params = get_common_params(request)
     return render_to_response('main/mission.html', params)

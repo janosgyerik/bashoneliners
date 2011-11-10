@@ -10,6 +10,8 @@
 
 {% block content %}
 
+<p>Our Mission Statement is the foundation or definition of this website project.</p>
+
 <dl class="mission">
     <dt>MISSION</dt>
     <dd>Create a collection of practical or just pure awesome(!) bash or ksh <em>one-liners</em> or tips, with easy to use user interfaces for browsing, searching and contributing one-liners.
@@ -27,45 +29,6 @@
 
 </dl>
 
-<h3>Interested in the project?</h3>
-
-<p>This is an open-source project, you can find the source code on the project management website:</p>
-<p><a href="https://launchpad.net/bashoneliners">https://launchpad.net/bashoneliners</a></p>
-
-<p>If you would like to participate in developing this site, please contact us at <a href="mailto:bashoneliners@lists.launchpad.net">bashoneliners@lists.launchpad.net</a> and let's start the conversation!</p>
-
-<dl>
-    <dt>Task management, upcoming features</dt>
-    <dd>
-	<a href="https://trello.com/board/main/4e7da3cf5a94680b35000893">https://trello.com/board/main/4e7da3cf5a94680b35000893</a>
-    </dd>
-
-    <dt>Mailing list address</dt>
-    <dd><a href="mailto:bashoneliners@lists.launchpad.net">bashoneliners@lists.launchpad.net</a></dd>
-
-    <dt>Mailing list public archive</dt>
-    <dd><a href="https://lists.launchpad.net/bashoneliners/">https://lists.launchpad.net/bashoneliners/</a></dd>
-
-    <dt>Get the source code</dt>
-    <dd>
-	<dl>
-	    <dt>Bazaar (primary)</dt>
-	    <dd>
-		<pre>bzr branch lp:bashoneliners</pre>
-	    </dd>
-
-	    <dt>Git (mirror)</dt>
-	    <dd>
-		<pre>git clone git@github.com:titan2x/bashoneliners.git</pre>
-	    </dd>
-
-	    <dt>Subversion (mirror)</dt>
-	    <dd>
-		<pre>svn checkout http://bashoneliners.googlecode.com/svn/trunk/</pre>
-	    </dd>
-	</dl>
-    </dd>
-
-</dl>
+<p>If you are interested in participating in this open-source project, head over to the <a href="{% url bashoneliners.main.views.sourcecode %}">source code</a> page.</p>
 
 {% endblock %}

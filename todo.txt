@@ -3,6 +3,25 @@ https://trello.com/board/main/4e7da3cf5a94680b35000893
 
 important
 =========
+- adjust texts and links
+	- mission statement
+	- source code
+- Change 'Details...' to 
+	'View explanation...', 
+	'View limitations...', 
+	'View explanation and limitations...' 
+	'Hide explanation...'
+	'Hide limitations...'
+	'Hide explanation and limitations...'
+- expand all one-liners
+- markdown with preview
+- add (formatted!) details + limitations to rss feed
+- allow login with password
+- allow change password when logged in
+
+
+first release
+=============
 - Profile page with own posts and bookmarks/favourites
 	- edit oneliner
 	- votes placed

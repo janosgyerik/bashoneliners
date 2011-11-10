@@ -7,12 +7,12 @@
 	    <a href="{% url bashoneliners.main.views.oneliner oneliner.pk %}">{{ oneliner.summary|capfirst }}</a>
 	</h3>
 
+	<pre>{% for line in oneliner.lines %}<span class="prompt">$ </span>{{ line }}<br/>{% endfor %}</pre>
+
 	<p class="author">
 	by <a href="{% url bashoneliners.main.views.profile oneliner.user.pk %}"><span>{{ oneliner.user.username }}</span> </a>
 	    on <span>{{ oneliner.created_dt }}</span>
 	</p>
-
-	<pre>{% for line in oneliner.lines %}<span class="prompt">$ </span>{{ line }}<br/>{% endfor %}</pre>
 
 	{% if oneliner.explanation or oneliner.caveats %}
 	<div class="details hidden">

@@ -89,7 +89,7 @@ class OneLiner(models.Model):
 	    sub_qq |= Q(explanation__icontains=term)
 	    sub_qq |= Q(caveats__icontains=term)
 	    qq &= Q(sub_qq)
-	return OneLiner.objects.filter(qq)[:limit]
+	return OneLiner.objects.filter(is_published=True).filter(qq)[:limit]
 
     def get_absolute_url(self):
 	return "/main/oneliner/%i/" % self.pk

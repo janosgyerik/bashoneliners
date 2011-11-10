@@ -99,6 +99,7 @@ class OneLiner(models.Model):
 
     class Meta:
 	get_latest_by = 'pk'
+	ordering = ('-id',)
 
 
 class Vote(models.Model):
@@ -143,7 +144,7 @@ class LatestEntries(Feed):
     description = "Latest Items posted to bashoneliners.com"
 
     def items(self):
-	return OneLiner.objects.filter(is_published=True).order_by('-pk')
+	return OneLiner.objects.filter(is_published=True)
 
     def item_description(self, item):
 	return item.line

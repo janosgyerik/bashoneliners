@@ -31,19 +31,19 @@
 <div id="nav">
     {% if user.is_authenticated %}
     <a href="{% url bashoneliners.main.views.profile %}"><span>{{ user.username }}</span></a> ;
-    <a href="{% url bashoneliners.main.views.post %}"><span>post a one-liner</span></a> ;
-    <a href="{% url bashoneliners.main.views.logout %}"><span>logout</span></a>
+    <a href="{% url bashoneliners.main.views.post %}"><span>Post a one-liner</span></a> ;
+    <a href="{% url bashoneliners.main.views.logout %}"><span>Logout</span></a>
     {% else %}
-    <a href="{% url bashoneliners.main.views.login %}"><span>login / sign up</span></a>
+    <a href="{% url bashoneliners.main.views.login %}"><span>Login / Sign up</span></a>
     {% endif %}
     <br/>
-    <a href="/"><span>home</span></a> ;
-    <a href="{% url bashoneliners.main.views.mission %}"><span>mission statement</span></a> ;
-    <a href="{% url bashoneliners.main.views.sourcecode %}"><span>source code</span></a> ;
+    <a href="/"><span>Home</span></a> ;
+    <a href="{% url bashoneliners.main.views.mission %}"><span>Mission Statement</span></a> ;
+    <a href="{% url bashoneliners.main.views.sourcecode %}"><span>Source code</span></a> ;
     <!--
     <a href="/main/top/50/"><span>top 50</span></a> ;
     -->
-    <a href="{% url bashoneliners.main.views.index %}"><span>latest 50</span></a> ;
+    <a href="{% url bashoneliners.main.views.index %}"><span>Latest 50</span></a> ;
     <a href="/feed/"><span>RSS</span></a>
 </div>
 

@@ -38,6 +38,39 @@ class PostOneLinerForm(forms.ModelForm):
 		#'is_published',
 		)
 
+
+class EditOneLinerForm(forms.ModelForm):
+    user = None
+
+    def __init__(self, user, *args, **kwargs):
+	self.user = user
+	super(EditOneLinerForm, self).__init__(*args, **kwargs)
+
+    def clean(self):
+	if self.instance.user != self.user:
+	    raise forms.ValidationError('User %s is not the owner of this OneLiner' % self.user)
+
+	return self.cleaned_data
+
+    class Meta:
+	model = OneLiner
+
+	widgets = {
+		'line': forms.Textarea(attrs={'cols': 80, 'rows': 3, }),
+		'summary': forms.TextInput(attrs={'size': 100, }),
+		'explanation': forms.Textarea(attrs={'cols': 80, 'rows': 10, }),
+		'caveats': forms.Textarea(attrs={'cols': 80, 'rows': 3, }),
+		}
+
+	fields = (
+		'line',
+		'summary',
+		'explanation',
+		'caveats',
+		'is_published',
+		)
+
+
 class SearchOneLinerForm(forms.Form):
     query = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'size': 60}))
 

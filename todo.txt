@@ -3,6 +3,15 @@ https://trello.com/board/main/4e7da3cf5a94680b35000893
 
 important
 =========
+- profile
+	- edit one-liners
+	- delete one-liners
+	- user info
+		- display name
+		- twitter
+		- homepage
+		- username
+		- password
 - add wishlist feature
 	- tdd
 	- post question

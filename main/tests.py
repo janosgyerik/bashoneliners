@@ -1,6 +1,7 @@
 from django.test import TestCase
 
 from main.models import User, OneLiner, Vote
+from main.forms import EditOneLinerForm
 
 class Util:
     @staticmethod
@@ -10,14 +11,75 @@ class Util:
 	return user
 
     @staticmethod
-    def new_oneliner(user, line):
-	oneliner = OneLiner(user=user, line=line)
+    def new_oneliner(user, line, summary=None, explanation=None):
+	if summary is None:
+	    summary = '(incorrectly omitted)'
+	if explanation is None:
+	    explanation = '(incorrectly omitted)'
+	oneliner = OneLiner(user=user, line=line, summary=summary, explanation=explanation)
 	oneliner.save()
 	return oneliner
 
     @staticmethod
     def new_vote():
 	pass
+
+
+class EditOneLinerTests(TestCase):
+    def setUp(self):
+	self.jack = Util.new_user('jack')
+	self.jacks_oneliner = Util.new_oneliner(self.jack, 'echo jack')
+
+	self.frank = Util.new_user('frank')
+	self.franks_oneliner = Util.new_oneliner(self.frank, 'echo frank')
+
+    def test_save_own_success(self):
+	oneliner0 = self.jacks_oneliner
+	data = {
+		'summary': oneliner0.summary,
+		'line': oneliner0.line,
+		'explanation': oneliner0.explanation,
+		}
+	new_summary = oneliner0.summary + ' some change'
+	data['summary'] = new_summary
+
+	form = EditOneLinerForm(self.jack, data, instance=oneliner0)
+	self.assertTrue(form.is_valid())
+	oneliner1 = form.save()
+
+	self.assertEquals(oneliner1.summary, new_summary)
+	self.assertEquals(oneliner1.user, self.jack)
+
+    def test_save_own_failure(self):
+	oneliner0 = self.jacks_oneliner
+	data = {
+		'summary': oneliner0.summary,
+		'line': oneliner0.line,
+		}
+	new_summary = oneliner0.summary + ' some change'
+	data['summary'] = new_summary
+
+	form = EditOneLinerForm(self.jack, data, instance=oneliner0)
+	self.assertFalse(form.is_valid())
+
+	error_items = form.errors.items()
+	self.assertEquals(len(error_items), 1)
+	self.assertEquals(error_items[0][0], 'explanation')
+
+    def test_save_notown_failure(self):
+	oneliner0 = self.jacks_oneliner
+	data = {
+		'summary': oneliner0.summary,
+		'line': oneliner0.line,
+		'explanation': oneliner0.explanation,
+		}
+
+	form = EditOneLinerForm(self.frank, data, instance=self.jacks_oneliner)
+	self.assertFalse(form.is_valid())
+
+	error_items = form.errors.items()
+	self.assertEquals(len(error_items), 1)
+	self.assertEquals(error_items[0][0], '__all__')
 
 
 class VoteTests(TestCase):

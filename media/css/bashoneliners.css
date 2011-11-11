@@ -80,7 +80,7 @@ code {
     color: blue;
 }
 
-.oneliner .summary, .oneliner .explanation, .oneliner .caveats {
+.oneliner .summary, .oneliner .explanation, .oneliner .limitations {
     margin: 1.5em;
 }
 

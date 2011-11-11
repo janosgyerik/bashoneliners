@@ -4,13 +4,6 @@ https://trello.com/board/main/4e7da3cf5a94680b35000893
 important
 =========
 - add wishlist feature
-- Change 'Details...' to 
-	'View explanation...', 
-	'View limitations...', 
-	'View explanation and limitations...' 
-	'Hide explanation...'
-	'Hide limitations...'
-	'Hide explanation and limitations...'
 - markdown with preview
 - rename caveats col to limitations
 - add (formatted!) details + limitations to rss feed

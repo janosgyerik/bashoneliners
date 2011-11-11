@@ -9,8 +9,22 @@
  */
 
 function bind_details_trigger(obj) {
-    $('<div class="details-trigger">Details...</div>').insertBefore(obj.find('.details')).click(function() {;
-	$(this).toggleClass('details-trigger-active').next().toggle('slow');
+    obj.find('.details').each(function() {
+	var trigger = $('<div class="details-trigger"/>').click(function() {
+	    $(this).toggleClass('details-trigger-active').next().toggle('slow');
+	});
+	var has_explanation = $(this).find('.explanation').size() > 0;
+	var has_limitations = $(this).find('.limitations').size() > 0;
+	if (has_explanation && has_limitations) {
+	    trigger.text('View explanation and limitations');
+	}
+	else if (has_explanation) {
+	    trigger.text('View explanation');
+	}
+	else if (has_limitations) {
+	    trigger.text('View limitations');
+	}
+	$(this).before(trigger);
     });
 
     obj.find('.expand-all').prepend('<div class="expand-all-trigger">Expand all</div>');

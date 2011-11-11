@@ -2,13 +2,15 @@ from django.conf.urls.defaults import *
 
 urlpatterns = patterns('bashoneliners.main.views',
     (r'^$', 'index'),
-    (r'^oneliner/(?P<pk>\d+)/$', 'oneliner'),
     (r'^sourcecode/$', 'sourcecode'),
     (r'^mission/$', 'mission'),
     (r'^post/$', 'post'),
     (r'^wishlist/$', 'wishlist'),
     #(r'^wishlist/ask/$', 'wishlist'),
     #(r'^wishlist/answer/$', 'wishlist'),
+
+    (r'^oneliner/(?P<pk>\d+)/$', 'oneliner'),
+    (r'^edit_oneliner/(?P<pk>\d+)/$', 'edit_oneliner'),
 
     (r'^profile/(?P<user_id>\d+)/$', 'profile'),
     (r'^profile/$', 'profile'),

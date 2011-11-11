@@ -138,6 +138,10 @@ code {
     color: red;
 }
 
+form .oneliner .explanation, form .oneliner .limitations {
+    margin: .5em;
+}
+
 form ul {
     list-style: none;
 }

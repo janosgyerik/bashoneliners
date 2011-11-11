@@ -16,6 +16,9 @@ from bashoneliners.main.models import OneLiner
 ''' forms '''
 
 class PostOneLinerForm(forms.ModelForm):
+    title = 'Post a one-liner'
+    actions = ('Post one-liner',)
+
     def save(self, user):
 	self.instance.user = user
 	return super(PostOneLinerForm, self).save()
@@ -40,6 +43,9 @@ class PostOneLinerForm(forms.ModelForm):
 
 
 class EditOneLinerForm(forms.ModelForm):
+    title = 'Edit one-liner'
+    actions = ('Save one-liner', 'Delete one-liner',)
+    edit = True
     user = None
 
     def __init__(self, user, *args, **kwargs):

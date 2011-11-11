@@ -2,30 +2,13 @@
 
 {% load nst %}
 
-{% block pagetitle %}Post a one-liner{% endblock %}
+{% block pagetitle %}{{ form.title }}{% endblock %}
 
 {% block keywords %}{% endblock %}
 
 {% block description %}{% endblock %}
 
 {% block content %}
-
-<p>Make sure your one-liner is:</p>
-
-<ul>
-    <li>Practical, clever, or interesting to someone using bash or ksh.</li>
-    <li>Short, clear, easy to understand.</li>
-    <li>Something very interesting or cool.</li>
-</ul>
-
-<p>Please DO NOT post a one-liner if:</p>
-
-<ul>
-    <li>... it is too complicated and hard to read.</li>
-    <li>... it is only marginally useful.</li>
-    <li>... you don't fully understand how it works.</li>
-</ul>
-
 
 <form action="" method="post">{% csrf_token %}
     <div class="non-field-errors">{{ form.non_field_errors }}</div>
@@ -56,7 +39,7 @@
 	    <dt>Limitations (if any)</dt>
 	    <dd>
 	    <div class="error">{{ form.caveats.errors }}</div>
-	    <div class="caveats">
+	    <div class="limitations">
 		{{ form.caveats }}
 	    </div>
 	    </dd>
@@ -70,7 +53,7 @@
 	    -->
 	</dl>
 
-	<p><input type="submit"></p>
+	<p>{% for action in form.actions %}<input type="submit" name="action" value="{{ action }}"/>{% endfor %}</p>
     </div>
 </form>
 

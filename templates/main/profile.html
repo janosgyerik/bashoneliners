@@ -8,10 +8,6 @@
 
 <h3>{% if owner %}One-liners you posted{% else %}One-liners posted{% endif %}</h3>
 
-{% if owner and oneliners %}
-<p class="warning">Editing or deleting of one-liners is not implemented yet. <a href="{% url bashoneliners.main.views.sourcecode %}">Would you be interested in implementing it?</a></p>
-{% endif %}
-
 {% include 'main/oneliners.html' %}
 
 <h3>Favourite one-liners</h3>

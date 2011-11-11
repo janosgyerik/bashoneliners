@@ -5,7 +5,7 @@ from django.template import RequestContext
 from django.contrib.auth import logout as django_logout
 
 from bashoneliners.main.models import HackerProfile, OneLiner, User
-from bashoneliners.main.forms import PostOneLinerForm, SearchOneLinerForm
+from bashoneliners.main.forms import PostOneLinerForm, EditOneLinerForm, SearchOneLinerForm
 
 from datetime import datetime
 
@@ -90,6 +90,30 @@ def oneliner(request, pk):
     params = get_common_params(request)
     params['oneliners'] = OneLiner.objects.filter(pk=pk)
     return render_to_response('main/oneliner.html', params)
+
+@login_required
+def edit_oneliner(request, pk):
+    params = get_common_params(request)
+
+    try:
+	oneliner0 = OneLiner.objects.get(pk=pk)
+    except:
+	pass # todo (?)
+
+    if request.method == 'POST':
+	form = EditOneLinerForm(request.user, request.POST, instance=oneliner0)
+	if form.is_valid():
+	    oneliner1 = form.save()
+	    #tweet(new_oneliner)
+	    #	if published
+	    #	if not was ever published
+	    return redirect(oneliner1)
+    else:
+	form = EditOneLinerForm(request.user, instance=oneliner0)
+
+    params['form'] = form
+
+    return render_to_response('main/post.html', params, context_instance=RequestContext(request))
 
 def sourcecode(request):
     params = get_common_params(request)

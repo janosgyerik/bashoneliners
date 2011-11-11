@@ -251,5 +251,10 @@ input.openid {
     margin: .5em 0;
 }
 
+.editable {
+    background: url(/media/icons/edit.png) no-repeat;
+    padding-left: 22px;
+}
+
 
 /* eof */

@@ -92,6 +92,23 @@ def oneliner(request, pk):
     return render_to_response('main/oneliner.html', params)
 
 @login_required
+def post(request):
+    params = get_common_params(request)
+
+    if request.method == 'POST':
+	form = PostOneLinerForm(request.user, request.POST)
+	if form.is_valid():
+	    new_oneliner = form.save()
+	    tweet(new_oneliner)
+	    return redirect(index)
+    else:
+	form = PostOneLinerForm(request.user)
+
+    params['form'] = form
+
+    return render_to_response('main/post.html', params, context_instance=RequestContext(request))
+
+@login_required
 def edit_oneliner(request, pk):
     params = get_common_params(request)
 
@@ -137,23 +154,6 @@ def profile(request, user_id=None):
 	params['owner'] = True
 
     return render_to_response('main/profile.html', params)
-
-@login_required
-def post(request):
-    params = get_common_params(request)
-
-    if request.method == 'POST':
-	form = PostOneLinerForm(request.POST)
-	if form.is_valid():
-	    new_oneliner = form.save(request.user)
-	    tweet(new_oneliner)
-	    return redirect(index)
-    else:
-	form = PostOneLinerForm()
-
-    params['form'] = form
-
-    return render_to_response('main/post.html', params, context_instance=RequestContext(request))
 
 def wishlist(request):
     params = get_common_params(request)

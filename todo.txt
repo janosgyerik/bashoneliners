@@ -39,12 +39,3 @@ future releases
 -
 
 
-code cleansing
-==============
-- accounts module
-	- login
-	- create account
-	- profile
-- css
-
-

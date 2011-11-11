@@ -4,6 +4,15 @@ https://trello.com/board/main/4e7da3cf5a94680b35000893
 important
 =========
 - add wishlist feature
+	- tdd
+	- post question
+		- require login only at the last step, not before
+	- wishlist page
+		- show published questions
+		- show published answers
+	- show own questions
+	- show own answers
+	- show in oneliner if it answers a question
 - markdown with preview
 - rename caveats col to limitations
 - add (formatted!) details + limitations to rss feed

@@ -131,6 +131,11 @@ def post(request):
 
     return render_to_response('main/post.html', params, context_instance=RequestContext(request))
 
+def wishlist(request):
+    params = get_common_params(request)
+    params['oneliners'] = OneLiner.objects.filter(is_published=True).order_by('-pk')
+    return render_to_response('main/index.html', params)
+
 def search(request):
     params = get_common_params(request)
     form = params['searchform']

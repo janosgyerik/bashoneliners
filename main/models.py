@@ -102,6 +102,17 @@ class OneLiner(models.Model):
 	ordering = ('-id',)
 
 
+'''
+class WishListQuestion(models.Model):
+    pass
+
+
+class WishListAnswer(models.Model):
+    question = models.ForeignKey(WishListQuestion)
+    answer = models.ForeignKey(OneLiner)
+'''
+
+
 class Vote(models.Model):
     user = models.ForeignKey(User)
     oneliner = models.ForeignKey(OneLiner)

@@ -106,4 +106,17 @@ class SearchTests(TestCase):
 	self.assertEquals(OneLiner.search('echo mike')[0], self.mikes_oneliner)
 
 
+class WishListTests(TestCase):
+    '''
+    	- must be logged in to add a question
+	- option to keep question anonymous
+	- multiple possible answers
+	- hide questions the owner marked answered
+	- email notification triggered by an answer
+	- show questions on profile
+	- show answers on profile
+	- edit question
+	- delete question
+	'''
+
 # eof

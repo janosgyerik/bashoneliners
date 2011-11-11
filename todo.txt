@@ -3,7 +3,6 @@ https://trello.com/board/main/4e7da3cf5a94680b35000893
 
 important
 =========
-- rename caveats col to limitations
 - add wishlist feature
 - Change 'Details...' to 
 	'View explanation...', 
@@ -12,8 +11,8 @@ important
 	'Hide explanation...'
 	'Hide limitations...'
 	'Hide explanation and limitations...'
-- expand all one-liners
 - markdown with preview
+- rename caveats col to limitations
 - add (formatted!) details + limitations to rss feed
 - allow login with password
 - allow change password when logged in

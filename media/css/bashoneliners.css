@@ -105,14 +105,31 @@ code {
 }
 
 .oneliner .details-trigger {
-    background: url(/media/images/plusminus.jpg) no-repeat;
     cursor: pointer;
+    background: url(/media/images/plusminus.jpg) no-repeat;
+    height: 17px;
     padding-left: 22px;
     margin-left: 1em;
-    height: 17px;
     color: blue;
 }
 .oneliner .details-trigger-active {
+    background-position: left bottom;
+}
+
+.oneliners .expand-all {
+    height: 17px;
+}
+.oneliners .expand-all-trigger, .oneliners .collapse-all-trigger {
+    cursor: pointer;
+    background: url(/media/images/plusminus.jpg) no-repeat;
+    height: 17px;
+    padding-left: 22px;
+    padding-right: 1em;
+    color: blue;
+    display: block;
+    float: right;
+}
+.oneliners .collapse-all-trigger {
     background-position: left bottom;
 }
 

@@ -27,8 +27,10 @@ function bind_details_trigger(obj) {
 	$(this).before(trigger);
     });
 
-    obj.find('.expand-all').prepend('<div class="expand-all-trigger">Expand all</div>');
-    obj.find('.expand-all').prepend('<div class="collapse-all-trigger">Collapse all</div>');
+    if (obj.find('.oneliner').size() > 0) {
+	obj.find('.expand-all').prepend('<div class="expand-all-trigger">Expand all</div>');
+	obj.find('.expand-all').prepend('<div class="collapse-all-trigger">Collapse all</div>');
+    }
 
     obj.find('.expand-all-trigger').click(function() {;
 	obj.find('.details-trigger').addClass('details-trigger-active');

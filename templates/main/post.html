@@ -10,6 +10,7 @@
 
 {% block content %}
 
+{% if user == oneliner.user %}
 <p>A few tips before you post...</p>
 
 <ul>
@@ -17,6 +18,7 @@
     <li>A good one-liner is useful, interesting or cool.</li>
     <li>Keep it clear and short.</li>
 </ul>
+{% endif %}
 
 <form action="" method="post">{% csrf_token %}
     <div class="non-field-errors">{{ form.non_field_errors }}</div>
@@ -58,7 +60,7 @@
 	</div>
 	-->
 
-	<p>{% for action in form.actions %}<input type="submit" name="action" value="{{ action }}"/>{% endfor %}</p>
+	<p class="actions">{% for action in form.actions %}<input type="submit" name="action" value="{{ action }}"/>{% endfor %}</p>
     </div>
 </form>
 

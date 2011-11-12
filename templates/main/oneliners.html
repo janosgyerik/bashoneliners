@@ -7,7 +7,7 @@
     {% for oneliner in oneliners %}
     <div class="oneliner">
 	<h3 class="summary">
-	    {% if user == oneliner.user and false %}
+	    {% if user == oneliner.user %}
 	    <a class="editable" href="{% url bashoneliners.main.views.edit_oneliner oneliner.pk %}"></a>
 	    {% endif %}
 	    <a href="{% url bashoneliners.main.views.oneliner oneliner.pk %}">{{ oneliner.summary|capfirst }}</a>

@@ -17,6 +17,7 @@ from bashoneliners.main.models import OneLiner
 
 class CommonOneLinerForm(forms.ModelForm):
     user = None
+    action = forms.CharField()
 
     def __init__(self, user, *args, **kwargs):
 	self.user = user
@@ -52,8 +53,20 @@ class PostOneLinerForm(CommonOneLinerForm):
 
 class EditOneLinerForm(CommonOneLinerForm):
     title = 'Edit one-liner'
-    actions = ('Save one-liner', 'Delete one-liner',)
+    action_save = 'Save one-liner'
+    action_delete = 'Delete one-liner'
+    actions = (action_save, action_delete,)
     edit = True
+    is_save = False
+    is_delete = False
+
+    def clean_action(self):
+	action = self.cleaned_data['action']
+	if action == self.action_save:
+	    self.is_save = True
+	elif action == self.action_delete:
+	    self.is_delete = True
+	return action
 
     def clean(self):
 	if self.instance.user != self.user:

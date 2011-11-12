@@ -67,7 +67,7 @@ def tweet(oneliner, test=False, consumer_key=None, consumer_secret=None, access_
 	    if test:
 		print tweetmsg
 		print
-	    	return True
+		return True
 	    else:
 		return api.update_status(tweetmsg)
 	except:
@@ -113,18 +113,20 @@ def edit_oneliner(request, pk):
     params = get_common_params(request)
 
     try:
-	oneliner0 = OneLiner.objects.get(pk=pk)
+	oneliner0 = OneLiner.objects.get(pk=pk, user=request.user)
     except:
-	pass # todo (?)
+	return render_to_response('main/access-error.html')
 
     if request.method == 'POST':
 	form = EditOneLinerForm(request.user, request.POST, instance=oneliner0)
 	if form.is_valid():
-	    oneliner1 = form.save()
-	    #tweet(new_oneliner)
-	    #	if published
-	    #	if not was ever published
-	    return redirect(oneliner1)
+	    if form.is_save:
+		oneliner1 = form.save()
+		tweet(oneliner1)
+		return redirect(oneliner, oneliner1.pk)
+	    elif form.is_delete:
+		oneliner0.delete()
+		return redirect(profile)
     else:
 	form = EditOneLinerForm(request.user, instance=oneliner0)
 

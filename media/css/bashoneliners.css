@@ -44,6 +44,10 @@ a img {
     margin-top: 1.5em;
 }
 
+#content .message {
+    text-align: center;
+}
+
 .oneliners .expand-all-trigger, .oneliners .collapse-all-trigger {
     cursor: pointer;
     background: url(/media/images/plusminus.jpg) no-repeat;
@@ -56,10 +60,6 @@ a img {
 }
 .oneliners .collapse-all-trigger {
     background-position: left bottom;
-}
-
-.oneliners .message {
-    text-align: center;
 }
 
 .oneliner {
@@ -154,6 +154,10 @@ form .required {
 
 form .hint {
     color: #888;
+}
+
+form .actions input {
+    margin-right: 2em;
 }
 
 form ul {

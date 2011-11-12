@@ -98,11 +98,13 @@ code {
     color: blue;
 }
 
-.oneliner .summary, .oneliner .explanation, .oneliner .limitations {
+.oneliners .oneliner .summary, 
+.oneliners .oneliner .explanation, 
+.oneliners .oneliner .limitations {
     margin: 1.5em;
 }
 
-.oneliner .summary {
+.oneliners .oneliner .summary {
     margin: .5em;
     color: #253;
     font-size: 18px;
@@ -113,13 +115,6 @@ code {
 .oneliner .summary a {
     color: inherit;
     text-decoration: inherit;
-}
-
-.oneliner .eof {
-    font-family: "Courier New", Courier, monospace;
-    color: #a0a3af;
-    font-weight: bold;
-    text-align: center;
 }
 
 .oneliner .details-trigger {
@@ -138,8 +133,27 @@ code {
     color: red;
 }
 
-form .oneliner .explanation, form .oneliner .limitations {
-    margin: .5em;
+form .oneliner .input {
+    margin: .5em 2em;
+}
+
+form .oneliner .input ul {
+    margin: 0;
+    padding: 0;
+}
+
+form label {
+    font-weight: bold;
+    font-size: larger;
+}
+
+form .required {
+    color: red;
+    padding: 0 .5em;
+}
+
+form .hint {
+    color: #888;
 }
 
 form ul {

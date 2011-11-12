@@ -3,6 +3,7 @@ https://trello.com/board/main/4e7da3cf5a94680b35000893
 
 important
 =========
+- remove table css
 - profile
 	- edit one-liners
 	- delete one-liners

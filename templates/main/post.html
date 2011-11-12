@@ -10,48 +10,53 @@
 
 {% block content %}
 
+<p>A few tips before you post...</p>
+
+<ul>
+    <li>Check first with search to confirm the one-liner does not yet exist.</li>
+    <li>A good one-liner is useful, interesting or cool.</li>
+    <li>Keep it clear and short.</li>
+</ul>
+
 <form action="" method="post">{% csrf_token %}
     <div class="non-field-errors">{{ form.non_field_errors }}</div>
     <div class="oneliner">
-	<dl>
-	    <dt>Summary of the one-liner, what it does in one sentence</dt>
-	    <dd>
+	<label for="id_summary">Summary of the one-liner<span class="required">*</span></label>
+	<div class="hint">In one sentence, what does it do?</div>
+	<div class="input">
 	    <div class="error">{{ form.summary.errors }}</div>
-	    <div class="summary">
-		{{ form.summary }}
-	    </div>
-	    </dd>
-
-	    <dt><label for="id_line">The one-liner</label></dt>
-	    <dd>
+	    <div class="summary">{{ form.summary }}</div>
+	</div>
+	
+	<label for="id_line">The one-liner<span class="required">*</span></label>
+	<div class="hint"></div>
+	<div class="input">
 	    <div class="error">{{ form.line.errors }}</div>
 	    <div class="summary">{{ form.line }}</div>
-	    </dd>
-
-	    <dt>How it works, in detail</dt>
-	    <dd>
+	</div>
+	
+	<label for="id_explanation">Explanation<span class="required">*</span></label>
+	<div class="hint">Try to use relevant keywords in the explanation, so that the one-liner is easier to find by search.</div>
+	<div class="input">
 	    <div class="error">{{ form.explanation.errors }}</div>
-	    <div class="explanation">
-		{{ form.explanation }}
-	    </div>
-	    </dd>
-
-	    <dt>Limitations (if any)</dt>
-	    <dd>
+	    <div class="explanation">{{ form.explanation }}</div>
+	</div>
+	
+	<label for="id_caveats">Limitations (optional)</label>
+	<div class="hint">For example, if the one-liner might not work in some flavors of UNIX, etc.</div>
+	<div class="input">
 	    <div class="error">{{ form.caveats.errors }}</div>
-	    <div class="limitations">
-		{{ form.caveats }}
-	    </div>
-	    </dd>
+	    <div class="limitations">{{ form.caveats }}</div>
+	</div>
 
-	    <!--
-	    <dt>Published</dt>
-	    <dd>
+	<!--
+	<label for="id_is_published">Published</label>
+	<div class="hint">If not checked, the one-liner will not be visible in public listings.</div>
+	<div class="input">
 	    <div class="error">{{ form.is_published.errors }}</div>
-		{{ form.is_published }}
-	    </dd>
-	    -->
-	</dl>
+	    <div class="is_published">{{ form.is_published }}</div>
+	</div>
+	-->
 
 	<p>{% for action in form.actions %}<input type="submit" name="action" value="{{ action }}"/>{% endfor %}</p>
     </div>

@@ -193,58 +193,6 @@ p.author {
     margin: 1em 0;
 }
 
-table.oneliner {
-    width: 100%;
-}
-
-td.votecell {
-    width: 60px;
-    text-align: center;
-    vertical-align: baseline;
-}
-
-td.votecell a {
-    background-image: url(../images/sprites.png);
-    background-repeat: no-repeat;
-    overflow: hidden;
-    display: block;
-    margin: auto;
-    line-height: 1;
-    text-indent: -9999em;
-    cursor: pointer;
-}
-
-td.votecell a.vote-up-off {
-    background-position: 0px -115px;
-    width: 41px;
-    height: 25px;
-}
-
-td.votecell a.vote-down-off {
-    background-position: 0px -150px;
-    width: 41px;
-    height: 25px;
-}
-
-td.votecell a.star-off {
-    background-position: 0px 0px;
-    width: 33px;
-    height: 31px;
-}
-
-td.votecell .vote-count {
-    display: block;
-    color: #808185;
-    font-weight: bold;
-    font-size: 240%;
-    margin: 0;
-    padding: .2em;
-    border: 0;
-    vertical-align: baseline;
-    text-align: center;
-    font-family: Arial,Liberation Sans,DejaVu Sans,sans-serif;
-}
-
 .warning {
     color: red;
 }

@@ -37,41 +37,44 @@ def get_common_params(request):
     return params
 
 def tweet(oneliner, test=False, consumer_key=None, consumer_secret=None, access_token=None, access_token_secret=None):
-    if oneliner.is_published:
-	try:
-	    import tweepy # 3rd party lib, install with: easy_install tweepy
-	    import settings
-	    if consumer_key is None:
-		consumer_key = settings.TWITTER.get('consumer_key')
-	    if consumer_secret is None:
-		consumer_secret = settings.TWITTER.get('consumer_secret')
-	    if access_token is None:
-		access_token = settings.TWITTER.get('access_token')
-	    if access_token_secret is None:
-		access_token_secret = settings.TWITTER.get('access_token_secret')
+    if not oneliner.was_tweeted:
+	if oneliner.is_published:
+	    try:
+		import tweepy # 3rd party lib, install with: easy_install tweepy
+		import settings
+		if consumer_key is None:
+		    consumer_key = settings.TWITTER.get('consumer_key')
+		if consumer_secret is None:
+		    consumer_secret = settings.TWITTER.get('consumer_secret')
+		if access_token is None:
+		    access_token = settings.TWITTER.get('access_token')
+		if access_token_secret is None:
+		    access_token_secret = settings.TWITTER.get('access_token_secret')
 
-	    # set up credentials to use Twitter api.
-	    auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
-	    auth.set_access_token(access_token, access_token_secret)
-	    api = tweepy.API(auth)
+		# set up credentials to use Twitter api.
+		auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
+		auth.set_access_token(access_token, access_token_secret)
+		api = tweepy.API(auth)
 
-	    tweetmsg = 'http://bashoneliners.com/main/oneliner/%d %s: %s # posted by %s' % (
-		    oneliner.pk,
-		    oneliner.summary,
-		    oneliner.line,
-		    oneliner.user.username,
-		    )
-	    if len(tweetmsg) > 161:
-		tweetmsg = tweetmsg[:157] + ' ...'
-	    
-	    if test:
-		print tweetmsg
-		print
-		return True
-	    else:
-		return api.update_status(tweetmsg)
-	except:
-	    pass
+		tweetmsg = 'http://bashoneliners.com/main/oneliner/%d %s: %s # posted by %s' % (
+			oneliner.pk,
+			oneliner.summary,
+			oneliner.line,
+			oneliner.user.username,
+			)
+		if len(tweetmsg) > 160:
+		    tweetmsg = tweetmsg[:156] + ' ...'
+		
+		if test:
+		    print tweetmsg
+		    print
+		    return True
+		else:
+		    oneliner.was_tweeted = True
+		    oneliner.save()
+		    return api.update_status(tweetmsg)
+	    except:
+		pass
 
 
 ''' url handlers '''

@@ -3,7 +3,7 @@ from django.contrib import admin
 from bashoneliners.main.models import HackerProfile, OneLiner
 
 class OneLinerAdmin(admin.ModelAdmin):
-    list_display = ('user', 'is_published', 'summary', )
+    list_display = ('user', 'is_published', 'was_tweeted', 'summary', )
 
 
 admin.site.register(HackerProfile)

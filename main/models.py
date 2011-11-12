@@ -54,6 +54,7 @@ class OneLiner(models.Model):
     caveats = models.TextField('Limitations', blank=True)
 
     is_published = models.BooleanField(default=True)
+    was_tweeted = models.BooleanField(default=False)
 
     created_dt = models.DateTimeField(default=datetime.now, blank=True)
 

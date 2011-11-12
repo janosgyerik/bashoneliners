@@ -36,10 +36,9 @@ post_save.connect(create_user_profile, sender=User)
 class HackerProfile(models.Model):
     user = models.OneToOneField(User)
 
-    #twitter = models.SlugField(max_length=100, blank=True, null=True)
-    #stackoverflow
-    #blog
-    #homepage
+    twitter_name = models.SlugField(max_length=100, blank=True, null=True)
+    blog_url = models.URLField(blank=True, null=True)
+    homepage_url = models.URLField(blank=True, null=True)
 
     def __unicode__(self):
 	return ', '.join([x for x in (self.user.username, self.user.email) if x])

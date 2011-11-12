@@ -6,17 +6,18 @@ release notes
 =============
 - new field: OneLiner.was_tweeted
 - renamed field: OneLiner.caveats to limitations
+- added new fields to HackerProfile: twitter_name, blog_url, homepage_url
 
 
 important
 =========
+- fix edit oneliner tests
 - profile
 	- user info
-		- display name
+		- username / display name
+		- password
 		- twitter
 		- homepage
-		- username
-		- password
 - add wishlist feature
 	- tdd
 	- post question

@@ -30,14 +30,14 @@ class CommonOneLinerForm(forms.ModelForm):
 		'line': forms.Textarea(attrs={'cols': 80, 'rows': 3, }),
 		'summary': forms.TextInput(attrs={'size': 100, }),
 		'explanation': forms.Textarea(attrs={'cols': 80, 'rows': 10, }),
-		'caveats': forms.Textarea(attrs={'cols': 80, 'rows': 3, }),
+		'limitations': forms.Textarea(attrs={'cols': 80, 'rows': 3, }),
 		}
 
 	fields = (
 		'line',
 		'summary',
 		'explanation',
-		'caveats',
+		'limitations',
 		#'is_published',
 		)
 

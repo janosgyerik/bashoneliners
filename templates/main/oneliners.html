@@ -20,7 +20,7 @@
 	    on <span>{{ oneliner.created_dt }}</span>
 	</p>
 
-	{% if oneliner.explanation or oneliner.caveats %}
+	{% if oneliner.explanation or oneliner.limitations %}
 	<div class="details hidden">
 	    {% if oneliner.explanation %}
 	    <div class="explanation">
@@ -29,10 +29,10 @@
 	    </div>
 	    {% endif %}
 
-	    {% if oneliner.caveats %}
+	    {% if oneliner.limitations %}
 	    <div class="limitations">
 		<h3>Limitations</h3>
-		{{ oneliner.caveats|nst|safe }}
+		{{ oneliner.limitations|nst|safe }}
 	    </div>
 	    {% endif %}
 	</div>

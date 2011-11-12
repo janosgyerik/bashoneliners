@@ -51,7 +51,7 @@ class OneLiner(models.Model):
     summary = models.CharField(max_length=200)
     line = models.TextField()
     explanation = models.TextField()
-    caveats = models.TextField('Limitations', blank=True)
+    limitations = models.TextField(blank=True)
 
     is_published = models.BooleanField(default=True)
     was_tweeted = models.BooleanField(default=False)
@@ -88,7 +88,7 @@ class OneLiner(models.Model):
 	    sub_qq |= Q(summary__icontains=term)
 	    sub_qq |= Q(line__icontains=term)
 	    sub_qq |= Q(explanation__icontains=term)
-	    sub_qq |= Q(caveats__icontains=term)
+	    sub_qq |= Q(limitations__icontains=term)
 	    qq &= Q(sub_qq)
 	return OneLiner.objects.filter(is_published=True).filter(qq)[:limit]
 

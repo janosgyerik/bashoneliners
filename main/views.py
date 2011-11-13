@@ -95,7 +95,7 @@ def oneliner(request, pk):
     return render_to_response('main/oneliner.html', params)
 
 @login_required
-def post(request):
+def new_oneliner(request):
     params = get_common_params(request)
 
     if request.method == 'POST':

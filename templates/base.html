@@ -34,7 +34,7 @@
     {% endif %}
     {% if user.is_authenticated %}
     <a href="{% url bashoneliners.main.views.profile %}"><span>{{ user.username }}</span></a> ;
-    <a href="{% url bashoneliners.main.views.post %}"><span>Post a one-liner</span></a> ;
+    <a href="{% url bashoneliners.main.views.new_oneliner %}"><span>Post a one-liner</span></a> ;
     <a href="{% url bashoneliners.main.views.logout %}"><span>Logout</span></a>
     {% else %}
     <a href="{% url bashoneliners.main.views.login %}"><span>Login / Sign up</span></a>

@@ -18,7 +18,6 @@ important
 =========
 - use annotations to control access
 	- redirect if the oneliner was deleted or un-published
-- change url scheme to /oneliner/edit
 - review post oneliner
 	- similar to edit
 	- redirect to the oneliner

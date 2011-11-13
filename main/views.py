@@ -154,9 +154,12 @@ def profile(request, user_id=None):
     user = User.objects.get(pk=user_id)
 
     params['hacker'] = user
-    params['oneliners'] = OneLiner.objects.filter(user=user).order_by('-pk')
+    oneliners = OneLiner.objects.filter(user=user).order_by('-pk')
     if user == request.user:
 	params['owner'] = True
+    else:
+	oneliners = oneliners.filter(is_published=True)
+    params['oneliners'] = oneliners
 
     return render_to_response('main/profile.html', params)
 

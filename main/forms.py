@@ -38,7 +38,7 @@ class CommonOneLinerForm(forms.ModelForm):
 		'summary',
 		'explanation',
 		'limitations',
-		#'is_published',
+		'is_published',
 		)
 
 

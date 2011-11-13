@@ -12,10 +12,13 @@ private release notes
 public release notes
 ====================
 - Own one-liners are shown in user profile, and can be edited and deleted
+- Users can save one-liners as draft (non-public) by setting is_published off
 
 
 important
 =========
+- bug: hacker profile should show owner data not current user
+	- in profile, is 'owner' param used at all?
 - use annotations to control access
 	- redirect if the oneliner was deleted or un-published
 - hacker profile editing
@@ -32,12 +35,21 @@ important
 	- show in oneliner if it answers a question
 - markdown with preview
 - add (formatted!) details + limitations to rss feed
-- allow login with password
-- allow change password when logged in
+- 404 error page
+- Valid xhtml
 
 
 first release
 =============
+- logo, better design
+- Valid xhtml
+- allow login with password
+- allow change password when logged in
+
+
+future releases
+===============
+- bookmarks, favourites
 - Voting
 	- vote up
 	- vote down
@@ -46,12 +58,6 @@ first release
 	- see all own votes on profile page
 - TOP 50
 - Commenting
-- logo, better design
 - Valid xhtml
-
-
-future releases
-===============
-- bookmarks, favourites
 
 

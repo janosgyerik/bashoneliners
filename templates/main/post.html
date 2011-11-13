@@ -51,14 +51,12 @@
 	    <div class="limitations">{{ form.limitations }}</div>
 	</div>
 
-	<!--
 	<label for="id_is_published">Published</label>
 	<div class="hint">If not checked, the one-liner will not be visible in public listings.</div>
 	<div class="input">
 	    <div class="error">{{ form.is_published.errors }}</div>
-	    <div class="is_published">{{ form.is_published }}</div>
+	    <div class="is_published">{{ form.is_published }} Published</div>
 	</div>
-	-->
 
 	<p class="actions">{% for action in form.actions %}<input type="submit" name="action" value="{{ action }}"/>{% endfor %}</p>
     </div>

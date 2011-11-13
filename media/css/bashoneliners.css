@@ -230,6 +230,10 @@ input.openid {
     padding-left: 22px;
 }
 
+table.profile {
+    margin-left: auto;
+}
+
 table.profile th {
     text-align: left;
     padding-right: 5em;

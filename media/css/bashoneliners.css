@@ -226,5 +226,10 @@ input.openid {
     padding-left: 22px;
 }
 
+table.profile th {
+    text-align: left;
+    padding-right: 5em;
+}
+
 
 /* eof */

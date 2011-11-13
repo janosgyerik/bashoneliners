@@ -12,12 +12,7 @@ release notes
 important
 =========
 - fix edit oneliner tests
-- profile
-	- user info
-		- username / display name
-		- password
-		- twitter
-		- homepage
+- hacker profile editing
 - add wishlist feature
 	- tdd
 	- post question
@@ -36,20 +31,20 @@ important
 
 first release
 =============
-- Profile page with own posts and bookmarks/favourites
-	- edit oneliner
-	- votes placed
-	- bookmarks
 - Voting
+	- vote up
+	- vote down
+	- cancel vote
+	- see own vote on one-liner
+	- see all own votes on profile page
 - TOP 50
-- RST text editor for Explanation etc
 - Commenting
-- logo, better header
+- logo, better design
 - Valid xhtml
 
 
 future releases
 ===============
--
+- bookmarks, favourites
 
 

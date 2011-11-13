@@ -40,6 +40,9 @@ class HackerProfile(models.Model):
     blog_url = models.URLField(blank=True, null=True)
     homepage_url = models.URLField(blank=True, null=True)
 
+    def twitter_url(self):
+	return 'http://twitter.com/%s/' % self.twitter_name
+
     def __unicode__(self):
 	return ', '.join([x for x in (self.user.username, self.user.email) if x])
 

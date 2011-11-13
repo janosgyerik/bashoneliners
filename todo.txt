@@ -18,10 +18,6 @@ important
 =========
 - use annotations to control access
 	- redirect if the oneliner was deleted or un-published
-- review post oneliner
-	- similar to edit
-	- redirect to the oneliner
-	- change url to /oneliner/new
 - hacker profile editing
 - add is_published
 - add wishlist feature

@@ -103,7 +103,7 @@ def new_oneliner(request):
 	if form.is_valid():
 	    new_oneliner = form.save()
 	    tweet(new_oneliner)
-	    return redirect(index)
+	    return redirect(oneliner, new_oneliner.pk)
     else:
 	form = PostOneLinerForm(request.user)
 

@@ -11,15 +11,15 @@
 <table class="profile">
     <tr>
 	<th>Twitter name</th>
-	<td>{% if user.hackerprofile.twitter_name %}<a href="{{ user.hackerprofile.twitter_url }}">{{ user.hackerprofile.twitter_name }}</a>{% else %}(not set){% endif %}</td>
+	<td>{% if hacker.hackerprofile.twitter_name %}<a href="{{ hacker.hackerprofile.twitter_url }}">{{ hacker.hackerprofile.twitter_name }}</a>{% else %}(not set){% endif %}</td>
     </tr>
     <tr>
 	<th>Blog URL</th>
-	<td>{{ user.hackerprofile.blog_url|urlize|default:'(not set)' }}</td>
+	<td>{{ hacker.hackerprofile.blog_url|default:'(not set)'|urlize }}</td>
     </tr>
     <tr>
 	<th>Homepage URL</th>
-	<td>{{ user.hackerprofile.homepage_url|urlize|default:'(not set)' }}</td>
+	<td>{{ hacker.hackerprofile.homepage_url|default:'(not set)'|urlize }}</td>
     </tr>
 </table>
 

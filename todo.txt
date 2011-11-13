@@ -2,17 +2,30 @@ See Trello for a more up to date near-term todo list!
 https://trello.com/board/main/4e7da3cf5a94680b35000893
 
 
-release notes
-=============
+private release notes
+=====================
 - new field: OneLiner.was_tweeted
 - renamed field: OneLiner.caveats to limitations
 - added new fields to HackerProfile: twitter_name, blog_url, homepage_url
 
 
+public release notes
+====================
+- Own one-liners are shown in user profile, and can be edited and deleted
+
+
 important
 =========
 - fix edit oneliner tests
+- use annotations to control access
+	- redirect if the oneliner was deleted or un-published
+- change url scheme to /oneliner/edit
+- review post oneliner
+	- similar to edit
+	- redirect to the oneliner
+	- change url to /oneliner/new
 - hacker profile editing
+- add is_published
 - add wishlist feature
 	- tdd
 	- post question

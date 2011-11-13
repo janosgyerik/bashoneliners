@@ -1,7 +1,7 @@
 from django.test import TestCase
 
 from main.models import User, OneLiner, Vote
-from main.forms import EditOneLinerForm
+from main.forms import EditOneLinerForm, EditHackerProfileForm, EditUserForm
 
 class Util:
     @staticmethod
@@ -23,6 +23,50 @@ class Util:
     @staticmethod
     def new_vote():
 	pass
+
+
+class EditUserTests(TestCase):
+    def setUp(self):
+	self.jack = Util.new_user('jack')
+	self.mike = Util.new_user('mike')
+
+    def test_change_username(self):
+	user0 = self.jack
+	data = {}
+	new_username = user0.username + '2'
+	data['username'] = new_username
+
+	form = EditUserForm(data, instance=user0)
+	self.assertTrue(form.is_valid())
+	user1 = form.save()
+
+	self.assertEquals(user1.username, new_username)
+
+    def test_duplicate_username_error(self):
+	user0 = self.jack
+	data = {}
+	data['username'] = self.mike.username
+
+	form = EditUserForm(data, instance=user0)
+	self.assertFalse(form.is_valid())
+
+	error_items = form.errors.items()
+	self.assertEquals(len(error_items), 1)
+	self.assertEquals(error_items[0][0], 'username')
+
+    def test_change_password(self):
+	user0 = self.jack
+	data = {}
+	data['username'] = user0.username
+	new_password = 'newpass'
+	data['password'] = new_password
+
+	form = EditUserForm(data, instance=user0)
+	#form.is_valid()
+	#print form.errors.as_text()
+	self.assertTrue(form.is_valid())
+	user1 = form.save()
+	self.assertTrue(user1.check_password(new_password))
 
 
 class EditOneLinerTests(TestCase):

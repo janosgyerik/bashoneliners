@@ -83,6 +83,7 @@ class EditOneLinerTests(TestCase):
 		'summary': oneliner0.summary,
 		'line': oneliner0.line,
 		'explanation': oneliner0.explanation,
+		'action': EditOneLinerForm.action_save,
 		}
 	new_summary = oneliner0.summary + ' some change'
 	data['summary'] = new_summary
@@ -99,6 +100,7 @@ class EditOneLinerTests(TestCase):
 	data = {
 		'summary': oneliner0.summary,
 		'line': oneliner0.line,
+		'action': EditOneLinerForm.action_save,
 		}
 	new_summary = oneliner0.summary + ' some change'
 	data['summary'] = new_summary
@@ -116,6 +118,7 @@ class EditOneLinerTests(TestCase):
 		'summary': oneliner0.summary,
 		'line': oneliner0.line,
 		'explanation': oneliner0.explanation,
+		'action': EditOneLinerForm.action_save,
 		}
 
 	form = EditOneLinerForm(self.frank, data, instance=self.jacks_oneliner)

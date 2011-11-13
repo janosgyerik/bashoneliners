@@ -16,7 +16,6 @@ public release notes
 
 important
 =========
-- fix edit oneliner tests
 - use annotations to control access
 	- redirect if the oneliner was deleted or un-published
 - change url scheme to /oneliner/edit

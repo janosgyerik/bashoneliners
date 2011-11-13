@@ -118,7 +118,7 @@ def edit_oneliner(request, pk):
     try:
 	oneliner0 = OneLiner.objects.get(pk=pk, user=request.user)
     except:
-	return render_to_response('main/access-error.html')
+	return render_to_response('main/access-error.html', params)
 
     if request.method == 'POST':
 	form = EditOneLinerForm(request.user, request.POST, instance=oneliner0)

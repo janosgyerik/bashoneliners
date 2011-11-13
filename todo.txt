@@ -17,8 +17,6 @@ public release notes
 
 important
 =========
-- use annotations to control access
-	- redirect if the oneliner was deleted or un-published
 - hacker profile editing
 - add wishlist feature
 	- tdd

@@ -13,6 +13,7 @@ public release notes
 ====================
 - Own one-liners are shown in user profile, and can be edited and deleted
 - Users can save one-liners as draft (non-public) by setting is_published off
+- Added explanation and limitations to rss feed entries
 
 
 important
@@ -29,7 +30,6 @@ important
 	- show own answers
 	- show in oneliner if it answers a question
 - markdown with preview
-- add (formatted!) details + limitations to rss feed
 - 404 error page
 - Valid xhtml
 

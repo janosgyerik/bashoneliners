@@ -3,6 +3,7 @@ from django.db.models import Count, Q
 from django.db.models.signals import post_save
 from django.contrib.syndication.views import Feed
 from django.contrib.auth.models import User
+from django.template import Context, loader
 
 from datetime import datetime
 import random
@@ -156,12 +157,10 @@ class LatestEntries(Feed):
     title = "BashOneLiners Syndication Feed"
     link = "/feed/"
     description = "Latest Items posted to bashoneliners.com"
+    description_template = 'feed-description.html'
 
     def items(self):
 	return OneLiner.objects.filter(is_published=True)
-
-    def item_description(self, item):
-	return item.line
 
 
 # eof

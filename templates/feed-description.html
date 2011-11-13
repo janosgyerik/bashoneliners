@@ -1,0 +1,8 @@
+{{ obj.line }}
+
+{% if obj.explanation %}Explanation:
+{{ obj.explanation|striptags }}
+{% endif %}
+{% if obj.limitations %}Limitations:
+{{ obj.limitations|striptags }}
+{% endif %}

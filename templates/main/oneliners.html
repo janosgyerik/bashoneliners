@@ -8,7 +8,7 @@
     <div class="oneliner">
 	<h3 class="summary">
 	    {% if user == oneliner.user %}
-	    <a class="editable" href="{% url bashoneliners.main.views.edit_oneliner oneliner.pk %}">
+	    <a class="editable" href="{% url bashoneliners.main.views.edit_oneliner oneliner.pk %}">&nbsp;
 	    {% if not oneliner.is_published %}
 	    <span class="draft">(Not published!)</span>
 	    {% endif %}

@@ -19,7 +19,6 @@ important
 =========
 - bug: hacker profile should show owner data not current user
 	- in profile, is 'owner' param used at all?
-- make own one-liners editable on public list pages
 - use annotations to control access
 	- redirect if the oneliner was deleted or un-published
 - hacker profile editing

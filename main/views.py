@@ -155,9 +155,7 @@ def profile(request, user_id=None):
 
     params['hacker'] = user
     oneliners = OneLiner.objects.filter(user=user)
-    if user == request.user:
-	params['owner'] = True
-    else:
+    if user != request.user:
 	oneliners = oneliners.filter(is_published=True)
     params['oneliners'] = oneliners
 

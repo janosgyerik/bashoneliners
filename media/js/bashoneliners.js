@@ -16,13 +16,13 @@ function bind_details_trigger(obj) {
 	var has_explanation = $(this).find('.explanation').size() > 0;
 	var has_limitations = $(this).find('.limitations').size() > 0;
 	if (has_explanation && has_limitations) {
-	    trigger.text('View explanation and limitations');
+	    trigger.text('Show explanation and limitations');
 	}
 	else if (has_explanation) {
-	    trigger.text('View explanation');
+	    trigger.text('Show explanation');
 	}
 	else if (has_limitations) {
-	    trigger.text('View limitations');
+	    trigger.text('Show limitations');
 	}
 	$(this).before(trigger);
     });

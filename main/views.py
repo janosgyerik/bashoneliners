@@ -81,7 +81,7 @@ def tweet(oneliner, test=False, consumer_key=None, consumer_secret=None, access_
 
 def index(request):
     params = get_common_params(request)
-    params['oneliners'] = OneLiner.objects.filter(is_published=True).order_by('-pk')
+    params['oneliners'] = OneLiner.objects.filter(is_published=True)
     return render_to_response('main/index.html', params)
 
 def top_n(request, num):
@@ -154,7 +154,7 @@ def profile(request, user_id=None):
     user = User.objects.get(pk=user_id)
 
     params['hacker'] = user
-    oneliners = OneLiner.objects.filter(user=user).order_by('-pk')
+    oneliners = OneLiner.objects.filter(user=user)
     if user == request.user:
 	params['owner'] = True
     else:
@@ -165,7 +165,7 @@ def profile(request, user_id=None):
 
 def wishlist(request):
     params = get_common_params(request)
-    params['oneliners'] = OneLiner.objects.filter(is_published=True).order_by('-pk')
+    params['oneliners'] = OneLiner.objects.filter(is_published=True)
     return render_to_response('main/index.html', params)
 
 def search(request):

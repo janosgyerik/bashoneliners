@@ -38,8 +38,8 @@ class HackerProfile(models.Model):
     user = models.OneToOneField(User)
 
     twitter_name = models.SlugField(max_length=100, blank=True, null=True)
-    blog_url = models.URLField(blank=True, null=True)
-    homepage_url = models.URLField(blank=True, null=True)
+    blog_url = models.URLField('Blog URL', blank=True, null=True)
+    homepage_url = models.URLField('Homepage URL', blank=True, null=True)
 
     def twitter_url(self):
 	return 'http://twitter.com/%s/' % self.twitter_name

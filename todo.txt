@@ -19,7 +19,6 @@ public release notes
 
 first release
 =============
-- probably can remove safely user component from one-liner editing form
 - username editing
 - wishlist feature
 	- tdd

@@ -7,18 +7,24 @@
 {% block content %}
 
 <table class="profile">
+    {% if hacker.hackerprofile.twitter_name %}
     <tr>
 	<th>Twitter name</th>
-	<td>{% if hacker.hackerprofile.twitter_name %}<a href="{{ hacker.hackerprofile.twitter_url }}">{{ hacker.hackerprofile.twitter_name }}</a>{% else %}(not set){% endif %}</td>
+	<td><a href="{{ hacker.hackerprofile.twitter_url }}">{{ hacker.hackerprofile.twitter_name }}</a></td>
     </tr>
+    {% endif %}
+    {% if hacker.hackerprofile.blog_url %}
     <tr>
 	<th>Blog URL</th>
 	<td>{{ hacker.hackerprofile.blog_url|default:'(not set)'|urlize }}</td>
     </tr>
+    {% endif %}
+    {% if hacker.hackerprofile.homepage_url %}
     <tr>
 	<th>Homepage URL</th>
 	<td>{{ hacker.hackerprofile.homepage_url|default:'(not set)'|urlize }}</td>
     </tr>
+    {% endif %}
 </table>
 
 <h3>{% if user == hacker %}One-liners you posted{% else %}One-liners posted{% endif %}</h3>

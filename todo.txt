@@ -16,10 +16,11 @@ public release notes
 - Added explanation and limitations to rss feed entries
 
 
-important
-=========
+first release
+=============
 - hacker profile editing
-- add wishlist feature
+- username editing
+- wishlist feature
 	- tdd
 	- post question
 		- require login only at the last step, not before
@@ -29,21 +30,19 @@ important
 	- show own questions
 	- show own answers
 	- show in oneliner if it answers a question
-- markdown with preview
-- 404 error page
-- Valid xhtml
-
-
-first release
-=============
+- format explanation and limitations fields with markdown
+- preview explanation and limitations before post
 - logo, better design
 - Valid xhtml
-- allow login with password
-- allow change password when logged in
 
 
 future releases
 ===============
+- allow login with password
+- allow change password when logged in
+- http error pages
+	- 404 error page
+	- 500 error page
 - bookmarks, favourites
 - Voting
 	- vote up

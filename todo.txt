@@ -12,13 +12,14 @@ private release notes
 public release notes
 ====================
 - Own one-liners are shown in user profile, and can be edited and deleted
-- Users can save one-liners as draft (non-public) by setting is_published off
+- One-liners can be saved as draft (non-public) by setting published flag off
 - Added explanation and limitations to rss feed entries
+- Editable user profile with twitter name, blog url and homepage url
 
 
 first release
 =============
-- hacker profile editing
+- probably can remove safely user component from one-liner editing form
 - username editing
 - wishlist feature
 	- tdd

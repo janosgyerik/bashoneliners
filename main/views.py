@@ -5,7 +5,7 @@ from django.template import RequestContext
 from django.contrib.auth import logout as django_logout
 
 from bashoneliners.main.models import HackerProfile, OneLiner, User
-from bashoneliners.main.forms import PostOneLinerForm, EditOneLinerForm, SearchOneLinerForm
+from bashoneliners.main.forms import *
 
 from datetime import datetime
 
@@ -145,13 +145,13 @@ def mission(request):
     params = get_common_params(request)
     return render_to_response('main/mission.html', params)
 
-def profile(request, user_id=None):
+def profile(request, pk=None):
     params = get_common_params(request)
 
-    if user_id is None:
-	user_id = request.user.pk
+    if pk is None:
+	pk = request.user.pk
 
-    user = User.objects.get(pk=user_id)
+    user = User.objects.get(pk=pk)
 
     params['hacker'] = user
     oneliners = OneLiner.objects.filter(user=user)
@@ -160,6 +160,24 @@ def profile(request, user_id=None):
     params['oneliners'] = oneliners
 
     return render_to_response('main/profile.html', params)
+
+@login_required
+def edit_profile(request):
+    params = get_common_params(request)
+
+    hackerprofile = request.user.hackerprofile
+
+    if request.method == 'POST':
+	form = EditHackerProfileForm(request.POST, instance=hackerprofile)
+	if form.is_valid():
+	    form.save()
+	    return redirect(profile)
+    else:
+	form = EditHackerProfileForm(instance=hackerprofile)
+
+    params['form'] = form
+
+    return render_to_response('main/edit-profile.html', params, context_instance=RequestContext(request))
 
 def wishlist(request):
     params = get_common_params(request)

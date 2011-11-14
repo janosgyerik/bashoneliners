@@ -12,8 +12,9 @@ urlpatterns = patterns('bashoneliners.main.views',
     (r'^oneliner/edit/(?P<pk>\d+)/$', 'edit_oneliner'),
     (r'^oneliner/new/$', 'new_oneliner'),
 
-    (r'^profile/(?P<user_id>\d+)/$', 'profile'),
+    (r'^profile/(?P<pk>\d+)/$', 'profile'),
     (r'^profile/$', 'profile'),
+    (r'^profile/edit/$', 'edit_profile'),
 
     (r'^top/(?P<num>\d+)/$', 'top_n'),
 

@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% load nst %}
+
+{% block pagetitle %}{{ user.username }}{% endblock %}
+
+{% block keywords %}{% endblock %}
+
+{% block description %}{% endblock %}
+
+{% block content %}
+
+<form action="" method="post">{% csrf_token %}
+    <div class="non-field-errors">{{ form.non_field_errors }}</div>
+    <div class="profile">
+	<label for="id_twitter_name">{{ form.twitter_name.label }}</label>
+	<div class="input">
+	    <div class="error">{{ form.twitter_name.errors }}</div>
+	    <div class="twitter_name">{{ form.twitter_name }}</div>
+	</div>
+	
+	<label for="id_blog_url">{{ form.blog_url.label }}</label>
+	<div class="input">
+	    <div class="error">{{ form.blog_url.errors }}</div>
+	    <div class="blog_url">{{ form.blog_url }}</div>
+	</div>
+	
+	<label for="id_homepage_url">{{ form.homepage_url.label }}</label>
+	<div class="input">
+	    <div class="error">{{ form.homepage_url.errors }}</div>
+	    <div class="homepage_url">{{ form.homepage_url }}</div>
+	</div>
+	
+	<p class="actions"><input type="submit" name="action" value="Save"/></p>
+    </div>
+</form>
+
+{% endblock %}
+
+{% block ready %}
+	$('#id_twitter_name').focus();
+{% endblock %}

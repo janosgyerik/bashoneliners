@@ -2,7 +2,7 @@
 
 {% load i18n %}
 
-{% block pagetitle %}{{ hacker.username }}{% endblock %}
+{% block pagetitle %}{% if user == hacker %}<a href="{% url bashoneliners.main.views.edit_profile %}" class="editable">{{ hacker.username }}</a>{% else %}{{ hacker.username }}{% endif %}{% endblock %}
 
 {% block content %}
 

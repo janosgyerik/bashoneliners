@@ -44,6 +44,11 @@ a img {
     margin-top: 1.5em;
 }
 
+#content h2 a {
+    text-decoration: none;
+    color: inherit;
+}
+
 #content .message {
     text-align: center;
 }
@@ -137,11 +142,11 @@ code {
     color: red;
 }
 
-form .oneliner .input {
+form .input {
     margin: .5em 2em;
 }
 
-form .oneliner .input ul {
+form .input ul {
     margin: 0;
     padding: 0;
 }

@@ -102,21 +102,18 @@ class EditUserForm(forms.ModelForm):
 
 
 class EditHackerProfileForm(forms.ModelForm):
-    user = None
-    username = forms.CharField(max_length=30) # same as in django.contrib.auth.models
-    password = forms.CharField(widget=forms.PasswordInput, required=False)
-
-    def __init__(self, user, *args, **kwargs):
-	self.user = user
-	super(EditHackerProfileForm, self).__init__(*args, **kwargs)
-
     class Meta:
 	model = HackerProfile
 
 	widgets = {
-		'blog_url': forms.TextInput(attrs={'size': 100, }),
-		'homepage_url': forms.TextInput(attrs={'size': 100, }),
+		'twitter_name': forms.TextInput(attrs={'size': 40, }),
+		'blog_url': forms.TextInput(attrs={'size': 80, }),
+		'homepage_url': forms.TextInput(attrs={'size': 80, }),
 		}
+
+	exclude = (
+		'user',
+		)
 
 
 # eof

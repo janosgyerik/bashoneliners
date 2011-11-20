@@ -3,10 +3,10 @@
 
 {% if obj.explanation %}
 <h3>Explanation</h3>
-<div>{{ obj.explanation|nst|linebreaks }}</div>
+<div>{{ obj.explanation|nst|safe|linebreaks }}</div>
 {% endif %}
 
 {% if obj.limitations %}
 <h3>Limitations</h3>
-<div>{{ obj.limitations|nst|linebreaks }}</div>
+<div>{{ obj.limitations|nst|safe|linebreaks }}</div>
 {% endif %}

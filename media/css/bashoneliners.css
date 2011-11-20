@@ -152,8 +152,11 @@ form .input ul {
 }
 
 form label {
-    font-weight: bold;
-    font-size: larger;
+    cursor: pointer;
+}
+
+form h3 {
+    margin: 0;
 }
 
 form .required {

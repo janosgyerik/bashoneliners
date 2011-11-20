@@ -23,35 +23,35 @@
 <form action="" method="post">{% csrf_token %}
     <div class="non-field-errors">{{ form.non_field_errors }}</div>
     <div class="oneliner">
-	<label for="id_summary">Summary of the one-liner<span class="required">*</span></label>
+	<h3>Summary of the one-liner<span class="required">*</span></h3>
 	<div class="hint">In one sentence, what does it do?</div>
 	<div class="input">
 	    <div class="error">{{ form.summary.errors }}</div>
 	    <div class="summary">{{ form.summary }}</div>
 	</div>
 	
-	<label for="id_line">The one-liner<span class="required">*</span></label>
+	<h3>The one-liner<span class="required">*</span></h3>
 	<div class="hint"></div>
 	<div class="input">
 	    <div class="error">{{ form.line.errors }}</div>
 	    <div class="summary">{{ form.line }}</div>
 	</div>
 	
-	<label for="id_explanation">Explanation<span class="required">*</span></label>
+	<h3>Explanation<span class="required">*</span></h3>
 	<div class="hint">Try to use relevant keywords in the explanation, so that the one-liner is easier to find by search.</div>
 	<div class="input">
 	    <div class="error">{{ form.explanation.errors }}</div>
 	    <div class="explanation">{{ form.explanation }}</div>
 	</div>
 	
-	<label for="id_limitations">Limitations (optional)</label>
+	<h3>Limitations (optional)</h3>
 	<div class="hint">For example, if the one-liner might not work in some flavors of UNIX, etc.</div>
 	<div class="input">
 	    <div class="error">{{ form.limitations.errors }}</div>
 	    <div class="limitations">{{ form.limitations }}</div>
 	</div>
 
-	<label for="id_is_published">Published</label>
+	<h3>Published</h3>
 	<div class="hint">If not checked, the one-liner will not be visible in public listings.</div>
 	<div class="input">
 	    <div class="error">{{ form.is_published.errors }}</div>

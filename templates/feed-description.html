@@ -1,11 +1,12 @@
+{% load nst %}
 <pre>{{ obj.line }}</pre>
 
 {% if obj.explanation %}
 <h3>Explanation</h3>
-<div>{{ obj.explanation|linebreaks }}</div>
+<div>{{ obj.explanation|nst|linebreaks }}</div>
 {% endif %}
 
 {% if obj.limitations %}
 <h3>Limitations</h3>
-<div>{{ obj.limitations|linebreaks }}</div>
+<div>{{ obj.limitations|nst|linebreaks }}</div>
 {% endif %}

@@ -2,24 +2,24 @@ See Trello for a more up to date near-term todo list!
 https://trello.com/board/main/4e7da3cf5a94680b35000893
 
 
-private release notes
-=====================
-- new field: OneLiner.was_tweeted
-- renamed field: OneLiner.caveats to limitations
-- added new fields to HackerProfile: twitter_name, blog_url, homepage_url
+find developers
+===============
+- in December, right before another round of bashoneliners hackfest
+- author of playterm
+	- idea: video maker from script
+	- link exchange
+- other potentials found by google search 'bash one-liners'
 
 
-public release notes
-====================
-- Own one-liners are shown in user profile, and can be edited and deleted
-- One-liners can be saved as draft (non-public) by setting published flag off
-- Added explanation and limitations to rss feed entries
-- Editable user profile with twitter name, blog url and homepage url
+find users
+==========
+- only when public release is ready!
+- other potentials found by google search 'bash one-liners'
 
 
 first release
 =============
-- username editing
+- critical: improve rss content
 - wishlist feature
 	- tdd
 	- post question
@@ -32,7 +32,12 @@ first release
 	- show in oneliner if it answers a question
 - format explanation and limitations fields with markdown
 - preview explanation and limitations before post
+- username editing
 - logo, better design
+- add pip requirements file
+- http error pages
+	- 404 error page
+	- 500 error page
 - Valid xhtml
 
 
@@ -40,9 +45,6 @@ future releases
 ===============
 - allow login with password
 - allow change password when logged in
-- http error pages
-	- 404 error page
-	- 500 error page
 - bookmarks, favourites
 - Voting
 	- vote up

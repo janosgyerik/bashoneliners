@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% load nst %}
+
+{% block pagetitle %}Wish list{% endblock %}
+
+{% block keywords %}{% endblock %}
+
+{% block description %}{% endblock %}
+
+{% block content %}
+
+<p>Very soon (in December I promise!) we will add a "wish list" feature,
+where you can request for a one-liner and get notified when somebody posts one that answers your question.</p>
+
+<p>Until then, <strong>we encourage you</strong> to post your one-liner requests on the project mailing list:
+<a href="mailto:bashoneliners@lists.launchpad.net">bashoneliners@lists.launchpad.net</a></p>
+
+<p>Note: the mailing list is public, the archive of posts is here:
+{{ 'https://lists.launchpad.net/bashoneliners/'|urlize }}
+</p>
+
+<p>Thanks!<br/>
+<a href="https://launchpad.net/~bashoneliners">The BashOneLiners team</a></p>
+
+{% endblock %}

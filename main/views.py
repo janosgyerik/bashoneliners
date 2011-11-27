@@ -180,8 +180,7 @@ def edit_profile(request):
 
 def wishlist(request):
     params = get_common_params(request)
-    params['oneliners'] = OneLiner.objects.filter(is_published=True)
-    return render_to_response('main/index.html', params)
+    return render_to_response('main/wishlist.html', params)
 
 def search(request):
     params = get_common_params(request)

@@ -247,5 +247,13 @@ table.profile th {
     padding-right: 5em;
 }
 
+dl dd {
+    padding-bottom: .5em;
+}
+
+dl dd pre {
+    margin-top: 0;
+}
+
 
 /* eof */

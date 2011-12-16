@@ -106,15 +106,16 @@ class OneLiner(models.Model):
 	ordering = ('-id',)
 
 
-'''
 class WishListQuestion(models.Model):
-    pass
+    user = models.ForeignKey(User)
+    question = models.TextField()
+    is_published = models.BooleanField(default=True)
+    is_answered = models.BooleanField(default=False)
 
 
 class WishListAnswer(models.Model):
     question = models.ForeignKey(WishListQuestion)
     answer = models.ForeignKey(OneLiner)
-'''
 
 
 class Vote(models.Model):

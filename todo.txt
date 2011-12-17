@@ -4,10 +4,11 @@ https://trello.com/board/main/4e7da3cf5a94680b35000893
 
 find developers
 ===============
-- in December, right before another round of bashoneliners hackfest
+- in January, right before another round of bashoneliners hackfest
 - author of playterm
 	- idea: video maker from script
 	- link exchange
+- author of tipscache
 - other potentials found by google search 'bash one-liners'
 
 
@@ -19,7 +20,7 @@ find users
 
 first release
 =============
-- critical: improve rss content
+- see trello for the up to date list
 - wishlist feature
 	- tdd
 	- post question

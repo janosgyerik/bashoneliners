@@ -6,7 +6,7 @@
 
 from django import forms
 
-from bashoneliners.main.models import OneLiner, HackerProfile, User
+from bashoneliners.main.models import OneLiner, HackerProfile, User, WishListQuestion
 
 ''' constants '''
 
@@ -114,6 +114,61 @@ class EditHackerProfileForm(forms.ModelForm):
 	exclude = (
 		'user',
 		)
+
+
+class CommonWishListQuestionForm(forms.ModelForm):
+    user = None
+    action = forms.CharField()
+
+    def __init__(self, user, *args, **kwargs):
+	self.user = user
+	super(CommonWishListQuestionForm, self).__init__(*args, **kwargs)
+
+    class Meta:
+	model = WishListQuestion
+
+	widgets = {
+		'question': forms.Textarea(attrs={'cols': 80, 'rows': 5, }),
+		}
+
+	fields = (
+		'question',
+		'is_published',
+		'is_answered',
+		)
+
+
+class PostWishListQuestionForm(CommonWishListQuestionForm):
+    title = 'Post a question'
+    actions = ('Post question',)
+
+    def save(self):
+	self.instance.user = self.user
+	return super(PostWishListQuestionForm, self).save()
+
+
+class EditWishListQuestionForm(CommonWishListQuestionForm):
+    title = 'Edit question'
+    action_save = 'Save question'
+    action_delete = 'Delete question'
+    actions = (action_save, action_delete,)
+    edit = True
+    is_save = False
+    is_delete = False
+
+    def clean_action(self):
+	action = self.cleaned_data['action']
+	if action == self.action_save:
+	    self.is_save = True
+	elif action == self.action_delete:
+	    self.is_delete = True
+	return action
+
+    def clean(self):
+	if self.instance.user != self.user:
+	    raise forms.ValidationError('User %s is not the owner of this Question' % self.user)
+
+	return self.cleaned_data
 
 
 # eof

@@ -110,8 +110,8 @@ class WishListQuestion(models.Model):
     user = models.ForeignKey(User)
     question = models.TextField()
     is_published = models.BooleanField(default=True)
-    is_anon = models.BooleanField(default=False)
     is_answered = models.BooleanField(default=False)
+    created_dt = models.DateTimeField(default=datetime.now, blank=True)
 
     @staticmethod
     def top(limit=50):

@@ -112,6 +112,8 @@ INSTALLED_APPS = (
     'bashoneliners.django_openid_auth',
 )
 
+USE_DJANGO_STATIC_SERVE_FOR_MEDIA = False
+
 
 ''' project specific custom settings '''
 

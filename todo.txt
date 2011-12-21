@@ -36,9 +36,6 @@ first release
 - username editing
 - logo, better design
 - add pip requirements file
-- http error pages
-	- 404 error page
-	- 500 error page
 - Valid xhtml
 
 

@@ -31,7 +31,7 @@ first release
 			2 link to post an answer
 			4 show user info
 		5 show recent answers
-		1 is_published option when posting a question
+		+ is_published option when posting a question
 	2 post one-liner
 		2 show related question 
 			2 only if not marked answered

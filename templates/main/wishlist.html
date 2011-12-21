@@ -30,6 +30,13 @@ Feel free to ask for it here.</p>
 	    <div class="question">{{ form.question }}</div>
 	</div>
 	
+	<h3>Published</h3>
+	<div class="hint">If checked, the question will be visible on this page.</div>
+	<div class="input">
+	    <div class="error">{{ form.is_published.errors }}</div>
+	    <div class="is_published">{{ form.is_published }} <label for="id_is_published">Published</label></div>
+	</div>
+
 	<p class="actions">{% for action in form.actions %}<input type="submit" name="action" value="{{ action }}"/>{% endfor %}</p>
     </div>
 </form>

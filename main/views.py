@@ -185,8 +185,8 @@ def wishlist(request):
 	if request.method == 'POST':
 	    data = dict(request.POST)
 	    data['question'] = request.POST.get('question')
+	    data['is_published'] = request.POST.get('is_published')
 	    data['is_answered'] = False
-	    data['is_published'] = True
 	    form = PostWishListQuestionForm(request.user, data)
 	    if form.is_valid():
 		new_question = form.save()

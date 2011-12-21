@@ -10,19 +10,38 @@
 
 {% block content %}
 
-<p>Very soon (by end of December I promise!) we will add a "wish list" feature,
-where you can request for a one-liner and get notified when somebody posts one that answers your question.</p>
+<p>Are you looking for a one-liner for some purpose and it's not on the site yet? (Surely you searched well, right?)
+Feel free to ask for it here.
+You will receive an email when an answer is posted.</p>
 
-<p>Until then, <strong>we encourage you</strong> to post your one-liner requests on the project mailing list:
-<a href="mailto:bashoneliners@lists.launchpad.net">bashoneliners@lists.launchpad.net</a></p>
+{% if user.is_authenticated %}
+<form action="" method="post">{% csrf_token %}
+    <div class="non-field-errors">{{ form.non_field_errors }}</div>
+    <div class="wishlist">
+	<h3>Question / one-liner request<span class="required">*</span></h3>
+	<div class="hint">For best results, be as specific as possible, detailed but not driveling.</div>
+	<div class="input">
+	    <div class="error">{{ form.question.errors }}</div>
+	    <div class="question">{{ form.question }}</div>
+	</div>
+	
+	<p class="actions">{% for action in form.actions %}<input type="submit" name="action" value="{{ action }}"/>{% endfor %}</p>
+    </div>
+</form>
+{% else %}
+<p>To post a question / wish list request, you have to <a href="{% url bashoneliners.main.views.login %}">login</a> first.</p>
+{% endif %}
 
-<p>Note: the mailing list is public, the archive of posts is here:
-{{ 'https://lists.launchpad.net/bashoneliners/'|urlize }}
-</p>
+{% if recent_questions %}
+<h2>Recent questions</h2>
 
-<p>This is really only a temporary solution until we implement the proper wish list feature, by end of December as promised. Till then it will help us if you post your requests, so we can keep posting fresh one-liners regularly.</p>
+{% for question in recent_questions %}
+<div class="question">{{ question.question }}</div>
+{% endfor %}
+{% endif %}
 
-<p>Thanks!<br/>
-<a href="https://launchpad.net/~bashoneliners">The BashOneLiners team</a></p>
+{% endblock %}
 
+{% block ready %}
+	$('#id_question').focus();
 {% endblock %}

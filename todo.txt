@@ -23,19 +23,19 @@ first release
 - see trello for the up to date high level list
 - wishlist feature
 	- wishlist page
-		1 user info
-			- link to user if question is not anon
-			- hide user info if anon (no link)
-		1 show questions
-			- is_published = True
-			- is_answered = False
+		+ form to post question
+		+ show questions
+			+ is_published = True
+			+ is_answered = False
+			- timestamp
+			2 link to post an answer
+			4 show user info
 		5 show recent answers
-		2 link to post oneliner as answer page
-		1 form to post question
+		1 is_published option when posting a question
 	2 post one-liner
 		2 show related question 
 			2 only if not marked answered
-		2+ email notification to question owner
+		2 email notification to question owner
 	- profile
 		1 show own questions
 			- link to edit

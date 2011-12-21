@@ -180,7 +180,26 @@ def edit_profile(request):
 
 def wishlist(request):
     params = get_common_params(request)
-    return render_to_response('main/wishlist.html', params)
+
+    if request.user.is_authenticated:
+	if request.method == 'POST':
+	    data = dict(request.POST)
+	    data['question'] = request.POST.get('question')
+	    data['is_answered'] = False
+	    data['is_published'] = True
+	    form = PostWishListQuestionForm(request.user, data)
+	    if form.is_valid():
+		new_question = form.save()
+		return redirect(wishlist)
+	else:
+	    form = PostWishListQuestionForm(request.user)
+    else:
+	form = None
+
+    params['form'] = form
+    params['recent_questions'] = WishListQuestion.top()
+
+    return render_to_response('main/wishlist.html', params, context_instance=RequestContext(request))
 
 def search(request):
     params = get_common_params(request)

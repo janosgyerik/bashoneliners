@@ -1,6 +1,6 @@
 from django.test import TestCase
 
-from main.models import User, OneLiner, Vote
+from main.models import User, OneLiner, Vote, WishListQuestion, WishListAnswer
 from main.forms import EditOneLinerForm, EditHackerProfileForm, EditUserForm
 
 class Util:
@@ -23,6 +23,18 @@ class Util:
     @staticmethod
     def new_vote():
 	pass
+
+    @staticmethod
+    def new_question(user):
+	question = WishListQuestion(user=user)
+	question.save()
+	return question
+
+    @staticmethod
+    def new_answer(question, oneliner):
+	answer = WishListAnswer(question=question, answer=oneliner)
+	answer.save()
+	return answer
 
 
 class EditUserTests(TestCase):
@@ -215,17 +227,53 @@ class SearchTests(TestCase):
 	self.assertEquals(OneLiner.search('echo mike')[0], self.mikes_oneliner)
 
 
-class WishListTests(TestCase):
-    '''
-    	- must be logged in to add a question
-	- option to keep question anonymous
-	- multiple possible answers
-	- hide questions the owner marked answered
-	- email notification triggered by an answer
-	- show questions on profile
-	- show answers on profile
-	- edit question
-	- delete question
-	'''
+class WishList(TestCase):
+    def setUp(self):
+	self.user = Util.new_user('user1')
+
+    def test_create_question(self):
+	Util.new_question(self.user)
+
+    def test_list_questions(self):
+	self.assertTrue(WishListQuestion.objects.all().count() == 0)
+	Util.new_question(self.user)
+	self.assertTrue(WishListQuestion.objects.all().count() > 0)
+
+    def test_list_questions_latestfirst(self):
+	q1 = Util.new_question(self.user)
+	q2 = Util.new_question(self.user)
+	self.assertTrue(WishListQuestion.objects.latest() == q2)
+
+    def test_list_excludes_nonpublished(self):
+	q1 = Util.new_question(self.user)
+	q2 = Util.new_question(self.user)
+	self.assertEquals(WishListQuestion.latest(), q2)
+	q2.is_published = False
+	q2.save()
+	self.assertNotEquals(WishListQuestion.latest(), q2)
+
+    def test_list_excludes_answered(self):
+	q1 = Util.new_question(self.user)
+	q2 = Util.new_question(self.user)
+	self.assertEquals(WishListQuestion.latest(), q2)
+	q2.is_answered = True
+	q2.save()
+	self.assertNotEquals(WishListQuestion.latest(), q2)
+
+    def test_answer(self):
+	q1 = Util.new_question(self.user)
+	jack = Util.new_user('jack')
+	o1 = Util.new_oneliner(jack, 'echo jack')
+	a1 = Util.new_answer(q1, o1)
+
+    def test_multiple_answers(self):
+	q1 = Util.new_question(self.user)
+	jack = Util.new_user('jack')
+	o1 = Util.new_oneliner(jack, 'echo jack')
+	a1 = Util.new_answer(q1, o1)
+	mike = Util.new_user('mike')
+	o2 = Util.new_oneliner(mike, 'echo mike')
+	a2 = Util.new_answer(q1, o2)
+
 
 # eof

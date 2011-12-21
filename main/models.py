@@ -110,7 +110,23 @@ class WishListQuestion(models.Model):
     user = models.ForeignKey(User)
     question = models.TextField()
     is_published = models.BooleanField(default=True)
+    is_anon = models.BooleanField(default=False)
     is_answered = models.BooleanField(default=False)
+
+    @staticmethod
+    def top(limit=50):
+	return WishListQuestion.objects.exclude(is_published=False).exclude(is_answered=True)[:limit]
+
+    @staticmethod
+    def latest():
+	try:
+	    return WishListQuestion.top(1)[0]
+	except:
+	    return None
+
+    class Meta:
+	get_latest_by = 'pk'
+	ordering = ('-id',)
 
 
 class WishListAnswer(models.Model):

@@ -20,17 +20,40 @@ find users
 
 first release
 =============
-- see trello for the up to date list
+- see trello for the up to date high level list
 - wishlist feature
-	- tdd
-	- post question
-		- require login only at the last step, not before
 	- wishlist page
-		- show published questions
-		- show published answers
-	- show own questions
-	- show own answers
-	- show in oneliner if it answers a question
+		1 user info
+			- link to user if question is not anon
+			- hide user info if anon (no link)
+		1 show questions
+			- is_published = True
+			- is_answered = False
+		5 show recent answers
+		2 link to post oneliner as answer page
+		1 form to post question
+	2 post one-liner
+		2 show related question 
+			2 only if not marked answered
+		2+ email notification to question owner
+	- profile
+		1 show own questions
+			- link to edit
+			2 show answers
+		3 edit question
+			- edit and save
+			- delete
+			- mark as answered
+		4 show own answers
+			- on own one-liners
+		3 edit answer -> same as one-liner
+			- edit and save
+			- delete
+			- mark as answered
+	4 oneliners
+		- show related questions
+	4 oneliner
+		- show related questions
 - format explanation and limitations fields with markdown
 - preview explanation and limitations before post
 - username editing

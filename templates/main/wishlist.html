@@ -11,8 +11,13 @@
 {% block content %}
 
 <p>Are you looking for a one-liner for some purpose and it's not on the site yet? (Surely you searched well, right?)
-Feel free to ask for it here.
-You will receive an email when an answer is posted.</p>
+Feel free to ask for it here.</p>
+
+<ul>
+    <li>After you post a question, it will be listed on this page, and other users can post one-liners (possibly many) that answer your question, until you mark your question <strong>Answered</strong>, after which people cannot post answers anymore.</li>
+    <li>A question can be <strong>Published</strong>, or not, in which case it will not be visible on this page and you can edit and publish later.</li>
+    <li>Soon we will implement email notifications when somebody posts an answer to your question. Until then, you can track your questions and answers on your <a href="{% url bashoneliners.main.views.profile %}">profile</a> page or by following the <a href="{% url bashoneliners.urls.feed %}">RSS</a> feed or <a href="https://twitter.com/#!/bashoneliners">@bashoneliners</a> on Twitter.</li>
+</ul>
 
 {% if user.is_authenticated %}
 <form action="" method="post">{% csrf_token %}

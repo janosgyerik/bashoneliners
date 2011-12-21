@@ -40,20 +40,20 @@ first release
 		1 show own questions
 			- link to edit
 			2 show answers
-		3 edit question
-			- edit and save
-			- delete
-			- mark as answered
 		4 show own answers
 			- on own one-liners
-		3 edit answer -> same as one-liner
-			- edit and save
-			- delete
-			- mark as answered
 	4 oneliners
 		- show related questions
 	4 oneliner
 		- show related questions
+	3 dedicated question page, with answers
+	3 edit question
+		- edit and save
+		- delete
+		- mark as answered
+	3 edit answer -> same as one-liner
+		- edit and save
+		- delete
 - format explanation and limitations fields with markdown
 - preview explanation and limitations before post
 - username editing

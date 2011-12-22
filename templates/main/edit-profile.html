@@ -31,7 +31,10 @@
 	    <div class="homepage_url">{{ form.homepage_url }}</div>
 	</div>
 	
-	<p class="actions"><input type="submit" name="action" value="Save"/></p>
+	<p class="actions">
+	    <input type="submit" name="action" value="Save" class="btn primary"/>
+	    <a href="{% url bashoneliners.main.views.profile %}" class="btn">Cancel</a>
+	</p>
     </div>
 </form>
 

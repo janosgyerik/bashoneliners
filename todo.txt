@@ -22,6 +22,9 @@ first release
 =============
 - see trello for the up to date high level list
 - pagetitle block seems to be ignored
+- hide the show/hide stuff on single question view
+- html5 fixes
+	- use red buttons for delete operations
 - wishlist feature
 	- add post answer button to questions, taking to post one-liner page
 	- post one-liner as answer to questions

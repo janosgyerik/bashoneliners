@@ -18,7 +18,7 @@
 </div>
 {% endif %}
 
-<form action="" method="post">{% csrf_token %}
+<form action="" method="post" class="form-stacked">{% csrf_token %}
     <div class="non-field-errors">{{ form.non_field_errors }}</div>
     <div class="oneliner">
 	<h3>Summary of the one-liner<span class="required">*</span></h3>
@@ -53,10 +53,10 @@
 	<div class="hint">If checked, the one-liner will be visible in public listings, and will be tweeted on Twitter with <a href="https://twitter.com/#!/bashoneliners">@bashoneliners</a></div>
 	<div class="input">
 	    <div class="error">{{ form.is_published.errors }}</div>
-	    <div class="is_published">{{ form.is_published }} <label for="id_is_published">Published</label></div>
+	    <div class="is_published"><label>{{ form.is_published }} <span>Published</span></label></div>
 	</div>
 
-	<p class="actions">{% for action in form.actions %}<input type="submit" name="action" value="{{ action }}"/>{% endfor %}</p>
+	<p class="actions">{% for action in form.actions %}<input class="btn primary" type="submit" name="action" value="{{ action }}"/>{% endfor %}</p>
     </div>
 </form>
 

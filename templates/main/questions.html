@@ -19,7 +19,7 @@
 		on <span>{{ question.created_dt }}</span>
 	    </small>
 	</blockquote>
-	<a href="{% url bashoneliners.main.views.new_oneliner question.pk %}"><button>Post a one-liner that answers this!</button></a>
+	<a class="btn" href="{% url bashoneliners.main.views.new_oneliner question.pk %}">Post a one-liner that answers this!</a>
     </div>
     {% empty %}
     <p class="message">No matching questions.</p>

@@ -1,56 +1,108 @@
+/* Begin Various Tags */
+
+    body {
+	color: black;
+	margin: 0;
+	padding: 0;
+	border: 0;
+    }
+
+    acronym, abbr {
+	cursor: help;
+    }
+
+    hr {
+	display: none;
+    }
+
+    img {
+	border: none;
+	vertical-align: middle;
+    }
+
+    dt {
+	font-weight: bold;
+    }
+
+/* End Various Tags */
+
+
+/* Begin Images */
+
+    img.centered {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+    }
+
+    img.alignright {
+	padding: 4px;
+	margin: 0 0 2px 7px;
+	display: inline;
+    }
+
+    img.alignleft {
+	padding: 4px;
+	margin: 0 7px 2px 0;
+	display: inline;
+    }
+
+/* End Images */
+
+
+/* Begin Utility Classes */
+
+    .floatleft {
+	float: left;
+	margin-right: 1em;
+    }
+
+    .floatright {
+	float: right;
+	margin-left: 1em;
+    }
+
+    .alignright {
+	text-align: right;
+    }
+
+    .center {
+	text-align: center;
+    }
+
+    .clear {
+	clear: both;
+    }
+
+    .hidden {
+	display: none;
+    }
+	    
+    .invisible {
+	visibility: hidden;
+    }
+	    
+    .screen-reader-text {
+	position: absolute;
+	left: -1000em;
+    }
+
+    .validators {
+	text-align: right;
+    }
+    .validators a {
+	margin-left: .5em;
+    }
+
+/* End Utility Classes */
+
+
 body {
-    margin: 0px 20px;
-    font-family: "UbuntuBeta Regular",Ubuntu,"Bitstream Vera Sans","DejaVu Sans",Tahoma,sans-serif;
-    font-size: 12px;
-    line-height: 18px;
-    color: black;
-    background-color: white;
-    min-width: 800px;
-}
-
-#searchbox {
-    margin: 10px 0 0 190px;
-    float: left;
-}
-
-#nav a {
-    color: #888;
-    text-decoration: none;
-    font-variant: small-caps;
-    text-transform: uppercase;
-}
-
-#nav a.comingsoon {
-    color: #ddd;
-}
-
-a img {
-    border: 0px;
-}
-
-.hr {
-    border-bottom: 2px solid black;
-    margin: 1em;
+    padding-top: 40px; /* Twitter bootstrap */
 }
 
 #content {
     margin: 10px 190px;
-}
-
-#content h2 {
-    text-align: center;
-    font-variant: small-caps;
-    text-transform: uppercase;
-    margin-top: 1.5em;
-}
-
-#content h2 a {
-    text-decoration: none;
-    color: inherit;
-}
-
-#content .message {
-    text-align: center;
 }
 
 .oneliners .expand-all-trigger, .oneliners .collapse-all-trigger {
@@ -80,13 +132,8 @@ a img {
     white-space: normal;
     font-family: "Courier New", Courier, monospace;
 
-    background: #334;
-    color: white;
-    border: 2px inset #888;
-
     background: #ddd;
     color: black;
-    border: 1px solid #aaa;
 }
 
 .oneliner pre .prompt {
@@ -103,11 +150,20 @@ code {
     color: blue;
 }
 
+.questions .question {
+    margin-bottom: 3em;
+}
+
 .questions .question .summary, 
 .oneliners .oneliner .summary, 
 .oneliners .oneliner .explanation, 
 .oneliners .oneliner .limitations {
     margin: 1.5em;
+}
+
+.oneliners .oneliner .author {
+    margin: .5em 1.5em;
+    text-align: right;
 }
 
 .questions .question .summary,
@@ -142,32 +198,6 @@ code {
     background-position: left bottom;
 }
 
-.question blockquote small, 
-.question blockquote small a {
-    color: silver;
-}
-
-.error {
-    color: red;
-}
-
-form .input {
-    margin: .5em 2em;
-}
-
-form .input ul {
-    margin: 0;
-    padding: 0;
-}
-
-form label {
-    cursor: pointer;
-}
-
-form h3 {
-    margin: 0;
-}
-
 form .required {
     color: red;
     padding: 0 .5em;
@@ -177,58 +207,23 @@ form .hint {
     color: #888;
 }
 
-form .actions input {
-    margin-right: 2em;
-}
-
-form ul {
-    list-style: none;
-}
-
-form ul li {
-    padding: 0;
-    margin: 0;
-}
-
-form ul li label {
-    font-weight: bold;
-}
-
-form ul li input {
-    margin: 1em;
-}
-
-form dl dt {
-    font-weight: bold;
-}
-
-p.author {
-    text-align: right;
-    font-style: italic;
-    color: silver;
-    margin: 0;
-    margin-right: 1em;
-}
-
-.author a {
-    color: silver;
-}
-
 .socialbtn {
     margin: 1em 0;
-}
-
-.warning {
-    color: red;
-}
-
-.message {
-    font-style: italic;
 }
 
 dl.mission dt {
     font-variant: small-caps;
     text-transform: uppercase;
+}
+
+dl.mission dd {
+    margin-bottom: .5em;
+    margin-left: 2em;
+}
+
+dl.sourcecode dd {
+    margin-bottom: .5em;
+    margin-left: 2em;
 }
 
 input.openid {
@@ -237,31 +232,31 @@ input.openid {
     padding-left: 16px;
 }
 
-#search-loading {
-    text-align: center;
-    margin: .5em 0;
-}
-
 .editable {
     background: url(/media/icons/edit.png) no-repeat;
     padding-left: 22px;
 }
 
+#openid-form input[type="radio"] {
+    float: none;
+}
+
+.footer {
+    background-color: #eee;
+}
+
+form .oneliner .input,
+form .question .input {
+    margin: .5em 2em;
+}
+
+form .actions input {
+    margin-right: 2em;
+}
+
 table.profile {
-    margin-left: auto;
-}
-
-table.profile th {
-    text-align: left;
-    padding-right: 5em;
-}
-
-dl dd {
-    padding-bottom: .5em;
-}
-
-dl dd pre {
-    margin-top: 0;
+    float: right;
+    width: inherit;
 }
 
 

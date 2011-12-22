@@ -27,10 +27,10 @@ class CommonOneLinerForm(forms.ModelForm):
 	model = OneLiner
 
 	widgets = {
-		'line': forms.Textarea(attrs={'cols': 80, 'rows': 3, }),
-		'summary': forms.TextInput(attrs={'size': 100, }),
-		'explanation': forms.Textarea(attrs={'cols': 80, 'rows': 10, }),
-		'limitations': forms.Textarea(attrs={'cols': 80, 'rows': 3, }),
+		'summary': forms.TextInput(attrs={'class': 'xxlarge', }),
+		'line': forms.Textarea(attrs={'rows': 3, 'class': 'xxlarge', }),
+		'explanation': forms.Textarea(attrs={'rows': 10, 'class': 'xxlarge', }),
+		'limitations': forms.Textarea(attrs={'rows': 3, 'class': 'xxlarge', }),
 		}
 
 	fields = (
@@ -76,7 +76,7 @@ class EditOneLinerForm(CommonOneLinerForm):
 
 
 class SearchOneLinerForm(forms.Form):
-    query = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'size': 60}))
+    query = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'placeholder': 'Search'}))
 
 
 class EditUserForm(forms.ModelForm):
@@ -106,9 +106,9 @@ class EditHackerProfileForm(forms.ModelForm):
 	model = HackerProfile
 
 	widgets = {
-		'twitter_name': forms.TextInput(attrs={'size': 40, }),
-		'blog_url': forms.TextInput(attrs={'size': 80, }),
-		'homepage_url': forms.TextInput(attrs={'size': 80, }),
+		'twitter_name': forms.TextInput(attrs={'class': 'xlarge', }),
+		'blog_url': forms.TextInput(attrs={'class': 'xxlarge', }),
+		'homepage_url': forms.TextInput(attrs={'class': 'xxlarge', }),
 		}
 
 	exclude = (
@@ -128,8 +128,8 @@ class CommonWishListQuestionForm(forms.ModelForm):
 	model = WishListQuestion
 
 	widgets = {
-		'summary': forms.TextInput(attrs={'size': 100, }),
-		'explanation': forms.Textarea(attrs={'cols': 80, 'rows': 5, }),
+		'summary': forms.TextInput(attrs={'class': 'xxlarge', }),
+		'explanation': forms.Textarea(attrs={'rows': 5, 'class': 'xxlarge', }),
 		}
 
 	fields = (

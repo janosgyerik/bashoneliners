@@ -1,6 +1,6 @@
-<form action="" method="post">{% csrf_token %}
+<form action="" method="post" class="form-stacked">{% csrf_token %}
     <div class="non-field-errors">{{ form.non_field_errors }}</div>
-    <div class="wishlist">
+    <div class="question">
 	<h3>Summary<span class="required">*</span></h3>
 	<div class="hint">In one sentence, what should the one-liner do?</div>
 	<div class="input">
@@ -19,9 +19,9 @@
 	<div class="hint">If checked, the question will be visible on this page.</div>
 	<div class="input">
 	    <div class="error">{{ form.is_published.errors }}</div>
-	    <div class="is_published">{{ form.is_published }} <label for="id_is_published">Published</label></div>
+	    <div class="is_published"><label>{{ form.is_published }} Published</label></div>
 	</div>
 
-	<p class="actions">{% for action in form.actions %}<input type="submit" name="action" value="{{ action }}"/>{% endfor %}</p>
+	<p class="actions">{% for action in form.actions %}<input type="submit" name="action" value="{{ action }}" class="btn primary"/>{% endfor %}</p>
     </div>
 </form>

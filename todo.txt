@@ -27,9 +27,9 @@ first release
 		+ show questions
 			+ is_published = True
 			+ is_answered = False
-			- timestamp
+			+ timestamp
 			2 link to post an answer
-			4 show user info
+			+ show user info
 		5 show recent answers
 		+ is_published option when posting a question
 	2 post one-liner
@@ -54,6 +54,8 @@ first release
 	3 edit answer -> same as one-liner
 		- edit and save
 		- delete
+	6 touch ups
+		- make the question form hidden by default, expand with jquery
 - format explanation and limitations fields with markdown
 - preview explanation and limitations before post
 - username editing

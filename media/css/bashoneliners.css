@@ -255,5 +255,13 @@ dl dd pre {
     margin-top: 0;
 }
 
+.question a.editable {
+    text-decoration: none;
+}
+
+.question blockquote small, .question blockquote small a {
+    color: silver;
+}
+
 
 /* eof */

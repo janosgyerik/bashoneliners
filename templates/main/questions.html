@@ -3,8 +3,8 @@
     {% for question in questions %}
     <div class="question">
 	<h3 class="summary">
-	    {% if false and user == question.user %}
-	    <a class="editable" href="">&nbsp;
+	    {% if user == question.user %}
+	    <a class="editable" href="{% url bashoneliners.main.views.edit_question question.pk %}">&nbsp;
 	    {% if not question.is_published %}
 	    <span class="draft">(Not published!)</span>
 	    {% endif %}

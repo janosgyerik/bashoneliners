@@ -21,41 +21,27 @@ find users
 first release
 =============
 - see trello for the up to date high level list
+- pagetitle block seems to be ignored
 - wishlist feature
-	- wishlist page
-		+ form to post question
-		+ show questions
-			+ is_published = True
-			+ is_answered = False
-			+ timestamp
-			2 link to post an answer
-			+ show user info
-		5 show recent answers
-		+ is_published option when posting a question
-	2 post one-liner
-		2 show related question 
-			2 only if not marked answered
-		2 email notification to question owner
-	- profile
-		+ show own questions
-			- link to edit
-			2 show answers
-		4 show own answers
-	4 oneliners
+	- add post answer button to questions, taking to post one-liner page
+	- post one-liner as answer to questions
 		- show related questions
-	4 oneliner
-		- show related questions
-	3 dedicated question page, with answers
-	3 edit question
-		- edit and save
-		- delete
-		- mark as answered
-	3 edit answer -> same as one-liner
-		- edit and save
-		- delete
-	6 touch ups
-		- use twitter bootstrap style for question blockquote
+		- option to add related questions
+	- show answers for each question everywhere
+		- on wish list page
+		- on profile page
+		- on question page
+		- on question editor page
+	- show questions for each one-liner
+		- on home
+		- on profile page
+		- on one-liner page
+		- on one-liner editor page
+	- email notification to question owner
+	- finishing touches
+		- show recent answers on wish list page
 		- make the question form hidden by default, expand with jquery
+		- use twitter bootstrap style for question blockquote
 		- on profile, hide answered questions by default, expand with jq
 - format explanation and limitations fields with markdown
 - preview explanation and limitations before post

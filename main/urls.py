@@ -16,6 +16,10 @@ urlpatterns = patterns('bashoneliners.main.views',
     (r'^profile/$', 'profile'),
     (r'^profile/edit/$', 'edit_profile'),
 
+    (r'^question/(?P<pk>\d+)/$', 'question'),
+    (r'^question/edit/(?P<pk>\d+)/$', 'edit_question'),
+    #(r'^question/new/$', 'new_question'),
+
     (r'^top/(?P<num>\d+)/$', 'top_n'),
 
     (r'^search/$', 'search'),

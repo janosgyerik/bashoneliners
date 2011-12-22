@@ -208,6 +208,36 @@ def wishlist(request):
 
     return render_to_response('main/wishlist.html', params, context_instance=RequestContext(request))
 
+def question(request, pk):
+    params = get_common_params(request)
+    params['questions'] = WishListQuestion.objects.filter(pk=pk)
+    return render_to_response('main/question.html', params)
+
+@login_required
+def edit_question(request, pk):
+    params = get_common_params(request)
+
+    try:
+	question0 = WishListQuestion.objects.get(pk=pk, user=request.user)
+    except:
+	return render_to_response('main/access-error.html', params)
+
+    if request.method == 'POST':
+	form = EditWishListQuestionForm(request.user, request.POST, instance=question0)
+	if form.is_valid():
+	    if form.is_save:
+		question1 = form.save()
+		return redirect(question, question1.pk)
+	    elif form.is_delete:
+		question0.delete()
+		return redirect(profile)
+    else:
+	form = EditWishListQuestionForm(request.user, instance=question0)
+
+    params['form'] = form
+
+    return render_to_response('main/edit-question.html', params, context_instance=RequestContext(request))
+
 def search(request):
     params = get_common_params(request)
     form = params['searchform']

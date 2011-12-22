@@ -20,33 +20,7 @@ Feel free to ask for it here.</p>
 </ul>
 
 {% if user.is_authenticated %}
-<form action="" method="post">{% csrf_token %}
-    <div class="non-field-errors">{{ form.non_field_errors }}</div>
-    <div class="wishlist">
-	<h3>Summary<span class="required">*</span></h3>
-	<div class="hint">In one sentence, what should the one-liner do?</div>
-	<div class="input">
-	    <div class="error">{{ form.summary.errors }}</div>
-	    <div class="summary">{{ form.summary }}</div>
-	</div>
-	
-	<h3>Explanation<span class="required">*</span></h3>
-	<div class="hint">For best results, be specific. Also, try to use relevant keywords, so that the question is easier to by search.</div>
-	<div class="input">
-	    <div class="error">{{ form.explanation.errors }}</div>
-	    <div class="explanation">{{ form.explanation }}</div>
-	</div>
-	
-	<h3>Published</h3>
-	<div class="hint">If checked, the question will be visible on this page.</div>
-	<div class="input">
-	    <div class="error">{{ form.is_published.errors }}</div>
-	    <div class="is_published">{{ form.is_published }} <label for="id_is_published">Published</label></div>
-	</div>
-
-	<p class="actions">{% for action in form.actions %}<input type="submit" name="action" value="{{ action }}"/>{% endfor %}</p>
-    </div>
-</form>
+{% include 'main/edit-question-form.html' %}
 {% else %}
 <p>To post a question / wish list request, you have to <a href="{% url bashoneliners.main.views.login %}">login</a> first.</p>
 {% endif %}
@@ -61,5 +35,5 @@ Feel free to ask for it here.</p>
 {% endblock %}
 
 {% block ready %}
-	$('#id_question').focus();
+	$('#id_summary').focus();
 {% endblock %}

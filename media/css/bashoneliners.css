@@ -142,6 +142,11 @@ code {
     background-position: left bottom;
 }
 
+.question blockquote small, 
+.question blockquote small a {
+    color: silver;
+}
+
 .error {
     color: red;
 }
@@ -257,14 +262,6 @@ dl dd {
 
 dl dd pre {
     margin-top: 0;
-}
-
-.question a.editable {
-    text-decoration: none;
-}
-
-.question blockquote small, .question blockquote small a {
-    color: silver;
 }
 
 

@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% load nst %}
+
+{% block pagetitle %}{{ form.title }}{% endblock %}
+
+{% block keywords %}{% endblock %}
+
+{% block description %}{% endblock %}
+
+{% block content %}
+
+{% include 'main/edit-question-form.html' %}
+
+{% endblock %}
+
+{% block ready %}
+	$('#id_summary').focus();
+{% endblock %}

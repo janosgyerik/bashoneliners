@@ -100,7 +100,7 @@ def new_oneliner(request, question_pk=None):
     try:
 	question = WishListQuestion.objects.get(pk=question_pk)
     except:
-	pass
+	question = None
 
     if request.method == 'POST':
 	form = PostOneLinerForm(request.user, request.POST)

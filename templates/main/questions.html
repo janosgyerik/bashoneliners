@@ -1,0 +1,27 @@
+<div class="questions">
+
+    {% for question in questions %}
+    <div class="question">
+	<h3 class="summary">
+	    {% if false and user == question.user %}
+	    <a class="editable" href="">&nbsp;
+	    {% if not question.is_published %}
+	    <span class="draft">(Not published!)</span>
+	    {% endif %}
+	    </a>
+	    {% endif %}
+	    {{ question.summary }}
+	</h3>
+	<blockquote>
+	    <p>{{ question.explanation }}</p>
+	    <small>
+		by <a href="{% url bashoneliners.main.views.profile question.user.pk %}"><span>{{ question.user.username }}</span> </a>
+		on <span>{{ question.created_dt }}</span>
+	    </small>
+	</blockquote>
+    </div>
+    {% empty %}
+    <p class="message">No matching questions.</p>
+    {% endfor %}
+
+</div>

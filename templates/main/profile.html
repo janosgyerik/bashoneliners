@@ -27,6 +27,10 @@
     {% endif %}
 </table>
 
+<h3>{% if user == hacker %}Questions you posted{% else %}Questions posted{% endif %}</h3>
+
+{% include 'main/questions.html' %}
+
 <h3>{% if user == hacker %}One-liners you posted{% else %}One-liners posted{% endif %}</h3>
 
 {% include 'main/oneliners.html' %}

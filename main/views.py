@@ -153,10 +153,16 @@ def profile(request, pk=None):
     user = User.objects.get(pk=pk)
 
     params['hacker'] = user
+
     oneliners = OneLiner.objects.filter(user=user)
     if user != request.user:
 	oneliners = oneliners.filter(is_published=True)
     params['oneliners'] = oneliners
+
+    questions = WishListQuestion.objects.filter(user=user)
+    if user != request.user:
+	questions = questions.filter(is_published=True)
+    params['questions'] = questions
 
     return render_to_response('main/profile.html', params)
 
@@ -197,7 +203,7 @@ def wishlist(request):
 	form = None
 
     params['form'] = form
-    params['recent_questions'] = WishListQuestion.top()
+    params['questions'] = WishListQuestion.top()
 
     return render_to_response('main/wishlist.html', params, context_instance=RequestContext(request))
 

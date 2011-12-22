@@ -37,7 +37,7 @@ first release
 			2 only if not marked answered
 		2 email notification to question owner
 	- profile
-		1 show own questions
+		+ show own questions
 			- link to edit
 			2 show answers
 		4 show own answers
@@ -56,6 +56,7 @@ first release
 		- delete
 	6 touch ups
 		- make the question form hidden by default, expand with jquery
+		- on profile, hide answered questions by default, expand with jq
 - format explanation and limitations fields with markdown
 - preview explanation and limitations before post
 - username editing

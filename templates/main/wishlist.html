@@ -23,11 +23,18 @@ Feel free to ask for it here.</p>
 <form action="" method="post">{% csrf_token %}
     <div class="non-field-errors">{{ form.non_field_errors }}</div>
     <div class="wishlist">
-	<h3>Question / one-liner request<span class="required">*</span></h3>
-	<div class="hint">For best results, be as specific as possible, detailed but not driveling.</div>
+	<h3>Summary<span class="required">*</span></h3>
+	<div class="hint">In one sentence, what should the one-liner do?</div>
 	<div class="input">
-	    <div class="error">{{ form.question.errors }}</div>
-	    <div class="question">{{ form.question }}</div>
+	    <div class="error">{{ form.summary.errors }}</div>
+	    <div class="summary">{{ form.summary }}</div>
+	</div>
+	
+	<h3>Explanation<span class="required">*</span></h3>
+	<div class="hint">For best results, be specific. Also, try to use relevant keywords, so that the question is easier to by search.</div>
+	<div class="input">
+	    <div class="error">{{ form.explanation.errors }}</div>
+	    <div class="explanation">{{ form.explanation }}</div>
 	</div>
 	
 	<h3>Published</h3>

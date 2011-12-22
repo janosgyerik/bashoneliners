@@ -128,11 +128,13 @@ class CommonWishListQuestionForm(forms.ModelForm):
 	model = WishListQuestion
 
 	widgets = {
-		'question': forms.Textarea(attrs={'cols': 80, 'rows': 5, }),
+		'summary': forms.TextInput(attrs={'size': 100, }),
+		'explanation': forms.Textarea(attrs={'cols': 80, 'rows': 5, }),
 		}
 
 	fields = (
-		'question',
+		'summary',
+		'explanation',
 		'is_published',
 		'is_answered',
 		)

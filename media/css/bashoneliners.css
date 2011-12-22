@@ -103,12 +103,14 @@ code {
     color: blue;
 }
 
+.questions .question .summary, 
 .oneliners .oneliner .summary, 
 .oneliners .oneliner .explanation, 
 .oneliners .oneliner .limitations {
     margin: 1.5em;
 }
 
+.questions .question .summary,
 .oneliners .oneliner .summary {
     margin: .5em;
     color: #253;
@@ -117,11 +119,13 @@ code {
     font-weight: normal;
 }
 
-.oneliner .summary a {
+.questions .question .summary a,
+.oneliners .oneliner .summary a {
     color: inherit;
     text-decoration: inherit;
 }
 
+.questions .question .summary .draft,
 .oneliner .summary .draft {
     color: red;
 }

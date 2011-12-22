@@ -41,7 +41,6 @@ first release
 			- link to edit
 			2 show answers
 		4 show own answers
-			- on own one-liners
 	4 oneliners
 		- show related questions
 	4 oneliner
@@ -55,6 +54,7 @@ first release
 		- edit and save
 		- delete
 	6 touch ups
+		- use twitter bootstrap style for question blockquote
 		- make the question form hidden by default, expand with jquery
 		- on profile, hide answered questions by default, expand with jq
 - format explanation and limitations fields with markdown

@@ -108,7 +108,8 @@ class OneLiner(models.Model):
 
 class WishListQuestion(models.Model):
     user = models.ForeignKey(User)
-    question = models.TextField()
+    summary = models.CharField(max_length=200)
+    explanation = models.TextField()
     is_published = models.BooleanField(default=True)
     is_answered = models.BooleanField(default=False)
     created_dt = models.DateTimeField(default=datetime.now, blank=True)

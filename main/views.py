@@ -190,7 +190,8 @@ def wishlist(request):
     if request.user.is_authenticated:
 	if request.method == 'POST':
 	    data = dict(request.POST)
-	    data['question'] = request.POST.get('question')
+	    data['summary'] = request.POST.get('summary')
+	    data['explanation'] = request.POST.get('explanation')
 	    data['is_published'] = request.POST.get('is_published')
 	    data['is_answered'] = False
 	    form = PostWishListQuestionForm(request.user, data)

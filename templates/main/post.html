@@ -10,6 +10,14 @@
 
 {% block content %}
 
+{% if question %}
+<div class="alert-message block-message info">
+    <a class="close" href="#">x</a>
+    <p>This one-liner will be linked to the following question as a possible answer:</p>
+    <p>{{ question.summary }}</p>
+</div>
+{% endif %}
+
 <form action="" method="post">{% csrf_token %}
     <div class="non-field-errors">{{ form.non_field_errors }}</div>
     <div class="oneliner">

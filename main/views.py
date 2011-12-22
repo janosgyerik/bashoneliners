@@ -94,8 +94,13 @@ def oneliner(request, pk):
     return render_to_response('main/oneliner.html', params)
 
 @login_required
-def new_oneliner(request):
+def new_oneliner(request, question_pk=None):
     params = get_common_params(request)
+
+    try:
+	question = WishListQuestion.objects.get(pk=question_pk)
+    except:
+	pass
 
     if request.method == 'POST':
 	form = PostOneLinerForm(request.user, request.POST)
@@ -107,6 +112,7 @@ def new_oneliner(request):
 	form = PostOneLinerForm(request.user)
 
     params['form'] = form
+    params['question'] = question
 
     return render_to_response('main/post.html', params, context_instance=RequestContext(request))
 

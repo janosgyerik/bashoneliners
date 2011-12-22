@@ -11,6 +11,7 @@ urlpatterns = patterns('bashoneliners.main.views',
     (r'^oneliner/(?P<pk>\d+)/$', 'oneliner'),
     (r'^oneliner/edit/(?P<pk>\d+)/$', 'edit_oneliner'),
     (r'^oneliner/new/$', 'new_oneliner'),
+    (r'^oneliner/new/question/(?P<question_pk>\d+)/$', 'new_oneliner'),
 
     (r'^profile/(?P<pk>\d+)/$', 'profile'),
     (r'^profile/$', 'profile'),

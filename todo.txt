@@ -21,11 +21,7 @@ find users
 first release
 =============
 - see trello for the up to date high level list
-- login page needs improvement
-	- full of html5 errors and may not work very well
-	    - because of multiple <input> inside <label>
-	- the logins with input boxes may not work at all
-	- make use of bootstrap placeholders
+- fix html5 errors on login page: should not be multiple <input> inside <label>
 - & is not properly escaped in some one-liners
 - ui fixes
 	- fix the document titles

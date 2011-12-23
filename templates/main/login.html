@@ -27,35 +27,35 @@
     <li>
 	<label>
 	    <input type="radio" name="openid_identifier" id="id_openid_wordpress" value="__username__.wordpress.com"/>
-	    <span>WordPress - <input class="username" type="text" value="username"/>.wordpress.com</span>
+	    <span>WordPress - <input class="username" type="text" placeholder="username"/>.wordpress.com</span>
 	</label>
     </li>
 
     <li>
 	<label>
 	    <input type="radio" name="openid_identifier" id="id_openid_myopenid" value="__username__.myopenid.com"/>
-	    <span>MyOpenID - <input class="username" type="text" value="username"/>.myopenid.com</span>
+	    <span>MyOpenID - <input class="username" type="text" placeholder="username"/>.myopenid.com</span>
 	</label>
     </li>
 
     <li>
 	<label>
 	    <input type="radio" name="openid_identifier" id="id_openid_livejournal" value="__username__.livejournal.com"/>
-	    <span>LiveJournal - <input class="username" type="text" value="username"/>.livejournal.com</span>
+	    <span>LiveJournal - <input class="username" type="text" placeholder="username"/>.livejournal.com</span>
 	</label>
     </li>
 
     <li>
 	<label>
 	    <input type="radio" name="openid_identifier" id="id_openid_myspace" value="myspace.com/__username__"/>
-	    <span>MySpace - myspace.com/<input class="username" type="text" value="username"/></span>
+	    <span>MySpace - myspace.com/<input class="username" type="text" placeholder="username"/></span>
 	</label>
     </li>
 
     <li>
 	<label>
 	    <input type="radio" name="openid_identifier" id="id_openid_launchpad" value="launchpad.net/~__username__"/>
-	    <span>Launchpad - launchpad.net/~<input class="username" type="text" value="username"/></span>
+	    <span>Launchpad - launchpad.net/~<input class="username" type="text" placeholder="username"/></span>
 	</label>
     </li>
 </ul>
@@ -83,6 +83,8 @@ $('#openid-form').bind('submit', function(e) {
 	var username = $(this).parent().find('input.username').val();
 	openid_provider_url = $(this).val().replace('__username__', username);
 	$(this).val(openid_provider_url);
+	//console.log(openid_provider_url);
     });
+    //e.preventDefault();
 });
 {% endblock %}

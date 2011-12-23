@@ -240,6 +240,7 @@ input.openid {
 
 .editable {
     background: url(/media/icons/edit.png) no-repeat;
+    background-position: left center;
     padding-left: 22px;
 }
 

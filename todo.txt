@@ -23,6 +23,7 @@ first release
 - see trello for the up to date high level list
 - pagetitle block seems to be ignored
 - hide the show/hide stuff on single question view
+- fix the edit buttons, it's not so good in many places...
 - html5 fixes
 	- use red buttons for delete operations
 - wishlist feature

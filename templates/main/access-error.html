@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block pagetitle %}Access error{% endblock %}
+{% block pagetitle %}Access denied{% endblock %}
 
 {% block keywords %}{% endblock %}
 
@@ -8,6 +8,12 @@
 
 {% block content %}
 
-<p class="message">One-liner does not exist or you have no permission to edit it.</p>
+<h1>Access denied</h1>
+
+<div class="alert-message block-message error">
+
+    <p>One-liner does not exist or you have no permission to edit it.</p>
+
+</div>
 
 {% endblock %}

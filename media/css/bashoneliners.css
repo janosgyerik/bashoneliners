@@ -252,6 +252,7 @@ input.openid {
     background-color: #eee;
 }
 
+form .profile .input,
 form .oneliner .input,
 form .question .input {
     margin: .5em 2em;

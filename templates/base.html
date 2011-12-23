@@ -1,6 +1,6 @@
 {% extends "html5.html" %}
 
-{% block title %}bashoneliners.com{% endblock %}
+{% block title %}Bash One-Liners :: {% block pagetitle %}{% endblock %}{% endblock %}
 
 {% block main %}
 
@@ -16,7 +16,7 @@
 		    <li class="dropdown" data-dropdown="dropdown">
 			<a href="#" class="dropdown-toggle">About</a>
 			<ul class="dropdown-menu">
-			    <li><a href="{% url bashoneliners.main.views.mission %}">Mission Statement</a></li>
+			    <li><a href="{% url bashoneliners.main.views.mission %}">Mission statement</a></li>
 			    <li><a href="{% url bashoneliners.main.views.sourcecode %}">Source code</a></li>
 			</ul>
 		    </li>
@@ -51,8 +51,6 @@
 </div><!-- topbar-wrapper -->
 
 <div id="content">
-
-    <h1>{% block pagetitle %}{% endblock %}</h1>
 
     {% block content %}{% endblock %}
 

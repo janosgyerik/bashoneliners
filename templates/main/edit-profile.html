@@ -10,7 +10,9 @@
 
 {% block content %}
 
-<form action="" method="post">{% csrf_token %}
+<h1>{{ user.username }}</h1>
+
+<form action="" method="post" class="profile form-stacked">{% csrf_token %}
     <div class="non-field-errors">{{ form.non_field_errors }}</div>
     <div class="profile">
 	<label for="id_twitter_name">{{ form.twitter_name.label }}</label>

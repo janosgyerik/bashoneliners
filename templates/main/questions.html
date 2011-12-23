@@ -19,7 +19,9 @@
 		on <span>{{ question.created_dt }}</span>
 	    </small>
 	</blockquote>
+	{% if user.is_authenticated %}
 	<a class="btn" href="{% url bashoneliners.main.views.new_oneliner question.pk %}">Post a one-liner that answers this!</a>
+	{% endif %}
     </div>
     {% empty %}
     <p class="message">No matching questions.</p>

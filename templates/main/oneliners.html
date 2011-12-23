@@ -5,43 +5,7 @@
     <div class="clear"></div>
 
     {% for oneliner in oneliners %}
-    <div class="oneliner">
-	<h3 class="summary">
-	    {% if user == oneliner.user %}
-	    <a class="editable" href="{% url bashoneliners.main.views.edit_oneliner oneliner.pk %}">&nbsp;
-	    {% if not oneliner.is_published %}
-	    <span class="draft">(Not published!)</span>
-	    {% endif %}
-	    </a>
-	    {% endif %}
-	    <a href="{% url bashoneliners.main.views.oneliner oneliner.pk %}">{{ oneliner.summary|capfirst }}</a>
-	</h3>
-
-	<pre>{% for line in oneliner.lines %}<span class="prompt">$ </span>{{ line }}<br/>{% endfor %}</pre>
-
-	<p class="author"><small>
-	&mdash; by <a href="{% url bashoneliners.main.views.profile oneliner.user.pk %}"><span>{{ oneliner.user.username }}</span></a>
-	    on <span>{{ oneliner.created_dt }}</span>
-	</small></p>
-
-	{% if oneliner.explanation or oneliner.limitations %}
-	<div class="details hidden">
-	    {% if oneliner.explanation %}
-	    <div class="explanation">
-		<h3>Explanation</h3>
-		{{ oneliner.explanation|nst|safe }}
-	    </div>
-	    {% endif %}
-
-	    {% if oneliner.limitations %}
-	    <div class="limitations">
-		<h3>Limitations</h3>
-		{{ oneliner.limitations|nst|safe }}
-	    </div>
-	    {% endif %}
-	</div>
-	{% endif %}
-    </div>
+    {% include 'elements/oneliner.html' %}
     {% empty %}
     <p class="message">No matching one-liners.</p>
     {% endfor %}

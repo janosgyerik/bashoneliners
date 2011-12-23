@@ -109,7 +109,7 @@ def new_oneliner(request, question_pk=None):
 	    tweet(new_oneliner)
 
 	    if question is not None:
-		WishListAnswer(question=question, answer=new_oneliner).save()
+		WishListAnswer(question=question, oneliner=new_oneliner).save()
 
 	    return redirect(oneliner, new_oneliner.pk)
     else:

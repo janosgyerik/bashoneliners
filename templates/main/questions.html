@@ -29,7 +29,7 @@
 	    <h3>Proposed answers</h3>
 	    <div class="oneliners">
 	    {% for answer in question.wishlistanswer_set.all %}
-	    {% with answer.answer as oneliner %}
+	    {% with answer.oneliner as oneliner %}
 	    {% include 'elements/oneliner.html' %}
 	    {% endwith %}
 	    {% endfor %}

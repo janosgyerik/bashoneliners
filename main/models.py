@@ -132,7 +132,7 @@ class WishListQuestion(models.Model):
 
 class WishListAnswer(models.Model):
     question = models.ForeignKey(WishListQuestion)
-    answer = models.ForeignKey(OneLiner)
+    oneliner = models.ForeignKey(OneLiner)
 
 
 class Vote(models.Model):

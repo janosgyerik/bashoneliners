@@ -32,7 +32,7 @@ class Util:
 
     @staticmethod
     def new_answer(question, oneliner):
-	answer = WishListAnswer(question=question, answer=oneliner)
+	answer = WishListAnswer(question=question, oneliner=oneliner)
 	answer.save()
 	return answer
 

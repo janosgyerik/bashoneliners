@@ -10,6 +10,8 @@
 
 {% block content %}
 
+<div style="margin-bottom: 2em">
+
 <p>Are you looking for a one-liner for some purpose and it's not on the site yet? (Surely you searched well, right?)
 Feel free to ask for it here.</p>
 
@@ -19,11 +21,15 @@ Feel free to ask for it here.</p>
     <li>Soon we will implement email notifications when somebody posts an answer to your question. Until then, you can track your questions and answers on your <a href="{% url bashoneliners.main.views.profile %}">profile</a> page or by following the <a href="{% url bashoneliners.urls.feed %}">RSS</a> feed or <a href="https://twitter.com/#!/bashoneliners">@bashoneliners</a> on Twitter.</li>
 </ul>
 
+<div class="form-show-hide-trigger details-trigger" form="questionform">Post question</div>
+
 {% if user.is_authenticated %}
 {% include 'main/edit-question-form.html' %}
 {% else %}
 <p>To post a question / wish list request, you have to <a href="{% url bashoneliners.main.views.login %}">login</a> first.</p>
 {% endif %}
+
+</div>
 
 {% if questions %}
 <h2>Recent questions</h2>

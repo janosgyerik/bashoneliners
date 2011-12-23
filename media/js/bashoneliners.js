@@ -43,8 +43,20 @@ function bind_details_trigger(obj) {
     });
 }
 
+function hide_questionform() {
+    if ($('.form-show-hide-trigger').size() > 0) {
+	$('.questionform').hide();
+
+	$('.form-show-hide-trigger').click(function() {
+	    $(this).toggleClass('details-trigger-active');
+	    $('.questionform').toggle('slow');
+	});
+    }
+}
+
 $(document).ready(function() {
     bind_details_trigger($('div.oneliners'));
+    hide_questionform();
 });
 
 // eof

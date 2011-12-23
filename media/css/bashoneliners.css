@@ -186,16 +186,19 @@ code {
     color: red;
 }
 
-.oneliner .details-trigger {
+.details-trigger {
     cursor: pointer;
     background: url(/media/images/plusminus.jpg) no-repeat;
     height: 17px;
     padding-left: 22px;
-    margin-left: 1em;
     color: blue;
 }
-.oneliner .details-trigger-active {
+.details-trigger-active {
     background-position: left bottom;
+}
+
+.oneliner .details-trigger {
+    margin-left: 1em;
 }
 
 form .required {

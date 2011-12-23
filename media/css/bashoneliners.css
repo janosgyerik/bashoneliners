@@ -260,6 +260,16 @@ form .actions input {
     margin-right: 2em;
 }
 
+form .input ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+form .input .error ul li {
+    color: red;
+}
+
 table.profile {
     float: right;
     width: inherit;

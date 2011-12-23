@@ -25,14 +25,12 @@ first release
 - & is not properly escaped in some one-liners
 - ui fixes
 	- fix the document titles
+	- use red buttons for delete operations
+	- add cancel button on edit form pages
 	- hide the show/hide stuff on single question view
 	- fix the edit buttons, it's not so good in many places...
 	- when the content is too short, fill the vertical space before the footer
-	- use red buttons for delete operations
-	- add cancel button on edit form pages
 - wishlist feature
-	- post one-liner as answer to questions
-		- handle it, save the relation
 	- show answers for each question everywhere
 		- on wish list page
 		- on profile page

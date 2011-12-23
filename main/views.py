@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import *
 from django.template import RequestContext
 from django.contrib.auth import logout as django_logout
 
-from bashoneliners.main.models import HackerProfile, OneLiner, User
+from bashoneliners.main.models import HackerProfile, OneLiner, User, WishListAnswer
 from bashoneliners.main.forms import *
 
 from datetime import datetime
@@ -107,6 +107,10 @@ def new_oneliner(request, question_pk=None):
 	if form.is_valid():
 	    new_oneliner = form.save()
 	    tweet(new_oneliner)
+
+	    if question is not None:
+		WishListAnswer(question=question, answer=new_oneliner).save()
+
 	    return redirect(oneliner, new_oneliner.pk)
     else:
 	form = PostOneLinerForm(request.user)

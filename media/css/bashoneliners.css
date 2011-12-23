@@ -105,9 +105,27 @@ body {
     margin: 10px 190px;
 }
 
+.details-trigger {
+    cursor: pointer;
+    background: url(/media/images/arrows.png) no-repeat;
+    background-position: 0 -51px;
+    height: 17px;
+    padding-left: 22px;
+    color: blue;
+}
+
+.details-trigger-active {
+    background-position: 0 -34px;
+}
+
+.oneliner .details-trigger {
+    margin-left: 1em;
+}
+
 .oneliners .expand-all-trigger, .oneliners .collapse-all-trigger {
     cursor: pointer;
-    background: url(/media/images/plusminus.jpg) no-repeat;
+    background: url(/media/images/arrows.png) no-repeat;
+    background-position: 0 -51px;
     height: 17px;
     padding-left: 22px;
     padding-right: 1em;
@@ -116,7 +134,7 @@ body {
     float: right;
 }
 .oneliners .collapse-all-trigger {
-    background-position: left bottom;
+    background-position: 0 0px;
 }
 
 .oneliner {
@@ -184,21 +202,6 @@ code {
 .questions .question .summary .draft,
 .oneliner .summary .draft {
     color: red;
-}
-
-.details-trigger {
-    cursor: pointer;
-    background: url(/media/images/plusminus.jpg) no-repeat;
-    height: 17px;
-    padding-left: 22px;
-    color: blue;
-}
-.details-trigger-active {
-    background-position: left bottom;
-}
-
-.oneliner .details-trigger {
-    margin-left: 1em;
 }
 
 form .required {

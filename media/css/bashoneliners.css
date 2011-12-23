@@ -265,5 +265,9 @@ table.profile {
     width: inherit;
 }
 
+.alert-message blockquote {
+    margin-bottom: 0;
+}
+
 
 /* eof */

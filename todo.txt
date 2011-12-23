@@ -29,11 +29,10 @@ first release
 	- fix the edit buttons, it's not so good in many places...
 	- when the content is too short, fill the vertical space before the footer
 	- use red buttons for delete operations
+	- add cancel button on edit form pages
 - wishlist feature
-	- add post answer button to questions, taking to post one-liner page
 	- post one-liner as answer to questions
-		- show related questions
-		- option to add related questions
+		- handle it, save the relation
 	- show answers for each question everywhere
 		- on wish list page
 		- on profile page
@@ -50,6 +49,9 @@ first release
 		- make the question form hidden by default, expand with jquery
 		- use twitter bootstrap style for question blockquote
 		- on profile, hide answered questions by default, expand with jq
+- improved wishlist-question-answer
+	- make it possible to link existing one-liners to questions
+	- make it possible to link a one-liner to multiple questions
 - format explanation and limitations fields with markdown
 - preview explanation and limitations before post
 - username editing

@@ -12,9 +12,14 @@
 
 {% if question %}
 <div class="alert-message block-message info">
-    <a class="close" href="#">x</a>
     <p>This one-liner will be linked to the following question as a possible answer:</p>
-    <p>{{ question.summary }}</p>
+    <blockquote>
+	<p><a href="{% url bashoneliners.main.views.question question.pk %}">{{ question.summary }}</a></p>
+	<small>
+	    by <a href="{% url bashoneliners.main.views.profile question.user.pk %}"><span>{{ question.user.username }}</span></a>
+	    on <span>{{ question.created_dt }}</span>
+	</small>
+    </blockquote>
 </div>
 {% endif %}
 

@@ -6,20 +6,24 @@
 
 {% block keywords %}bash, ksh, shell, script, one-liner, oneliner, tips, tricks, linux, unix, vote, rank, rss, open-source, django, python, bazaar, launchpad, collaborate{% endblock %}
 
-{% block description %}A collection of practical or just pure awesome(!) bash or ksh one-liners or tips, with easy to use user interfaces for browsing, searching and contributing one-liners. {% endblock %}
+{% block description %}A collection of practical or just pure awesome bash one-liners or shell script tips and tricks for GNU Linux, UNIX or BSD systems. Open, collaborative system, user friendly, with functions to contribute one-liners, request one-liners, search, rss feed, commenting, Open ID login. Open-source project, using Django, Python, jQuery, Bazaar, Launchpad, HTML5, Bootstrap from Twitter.{% endblock %}
 
 {% block content %}
 
-<p>Welcome to <strong>bashoneliners.com</strong>, a place for practical, clever, or interesting Bash/Ksh <em>one-liners</em>, tips, short script snippets. 
-You can post your own one-liner and share with the world!
-Also, this is an open-source project,
-if you would like to participate check out our <a href="{% url bashoneliners.main.views.mission %}">mission statement</a> 
+<p>Welcome to <strong>bashoneliners.com</strong>, a place for practical or just pure awesome bash <em>one-liners</em> or shell script tips and tricks for GNU Linux, UNIX or BSD systems.
+You can post a one-liner and share with the world,
+or browse and search the ones contributed by others.</p>
+
+<p>This is an open-source project,
+and we are looking for contributors and sponsors.
+If you are interested to join us, 
+please check out our <a href="{% url bashoneliners.main.views.mission %}">mission statement</a> 
 and <a href="{% url bashoneliners.main.views.sourcecode %}">source code</a> pages!
 </p>
 
-<p>In addition to <a href="{% url bashoneliners.urls.feed %}">RSS</a>, you can follow new one-liner posts on twitter: <a href="https://twitter.com/#!/bashoneliners">@bashoneliners</a>.</p>
+<p>You can follow the latest one-liners on <a href="{% url bashoneliners.urls.feed %}">RSS</a> or twitter: <a href="https://twitter.com/#!/bashoneliners">@bashoneliners</a>.</p>
 
-<h2>Latest 50</h2>
+<h2>Latest</h2>
 
 {% include 'main/oneliners.html' %}
 

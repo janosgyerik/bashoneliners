@@ -8,15 +8,15 @@
 	    <div class="summary">{{ form.summary }}</div>
 	</div>
 	
-	<h3>Explanation<span class="required">*</span></h3>
-	<div class="hint">For best results, be specific. Also, try to use relevant keywords, so that the question is easier to find by search.</div>
+	<h3>Explanation</h3>
+	<div class="hint">Be specific. Try to use relevant keywords, so that the question is easier to find by search.</div>
 	<div class="input">
 	    <div class="error">{{ form.explanation.errors }}</div>
 	    <div class="explanation">{{ form.explanation }}</div>
 	</div>
 	
 	<h3>Published</h3>
-	<div class="hint">If checked, the question will be visible on this page.</div>
+	<div class="hint">If checked, the question will be visible on the <a href="{% url bashoneliners.main.views.wishlist %}">wish list page</a>.</div>
 	<div class="input">
 	    <div class="error">{{ form.is_published.errors }}</div>
 	    <div class="is_published"><label>{{ form.is_published }} Published</label></div>

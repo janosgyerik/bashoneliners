@@ -26,7 +26,6 @@ first release
 - ui fixes
 	- use red buttons for delete operations
 	- add cancel button on edit form pages
-	- hide the show/hide stuff on single question view
 - wishlist feature
 	- link to individual questions
 	- show answers for each question everywhere

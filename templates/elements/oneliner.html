@@ -1,0 +1,19 @@
+    <div class="oneliner">
+	<h3 class="summary">
+	    {% if user == oneliner.user %}
+	    <a class="editable" href="{% url bashoneliners.main.views.edit_oneliner oneliner.pk %}">&nbsp;
+	    {% if not oneliner.is_published %}
+	    <span class="draft">(Not published!)</span>
+	    {% endif %}
+	    </a>
+	    {% endif %}
+	    <a href="{% url bashoneliners.main.views.oneliner oneliner.pk %}">{{ oneliner.summary|capfirst }}</a>
+	</h3>
+
+	<pre>{% for line in oneliner.lines %}<span class="prompt">$ </span>{{ line }}<br/>{% endfor %}</pre>
+
+	<p class="author"><small>
+	&mdash; by <span>{{ oneliner.user.username }}</span>
+	    on <span>{{ oneliner.created_dt }}</span>
+	</small></p>
+    </div>

@@ -27,12 +27,12 @@ first release
 	- use red buttons for delete operations
 	- add cancel button on edit form pages
 	- hide the show/hide stuff on single question view
-	- when the content is too short, fill the vertical space before the footer
 - wishlist feature
+	- link to individual questions
 	- show answers for each question everywhere
-		- on wish list page
+		+ on wish list page
 		- on profile page
-		- on question page
+		+ on question page
 		- on question editor page
 	- show questions for each one-liner
 		- on home
@@ -50,6 +50,7 @@ first release
 	- make it possible to link a one-liner to multiple questions
 - format explanation and limitations fields with markdown
 - preview explanation and limitations before post
+- when the content is too short, fill the vertical space before the footer
 - username editing
 - logo, better design
 - add pip requirements file

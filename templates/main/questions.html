@@ -19,8 +19,22 @@
 		on <span>{{ question.created_dt }}</span>
 	    </small>
 	</blockquote>
+
 	{% if user.is_authenticated %}
-	<a class="btn" href="{% url bashoneliners.main.views.new_oneliner question.pk %}">Post a one-liner that answers this!</a>
+	<a style="margin-bottom: 1em" class="btn" href="{% url bashoneliners.main.views.new_oneliner question.pk %}">Post a one-liner that answers this!</a>
+	{% endif %}
+
+	{% if question.wishlistanswer_set.all %}
+	<div class="alert-message block-message success">
+	    <h3>Proposed answers</h3>
+	    <div class="oneliners">
+	    {% for answer in question.wishlistanswer_set.all %}
+	    {% with answer.answer as oneliner %}
+	    {% include 'elements/oneliner.html' %}
+	    {% endwith %}
+	    {% endfor %}
+	    </div>
+	</div>
 	{% endif %}
     </div>
     {% empty %}

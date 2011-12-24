@@ -22,6 +22,9 @@
 	    <div class="is_published"><label>{{ form.is_published }} Published</label></div>
 	</div>
 
-	<p class="actions">{% for action in form.actions %}<input type="submit" name="action" value="{{ action }}" class="btn primary"/>{% endfor %}</p>
+	<p class="actions">
+	    {% for action in form.actions %}<input type="submit" name="action" value="{{ action }}" class="btn primary"/>{% endfor %}
+	    <a class="btn cancel" href="{{ next }}">Cancel</a>
+	</p>
     </div>
 </form>

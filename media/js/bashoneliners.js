@@ -56,6 +56,11 @@ function hide_questionform() {
 	    $(this).toggleClass('details-trigger-active');
 	    $('.questionform').toggle('slow');
 	});
+
+	$('.questionform .btn.cancel').click(function(e) {
+	    e.preventDefault();
+	    $('.form-show-hide-trigger').click();
+	});
     }
 }
 

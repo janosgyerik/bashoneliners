@@ -25,7 +25,6 @@ first release
 - & is not properly escaped in some one-liners
 - ui fixes
 	- use red buttons for delete operations
-	- add cancel button on edit form pages
 - wishlist feature
 	- link to individual questions
 	- show answers for each question everywhere

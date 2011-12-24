@@ -96,6 +96,7 @@ def oneliner(request, pk):
 @login_required
 def new_oneliner(request, question_pk=None):
     params = get_common_params(request)
+    params['next'] = request.META.get('HTTP_REFERER', None) or '/'
 
     try:
 	question = WishListQuestion.objects.get(pk=question_pk)
@@ -128,6 +129,8 @@ def edit_oneliner(request, pk):
 	oneliner0 = OneLiner.objects.get(pk=pk, user=request.user)
     except:
 	return render_to_response('main/access-error.html', params)
+
+    params['next'] = request.META.get('HTTP_REFERER', None) or reverse(oneliner, oneliner0.pk)
 
     if request.method == 'POST':
 	form = EditOneLinerForm(request.user, request.POST, instance=oneliner0)
@@ -179,6 +182,7 @@ def profile(request, pk=None):
 @login_required
 def edit_profile(request):
     params = get_common_params(request)
+    params['next'] = request.META.get('HTTP_REFERER', None) or '/'
 
     hackerprofile = request.user.hackerprofile
 
@@ -231,6 +235,8 @@ def edit_question(request, pk):
 	question0 = WishListQuestion.objects.get(pk=pk, user=request.user)
     except:
 	return render_to_response('main/access-error.html', params)
+
+    params['next'] = request.META.get('HTTP_REFERER', None) or reverse(question, question0.pk)
 
     if request.method == 'POST':
 	form = EditWishListQuestionForm(request.user, request.POST, instance=question0)

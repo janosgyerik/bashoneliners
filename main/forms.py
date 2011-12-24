@@ -119,6 +119,7 @@ class EditHackerProfileForm(forms.ModelForm):
 
 class CommonWishListQuestionForm(forms.ModelForm):
     user = None
+    next_url = forms.URLField(required=False)
     action = forms.CharField()
 
     def __init__(self, user, *args, **kwargs):

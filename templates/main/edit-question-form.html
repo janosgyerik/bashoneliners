@@ -1,4 +1,5 @@
 <form action="" method="post" class="form-stacked questionform">{% csrf_token %}
+    {{ form.next_url.as_hidden }}
     <div class="non-field-errors">{{ form.non_field_errors }}</div>
     <div class="question">
 	<h3>Summary<span class="required">*</span></h3>
@@ -24,7 +25,7 @@
 
 	<p class="actions">
 	    {% for action in form.actions %}<input type="submit" name="action" value="{{ action }}" class="btn primary"/>{% endfor %}
-	    <a class="btn cancel" href="{{ next }}">Cancel</a>
+	    <a class="btn cancel" href="{{ form.next_url.value }}">Cancel</a>
 	</p>
     </div>
 </form>

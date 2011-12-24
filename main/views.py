@@ -212,7 +212,8 @@ def wishlist(request):
 		new_question = form.save()
 		return redirect(wishlist)
 	else:
-	    form = PostWishListQuestionForm(request.user)
+	    next_url = request.META.get('HTTP_REFERER', None) or '/'
+	    form = PostWishListQuestionForm(request.user, initial={'next_url': next_url})
     else:
 	form = None
 
@@ -235,19 +236,18 @@ def edit_question(request, pk):
     except:
 	return render_to_response('main/access-error.html', params)
 
-    params['next'] = request.META.get('HTTP_REFERER', None) or reverse(question, question0.pk)
-
     if request.method == 'POST':
 	form = EditWishListQuestionForm(request.user, request.POST, instance=question0)
 	if form.is_valid():
 	    if form.is_save:
 		question1 = form.save()
-		return redirect(question, question1.pk)
+		return redirect(form.cleaned_data.get('next_url'))
 	    elif form.is_delete:
 		question0.delete()
 		return redirect(profile)
     else:
-	form = EditWishListQuestionForm(request.user, instance=question0)
+	next_url = request.META.get('HTTP_REFERER', None) or '/'
+	form = EditWishListQuestionForm(request.user, instance=question0, initial={'next_url': next_url})
 
     params['form'] = form
 

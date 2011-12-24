@@ -96,7 +96,6 @@ def oneliner(request, pk):
 @login_required
 def new_oneliner(request, question_pk=None):
     params = get_common_params(request)
-    params['next'] = request.META.get('HTTP_REFERER', None) or '/'
 
     try:
 	question = WishListQuestion.objects.get(pk=question_pk)
@@ -114,7 +113,8 @@ def new_oneliner(request, question_pk=None):
 
 	    return redirect(oneliner, new_oneliner.pk)
     else:
-	form = PostOneLinerForm(request.user)
+	next_url = request.META.get('HTTP_REFERER', None) or '/'
+	form = PostOneLinerForm(request.user, initial={'next_url': next_url})
 
     params['form'] = form
     params['question'] = question
@@ -130,20 +130,19 @@ def edit_oneliner(request, pk):
     except:
 	return render_to_response('main/access-error.html', params)
 
-    params['next'] = request.META.get('HTTP_REFERER', None) or reverse(oneliner, oneliner0.pk)
-
     if request.method == 'POST':
 	form = EditOneLinerForm(request.user, request.POST, instance=oneliner0)
 	if form.is_valid():
 	    if form.is_save:
 		oneliner1 = form.save()
 		tweet(oneliner1)
-		return redirect(oneliner, oneliner1.pk)
+		return redirect(form.cleaned_data.get('next_url'))
 	    elif form.is_delete:
 		oneliner0.delete()
 		return redirect(profile)
     else:
-	form = EditOneLinerForm(request.user, instance=oneliner0)
+	next_url = request.META.get('HTTP_REFERER', None) or '/'
+	form = EditOneLinerForm(request.user, instance=oneliner0, initial={'next_url': next_url})
 
     params['form'] = form
 

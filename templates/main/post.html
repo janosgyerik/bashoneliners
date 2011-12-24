@@ -26,6 +26,7 @@
 {% endif %}
 
 <form action="" method="post" class="form-stacked">{% csrf_token %}
+    {{ form.next_url.as_hidden }}
     <div class="non-field-errors">{{ form.non_field_errors }}</div>
     <div class="oneliner">
 	<h3>Summary of the one-liner<span class="required">*</span></h3>
@@ -65,7 +66,7 @@
 
 	<p class="actions">
 	    {% for action in form.actions %}<input class="btn primary" type="submit" name="action" value="{{ action }}"/>{% endfor %}
-	    <a class="btn cancel" href="{{ next }}">Cancel</a>
+	    <a class="btn cancel" href="{{ form.next_url.value }}">Cancel</a>
 	</p>
     </div>
 </form>

@@ -17,6 +17,7 @@ from bashoneliners.main.models import OneLiner, HackerProfile, User, WishListQue
 
 class CommonOneLinerForm(forms.ModelForm):
     user = None
+    next_url = forms.URLField(required=False)
     action = forms.CharField()
 
     def __init__(self, user, *args, **kwargs):

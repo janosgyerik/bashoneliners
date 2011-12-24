@@ -23,9 +23,9 @@ Feel free to ask for it here.</p>
     <li>You will receive an email when someone suggests an answer. <em>(coming soon)</em></li>
 </ul>
 
+{% if user.is_authenticated %}
 <div class="form-show-hide-trigger details-trigger" form="questionform">Post question</div>
 
-{% if user.is_authenticated %}
 {% include 'main/edit-question-form.html' %}
 {% else %}
 <p>To post a question / wish list request, you have to <a href="{% url bashoneliners.main.views.login %}">login</a> first.</p>

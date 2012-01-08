@@ -34,7 +34,7 @@
 		<ul class="nav secondary-nav">
 		    {% if user.is_authenticated %}
 		    <li class="dropdown" data-dropdown="dropdown">
-			<a href="#" class="dropdown-toggle">{{ user.username }}</a>
+			<a href="#" class="dropdown-toggle">{{ user.hackerprofile.display_name|default:user.username }}</a>
 			<ul class="dropdown-menu">
 			    <li><a href="{% url bashoneliners.main.views.profile %}">Profile</a>
 			    <li><a href="{% url bashoneliners.main.views.new_oneliner %}">Post a one-liner</a>

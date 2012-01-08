@@ -2,7 +2,7 @@
 
 {% load nst %}
 
-{% block pagetitle %}{{ user.username }}{% endblock %}
+{% block pagetitle %}{{ user.hackerprofile.display_name|default:user.username }}{% endblock %}
 
 {% block keywords %}{% endblock %}
 
@@ -10,11 +10,18 @@
 
 {% block content %}
 
-<h1>{{ user.username }}</h1>
+<h1>{{ user.hackerprofile.display_name|default:user.username }}</h1>
 
 <form action="" method="post" class="profile form-stacked">{% csrf_token %}
     <div class="non-field-errors">{{ form.non_field_errors }}</div>
     <div class="profile">
+	<label for="id_display_name">{{ form.display_name.label }}</label>
+	<div class="input">
+	    <div class="error">{{ form.display_name.errors }}</div>
+	    <div class="hint">Name to show instead of your username: {{ user.username }}</div>
+	    <div class="display_name">{{ form.display_name }}</div>
+	</div>
+	
 	<label for="id_twitter_name">{{ form.twitter_name.label }}</label>
 	<div class="input">
 	    <div class="error">{{ form.twitter_name.errors }}</div>
@@ -43,5 +50,5 @@
 {% endblock %}
 
 {% block ready %}
-	$('#id_twitter_name').focus();
+	$('#id_display_name').focus();
 {% endblock %}

@@ -15,7 +15,7 @@
 	<blockquote>
 	    <p>{{ question.explanation }}</p>
 	    <small>
-		by <a href="{% url bashoneliners.main.views.profile question.user.pk %}"><span>{{ question.user.username }}</span> </a>
+		by <a href="{% url bashoneliners.main.views.profile question.user.pk %}"><span>{{ question.user.hackerprofile.display_name|default:question.user.username }}</span> </a>
 		on <span>{{ question.created_dt }}</span>
 	    </small>
 	</blockquote>

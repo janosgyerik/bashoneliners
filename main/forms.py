@@ -107,6 +107,7 @@ class EditHackerProfileForm(forms.ModelForm):
 	model = HackerProfile
 
 	widgets = {
+		'display_name': forms.TextInput(attrs={'class': 'xlarge', }),
 		'twitter_name': forms.TextInput(attrs={'class': 'xlarge', }),
 		'blog_url': forms.TextInput(attrs={'class': 'xxlarge', }),
 		'homepage_url': forms.TextInput(attrs={'class': 'xxlarge', }),

@@ -6,7 +6,7 @@
 
 {% block content %}
 
-<h1>{{ hacker.username }}{% if user == hacker %}<a href="{% url bashoneliners.main.views.edit_profile %}" class="editable"></a>{% endif %}</h1>
+<h1>{{ hacker.hackerprofile.display_name|default:hacker.username }}{% if user == hacker %}<a href="{% url bashoneliners.main.views.edit_profile %}" class="editable"></a>{% endif %}</h1>
 
 <table class="profile bordered-table">
     {% if hacker.hackerprofile.twitter_name %}

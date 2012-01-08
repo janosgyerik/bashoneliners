@@ -3,6 +3,7 @@ from django.conf.urls.defaults import *
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
 admin.autodiscover()
+
 from bashoneliners.main.models import LatestEntries
 
 def feed(request):

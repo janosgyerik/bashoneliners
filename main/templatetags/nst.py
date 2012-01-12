@@ -6,6 +6,7 @@ import re
 
 def nst(value):
     value = re.sub(r'<.*?>', '', value)
+    value = re.sub('&', '&amp;', value)
     value = re.sub('<', '&lt;', value)
     value = re.sub('>', '&gt;', value)
     value = re.sub(r'\n', '<br/>', value)

@@ -62,9 +62,6 @@ class OneLiner(models.Model):
 
     created_dt = models.DateTimeField(default=datetime.now, blank=True)
 
-    def lines(self):
-	return [x for x in self.line.split('\n') if x.strip() != '']
-
     def vote_up(self, user):
 	Vote.vote_up(user, self)
 

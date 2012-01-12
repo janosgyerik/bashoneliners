@@ -29,7 +29,7 @@ class CommonOneLinerForm(forms.ModelForm):
 
 	widgets = {
 		'summary': forms.TextInput(attrs={'class': 'xxlarge', }),
-		'line': forms.Textarea(attrs={'rows': 3, 'class': 'xxlarge', }),
+		'line': forms.TextInput(attrs={'class': 'xxlarge', }),
 		'explanation': forms.Textarea(attrs={'rows': 10, 'class': 'xxlarge', }),
 		'limitations': forms.Textarea(attrs={'rows': 3, 'class': 'xxlarge', }),
 		}

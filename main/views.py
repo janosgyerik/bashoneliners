@@ -281,7 +281,7 @@ def search(request):
     return render_to_response('main/search.html', params)
 
 def search_ajax(request):
-    params = {}
+    params = get_common_params(request)
 
     if request.method == 'GET':
 	form = SearchOneLinerForm(request.GET)

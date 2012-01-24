@@ -19,7 +19,7 @@ urlpatterns = patterns('bashoneliners.main.views',
 
     (r'^question/(?P<pk>\d+)/$', 'question'),
     (r'^question/edit/(?P<pk>\d+)/$', 'edit_question'),
-    #(r'^question/new/$', 'new_question'),
+    (r'^question/new/$', 'new_question'),
 
     (r'^top/(?P<num>\d+)/$', 'top_n'),
 

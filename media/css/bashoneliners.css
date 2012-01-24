@@ -168,10 +168,6 @@ code {
     color: blue;
 }
 
-.questions .question {
-    margin-bottom: 3em;
-}
-
 .questions .question .summary, 
 .oneliners .oneliner .summary, 
 .oneliners .oneliner .explanation, 

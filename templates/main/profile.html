@@ -33,9 +33,13 @@
 
 {% include 'main/questions.html' %}
 
+<p><a href="{% url bashoneliners.main.views.new_question %}" class="btn primary">Post a question</a></p>
+
 <h3>{% if user == hacker %}One-liners you posted{% else %}One-liners posted{% endif %}</h3>
 
 {% include 'main/oneliners.html' %}
+
+<p><a href="{% url bashoneliners.main.views.new_oneliner %}" class="btn primary">Post a One-Liner</a></p>
 
 <h3>Favourite one-liners</h3>
 

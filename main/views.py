@@ -253,6 +253,24 @@ def edit_question(request, pk):
 
     return render_to_response('main/edit-question.html', params, context_instance=RequestContext(request))
 
+@login_required
+def new_question(request):
+    params = get_common_params(request)
+
+    if request.method == 'POST':
+	form = PostWishListQuestionForm(request.user, request.POST)
+	if form.is_valid():
+	    new_question = form.save()
+	    #return redirect(wishlist)
+	    return redirect(form.cleaned_data.get('next_url'))
+    else:
+	next_url = request.META.get('HTTP_REFERER', None) or '/'
+	form = PostWishListQuestionForm(request.user, initial={'next_url': next_url})
+
+    params['form'] = form
+
+    return render_to_response('main/edit-question.html', params, context_instance=RequestContext(request))
+
 def search(request):
     params = get_common_params(request)
     form = params['searchform']

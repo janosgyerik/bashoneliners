@@ -17,16 +17,8 @@
 <p>Are you looking for a one-liner for some specific purpose and it's not on the site yet? (Surely you searched well, right?)
 Feel free to ask for it here.</p>
 
-<ul>
-    <li>After you post a question, it will be listed on this page, and other users can suggest (possibly many) one-liners as answers.</li>
-    <li>You can track your questions on your <a href="{% url bashoneliners.main.views.profile %}">profile</a> page, and mark them <strong>Answered</strong> so they no longer appear in the list of questions. <em>(coming soon)</em></li>
-    <li>You will receive an email when someone suggests an answer. <em>(coming soon)</em></li>
-</ul>
-
 {% if user.is_authenticated %}
-<div class="form-show-hide-trigger details-trigger" form="questionform">Post a question</div>
-
-{% include 'main/edit-question-form.html' %}
+<p><a href="{% url bashoneliners.main.views.new_question %}" class="btn primary">Post a question</a></p>
 {% else %}
 <p>To post a question, please <a href="{% url bashoneliners.main.views.login %}">login</a> first.</p>
 {% endif %}

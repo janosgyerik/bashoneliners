@@ -22,6 +22,9 @@
 		    </li>
 		    <li><a href="{% url bashoneliners.main.views.index %}">Latest</a></li>
 		    <li><a href="{% url bashoneliners.main.views.wishlist %}">Questions</a></li>
+		    {% if user.is_authenticated %}
+		    <li><a href="{% url bashoneliners.main.views.new_oneliner %}">Post</a>
+		    {% endif %}
 		    <li><a href="{% url bashoneliners.urls.feed %}">RSS</a></li>
 		</ul>
 
@@ -37,7 +40,6 @@
 			<a href="#" class="dropdown-toggle">{{ user.hackerprofile.display_name|default:user.username }}</a>
 			<ul class="dropdown-menu">
 			    <li><a href="{% url bashoneliners.main.views.profile %}">Profile</a>
-			    <li><a href="{% url bashoneliners.main.views.new_oneliner %}">Post a one-liner</a>
 			    <li><a href="{% url bashoneliners.main.views.logout %}">Logout</a></li>
 			</ul>
 		    </li>

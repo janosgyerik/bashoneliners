@@ -44,8 +44,8 @@ class CommonOneLinerForm(forms.ModelForm):
 
 
 class PostOneLinerForm(CommonOneLinerForm):
-    title = 'Post a one-liner'
-    actions = ('Post one-liner',)
+    title = 'Post a One-Liner'
+    actions = ('Post One-Liner',)
 
     def save(self):
 	self.instance.user = self.user

@@ -277,5 +277,9 @@ table.profile {
     margin-bottom: 0;
 }
 
+.alert-message h3.summary a {
+    font-weight: normal;
+}
+
 
 /* eof */

@@ -10,7 +10,7 @@
 	    {% endif %}
 	    </a>
 	    {% endif %}
-	    {{ question.summary }}
+	    <a href="{% url bashoneliners.main.views.question question.pk %}">{{ question.summary }}</a>
 	</h3>
 	<blockquote>
 	    <p>{{ question.explanation }}</p>

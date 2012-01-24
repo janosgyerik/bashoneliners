@@ -23,6 +23,13 @@
 	    <div class="is_published"><label>{{ form.is_published }} Published</label></div>
 	</div>
 
+	<h3>Answered</h3>
+	<div class="hint">If checked, the question will not be shown on the <a href="{% url bashoneliners.main.views.wishlist %}">questions page</a>.</div>
+	<div class="input">
+	    <div class="error">{{ form.is_answered.errors }}</div>
+	    <div class="is_answered"><label>{{ form.is_answered }} Answered</label></div>
+	</div>
+
 	<p class="actions">
 	    {% for action in form.actions %}<input type="submit" name="action" value="{{ action }}" class="btn primary"/>{% endfor %}
 	    <a class="btn cancel" href="{{ form.next_url.value }}">Cancel</a>

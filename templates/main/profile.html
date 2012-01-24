@@ -29,17 +29,29 @@
     {% endif %}
 </table>
 
-<h3>{% if user == hacker %}Questions you posted{% else %}Questions posted{% endif %}</h3>
+<h3>Questions (waiting to be answered)</h3>
 
+{% with questions_pending as questions %}
 {% include 'main/questions.html' %}
+{% endwith %}
 
+{% if user == hacker %}
 <p><a href="{% url bashoneliners.main.views.new_question %}" class="btn primary">Post a question</a></p>
+{% endif %}
+
+<h3>Questions (answered)</h3>
+
+{% with questions_answered as questions %}
+{% include 'main/questions.html' %}
+{% endwith %}
 
 <h3>{% if user == hacker %}One-liners you posted{% else %}One-liners posted{% endif %}</h3>
 
 {% include 'main/oneliners.html' %}
 
+{% if user == hacker %}
 <p><a href="{% url bashoneliners.main.views.new_oneliner %}" class="btn primary">Post a One-Liner</a></p>
+{% endif %}
 
 <h3>Favourite one-liners</h3>
 

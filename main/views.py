@@ -174,7 +174,8 @@ def profile(request, pk=None):
     questions = WishListQuestion.objects.filter(user=user)
     if user != request.user:
 	questions = questions.filter(is_published=True)
-    params['questions'] = questions
+    params['questions_pending'] = questions.filter(is_answered=False)
+    params['questions_answered'] = questions.filter(is_answered=True)
 
     return render_to_response('main/profile.html', params)
 

@@ -126,6 +126,10 @@ body {
     color: #253;
 }
 
+.question {
+    margin-bottom: 1em;
+}
+
 code {
     line-height: 1.3em;
     padding: 0 .5em;
@@ -140,7 +144,7 @@ code {
 .oneliners .oneliner .summary, 
 .oneliners .oneliner .explanation, 
 .oneliners .oneliner .limitations {
-    margin: 1.5em;
+    margin: .5em 1.5em 1.5em;
 }
 
 .oneliners .oneliner .author {

@@ -105,21 +105,6 @@ body {
     margin: 10px 190px;
 }
 
-.oneliners .expand-all-trigger, .oneliners .collapse-all-trigger {
-    cursor: pointer;
-    background: url(/media/images/arrows.png) no-repeat;
-    background-position: 0 -51px;
-    height: 17px;
-    padding-left: 22px;
-    padding-right: 1em;
-    color: blue;
-    display: block;
-    float: right;
-}
-.oneliners .collapse-all-trigger {
-    background-position: 0 0px;
-}
-
 .oneliner {
     margin-bottom: 3em;
 }

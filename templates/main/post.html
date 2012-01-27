@@ -13,7 +13,7 @@
 <h1>{{ form.title }}</h1>
 
 {% if question %}
-<div class="alert-message block-message info">
+<div class="alert-message block-message info compact">
     <p>This one-liner will be linked to the following question as a possible answer:</p>
     <blockquote>
 	<p><a href="{% url bashoneliners.main.views.question question.pk %}">{{ question.summary }}</a></p>

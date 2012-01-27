@@ -241,12 +241,12 @@ table.profile {
     width: inherit;
 }
 
-.alert-message blockquote {
-    margin-bottom: 0;
-}
-
 .alert-message h3.summary a {
     font-weight: normal;
+}
+
+.alert-message.compact blockquote {
+    margin-bottom: 0;
 }
 
 

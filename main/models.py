@@ -112,6 +112,9 @@ class WishListQuestion(models.Model):
     is_answered = models.BooleanField(default=False)
     created_dt = models.DateTimeField(default=datetime.now, blank=True)
 
+    def __unicode__(self):
+	return '%s @%s' % (self.summary, self.user)
+
     @staticmethod
     def top(limit=50):
 	return WishListQuestion.objects.exclude(is_published=False).exclude(is_answered=True)[:limit]

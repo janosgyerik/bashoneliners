@@ -77,6 +77,9 @@ class OneLiner(models.Model):
     def get_votes_down(self):
 	return self.vote_set.filter(up=False).count()
 
+    def questions(self):
+	return self.wishlistanswer_set.filter(question__is_published=True)
+
     @staticmethod
     def top(limit=50):
 	return OneLiner.objects.filter(vote__up=True).annotate(votes=Count('vote')).order_by('-votes')[:limit]
@@ -114,6 +117,9 @@ class WishListQuestion(models.Model):
 
     def __unicode__(self):
 	return '%s @%s' % (self.summary, self.user)
+
+    def oneliners(self):
+	return self.wishlistanswer_set.filter(oneliner__is_published=True)
 
     @staticmethod
     def top(limit=50):

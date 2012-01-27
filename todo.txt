@@ -10,6 +10,7 @@ find developers
 	- link exchange
 - author of tipscache
 - other potentials found by google search 'bash one-liners'
+- commandlinefu.com ?
 
 
 find users
@@ -20,23 +21,13 @@ find users
 
 first release
 =============
-- see trello for the up to date high level list
+- SEE trello for the up to date high level list
+- maybe add a forum for discussions and new feature requests
 - fix html5 errors on login page: should not be multiple <input> inside <label>
 - use red buttons for delete operations
 - format explanation and limitations fields with markdown
-- preview explanation and limitations before post
+- preview before post
 - when the content is too short, fill the vertical space before the footer
-- username editing
-- logo, better design
-- add pip requirements file
-- Valid xhtml
-
-
-future releases
-===============
-- allow login with password
-- allow change password when logged in
-- bookmarks, favourites
 - Voting
 	- vote up
 	- vote down
@@ -45,6 +36,18 @@ future releases
 	- see all own votes on profile page
 - TOP 50
 - Commenting
+- favourites
+
+
+future releases
+===============
+- ajax controls to change one-liner or question status from public to private
+- the user who asked the question can mark the best answer
+- api with different query options and output format options
+- logo, better design
+- add pip requirements file
+- allow login with password
+- allow change password when logged in
 - Valid xhtml
 
 

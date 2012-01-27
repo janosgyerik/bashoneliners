@@ -1,0 +1,16 @@
+{% extends 'elements/question.html' %}
+
+{% block related %}
+	{% if question.wishlistanswer_set.all %}
+	<div class="alert-message block-message success">
+	    <h3>Proposed answers</h3>
+	    <div class="oneliners">
+	    {% for answer in question.wishlistanswer_set.all %}
+	    {% with answer.oneliner as oneliner %}
+	    {% include 'elements/oneliner.html' %}
+	    {% endwith %}
+	    {% endfor %}
+	    </div>
+	</div>
+	{% endif %}
+{% endblock %}

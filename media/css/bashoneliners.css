@@ -249,5 +249,9 @@ table.profile {
     margin-bottom: 0;
 }
 
+.question .alert-message {
+    margin-top: 1em;
+}
+
 
 /* eof */

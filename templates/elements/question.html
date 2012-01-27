@@ -1,0 +1,26 @@
+    <div class="question">
+	<h3 class="summary">
+	    {% if user == question.user %}
+	    <a class="editable" href="{% url bashoneliners.main.views.edit_question question.pk %}">&nbsp;
+	    {% if not question.is_published %}
+	    <span class="draft">(Not published!)</span>
+	    {% endif %}
+	    </a>
+	    {% endif %}
+	    <a href="{% url bashoneliners.main.views.question question.pk %}">{{ question.summary }}</a>
+	</h3>
+	<blockquote>
+	    <p>{{ question.explanation }}</p>
+	    <small>
+		by <a href="{% url bashoneliners.main.views.profile question.user.pk %}"><span>{{ question.user.hackerprofile.display_name|default:question.user.username }}</span> </a>
+		on <span>{{ question.created_dt }}</span>
+	    </small>
+	</blockquote>
+
+	{% if user.is_authenticated %}
+	<a class="btn" href="{% url bashoneliners.main.views.new_oneliner question.pk %}">Post a one-liner that answers this!</a>
+	{% endif %}
+
+	{% block related %}
+	{% endblock %}
+    </div>

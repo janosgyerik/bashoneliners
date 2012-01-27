@@ -3,7 +3,7 @@
 {% block related %}
 	{% if question.oneliners %}
 	{% with question.oneliners as answers %}
-	<div class="alert-message block-message success">
+	<div class="alert-message block-message success related">
 	    <h3>Proposed answers</h3>
 	    <div class="oneliners">
 	    {% for answer in answers %}

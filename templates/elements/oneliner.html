@@ -19,21 +19,17 @@
 	    on <span>{{ oneliner.created_dt }}</span>
 	</small></p>
 
-	{% if oneliner.explanation or oneliner.limitations %}
-	<div class="details hidden">
-	    {% if oneliner.explanation %}
-	    <div class="explanation">
-		<h3>Explanation</h3>
-		{{ oneliner.explanation|nst|safe }}
-	    </div>
-	    {% endif %}
+	{% if oneliner.explanation %}
+	<div class="explanation">
+	    <h3>Explanation</h3>
+	    {{ oneliner.explanation|nst|safe }}
+	</div>
+	{% endif %}
 
-	    {% if oneliner.limitations %}
-	    <div class="limitations">
-		<h3>Limitations</h3>
-		{{ oneliner.limitations|nst|safe }}
-	    </div>
-	    {% endif %}
+	{% if oneliner.limitations %}
+	<div class="limitations">
+	    <h3>Limitations</h3>
+	    {{ oneliner.limitations|nst|safe }}
 	</div>
 	{% endif %}
     </div>

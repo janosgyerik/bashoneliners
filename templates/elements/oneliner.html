@@ -1,4 +1,4 @@
-{% load nst %}
+{% load markup %}
 
     <div class="oneliner">
 	<h3 class="summary">
@@ -22,14 +22,14 @@
 	{% if oneliner.explanation %}
 	<div class="explanation">
 	    <h3>Explanation</h3>
-	    {{ oneliner.explanation|nst|safe }}
+	    {{ oneliner.explanation|markdown:"safe" }}
 	</div>
 	{% endif %}
 
 	{% if oneliner.limitations %}
 	<div class="limitations">
 	    <h3>Limitations</h3>
-	    {{ oneliner.limitations|nst|safe }}
+	    {{ oneliner.limitations|markdown:"safe" }}
 	</div>
 	{% endif %}
 

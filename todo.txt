@@ -2,6 +2,14 @@ See Trello for a more up to date near-term todo list!
 https://trello.com/board/main/4e7da3cf5a94680b35000893
 
 
+release notes
+=============
+- Explanation and Limitations are now shown expanded by default
+- If you are interested to test but prefer to not be too public, you can use http://dev.bashoneliners.com/. Just keep in mind that it is a test site, and I might break it or reset it from time to time, so your data won't be safe there.
+- I am not sure if all of you are interested in these announcements and updates, so in the future I will use the mailing list. You can subscribe to it here: 
+- Adjusted formatting, margins
+
+
 find developers
 ===============
 - in January, right before another round of bashoneliners hackfest

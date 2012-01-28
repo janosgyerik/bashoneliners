@@ -132,11 +132,9 @@ body {
 
 code {
     line-height: 1.3em;
-    padding: 0 .5em;
     font-family: "Courier New", Courier, monospace;
     background: #ddf;
     border: 1px solid #aaf;
-    font-weight: medium;
     color: blue;
 }
 

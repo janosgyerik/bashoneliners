@@ -303,4 +303,7 @@ def logout(request):
     django_logout(request)
     return index(request)
 
+def help_markdown(request):
+    return render_to_response('help/markdown.html')
+
 # eof

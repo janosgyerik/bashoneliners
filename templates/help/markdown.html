@@ -1,0 +1,75 @@
+{% load markup %}
+
+{% block main %}
+
+<table class="bordered-table zebra-striped help">
+    <thead>
+	<tr>
+	    <th>Syntax</th>
+	    <th>Output</th>
+	</tr>
+    </thead>
+    <tbody>
+	<tr>
+	    <td>*emphasis* or _emphasis_</td>
+	    <td>{{ '*emphasis* or _emphasis_'|markdown }}</td>
+	</tr>
+	<tr>
+	    <td>**strong emphasis** or __strong emphasis__</td>
+	    <td>{{ '**strong emphasis** or __strong emphasis__'|markdown }}</td>
+	</tr>
+	<tr>
+	    <td>\*escaped markup\*</td>
+	    <td>{{ '\*escaped markup\*'|markdown }}</td>
+	</tr>
+	<tr>
+	    <td>`span of code`</td>
+	    <td>{{ '`span of code`'|markdown }}</td>
+	</tr>
+	<tr>
+	    <td>``There is a literal backtick (`) here.``</td>
+	    <td>{{ '``There is a literal backtick (`) here.``'|markdown }}</td>
+	</tr>
+	<tr>
+	    <td>&lt;http://bashoneliners.com/&gt;</td>
+	    <td>{{ '<http://bashoneliners.com/>'|markdown }}</td>
+	</tr>
+	<tr>
+	    <td>&gt; start lines with<br/>
+		&gt; email-style &gt; characters<br/>
+	    &gt; to blockquote a block of text</td>
+	    <td><blockquote>start lines with<br/>
+email-style &gt; characters<br/>
+to blockquote a block of text
+	    </blockquote></td>
+	</tr>
+	<tr>
+	    <td>* start lines with *<br/>
+		* or with - or with +<br/>
+	    * to make them an unordered list</td>
+	    <td>
+		<ul>
+		    <li>start lines with *</li>
+		    <li>or with - or with +</li>
+		    <li>to make them an unordered list</li>
+		</ul>
+	    </td>
+	</tr>
+	<tr>
+	    <td>1. Ordered lists<br/>
+		1. use numbers<br/>
+		1. followed by periods</td>
+	    <td>
+		<ol>
+		    <li>Ordered lists</li>
+		    <li>use numbers</li>
+		    <li>followed by periods</li>
+		</ol>
+	    </td>
+	</tr>
+    </tbody>
+</table>
+
+<p>For more details please refer to the documentation of <a class="markdown" href="http://daringfireball.net/projects/markdown/syntax">markdown</a>.</p>
+
+{% endblock %}

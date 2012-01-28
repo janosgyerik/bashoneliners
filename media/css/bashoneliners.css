@@ -260,5 +260,17 @@ table.profile {
     margin-right: 1em;
 }
 
+.loading {
+    background: url(/media/images/loading.gif) center no-repeat !important;
+}
+
+table.help {
+    width: inherit;
+}
+
+a.help {
+    cursor: help;
+}
+
 
 /* eof */

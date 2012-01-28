@@ -9,6 +9,24 @@
  */
 
 $(document).ready(function() {
+    $('.help-markdown').click(function() {
+	var url = this.href;
+	var dialog = $('<div class="loading"></div>').appendTo('body');
+	dialog.dialog({
+	    close: function(event, ui) { dialog.remove(); },
+	    height: 400,
+	    width: 500,
+	    title: 'Markdown Syntax Quick Reference'
+	});
+	dialog.load(
+	    url,
+	    '',
+	    function(responseText, textStatus, XMLHttpRequest) {
+		dialog.removeClass('loading');
+	    }
+	);
+	return false;
+    });
 });
 
 // eof

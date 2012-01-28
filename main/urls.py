@@ -28,6 +28,8 @@ urlpatterns = patterns('bashoneliners.main.views',
 
     (r'^login/$', 'login'),
     (r'^logout/$', 'logout'),
+
+    (r'^help/markdown/$', 'help_markdown'),
 )
 
 # eof

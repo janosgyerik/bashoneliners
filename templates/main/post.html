@@ -43,7 +43,7 @@
 	
 	<h3>Explanation<span class="required">*</span></h3>
 	<div class="hint">Try to use relevant keywords in the explanation, so that the one-liner is easier to find by search.
-	    <br/>Note: any html will be escaped, and the text will be formatted with <a class="markdown" href="http://daringfireball.net/projects/markdown/syntax">markdown</a>.
+	    <br/>Note: any html will be escaped, and the text will be formatted with <a class="help help-markdown" href="{% url bashoneliners.main.views.help_markdown %}">markdown</a>.
 	</div>
 	<div class="input">
 	    <div class="error">{{ form.explanation.errors }}</div>
@@ -52,7 +52,7 @@
 	
 	<h3>Limitations (optional)</h3>
 	<div class="hint">For example, if the one-liner might not work in some flavors of UNIX, etc.
-	    <br/>Note: any html will be escaped, and the text will be formatted with <a class="markdown" href="http://daringfireball.net/projects/markdown/syntax">markdown</a>.
+	    <br/>Note: any html will be escaped, and the text will be formatted with <a class="help help-markdown" href="{% url bashoneliners.main.views.help_markdown %}">markdown</a>.
 	<div class="input">
 	    <div class="error">{{ form.limitations.errors }}</div>
 	    <div class="limitations">{{ form.limitations }}</div>

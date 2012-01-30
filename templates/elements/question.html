@@ -17,7 +17,7 @@
 	    </small>
 	</blockquote>
 
-	{% if user.is_authenticated %}
+	{% if user.is_authenticated and not question.is_answered %}
 	<a class="btn" href="{% url bashoneliners.main.views.new_oneliner question.pk %}">Post a one-liner that answers this!</a>
 	{% endif %}
 

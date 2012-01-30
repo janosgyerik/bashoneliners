@@ -56,7 +56,7 @@ def tweet(oneliner, test=False, consumer_key=None, consumer_secret=None, access_
 		auth.set_access_token(access_token, access_token_secret)
 		api = tweepy.API(auth)
 
-		tweetmsg = 'http://bashoneliners.com/main/oneliner/%d %s -- %s' % (
+		tweetmsg = 'http://bashoneliners.com/main/oneliner/%d %s: %s' % (
 			oneliner.pk,
 			oneliner.summary,
 			oneliner.line,

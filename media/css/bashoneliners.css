@@ -272,5 +272,9 @@ a.help {
     cursor: help;
 }
 
+.questions .question blockquote {
+    margin-left: 1em;
+}   
+
 
 /* eof */

@@ -45,8 +45,20 @@ class HackerProfile(models.Model):
     def twitter_url(self):
 	return 'http://twitter.com/%s/' % self.twitter_name
 
+    def get_username(self):
+	return self.user.username
+
+    def get_email(self):
+	return self.user.email
+
+    def get_date_joined(self):
+	return self.user.date_joined
+
     def __unicode__(self):
 	return ', '.join([x for x in (self.user.username, self.user.email) if x])
+
+    class Meta:
+	ordering = ('-id',)
 
 
 class OneLiner(models.Model):

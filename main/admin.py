@@ -8,9 +8,12 @@ class OneLinerAdmin(admin.ModelAdmin):
 class WishListQuestionAdmin(admin.ModelAdmin):
     list_display = ('user', 'is_published', 'is_answered', 'summary', )
 
+class HackerProfileAdmin(admin.ModelAdmin):
+    list_display = ('get_username', 'get_email', 'get_date_joined', 'display_name', 'twitter_name',)
 
-admin.site.register(HackerProfile)
+
 admin.site.register(OneLiner, OneLinerAdmin)
 admin.site.register(WishListQuestion, WishListQuestionAdmin)
+admin.site.register(HackerProfile, HackerProfileAdmin)
 
 # eof

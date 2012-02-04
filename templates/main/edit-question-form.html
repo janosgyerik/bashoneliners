@@ -1,38 +1,38 @@
-<form action="" method="post" class="form-stacked questionform">{% csrf_token %}
+<form action="" method="post" class="">{% csrf_token %}
     {{ form.next_url.as_hidden }}
     <div class="non-field-errors">{{ form.non_field_errors }}</div>
     <div class="question">
 	<h3>Summary<span class="required">*</span></h3>
-	<div class="hint">In one sentence, what should the one-liner do?</div>
+	<div class="help-block">In one sentence, what should the one-liner do?</div>
 	<div class="input">
 	    <div class="error">{{ form.summary.errors }}</div>
 	    <div class="summary">{{ form.summary }}</div>
 	</div>
 	
 	<h3>Explanation</h3>
-	<div class="hint">Be specific. Try to use relevant keywords, so that the question is easier to find by search.</div>
+	<div class="help-block">Be specific. Try to use relevant keywords, so that the question is easier to find by search.</div>
 	<div class="input">
 	    <div class="error">{{ form.explanation.errors }}</div>
 	    <div class="explanation">{{ form.explanation }}</div>
 	</div>
 	
 	<h3>Published</h3>
-	<div class="hint">If checked, the question will be visible on the <a href="{% url bashoneliners.main.views.wishlist %}">questions page</a>.</div>
+	<div class="help-block">If checked, the question will be visible on the <a href="{% url bashoneliners.main.views.wishlist %}">questions page</a>.</div>
 	<div class="input">
 	    <div class="error">{{ form.is_published.errors }}</div>
-	    <div class="is_published"><label>{{ form.is_published }} Published</label></div>
+	    <div class="is_published"><label class="checkbox">{{ form.is_published }} Published</label></div>
 	</div>
 
 	<h3>Answered</h3>
-	<div class="hint">If checked, the question will not be shown on the <a href="{% url bashoneliners.main.views.wishlist %}">questions page</a>.</div>
+	<div class="help-block">If checked, the question will not be shown on the <a href="{% url bashoneliners.main.views.wishlist %}">questions page</a>.</div>
 	<div class="input">
 	    <div class="error">{{ form.is_answered.errors }}</div>
-	    <div class="is_answered"><label>{{ form.is_answered }} Answered</label></div>
+	    <div class="is_answered"><label class="checkbox">{{ form.is_answered }} Answered</label></div>
 	</div>
 
-	<p class="actions">
-	    {% for action in form.actions %}<input type="submit" name="action" value="{{ action }}" class="btn primary"/>{% endfor %}
-	    <a class="btn cancel" href="{{ form.next_url.value }}">Cancel</a>
+	<p class="form-actions">
+	    {% for action in form.actions %}<input type="submit" name="action" value="{{ action }}" class="btn btn-primary"/>{% endfor %}
+	    <a class="btn" href="{{ form.next_url.value }}">Cancel</a>
 	</p>
     </div>
 </form>

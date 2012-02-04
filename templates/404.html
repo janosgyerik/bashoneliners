@@ -1,10 +1,12 @@
 {% extends "base.html" %}
 
+{% block pagetitle %}Page not found{% endblock %}
+
+{% block pageheader %}Page not found{% endblock %}
+
 {% block content %}
 
-<h1>bashoneliners.com</h1>
-
-<div class="alert-message block-message error">
+<div class="alert alert-error">
     <p>The page you are trying to reach does not exist (404).</p>
     <p>Path: <strong>{{ request_path }}</strong></p>
     <p>If you think this is some kind of error, 
@@ -14,6 +16,6 @@
     </p>
 </div>
 
-<p><a href="/">Go back to the home page</a></p>
+<p><a href="/">Back to the main page.</a></p>
 
 {% endblock %}

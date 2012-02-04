@@ -1,11 +1,7 @@
-    <div class="question">
+    <div class="question well">
 	<h3 class="summary">
 	    <a href="{% url bashoneliners.main.views.question question.pk %}">{{ question.summary }}</a>
-	    {% if user == question.user %}
-	    <a class="editable" href="{% url bashoneliners.main.views.edit_question question.pk %}">&nbsp;
-	    {% if not question.is_published %}<span class="draft">(Not published!)</span>{% endif %}
-	    </a>
-	    {% endif %}
+	    {% if user == question.user %}<a class="edit" href="{% url bashoneliners.main.views.edit_question question.pk %}">{% if not question.is_published %}<span class="draft">(Not published!)</span>{% endif %}</a>{% endif %}
 	</h3>
 	<blockquote>
 	    <p>{{ question.explanation }}</p>
@@ -16,7 +12,7 @@
 	</blockquote>
 
 	{% if user.is_authenticated and not question.is_answered %}
-	<a class="btn" href="{% url bashoneliners.main.views.new_oneliner question.pk %}">Post a one-liner that answers this!</a>
+	<p><a class="btn" href="{% url bashoneliners.main.views.new_oneliner question.pk %}">Post a one-liner that answers this!</a></p>
 	{% endif %}
 
 	{% block related %}

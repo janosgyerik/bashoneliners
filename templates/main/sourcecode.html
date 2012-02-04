@@ -2,18 +2,21 @@
 
 {% block pagetitle %}Source code{% endblock %}
 
+{% block pageheader %}Source code{% endblock %}
+
 {% block keywords %}{% endblock %}
 
 {% block description %}{% endblock %}
 
 {% block content %}
 
-<h1>Source code</h1>
-
-<p>This is an open-source project, and we are looking for contributors. You can find the source code here:</p>
+<p>This is an open-source project and we are looking for sponsors. You can find the source code here:</p>
 <p><a href="https://launchpad.net/bashoneliners">https://launchpad.net/bashoneliners</a></p>
 
-<p>If you would like to participate in developing this site, please contact us at <a href="mailto:bashoneliners@googlegroups.com">bashoneliners@googlegroups.com</a> and let's start the conversation!</p>
+<p>If you would like to participate in developing this site, 
+please read the <a href="{% url bashoneliners.main.views.mission %}">mission statement</a> first, 
+it is the foundation of our project.
+If you are still interested, contact us at <a href="mailto:bashoneliners@googlegroups.com">bashoneliners@googlegroups.com</a> and let's start the conversation!</p>
 
 <dl class="sourcecode">
     <dt>Task management, upcoming features</dt>
@@ -41,7 +44,5 @@ git clone https://github.com/titan2x/bashoneliners.git
     </dd>
 
 </dl>
-
-<p>Please also read our <a href="{% url bashoneliners.main.views.mission %}">mission statement</a>, as it is the foundation of our project.</p>
 
 {% endblock %}

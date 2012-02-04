@@ -2,18 +2,16 @@
 
 {% block pagetitle %}Access denied{% endblock %}
 
+{% block pageheader %}Access denied{% endblock %}
+
 {% block keywords %}{% endblock %}
 
 {% block description %}{% endblock %}
 
 {% block content %}
 
-<h1>Access denied</h1>
-
-<div class="alert-message block-message error">
-
-    <p>One-liner does not exist or you have no permission to edit it.</p>
-
+<div class="alert alert-error">
+One-liner does not exist or you don't have permission to edit it.
 </div>
 
 {% endblock %}

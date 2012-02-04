@@ -28,10 +28,10 @@ class CommonOneLinerForm(forms.ModelForm):
 	model = OneLiner
 
 	widgets = {
-		'summary': forms.TextInput(attrs={'class': 'xxlarge', }),
-		'line': forms.TextInput(attrs={'class': 'xxlarge', }),
-		'explanation': forms.Textarea(attrs={'rows': 10, 'class': 'xxlarge', }),
-		'limitations': forms.Textarea(attrs={'rows': 3, 'class': 'xxlarge', }),
+		'summary': forms.TextInput(attrs={'class': 'span6', }),
+		'line': forms.TextInput(attrs={'class': 'span6', }),
+		'explanation': forms.Textarea(attrs={'rows': 10, 'class': 'span6', }),
+		'limitations': forms.Textarea(attrs={'rows': 3, 'class': 'span6', }),
 		}
 
 	fields = (
@@ -77,7 +77,7 @@ class EditOneLinerForm(CommonOneLinerForm):
 
 
 class SearchOneLinerForm(forms.Form):
-    query = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'placeholder': 'Search'}))
+    query = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'placeholder': 'Search', 'class': 'search-query', }))
 
 
 class EditUserForm(forms.ModelForm):
@@ -107,10 +107,10 @@ class EditHackerProfileForm(forms.ModelForm):
 	model = HackerProfile
 
 	widgets = {
-		'display_name': forms.TextInput(attrs={'class': 'xlarge', }),
-		'twitter_name': forms.TextInput(attrs={'class': 'xlarge', }),
-		'blog_url': forms.TextInput(attrs={'class': 'xxlarge', }),
-		'homepage_url': forms.TextInput(attrs={'class': 'xxlarge', }),
+		'display_name': forms.TextInput(attrs={'class': '', }),
+		'twitter_name': forms.TextInput(attrs={'class': '', }),
+		'blog_url': forms.TextInput(attrs={'class': 'span6', }),
+		'homepage_url': forms.TextInput(attrs={'class': 'span6', }),
 		}
 
 	exclude = (
@@ -131,8 +131,8 @@ class CommonWishListQuestionForm(forms.ModelForm):
 	model = WishListQuestion
 
 	widgets = {
-		'summary': forms.TextInput(attrs={'class': 'xxlarge', }),
-		'explanation': forms.Textarea(attrs={'rows': 5, 'class': 'xxlarge', }),
+		'summary': forms.TextInput(attrs={'class': 'span6', }),
+		'explanation': forms.Textarea(attrs={'rows': 5, 'class': 'span6', }),
 		}
 
 	fields = (

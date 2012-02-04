@@ -2,13 +2,13 @@
 
 {% block pagetitle %}{{ form.title }}{% endblock %}
 
+{% block pageheader %}{{ form.title }}{% endblock %}
+
 {% block keywords %}{% endblock %}
 
 {% block description %}{% endblock %}
 
 {% block content %}
-
-<h1>{{ form.title }}</h1>
 
 <ul>
     <li>After you post a question, it will be listed on the <a href="{% url bashoneliners.main.views.wishlist %}">Questions</a> page, and other users can suggest (possibly many) one-liners that answer it.</li>

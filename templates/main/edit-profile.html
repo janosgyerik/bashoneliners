@@ -2,28 +2,29 @@
 
 {% block pagetitle %}{{ user.hackerprofile.display_name|default:user.username }}{% endblock %}
 
+{% block pageheader %}{{ user.hackerprofile.display_name|default:user.username }}{% endblock %}
+
 {% block keywords %}{% endblock %}
 
 {% block description %}{% endblock %}
 
 {% block content %}
 
-<h1>{{ user.hackerprofile.display_name|default:user.username }}</h1>
-
-<form action="" method="post" class="profile form-stacked">{% csrf_token %}
+<form action="" method="post" class="">{% csrf_token %}
     <div class="non-field-errors">{{ form.non_field_errors }}</div>
     <div class="profile">
 	<label for="id_display_name">{{ form.display_name.label }}</label>
 	<div class="input">
 	    <div class="error">{{ form.display_name.errors }}</div>
-	    <div class="hint">Name to show instead of your username: {{ user.username }}</div>
+	    <div class="help-block">Name to show instead of your username: {{ user.username }}</div>
 	    <div class="display_name">{{ form.display_name }}</div>
 	</div>
 	
 	<label for="id_twitter_name">{{ form.twitter_name.label }}</label>
-	<div class="input">
+	<div class="input input-prepend">
+	    <span class="add-on">@</span>
 	    <div class="error">{{ form.twitter_name.errors }}</div>
-	    <div class="twitter_name">{{ form.twitter_name }}</div>
+	    <div id="prependedInput" class="twitter_name">{{ form.twitter_name }}</div>
 	</div>
 	
 	<label for="id_blog_url">{{ form.blog_url.label }}</label>
@@ -38,9 +39,9 @@
 	    <div class="homepage_url">{{ form.homepage_url }}</div>
 	</div>
 	
-	<p class="actions">
-	    <input type="submit" name="action" value="Save" class="btn primary"/>
-	    <a class="btn cancel" href="{{ next }}">Cancel</a>
+	<p class="form-actions">
+	    <input type="submit" name="action" value="Save" class="btn btn-primary"/>
+	    <a class="btn" href="{{ next }}">Cancel</a>
 	</p>
     </div>
 </form>

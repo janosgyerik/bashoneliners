@@ -2,24 +2,25 @@
 
 {% block title %}Bash One-Liners :: {% block pagetitle %}{% endblock %}{% endblock %}
 
-{% block main %}
+{% block navbar %}
 
-<div class="topbar-wrapper" style="z-index: 5">
-    <div class="topbar">
-	<div class="topbar-inner">
-	    <div class="container">
-		<h3><a href="/">Bash One-Liners</a></h3>
+<div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+	<div class="container">
+	    <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+		<span class="icon-bar"></span>
+		<span class="icon-bar"></span>
+		<span class="icon-bar"></span>
+	    </a>
+
+	    <a class="brand" href="/">Bash One-Liners</a>
+
+	    <div class="nav-collapse">
 		<ul class="nav">
 		    {% if user.is_superuser %}
 		    <li><a href="/admin/">Admin</a></li>
 		    {% endif %}
-		    <li class="dropdown" data-dropdown="dropdown">
-			<a href="#" class="dropdown-toggle">About</a>
-			<ul class="dropdown-menu">
-			    <li><a href="{% url bashoneliners.main.views.mission %}">Mission statement</a></li>
-			    <li><a href="{% url bashoneliners.main.views.sourcecode %}">Source code</a></li>
-			</ul>
-		    </li>
+		    <li><a href="{% url bashoneliners.main.views.sourcecode %}">Source code</a></li>
 		    <li><a href="{% url bashoneliners.main.views.index %}">Latest</a></li>
 		    <li><a href="{% url bashoneliners.main.views.wishlist %}">Questions</a></li>
 		    {% if user.is_authenticated %}
@@ -29,51 +30,37 @@
 		</ul>
 
 		{% if searchform %}
-		<form class="pull-left" id="search-form" method="get" action="{% url bashoneliners.main.views.search %}">
+		<form class="navbar-search pull-left" id="search-form" method="get" action="{% url bashoneliners.main.views.search %}">
 		    {{ searchform.query }}
 		</form>
 		{% endif %}
 
-		<ul class="nav secondary-nav">
-		    {% if user.is_authenticated %}
-		    <li class="dropdown" data-dropdown="dropdown">
-			<a href="#" class="dropdown-toggle">{{ user.hackerprofile.display_name|default:user.username }}</a>
-			<ul class="dropdown-menu">
-			    <li><a href="{% url bashoneliners.main.views.profile %}">Profile</a>
-			    <li><a href="{% url bashoneliners.main.views.logout %}">Logout</a></li>
-			</ul>
-		    </li>
-		    {% else %}
-		    <li><a href="{% url bashoneliners.main.views.login %}">Login</a></li>
-		    {% endif %}
-		</ul>
+		{% if user.is_authenticated %}
+		<p class="navbar-text pull-right">Logged in as <a href="{% url bashoneliners.main.views.profile %}">{{ user.hackerprofile.display_name|default:user.username }}</a>&mdash;<a href="{% url bashoneliners.main.views.logout %}">Logout</a></p>
+		{% else %}
+		<p class="navbar-text pull-right"><a href="{% url bashoneliners.main.views.login %}">Login</a></p>
+		{% endif %}
 	    </div>
-	</div><!-- topbar-inner -->
-    </div><!-- topbar -->
-</div><!-- topbar-wrapper -->
-
-<div id="content">
-
-    {% block content %}{% endblock %}
-
+	</div>
+    </div>
 </div>
+
+{% endblock %}
+
+{% block main %}
+
+<div class="page-header"><h1>{% block pageheader %}{% endblock %}</h1></div>
+
+{% block content %}{% endblock %}
 
 {% endblock main %}
 
 {% block footer %}
-    <div class="container">
+    <div class="container-fluid">
 	<p class="pull-right validators"> 
 	    <a href="http://www.dreamhost.com/r.cgi?455568"><img alt="This site hosted by DreamHost. Unlimited storage and bandwidth for only $8.95" src="/media/images/dreamhost.gif" /></a> 
 	    <a href="http://www.dreamhost.com/green.cgi"><img alt="Green Web Hosting! This site hosted by DreamHost." src="/media/images/green1.gif" height="31" /></a> 
 	    <a href="http://validator.w3.org/check?uri=referer"><img src="/media/images/valid-xhtml10.png" alt="Valid XHTML 1.0 Strict" /></a> 
 	</p> 
-    </div>
-
-    <div id="templates" class="hidden" >
-	<span class="search-loading">
-	    <!--
-	    <img src="/media/images/loading.gif" alt="" title="" />
-	    -->
-	</span>
     </div>
 {% endblock %}

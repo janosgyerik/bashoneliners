@@ -1,16 +1,14 @@
 {% load markup %}
 
-    <div class="oneliner">
+    <div class="oneliner well">
 	<h3 class="summary">
 	    <a href="{% url bashoneliners.main.views.oneliner oneliner.pk %}">{{ oneliner.summary|capfirst }}</a>
 	    {% if user == oneliner.user %}
-	    <a class="editable" href="{% url bashoneliners.main.views.edit_oneliner oneliner.pk %}">&nbsp;
-	    {% if not oneliner.is_published %}<span class="draft">(Not published!)</span>{% endif %}
-	    </a>
+	    <a class="edit" href="{% url bashoneliners.main.views.edit_oneliner oneliner.pk %}">{% if not oneliner.is_published %}<span class="draft">(Not published!)</span>{% endif %}</a>
 	    {% endif %}
 	</h3>
 
-	<pre><span class="prompt">$ </span>{{ oneliner.line }}</pre>
+	<pre><span class="add-on">bash$</span>{{ oneliner.line }}</pre>
 
 	<p class="author"><small>
 	&mdash; by <a href="{% url bashoneliners.main.views.profile oneliner.user.pk %}"><span>{{ oneliner.user.hackerprofile.display_name|default:oneliner.user.username }}</span></a>
@@ -19,14 +17,14 @@
 
 	{% if oneliner.explanation %}
 	<div class="explanation">
-	    <h3>Explanation</h3>
+	    <h4>Explanation</h4>
 	    {{ oneliner.explanation|markdown:"safe" }}
 	</div>
 	{% endif %}
 
 	{% if oneliner.limitations %}
 	<div class="limitations">
-	    <h3>Limitations</h3>
+	    <h4>Limitations</h4>
 	    {{ oneliner.limitations|markdown:"safe" }}
 	</div>
 	{% endif %}

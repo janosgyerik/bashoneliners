@@ -2,79 +2,66 @@
 
 {% block pagetitle %}Login{% endblock %}
 
+{% block pageheader %}Login{% endblock %}
+
 {% block content %}
 
-<h1>Login</h1>
-
-<p>Choose an OpenID provider to login:</p>
-
-<form id="openid-form" method="post" action="/openid/login/"><div>
+<form class="form-horizontal" id="openid-form" method="post" action="/openid/login/">
+<fieldset>
 {% csrf_token %}
+    <div class="control-group">
+	<label class="control-label">Select Open ID provider</label>
+	<div class="controls">
+	    <label class="radio">
+		<input type="radio" name="openid_identifier" id="id_openid_google" value="https://www.google.com/accounts/o8/id"/>
+		Google - https://www.google.com/accounts/o8/id
+	    </label>
 
-<ul class="inputs-list">
-    <li>
-	<label>
-	    <input type="radio" name="openid_identifier" id="id_openid_google" value="https://www.google.com/accounts/o8/id"/>
-	    <span>Google - https://www.google.com/accounts/o8/id</span>
-	</label>
-    </li>
-
-    <li>
-	<label>
-	    <input type="radio" name="openid_identifier" id="id_openid_yahoo" value="http://yahoo.com"/>
-	    <span>Yahoo! - http://yahoo.com</span>
-	</label>
-    </li>
-
-    <li>
-	<label>
-	    <input type="radio" name="openid_identifier" id="id_openid_wordpress" value="__username__.wordpress.com"/>
-	    <span>WordPress - <input class="username" type="text" placeholder="username"/>.wordpress.com</span>
-	</label>
-    </li>
-
-    <li>
-	<label>
-	    <input type="radio" name="openid_identifier" id="id_openid_myopenid" value="__username__.myopenid.com"/>
-	    <span>MyOpenID - <input class="username" type="text" placeholder="username"/>.myopenid.com</span>
-	</label>
-    </li>
-
-    <li>
-	<label>
-	    <input type="radio" name="openid_identifier" id="id_openid_livejournal" value="__username__.livejournal.com"/>
-	    <span>LiveJournal - <input class="username" type="text" placeholder="username"/>.livejournal.com</span>
-	</label>
-    </li>
-
-    <li>
-	<label>
-	    <input type="radio" name="openid_identifier" id="id_openid_myspace" value="myspace.com/__username__"/>
-	    <span>MySpace - myspace.com/<input class="username" type="text" placeholder="username"/></span>
-	</label>
-    </li>
-
-    <li>
-	<label>
-	    <input type="radio" name="openid_identifier" id="id_openid_launchpad" value="launchpad.net/~__username__"/>
-	    <span>Launchpad - launchpad.net/~<input class="username" type="text" placeholder="username"/></span>
-	</label>
-    </li>
-</ul>
-
-<p><input name="bsignin" type="submit" value="Login" class="btn primary" /></p>
-</div></form>
+	    <label class="radio">
+		<input type="radio" name="openid_identifier" id="id_openid_yahoo" value="http://yahoo.com"/>
+		Yahoo! - http://yahoo.com
+	    </label>
+	    
+	    <label class="radio">
+		<input type="radio" name="openid_identifier" id="id_openid_wordpress" value="__username__.wordpress.com"/>
+		WordPress: <div class="input-append"><input class="username" type="text" placeholder="username"/><span class="add-on">.wordpress.com</span></div>
+	    </label>
+	    
+	    <label class="radio">
+		<input type="radio" name="openid_identifier" id="id_openid_myopenid" value="__username__.myopenid.com"/>
+		MyOpenID: <div class="input-append"><input class="username" type="text" placeholder="username"/><span class="add-on">.myopenid.com</span></div>
+	    </label>
+	    
+	    <label class="radio">
+		<input type="radio" name="openid_identifier" id="id_openid_livejournal" value="__username__.livejournal.com"/>
+		LiveJournal: <div class="input-append"><input class="username" type="text" placeholder="username"/><span class="add-on">.livejournal.com</span></div>
+	    </label>
+	    
+	    <label class="radio">
+		<input type="radio" name="openid_identifier" id="id_openid_myspace" value="myspace.com/__username__"/>
+		MySpace: <div class="input-prepend"><span class="add-on">myspace.com/</span><input class="username" type="text" placeholder="username"/></div>
+	    </label>
+	    
+	    <label class="radio">
+		<input type="radio" name="openid_identifier" id="id_openid_launchpad" value="launchpad.net/~__username__"/>
+		Launchpad: <div class="input-prepend"><span class="add-on">launchpad.net/~</span><input class="username" type="text" placeholder="username"/></div>
+	    </label>
+	</div>
+    </div>
+    <div class="form-actions">
+	<input name="bsignin" type="submit" value="Login" class="btn btn-primary" />
+    </div>
+</fieldset>
+</form>
 
 <form id="openid-form-other" method="post" action="/openid/login/"><div>
 {% csrf_token %}
-<p><strong>Or,</strong> enter other OpenID provider URL:</p>
-<input type="text" id="id_openid_identifier" class="openid xlarge" name="openid_identifier" maxlength="255" size="30" />
-<input class="btn primary" name="bsignin" type="submit" value="Login" />
+<p>If your favourite OpenID provider is not in the list above,
+you can enter its URL directly:</p>
+<input type="text" id="id_openid_identifier" class="openid span4" name="openid_identifier" maxlength="255" />
+<input class="btn btn-primary" name="bsignin" type="submit" value="Login" />
+<p class="help-block">if you don't know the URL of your OpenID provider, this page might help: {{ 'http://en.wikipedia.org/wiki/OpenID'|urlize }}</p>
 </div></form>
-
-<div class="clear"></div>
-
-<p>Tip: if you don't know the URL of your OpenID provider, have a look at this wiki page: {{ 'http://en.wikipedia.org/wiki/OpenID'|urlize }}</p>
 
 {% endblock %}
 

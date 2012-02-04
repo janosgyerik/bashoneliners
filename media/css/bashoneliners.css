@@ -101,73 +101,30 @@ body {
     padding-top: 40px; /* Twitter bootstrap */
 }
 
-#content {
-    margin: 10px 190px;
-}
-
-.oneliner {
-    margin-bottom: 3em;
-}
-
 .oneliner pre {
-    line-height: 1.3em;
-    margin: 1em;
-    margin-top: 0.3em;
-    margin-bottom: 0;
-    padding: 1em;
-    white-space: normal;
-    font-family: "Courier New", Courier, monospace;
-
     background: #ddd;
-    color: black;
 }
-
-.oneliner pre .prompt {
+.oneliner pre .add-on {
     color: #253;
+    padding-right: .5em;
+    font-weight: bold;
 }
 
-.question {
-    margin-bottom: 1em;
-}
-
-code {
-    line-height: 1.3em;
-    font-family: "Courier New", Courier, monospace;
-    background: #ddf;
-    border: 1px solid #aaf;
-    color: blue;
-}
-
-.questions .question .summary, 
-.oneliners .oneliner .summary, 
-.oneliners .oneliner .explanation, 
-.oneliners .oneliner .limitations {
-    margin: .5em 1.5em 1.5em;
-}
-
-.oneliners .oneliner .author {
-    margin: .5em 1.5em;
-    text-align: right;
-}
-
-.questions .question .summary,
-.oneliners .oneliner .summary {
-    margin: .5em;
-    color: #253;
-    font-size: 18px;
-    line-height: 22px;
-    font-weight: normal;
-}
-
-.questions .question .summary a,
-.oneliners .oneliner .summary a {
+.summary {
     color: inherit;
+}
+
+.summary a {
+    color: inherit;
+}
+
+.summary a:hover {
     text-decoration: inherit;
 }
 
-.questions .question .summary .draft,
-.oneliner .summary .draft {
-    color: red;
+.edit {
+    padding: 0 12px;
+    background: url(/media/icons/edit.png) no-repeat center;
 }
 
 form .required {
@@ -175,12 +132,59 @@ form .required {
     padding: 0 .5em;
 }
 
-form .hint {
-    color: #888;
+form .input .error ul {
+    list-style: none;
+    margin-left: 0;
 }
 
-.socialbtn {
-    margin: 1em 0;
+form .input .error ul li {
+    color: red;
+}
+
+.form-actions input {
+    margin-right: 2em;
+}
+
+input.openid {
+    background: url(/openid/logo.gif) no-repeat;
+    background-position: 0 50%;
+    padding-left: 16px;
+}
+
+#openid-form input[type="radio"] {
+    float: none;
+}
+
+form .profile label {
+    font-weight: bold;
+}
+
+table.profile {
+    width: auto;
+}
+
+.related .well {
+    background: #dff0d8;
+}
+.related .well .summary {
+    color: #468847;
+}
+
+.footer {
+    background-color: #eee;
+}
+
+table.help {
+    width: inherit;
+}
+
+a.help {
+    cursor: help;
+}
+
+dl.sourcecode dd {
+    margin-bottom: .5em;
+    margin-left: 2em;
 }
 
 dl.mission dt {
@@ -193,88 +197,11 @@ dl.mission dd {
     margin-left: 2em;
 }
 
-dl.sourcecode dd {
-    margin-bottom: .5em;
-    margin-left: 2em;
-}
+/* overriding bootstrap */
 
-input.openid {
-    background: url(/openid/logo.gif) no-repeat;
-    background-position: 0 50%;
-    padding-left: 16px;
+pre code {
+    border: 0;
 }
-
-.editable {
-    background: url(/media/icons/edit.png) no-repeat;
-    background-position: left center;
-    padding-left: 22px;
-}
-
-#openid-form input[type="radio"] {
-    float: none;
-}
-
-.footer {
-    background-color: #eee;
-}
-
-form .profile .input,
-form .oneliner .input,
-form .question .input {
-    margin: .5em 2em;
-}
-
-form .actions input {
-    margin-right: 2em;
-}
-
-form .input ul {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-}
-
-form .input .error ul li {
-    color: red;
-}
-
-table.profile {
-    float: right;
-    width: inherit;
-}
-
-.alert-message h3.summary a {
-    font-weight: normal;
-}
-
-.alert-message.compact blockquote {
-    margin-bottom: 0;
-}
-
-.question .alert-message {
-    margin-top: 1em;
-}
-
-.related {
-    margin-left: 3em;
-    margin-right: 1em;
-}
-
-.loading {
-    background: url(/media/images/loading.gif) center no-repeat !important;
-}
-
-table.help {
-    width: inherit;
-}
-
-a.help {
-    cursor: help;
-}
-
-.questions .question blockquote {
-    margin-left: 1em;
-}   
 
 
 /* eof */

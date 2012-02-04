@@ -1,8 +1,6 @@
 {% load markup %}
 
-{% block main %}
-
-<table class="bordered-table zebra-striped help">
+<table class="table table-bordered table-striped help">
     <thead>
 	<tr>
 	    <th>Syntax</th>
@@ -70,6 +68,5 @@ to blockquote a block of text
     </tbody>
 </table>
 
-<p>For more details please refer to the documentation of <a class="markdown" href="http://daringfireball.net/projects/markdown/syntax">markdown</a>.</p>
-
-{% endblock %}
+<p>For more details please refer to the documentation of markdown:<br/>
+{{ '<http://daringfireball.net/projects/markdown/syntax>'|markdown }}</p>

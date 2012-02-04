@@ -96,9 +96,11 @@ def oneliner(request, pk):
 @login_required
 def new_oneliner(request, question_pk=None):
     params = get_common_params(request)
+    initial = {}
 
     try:
 	question = WishListQuestion.objects.get(pk=question_pk)
+	initial['summary'] = question.summary
     except:
 	question = None
 
@@ -114,7 +116,8 @@ def new_oneliner(request, question_pk=None):
 	    return redirect(oneliner, new_oneliner.pk)
     else:
 	next_url = request.META.get('HTTP_REFERER', None) or '/'
-	form = PostOneLinerForm(request.user, initial={'next_url': next_url})
+	initial['next_url'] = next_url
+	form = PostOneLinerForm(request.user, initial=initial)
 
     params['form'] = form
     params['question'] = question

@@ -4,38 +4,27 @@ https://trello.com/board/main/4e7da3cf5a94680b35000893
 
 release notes
 =============
-- Explanation and Limitations are now shown expanded by default
-- Explanation and Limitations are now formatted with "markdown"
-- If you are interested to test but prefer to not be too public, you can use http://dev.bashoneliners.com/. Just keep in mind that it is a test site, and I might break it or reset it from time to time, so your data won't be safe there.
-- I am not sure if all of you are interested in these announcements and updates, so in the future I will use the mailing list. You can subscribe to it here: 
-- Adjusted formatting, margins
+- Migrated to Bootstrap 2 from Twitter, most of all this makes the site readable on mobile devices
+- Revised and improved the formatting of all pages
 
 
-find developers
-===============
-- in January, right before another round of bashoneliners hackfest
+submit the site to ...
+======================
 - author of playterm
 	- idea: video maker from script
 	- link exchange
 - author of tipscache
-- other potentials found by google search 'bash one-liners'
-- commandlinefu.com ?
-
-
-find users
-==========
-- only when public release is ready!
-- other potentials found by google search 'bash one-liners'
+- Linux Journal
+- Linux Magazine
+- Linux Format
+- Ubuntu User
+- site owners of the first x matches of a google search for 'bash one-liners'
 
 
 first release
 =============
-- SEE trello for the up to date high level list
-- maybe add a forum for discussions and new feature requests
+- Note: only the things not yet on Trello
 - fix html5 errors on login page: should not be multiple <input> inside <label>
-- use red buttons for delete operations
-- format explanation and limitations fields with markdown
-- preview before post
 - when the content is too short, fill the vertical space before the footer
 - Voting
 	- vote up
@@ -46,6 +35,7 @@ first release
 - TOP 50
 - Commenting
 - favourites
+- upgrade openid provider, there is a deprecation warning
 
 
 future releases
@@ -55,8 +45,5 @@ future releases
 - api with different query options and output format options
 - logo, better design
 - add pip requirements file
-- allow login with password
-- allow change password when logged in
-- Valid xhtml
 
 

@@ -33,6 +33,7 @@ urlpatterns = patterns('bashoneliners.main.views',
 )
 
 urlpatterns += patterns('bashoneliners.main.ajax',
+    (r'^ajax/markdown/$', 'markdown'),
     (r'^ajax/question/(?P<question_pk>\d+)/answered_by/oneliner/(?P<oneliner_pk>\d+)/$', 'question_answered'),
 )
 

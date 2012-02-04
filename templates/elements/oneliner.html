@@ -1,6 +1,6 @@
 {% load markup %}
 
-    <div class="oneliner well">
+    <div class="oneliner well oneliner-{{oneliner.pk}}">
 	<h3 class="summary">
 	    <a href="{% url bashoneliners.main.views.oneliner oneliner.pk %}">{{ oneliner.summary|capfirst }}</a>
 	    {% if user == oneliner.user %}
@@ -33,7 +33,7 @@
 	{% endblock %}
 
 	{% if user == question.user and not question.is_answered %}
-	<p><a href="{% url bashoneliners.main.ajax.question_answered question.pk oneliner.pk %}" class="btn btn-primary question-answered">Accept this answer</a></p>
+	<p><a href="{% url bashoneliners.main.ajax.question_answered question.pk oneliner.pk %}" class="btn btn-primary question-answered" data-parent="question-{{ question.pk }}">Accept this answer</a></p>
 	{% endif %}
 
     </div>

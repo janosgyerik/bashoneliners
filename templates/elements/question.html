@@ -1,4 +1,4 @@
-    <div class="question well">
+    <div class="question well question-{{question.pk}}">
 	<h3 class="summary">
 	    <a href="{% url bashoneliners.main.views.question question.pk %}">{{ question.summary|capfirst }}</a>
 	    {% if user == question.user %}<a class="edit" href="{% url bashoneliners.main.views.edit_question question.pk %}">{% if not question.is_published %}<span class="draft">(Not published!)</span>{% endif %}</a>{% endif %}

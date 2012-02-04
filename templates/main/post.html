@@ -50,6 +50,8 @@
 	<div class="input">
 	    <div class="error">{{ form.explanation.errors }}</div>
 	    <div class="explanation">{{ form.explanation }}</div>
+	    <p><a href="{% url bashoneliners.main.ajax.markdown %}" class="btn btn-info preview-markdown" data-source="id_explanation">Preview</a></p>
+	    <div id="id_explanation-preview"></div>
 	</div>
 	
 	<h3>Limitations (optional)</h3>
@@ -58,6 +60,8 @@
 	<div class="input">
 	    <div class="error">{{ form.limitations.errors }}</div>
 	    <div class="limitations">{{ form.limitations }}</div>
+	    <p><a href="{% url bashoneliners.main.ajax.markdown %}" class="btn btn-info preview-markdown" data-source="id_limitations">Preview</a></p>
+	    <div id="id_limitations-preview"></div>
 	</div>
 
 	<h3>Published</h3>

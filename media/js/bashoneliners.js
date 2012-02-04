@@ -48,9 +48,29 @@ function bind_question_answered() {
     });
 }
 
+function bind_preview_markdown() {
+    $('.preview-markdown').click(function(e) {
+	e.preventDefault();
+	var source = $('#' + $(this).attr('data-source'));
+	var preview = $('#' + $(this).attr('data-source') + '-preview');
+	var update_preview = function(html) {
+	    preview.html(html);
+	    preview.addClass('well');
+	};
+	$.ajax({
+	    url: $(this).attr('href'),
+	    type: 'post',
+	    data: { text: source.val() },
+	    success: update_preview,
+	    error: popup_error
+	});
+    });
+}
+
 $(document).ready(function() {
     bind_help_markdown();
     bind_question_answered();
+    bind_preview_markdown();
 });
 
 // eof

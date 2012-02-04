@@ -1,7 +1,7 @@
 from django.test import TestCase
 
-from main.models import User, OneLiner, Vote, WishListQuestion, WishListAnswer
-from main.forms import EditOneLinerForm, EditHackerProfileForm, EditUserForm
+from main.models import *
+from main.forms import *
 
 class Util:
     @staticmethod
@@ -274,6 +274,50 @@ class WishList(TestCase):
 	mike = Util.new_user('mike')
 	o2 = Util.new_oneliner(mike, 'echo mike')
 	a2 = Util.new_answer(q1, o2)
+
+
+class AcceptAnswer(TestCase):
+    def setUp(self):
+	self.jack = Util.new_user('jack')
+	self.oneliner = OneLiner(user=self.jack)
+	self.oneliner.save()
+
+	self.bill = Util.new_user('bill')
+	OneLiner(user=self.bill).save()
+
+	self.mike = Util.new_user('mike')
+	self.question = WishListQuestion(user=self.mike)
+	self.question.save()
+
+    def test_accept(self):
+	self.assertEqual(AcceptedAnswer.objects.count(), 0)
+	self.assertTrue(not self.question.is_answered)
+
+	self.question.accept_answer(self.oneliner)
+	self.assertTrue(self.question.is_answered)
+	self.assertEqual(AcceptedAnswer.objects.count(), 1)
+
+	self.question.accept_answer(self.oneliner)
+	self.assertTrue(self.question.is_answered)
+	self.assertEqual(AcceptedAnswer.objects.count(), 1)
+
+    def test_accept_clear(self):
+	self.test_accept()
+	self.assertTrue(AcceptedAnswer.objects.count() > 0)
+	self.assertTrue(self.question.is_answered)
+
+	self.question.clear_all_answers()
+	self.assertFalse(AcceptedAnswer.objects.count() > 0)
+	self.assertFalse(self.question.is_answered)
+
+    def test_clear_answers_when_is_answered_is_cleared(self):
+	self.test_accept()
+	self.assertTrue(AcceptedAnswer.objects.count() > 0)
+	self.assertTrue(self.question.is_answered)
+
+	self.question.is_answered = False
+	self.question.save()
+	self.assertFalse(AcceptedAnswer.objects.count() > 0)
 
 
 # eof

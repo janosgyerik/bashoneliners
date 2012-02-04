@@ -93,6 +93,10 @@ class OneLiner(models.Model):
 	return self.wishlistanswer_set.filter(question__is_published=True)
 
     @staticmethod
+    def get(pk):
+	return OneLiner.objects.get(pk=pk)
+
+    @staticmethod
     def top(limit=50):
 	return OneLiner.objects.filter(vote__up=True).annotate(votes=Count('vote')).order_by('-votes')[:limit]
 
@@ -133,6 +137,27 @@ class WishListQuestion(models.Model):
     def oneliners(self):
 	return self.wishlistanswer_set.filter(oneliner__is_published=True)
 
+    def accept_answer(self, oneliner):
+	self.is_answered = True
+	self.save()
+	try:
+	    AcceptedAnswer(question=self, oneliner=oneliner).save()
+	except:
+	    pass
+
+    def clear_all_answers(self):
+	self.is_answered = False
+	self.save()
+
+    def save(self, *args, **kwargs):
+	if not self.is_answered:
+	    AcceptedAnswer.objects.filter(question=self).delete()
+	return super(WishListQuestion, self).save(*args, **kwargs)
+
+    @staticmethod
+    def get(pk):
+	return WishListQuestion.objects.get(pk=pk)
+
     @staticmethod
     def top(limit=50):
 	return WishListQuestion.objects.exclude(is_published=False).exclude(is_answered=True)[:limit]
@@ -152,6 +177,14 @@ class WishListQuestion(models.Model):
 class WishListAnswer(models.Model):
     question = models.ForeignKey(WishListQuestion)
     oneliner = models.ForeignKey(OneLiner)
+
+
+class AcceptedAnswer(models.Model):
+    question = models.ForeignKey(WishListQuestion)
+    oneliner = models.ForeignKey(OneLiner)
+
+    class Meta:
+	unique_together = (('question', 'oneliner',),)
 
 
 class Vote(models.Model):

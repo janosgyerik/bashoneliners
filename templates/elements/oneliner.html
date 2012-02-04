@@ -31,4 +31,9 @@
 
 	{% block related %}
 	{% endblock %}
+
+	{% if user == question.user and not question.is_answered %}
+	<p><a href="{% url bashoneliners.main.ajax.question_answered question.pk oneliner.pk %}" class="btn btn-primary question-answered">Accept this answer</a></p>
+	{% endif %}
+
     </div>

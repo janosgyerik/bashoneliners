@@ -191,9 +191,9 @@ class Vote(models.Model):
 
 
 class LatestEntries(Feed):
-    title = "BashOneLiners Syndication Feed"
+    title = "Bash One-Liners"
     link = "/feed/"
-    description = "Latest Items posted to bashoneliners.com"
+    description = "Latest One-Liners posted on bashoneliners.com"
     description_template = 'feed-description.html'
 
     def items(self):

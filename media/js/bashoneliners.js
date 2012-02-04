@@ -36,12 +36,9 @@ function bind_help_markdown() {
 function bind_question_answered() {
     $('.question-answered').click(function(e) {
 	e.preventDefault();
-	var me = $(this);
+	var question = $('.' + $(this).attr('data-parent'));
 	var remove_buttons = function() {
-	    me
-	    .parent().parent().parent() // TODO
-	    .find('.question-answered')
-	    .remove();
+	    question.find('.question-answered').remove();
 	};
 	$.ajax({
 	    url: $(this).attr('href'),

@@ -20,7 +20,7 @@ def markdown(request):
     else:
 	text = None
 
-    return render_to_response('main/markdown.html', {'text': text})
+    return render_to_response('main/elements/markdown.html', {'text': text})
 
 def search(request):
     params = {}
@@ -35,7 +35,7 @@ def search(request):
 	    params['oneliners'] = OneLiner.search(form.cleaned_data.get('query'))
 	    params['user'] = request.user
 
-    return render_to_response('main/oneliners.html', params)
+    return render_to_response('main/elements/oneliners.html', params)
 
 
 # eof

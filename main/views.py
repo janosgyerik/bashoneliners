@@ -77,11 +77,6 @@ def index(request):
     params['oneliners'] = OneLiner.objects.filter(is_published=True)
     return render_to_response('main/index.html', params)
 
-def top_n(request, num):
-    params = _common_params(request)
-    params['oneliners'] = OneLiner.top()
-    return render_to_response('main/top_n.html', params)
-
 def oneliner(request, pk):
     params = _common_params(request)
     params['oneliners'] = OneLiner.objects.filter(pk=pk)

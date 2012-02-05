@@ -30,7 +30,7 @@
 <h3>Questions asked (waiting for an answer)</h3>
 
 {% with questions_pending as questions %}
-{% include 'main/questions.html' %}
+{% include 'main/elements/questions.html' %}
 {% endwith %}
 
 {% if user == hacker %}
@@ -40,12 +40,12 @@
 <h3>Questions asked (answered)</h3>
 
 {% with questions_answered as questions %}
-{% include 'main/questions.html' %}
+{% include 'main/elements/questions.html' %}
 {% endwith %}
 
 <h3>One-Liners posted</h3>
 
-{% include 'main/oneliners.html' %}
+{% include 'main/elements/oneliners.html' %}
 
 {% if user == hacker %}
 <p><a href="{% url bashoneliners.main.views.new_oneliner %}" class="btn btn-primary">Post a One-Liner</a></p>

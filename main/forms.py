@@ -6,7 +6,7 @@
 
 from django import forms
 
-from bashoneliners.main.models import OneLiner, HackerProfile, User, WishListQuestion
+from bashoneliners.main.models import OneLiner, HackerProfile, User, Question
 
 ''' constants '''
 
@@ -118,17 +118,17 @@ class EditHackerProfileForm(forms.ModelForm):
 		)
 
 
-class CommonWishListQuestionForm(forms.ModelForm):
+class CommonQuestionForm(forms.ModelForm):
     user = None
     next_url = forms.URLField(required=False)
     action = forms.CharField()
 
     def __init__(self, user, *args, **kwargs):
 	self.user = user
-	super(CommonWishListQuestionForm, self).__init__(*args, **kwargs)
+	super(CommonQuestionForm, self).__init__(*args, **kwargs)
 
     class Meta:
-	model = WishListQuestion
+	model = Question
 
 	widgets = {
 		'summary': forms.TextInput(attrs={'class': 'span6', }),
@@ -143,16 +143,16 @@ class CommonWishListQuestionForm(forms.ModelForm):
 		)
 
 
-class PostWishListQuestionForm(CommonWishListQuestionForm):
+class PostQuestionForm(CommonQuestionForm):
     title = 'Post a question'
     actions = ('Post question',)
 
     def save(self):
 	self.instance.user = self.user
-	return super(PostWishListQuestionForm, self).save()
+	return super(PostQuestionForm, self).save()
 
 
-class EditWishListQuestionForm(CommonWishListQuestionForm):
+class EditQuestionForm(CommonQuestionForm):
     title = 'Edit question'
     action_save = 'Save question'
     action_delete = 'Delete question'

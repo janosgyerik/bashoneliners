@@ -1,11 +1,11 @@
 from django.contrib import admin
 
-from bashoneliners.main.models import HackerProfile, OneLiner, WishListQuestion, WishListAnswer
+from bashoneliners.main.models import HackerProfile, OneLiner, Question, Answer
 
 class OneLinerAdmin(admin.ModelAdmin):
     list_display = ('user', 'is_published', 'was_tweeted', 'summary', 'created_dt',)
 
-class WishListQuestionAdmin(admin.ModelAdmin):
+class QuestionAdmin(admin.ModelAdmin):
     list_display = ('user', 'is_published', 'is_answered', 'summary', 'created_dt',)
 
 class HackerProfileAdmin(admin.ModelAdmin):
@@ -13,7 +13,7 @@ class HackerProfileAdmin(admin.ModelAdmin):
 
 
 admin.site.register(OneLiner, OneLinerAdmin)
-admin.site.register(WishListQuestion, WishListQuestionAdmin)
+admin.site.register(Question, QuestionAdmin)
 admin.site.register(HackerProfile, HackerProfileAdmin)
 
 # eof

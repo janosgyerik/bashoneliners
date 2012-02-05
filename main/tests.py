@@ -26,13 +26,13 @@ class Util:
 
     @staticmethod
     def new_question(user):
-	question = WishListQuestion(user=user)
+	question = Question(user=user)
 	question.save()
 	return question
 
     @staticmethod
     def new_answer(question, oneliner):
-	answer = WishListAnswer(question=question, oneliner=oneliner)
+	answer = Answer(question=question, oneliner=oneliner)
 	answer.save()
 	return answer
 
@@ -227,7 +227,7 @@ class SearchTests(TestCase):
 	self.assertEquals(OneLiner.search('echo mike')[0], self.mikes_oneliner)
 
 
-class WishList(TestCase):
+class QuestionTests(TestCase):
     def setUp(self):
 	self.user = Util.new_user('user1')
 
@@ -235,30 +235,30 @@ class WishList(TestCase):
 	Util.new_question(self.user)
 
     def test_list_questions(self):
-	self.assertTrue(WishListQuestion.objects.all().count() == 0)
+	self.assertTrue(Question.objects.all().count() == 0)
 	Util.new_question(self.user)
-	self.assertTrue(WishListQuestion.objects.all().count() > 0)
+	self.assertTrue(Question.objects.all().count() > 0)
 
     def test_list_questions_latestfirst(self):
 	q1 = Util.new_question(self.user)
 	q2 = Util.new_question(self.user)
-	self.assertTrue(WishListQuestion.objects.latest() == q2)
+	self.assertTrue(Question.objects.latest() == q2)
 
     def test_list_excludes_nonpublished(self):
 	q1 = Util.new_question(self.user)
 	q2 = Util.new_question(self.user)
-	self.assertEquals(WishListQuestion.latest(), q2)
+	self.assertEquals(Question.latest(), q2)
 	q2.is_published = False
 	q2.save()
-	self.assertNotEquals(WishListQuestion.latest(), q2)
+	self.assertNotEquals(Question.latest(), q2)
 
     def test_list_excludes_answered(self):
 	q1 = Util.new_question(self.user)
 	q2 = Util.new_question(self.user)
-	self.assertEquals(WishListQuestion.latest(), q2)
+	self.assertEquals(Question.latest(), q2)
 	q2.is_answered = True
 	q2.save()
-	self.assertNotEquals(WishListQuestion.latest(), q2)
+	self.assertNotEquals(Question.latest(), q2)
 
     def test_answer(self):
 	q1 = Util.new_question(self.user)
@@ -276,7 +276,7 @@ class WishList(TestCase):
 	a2 = Util.new_answer(q1, o2)
 
 
-class AcceptAnswer(TestCase):
+class AcceptedAnswerTests(TestCase):
     def setUp(self):
 	self.jack = Util.new_user('jack')
 	self.oneliner = OneLiner(user=self.jack)
@@ -286,7 +286,7 @@ class AcceptAnswer(TestCase):
 	OneLiner(user=self.bill).save()
 
 	self.mike = Util.new_user('mike')
-	self.question = WishListQuestion(user=self.mike)
+	self.question = Question(user=self.mike)
 	self.question.save()
 
     def test_accept(self):

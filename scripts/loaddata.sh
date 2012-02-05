@@ -14,5 +14,8 @@ loaddata() {
 loaddata auth.User 
 loaddata HackerProfile
 loaddata OneLiner
+loaddata Question
+loaddata Answer
+loaddata AcceptedAnswer
 
 # eof

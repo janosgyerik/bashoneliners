@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import *
 from django.template import RequestContext
 from django.contrib.auth import logout as django_logout
 
-from bashoneliners.main.models import HackerProfile, OneLiner, User, WishListAnswer
+from bashoneliners.main.models import HackerProfile, OneLiner, User, Answer
 from bashoneliners.main.forms import *
 
 from datetime import datetime
@@ -88,7 +88,7 @@ def new_oneliner(request, question_pk=None):
     initial = {}
 
     try:
-	question = WishListQuestion.objects.get(pk=question_pk)
+	question = Question.objects.get(pk=question_pk)
 	initial['summary'] = question.summary
     except:
 	question = None
@@ -100,7 +100,7 @@ def new_oneliner(request, question_pk=None):
 	    tweet(new_oneliner)
 
 	    if question is not None:
-		WishListAnswer(question=question, oneliner=new_oneliner).save()
+		Answer(question=question, oneliner=new_oneliner).save()
 
 	    return redirect(oneliner, new_oneliner.pk)
     else:
@@ -163,7 +163,7 @@ def profile(request, pk=None):
 	oneliners = oneliners.filter(is_published=True)
     params['oneliners'] = oneliners
 
-    questions = WishListQuestion.objects.filter(user=user)
+    questions = Question.objects.filter(user=user)
     if user != request.user:
 	questions = questions.filter(is_published=True)
     params['questions_pending'] = questions.filter(is_answered=False)
@@ -200,24 +200,24 @@ def wishlist(request):
 	    data['explanation'] = request.POST.get('explanation')
 	    data['is_published'] = request.POST.get('is_published')
 	    data['is_answered'] = False
-	    form = PostWishListQuestionForm(request.user, data)
+	    form = PostQuestionForm(request.user, data)
 	    if form.is_valid():
 		new_question = form.save()
 		return redirect(wishlist)
 	else:
 	    next_url = request.META.get('HTTP_REFERER', None) or '/'
-	    form = PostWishListQuestionForm(request.user, initial={'next_url': next_url})
+	    form = PostQuestionForm(request.user, initial={'next_url': next_url})
     else:
 	form = None
 
     params['form'] = form
-    params['questions'] = WishListQuestion.top()
+    params['questions'] = Question.top()
 
     return render_to_response('main/pages/wishlist.html', params, context_instance=RequestContext(request))
 
 def question(request, pk):
     params = _common_params(request)
-    params['questions'] = WishListQuestion.objects.filter(pk=pk)
+    params['questions'] = Question.objects.filter(pk=pk)
     return render_to_response('main/pages/question.html', params)
 
 @login_required
@@ -225,12 +225,12 @@ def edit_question(request, pk):
     params = _common_params(request)
 
     try:
-	question0 = WishListQuestion.objects.get(pk=pk, user=request.user)
+	question0 = Question.objects.get(pk=pk, user=request.user)
     except:
 	return render_to_response('main/pages/access-error.html', params)
 
     if request.method == 'POST':
-	form = EditWishListQuestionForm(request.user, request.POST, instance=question0)
+	form = EditQuestionForm(request.user, request.POST, instance=question0)
 	if form.is_valid():
 	    if form.is_save:
 		question1 = form.save()
@@ -240,7 +240,7 @@ def edit_question(request, pk):
 		return redirect(profile)
     else:
 	next_url = request.META.get('HTTP_REFERER', None) or '/'
-	form = EditWishListQuestionForm(request.user, instance=question0, initial={'next_url': next_url})
+	form = EditQuestionForm(request.user, instance=question0, initial={'next_url': next_url})
 
     params['form'] = form
 
@@ -251,14 +251,13 @@ def new_question(request):
     params = _common_params(request)
 
     if request.method == 'POST':
-	form = PostWishListQuestionForm(request.user, request.POST)
+	form = PostQuestionForm(request.user, request.POST)
 	if form.is_valid():
 	    new_question = form.save()
-	    #return redirect(wishlist)
 	    return redirect(form.cleaned_data.get('next_url'))
     else:
 	next_url = request.META.get('HTTP_REFERER', None) or '/'
-	form = PostWishListQuestionForm(request.user, initial={'next_url': next_url})
+	form = PostQuestionForm(request.user, initial={'next_url': next_url})
 
     params['form'] = form
 

@@ -90,7 +90,7 @@ class OneLiner(models.Model):
 	return self.vote_set.filter(up=False).count()
 
     def questions(self):
-	return self.wishlistanswer_set.filter(question__is_published=True)
+	return self.answer_set.filter(question__is_published=True)
 
     @staticmethod
     def get(pk):
@@ -123,7 +123,7 @@ class OneLiner(models.Model):
 	ordering = ('-id',)
 
 
-class WishListQuestion(models.Model):
+class Question(models.Model):
     user = models.ForeignKey(User)
     summary = models.CharField(max_length=200)
     explanation = models.TextField(blank=True, null=True)
@@ -135,7 +135,7 @@ class WishListQuestion(models.Model):
 	return '%s @%s' % (self.summary, self.user)
 
     def oneliners(self):
-	return self.wishlistanswer_set.filter(oneliner__is_published=True)
+	return self.answer_set.filter(oneliner__is_published=True)
 
     def accept_answer(self, oneliner):
 	self.is_answered = True
@@ -152,20 +152,20 @@ class WishListQuestion(models.Model):
     def save(self, *args, **kwargs):
 	if not self.is_answered:
 	    AcceptedAnswer.objects.filter(question=self).delete()
-	return super(WishListQuestion, self).save(*args, **kwargs)
+	return super(Question, self).save(*args, **kwargs)
 
     @staticmethod
     def get(pk):
-	return WishListQuestion.objects.get(pk=pk)
+	return Question.objects.get(pk=pk)
 
     @staticmethod
     def top(limit=50):
-	return WishListQuestion.objects.exclude(is_published=False).exclude(is_answered=True)[:limit]
+	return Question.objects.exclude(is_published=False).exclude(is_answered=True)[:limit]
 
     @staticmethod
     def latest():
 	try:
-	    return WishListQuestion.top(1)[0]
+	    return Question.top(1)[0]
 	except:
 	    return None
 
@@ -174,13 +174,13 @@ class WishListQuestion(models.Model):
 	ordering = ('-id',)
 
 
-class WishListAnswer(models.Model):
-    question = models.ForeignKey(WishListQuestion)
+class Answer(models.Model):
+    question = models.ForeignKey(Question)
     oneliner = models.ForeignKey(OneLiner)
 
 
 class AcceptedAnswer(models.Model):
-    question = models.ForeignKey(WishListQuestion)
+    question = models.ForeignKey(Question)
     oneliner = models.ForeignKey(OneLiner)
 
     class Meta:

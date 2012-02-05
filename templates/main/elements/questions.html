@@ -1,7 +1,7 @@
 <div class="questions">
 
     {% for question in questions %}
-    {% include 'main/elements/question-with-related.html' %}
+    {% include 'main/elements/question_with_related.html' %}
     {% empty %}
     <p class="message">No matching questions.</p>
     {% endfor %}

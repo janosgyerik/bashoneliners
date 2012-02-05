@@ -111,7 +111,7 @@ def oneliner_new(request, question_pk=None):
     params['form'] = form
     params['question'] = question
 
-    return render_to_response('main/pages/edit-oneliner.html', params, context_instance=RequestContext(request))
+    return render_to_response('main/pages/oneliner_edit.html', params, context_instance=RequestContext(request))
 
 @login_required
 def oneliner_edit(request, pk):
@@ -120,7 +120,7 @@ def oneliner_edit(request, pk):
     try:
 	oneliner0 = OneLiner.objects.get(pk=pk, user=request.user)
     except:
-	return render_to_response('main/pages/access-error.html', params)
+	return render_to_response('main/pages/access_error.html', params)
 
     if request.method == 'POST':
 	form = EditOneLinerForm(request.user, request.POST, instance=oneliner0)
@@ -138,7 +138,7 @@ def oneliner_edit(request, pk):
 
     params['form'] = form
 
-    return render_to_response('main/pages/edit-oneliner.html', params, context_instance=RequestContext(request))
+    return render_to_response('main/pages/oneliner_edit.html', params, context_instance=RequestContext(request))
 
 def sourcecode(request):
     params = _common_params(request)
@@ -188,7 +188,7 @@ def profile_edit(request):
 
     params['form'] = form
 
-    return render_to_response('main/pages/edit-profile.html', params, context_instance=RequestContext(request))
+    return render_to_response('main/pages/profile_edit.html', params, context_instance=RequestContext(request))
 
 def question_list(request):
     params = _common_params(request)
@@ -227,7 +227,7 @@ def question_edit(request, pk):
     try:
 	question0 = Question.objects.get(pk=pk, user=request.user)
     except:
-	return render_to_response('main/pages/access-error.html', params)
+	return render_to_response('main/pages/access_error.html', params)
 
     if request.method == 'POST':
 	form = EditQuestionForm(request.user, request.POST, instance=question0)
@@ -244,7 +244,7 @@ def question_edit(request, pk):
 
     params['form'] = form
 
-    return render_to_response('main/pages/edit-question.html', params, context_instance=RequestContext(request))
+    return render_to_response('main/pages/question_edit.html', params, context_instance=RequestContext(request))
 
 @login_required
 def question_new(request):
@@ -261,7 +261,7 @@ def question_new(request):
 
     params['form'] = form
 
-    return render_to_response('main/pages/edit-question.html', params, context_instance=RequestContext(request))
+    return render_to_response('main/pages/question_edit.html', params, context_instance=RequestContext(request))
 
 def search(request):
     params = _common_params(request)

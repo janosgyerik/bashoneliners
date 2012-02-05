@@ -227,7 +227,7 @@ class LatestEntries(Feed):
     title = "Bash One-Liners"
     link = "/feed/"
     description = "Latest One-Liners posted on bashoneliners.com"
-    description_template = 'feed-description.html'
+    description_template = 'feed_description.html'
 
     def items(self):
 	return OneLiner.objects.filter(is_published=True)

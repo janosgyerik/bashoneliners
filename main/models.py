@@ -148,6 +148,9 @@ class Question(models.Model):
     def __unicode__(self):
 	return '%s @%s' % (self.summary, self.user)
 
+    def add_answer(self, oneliner):
+	Answer(question=self, oneliner=oneliner).save()
+
     def oneliners(self):
 	return self.answer_set.filter(oneliner__is_published=True)
 

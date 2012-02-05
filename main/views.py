@@ -88,7 +88,7 @@ def oneliner_new(request, question_pk=None, oneliner_pk=None):
     initial = {}
 
     question = None
-    oneliner = None
+    oneliner0 = None
 
     if question_pk is not None:
 	try:
@@ -99,8 +99,8 @@ def oneliner_new(request, question_pk=None, oneliner_pk=None):
 
     elif oneliner_pk is not None:
 	try:
-	    oneliner = OneLiner.objects.get(pk=oneliner_pk)
-	    initial['summary'] = oneliner.summary
+	    oneliner0 = OneLiner.objects.get(pk=oneliner_pk)
+	    initial['summary'] = oneliner0.summary
 	except:
 	    pass
 
@@ -111,9 +111,9 @@ def oneliner_new(request, question_pk=None, oneliner_pk=None):
 	    tweet(new_oneliner)
 
 	    if question is not None:
-		Answer(question=question, oneliner=new_oneliner).save()
-	    elif oneliner is not None:
-		oneliner.add_alternative(new_oneliner)
+		question.add_answer(new_oneliner)
+	    elif oneliner0 is not None:
+		oneliner0.add_alternative(new_oneliner)
 
 	    return redirect(oneliner, new_oneliner.pk)
     else:
@@ -123,7 +123,7 @@ def oneliner_new(request, question_pk=None, oneliner_pk=None):
 
     params['form'] = form
     params['question'] = question
-    params['oneliner'] = oneliner
+    params['oneliner'] = oneliner0
 
     return render_to_response('main/pages/oneliner_edit.html', params, context_instance=RequestContext(request))
 

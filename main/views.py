@@ -287,6 +287,6 @@ def logout(request):
     return index(request)
 
 def help_markdown(request):
-    return render_to_response('help/markdown.html')
+    return render_to_response('main/help/markdown.html')
 
 # eof

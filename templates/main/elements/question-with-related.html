@@ -1,4 +1,4 @@
-{% extends 'elements/question.html' %}
+{% extends 'main/elements/question.html' %}
 
 {% block related %}
 	{% if question.oneliners %}
@@ -8,7 +8,7 @@
 	    <div class="oneliners">
 	    {% for answer in answers %}
 	    {% with answer.oneliner as oneliner %}
-	    {% include 'elements/oneliner.html' %}
+	    {% include 'main/elements/oneliner.html' %}
 	    {% endwith %}
 	    {% endfor %}
 	    </div>

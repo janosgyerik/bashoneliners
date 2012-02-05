@@ -1,8 +1,38 @@
 {% extends 'main/elements/oneliner.html' %}
 
 {% block related %}
+	{% if oneliner.relateds %}
+	{% with oneliner.relateds as alternatives %}
+	<div class="related">
+	    <h3 class="">Related one-liners</h3>
+	    <div class="oneliners">
+	    {% for alternative in alternatives %}
+	    {% with alternative.oneliner as oneliner %}
+	    {% include 'main/elements/oneliner.html' %}
+	    {% endwith %}
+	    {% endfor %}
+	    </div>
+	</div>
+	{% endwith %}
+	{% endif %}
+
+	{% if oneliner.alternatives %}
+	{% with oneliner.alternatives as alternatives %}
+	<div class="related">
+	    <h3 class="">Alternative one-liners</h3>
+	    <div class="oneliners">
+	    {% for alternative in alternatives %}
+	    {% with alternative.alternative as oneliner %}
+	    {% include 'main/elements/oneliner.html' %}
+	    {% endwith %}
+	    {% endfor %}
+	    </div>
+	</div>
+	{% endwith %}
+	{% endif %}
+
 	{% if user.is_authenticated and user != oneliner.user %}
-	<p><a href="{% url bashoneliners.main.views.oneliner_alternative oneliner.pk %}" class="btn">Post an alternative</a></p>
+	<p><a href="{% url bashoneliners.main.views.oneliner_alternative oneliner.pk %}" class="btn">Post an alternative one-liner</a></p>
 	{% endif %}
 
 	{% if oneliner.questions %}

@@ -98,6 +98,9 @@ class OneLiner(models.Model):
     def add_alternative(self, alternative):
 	AlternativeOneLiner(alternative=alternative, oneliner=self).save()
 
+    def relateds(self):
+	return self.related_set.filter(oneliner__is_published=True)
+
     @staticmethod
     def get(pk):
 	return OneLiner.objects.get(pk=pk)

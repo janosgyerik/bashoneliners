@@ -75,12 +75,12 @@ def tweet(oneliner, test=False, consumer_key=None, consumer_secret=None, access_
 def index(request):
     params = _common_params(request)
     params['oneliners'] = OneLiner.objects.filter(is_published=True)
-    return render_to_response('main/index.html', params)
+    return render_to_response('main/pages/index.html', params)
 
 def oneliner(request, pk):
     params = _common_params(request)
     params['oneliners'] = OneLiner.objects.filter(pk=pk)
-    return render_to_response('main/oneliner.html', params)
+    return render_to_response('main/pages/oneliner.html', params)
 
 @login_required
 def new_oneliner(request, question_pk=None):
@@ -111,7 +111,7 @@ def new_oneliner(request, question_pk=None):
     params['form'] = form
     params['question'] = question
 
-    return render_to_response('main/edit-oneliner.html', params, context_instance=RequestContext(request))
+    return render_to_response('main/pages/edit-oneliner.html', params, context_instance=RequestContext(request))
 
 @login_required
 def edit_oneliner(request, pk):
@@ -120,7 +120,7 @@ def edit_oneliner(request, pk):
     try:
 	oneliner0 = OneLiner.objects.get(pk=pk, user=request.user)
     except:
-	return render_to_response('main/access-error.html', params)
+	return render_to_response('main/pages/access-error.html', params)
 
     if request.method == 'POST':
 	form = EditOneLinerForm(request.user, request.POST, instance=oneliner0)
@@ -138,15 +138,15 @@ def edit_oneliner(request, pk):
 
     params['form'] = form
 
-    return render_to_response('main/edit-oneliner.html', params, context_instance=RequestContext(request))
+    return render_to_response('main/pages/edit-oneliner.html', params, context_instance=RequestContext(request))
 
 def sourcecode(request):
     params = _common_params(request)
-    return render_to_response('main/sourcecode.html', params)
+    return render_to_response('main/pages/sourcecode.html', params)
 
 def mission(request):
     params = _common_params(request)
-    return render_to_response('main/mission.html', params)
+    return render_to_response('main/pages/mission.html', params)
 
 def profile(request, pk=None):
     params = _common_params(request)
@@ -169,7 +169,7 @@ def profile(request, pk=None):
     params['questions_pending'] = questions.filter(is_answered=False)
     params['questions_answered'] = questions.filter(is_answered=True)
 
-    return render_to_response('main/profile.html', params)
+    return render_to_response('main/pages/profile.html', params)
 
 @login_required
 def edit_profile(request):
@@ -188,7 +188,7 @@ def edit_profile(request):
 
     params['form'] = form
 
-    return render_to_response('main/edit-profile.html', params, context_instance=RequestContext(request))
+    return render_to_response('main/pages/edit-profile.html', params, context_instance=RequestContext(request))
 
 def wishlist(request):
     params = _common_params(request)
@@ -213,12 +213,12 @@ def wishlist(request):
     params['form'] = form
     params['questions'] = WishListQuestion.top()
 
-    return render_to_response('main/wishlist.html', params, context_instance=RequestContext(request))
+    return render_to_response('main/pages/wishlist.html', params, context_instance=RequestContext(request))
 
 def question(request, pk):
     params = _common_params(request)
     params['questions'] = WishListQuestion.objects.filter(pk=pk)
-    return render_to_response('main/question.html', params)
+    return render_to_response('main/pages/question.html', params)
 
 @login_required
 def edit_question(request, pk):
@@ -227,7 +227,7 @@ def edit_question(request, pk):
     try:
 	question0 = WishListQuestion.objects.get(pk=pk, user=request.user)
     except:
-	return render_to_response('main/access-error.html', params)
+	return render_to_response('main/pages/access-error.html', params)
 
     if request.method == 'POST':
 	form = EditWishListQuestionForm(request.user, request.POST, instance=question0)
@@ -244,7 +244,7 @@ def edit_question(request, pk):
 
     params['form'] = form
 
-    return render_to_response('main/edit-question.html', params, context_instance=RequestContext(request))
+    return render_to_response('main/pages/edit-question.html', params, context_instance=RequestContext(request))
 
 @login_required
 def new_question(request):
@@ -262,7 +262,7 @@ def new_question(request):
 
     params['form'] = form
 
-    return render_to_response('main/edit-question.html', params, context_instance=RequestContext(request))
+    return render_to_response('main/pages/edit-question.html', params, context_instance=RequestContext(request))
 
 def search(request):
     params = _common_params(request)
@@ -271,11 +271,11 @@ def search(request):
     if form.is_valid():
 	params['oneliners'] = OneLiner.search(form.cleaned_data.get('query'))
 
-    return render_to_response('main/search.html', params)
+    return render_to_response('main/pages/search.html', params)
 
 def login(request):
     params = _common_params(request)
-    return render_to_response('main/login.html', params, context_instance=RequestContext(request))
+    return render_to_response('main/pages/login.html', params, context_instance=RequestContext(request))
 
 def logout(request):
     django_logout(request)

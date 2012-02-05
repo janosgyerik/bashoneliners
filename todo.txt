@@ -7,6 +7,7 @@ release notes
 - Migrated to Bootstrap 2 from Twitter, most of all this makes the site readable on mobile devices
 - Revised and improved the formatting of all pages
 - Improved user interface for accepting answers to questions
+- Implemented preview for Explanations and Limitations fields when posting or editing
 
 
 submit the site to ...

@@ -284,20 +284,6 @@ def search(request):
 
     return render_to_response('main/search.html', params)
 
-def search_ajax(request):
-    params = get_common_params(request)
-
-    if request.method == 'GET':
-	form = SearchOneLinerForm(request.GET)
-    else:
-	form = None
-
-    if form is not None:
-	if form.is_valid():
-	    params['oneliners'] = OneLiner.search(form.cleaned_data.get('query'))
-
-    return render_to_response('main/oneliners.html', params)
-
 def login(request):
     params = get_common_params(request)
     return render_to_response('main/login.html', params, context_instance=RequestContext(request))

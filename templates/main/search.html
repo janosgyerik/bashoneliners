@@ -31,12 +31,12 @@
 	    $('#search-errors').empty();
 
 	    var options = {
-		'url': '{% url bashoneliners.main.views.search_ajax %}',
-		'type': 'GET',
-		'data': { 'query': $('#id_query').val() },
-		'success': search_success,
-		'error': search_error,
-		'complete': search_completed
+		url: '{% url bashoneliners.main.ajax.search %}',
+		type: 'get',
+		data: { 'query': $('#id_query').val() },
+		success: search_success,
+		error: search_error,
+		complete: search_completed
 	    };
 	    $.ajax(options);
 	});

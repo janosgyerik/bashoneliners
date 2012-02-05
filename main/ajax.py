@@ -2,6 +2,7 @@ from django.shortcuts import render_to_response
 from django.contrib.auth.decorators import *
 
 from bashoneliners.main.models import WishListQuestion, OneLiner
+from bashoneliners.main.forms import SearchOneLinerForm
 
 @login_required
 def question_answered(request, question_pk, oneliner_pk):
@@ -20,6 +21,21 @@ def markdown(request):
 	text = None
 
     return render_to_response('main/markdown.html', {'text': text})
+
+def search(request):
+    params = {}
+
+    if request.method == 'GET':
+	form = SearchOneLinerForm(request.GET)
+    else:
+	form = None
+
+    if form is not None:
+	if form.is_valid():
+	    params['oneliners'] = OneLiner.search(form.cleaned_data.get('query'))
+	    params['user'] = request.user
+
+    return render_to_response('main/oneliners.html', params)
 
 
 # eof

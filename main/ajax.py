@@ -10,7 +10,7 @@ def question_answered(request, question_pk, oneliner_pk):
     oneliner = OneLiner.objects.get(pk=oneliner_pk)
     question.accept_answer(oneliner)
 
-    return render_to_response('json.js')
+    return render_to_response('main/ajax/json.js')
 
 def markdown(request):
     if request.method == 'GET':

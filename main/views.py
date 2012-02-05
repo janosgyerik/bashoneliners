@@ -116,7 +116,7 @@ def new_oneliner(request, question_pk=None):
     params['form'] = form
     params['question'] = question
 
-    return render_to_response('main/post.html', params, context_instance=RequestContext(request))
+    return render_to_response('main/edit-oneliner.html', params, context_instance=RequestContext(request))
 
 @login_required
 def edit_oneliner(request, pk):
@@ -143,7 +143,7 @@ def edit_oneliner(request, pk):
 
     params['form'] = form
 
-    return render_to_response('main/post.html', params, context_instance=RequestContext(request))
+    return render_to_response('main/edit-oneliner.html', params, context_instance=RequestContext(request))
 
 def sourcecode(request):
     params = _common_params(request)

@@ -1,28 +1,3 @@
-{% extends "base.html" %}
-
-{% block pagetitle %}{{ form.title }}{% endblock %}
-
-{% block pageheader %}{{ form.title }}{% endblock %}
-
-{% block keywords %}{% endblock %}
-
-{% block description %}{% endblock %}
-
-{% block content %}
-
-{% if question %}
-<div class="alert alert-info compact">
-    <p>This one-liner will be linked to the following question as a possible answer:</p>
-    <blockquote>
-	<p><a href="{% url bashoneliners.main.views.question question.pk %}">{{ question.summary }}</a></p>
-	<small>
-	    by <a href="{% url bashoneliners.main.views.profile question.user.pk %}"><span>{{ question.user.hackerprofile.display_name|default:question.user.username }}</span></a>
-	    on <span>{{ question.created_dt }}</span>
-	</small>
-    </blockquote>
-</div>
-{% endif %}
-
 <form action="" method="post" class="">{% csrf_token %}
     {{ form.next_url.as_hidden }}
     <div class="non-field-errors">{{ form.non_field_errors }}</div>
@@ -77,9 +52,3 @@
 	</p>
     </div>
 </form>
-
-{% endblock %}
-
-{% block ready %}
-	$('#id_summary').focus();
-{% endblock %}

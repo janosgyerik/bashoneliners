@@ -17,7 +17,7 @@ from datetime import datetime
 
 ''' helper methods '''
 
-def get_common_params(request):
+def _common_params(request):
     if request.method == 'GET':
 	searchform = SearchOneLinerForm(request.GET)
     else:
@@ -27,12 +27,6 @@ def get_common_params(request):
 	    'user': request.user,
 	    'searchform': searchform,
 	    }
-
-    try:
-	if request.META['HTTP_USER_AGENT'].startswith('W3C_Validator'):
-	    params['w3c'] = True
-    except: 
-	pass
 
     return params
 
@@ -79,23 +73,23 @@ def tweet(oneliner, test=False, consumer_key=None, consumer_secret=None, access_
 ''' url handlers '''
 
 def index(request):
-    params = get_common_params(request)
+    params = _common_params(request)
     params['oneliners'] = OneLiner.objects.filter(is_published=True)
     return render_to_response('main/index.html', params)
 
 def top_n(request, num):
-    params = get_common_params(request)
+    params = _common_params(request)
     params['oneliners'] = OneLiner.top()
     return render_to_response('main/top_n.html', params)
 
 def oneliner(request, pk):
-    params = get_common_params(request)
+    params = _common_params(request)
     params['oneliners'] = OneLiner.objects.filter(pk=pk)
     return render_to_response('main/oneliner.html', params)
 
 @login_required
 def new_oneliner(request, question_pk=None):
-    params = get_common_params(request)
+    params = _common_params(request)
     initial = {}
 
     try:
@@ -126,7 +120,7 @@ def new_oneliner(request, question_pk=None):
 
 @login_required
 def edit_oneliner(request, pk):
-    params = get_common_params(request)
+    params = _common_params(request)
 
     try:
 	oneliner0 = OneLiner.objects.get(pk=pk, user=request.user)
@@ -152,15 +146,15 @@ def edit_oneliner(request, pk):
     return render_to_response('main/post.html', params, context_instance=RequestContext(request))
 
 def sourcecode(request):
-    params = get_common_params(request)
+    params = _common_params(request)
     return render_to_response('main/sourcecode.html', params)
 
 def mission(request):
-    params = get_common_params(request)
+    params = _common_params(request)
     return render_to_response('main/mission.html', params)
 
 def profile(request, pk=None):
-    params = get_common_params(request)
+    params = _common_params(request)
 
     if pk is None:
 	pk = request.user.pk
@@ -184,7 +178,7 @@ def profile(request, pk=None):
 
 @login_required
 def edit_profile(request):
-    params = get_common_params(request)
+    params = _common_params(request)
     params['next'] = request.META.get('HTTP_REFERER', None) or '/'
 
     hackerprofile = request.user.hackerprofile
@@ -202,7 +196,7 @@ def edit_profile(request):
     return render_to_response('main/edit-profile.html', params, context_instance=RequestContext(request))
 
 def wishlist(request):
-    params = get_common_params(request)
+    params = _common_params(request)
 
     if request.user.is_authenticated:
 	if request.method == 'POST':
@@ -227,13 +221,13 @@ def wishlist(request):
     return render_to_response('main/wishlist.html', params, context_instance=RequestContext(request))
 
 def question(request, pk):
-    params = get_common_params(request)
+    params = _common_params(request)
     params['questions'] = WishListQuestion.objects.filter(pk=pk)
     return render_to_response('main/question.html', params)
 
 @login_required
 def edit_question(request, pk):
-    params = get_common_params(request)
+    params = _common_params(request)
 
     try:
 	question0 = WishListQuestion.objects.get(pk=pk, user=request.user)
@@ -259,7 +253,7 @@ def edit_question(request, pk):
 
 @login_required
 def new_question(request):
-    params = get_common_params(request)
+    params = _common_params(request)
 
     if request.method == 'POST':
 	form = PostWishListQuestionForm(request.user, request.POST)
@@ -276,7 +270,7 @@ def new_question(request):
     return render_to_response('main/edit-question.html', params, context_instance=RequestContext(request))
 
 def search(request):
-    params = get_common_params(request)
+    params = _common_params(request)
     form = params['searchform']
 
     if form.is_valid():
@@ -285,7 +279,7 @@ def search(request):
     return render_to_response('main/search.html', params)
 
 def login(request):
-    params = get_common_params(request)
+    params = _common_params(request)
     return render_to_response('main/login.html', params, context_instance=RequestContext(request))
 
 def logout(request):

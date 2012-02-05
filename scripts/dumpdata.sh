@@ -16,5 +16,8 @@ dumpdata() {
 dumpdata User auth $fixtures_dir/auth.User.json
 dumpdata HackerProfile
 dumpdata OneLiner
+dumpdata WishListQuestion
+dumpdata WishListAnswer
+dumpdata AcceptedAnswer
 
 # eof

@@ -83,15 +83,26 @@ def oneliner(request, pk):
     return render_to_response('main/pages/oneliner.html', params)
 
 @login_required
-def oneliner_new(request, question_pk=None):
+def oneliner_new(request, question_pk=None, oneliner_pk=None):
     params = _common_params(request)
     initial = {}
 
-    try:
-	question = Question.objects.get(pk=question_pk)
-	initial['summary'] = question.summary
-    except:
-	question = None
+    question = None
+    oneliner = None
+
+    if question_pk is not None:
+	try:
+	    question = Question.objects.get(pk=question_pk)
+	    initial['summary'] = question.summary
+	except:
+	    pass
+
+    elif oneliner_pk is not None:
+	try:
+	    oneliner = OneLiner.objects.get(pk=oneliner_pk)
+	    initial['summary'] = oneliner.summary
+	except:
+	    pass
 
     if request.method == 'POST':
 	form = PostOneLinerForm(request.user, request.POST)
@@ -101,6 +112,8 @@ def oneliner_new(request, question_pk=None):
 
 	    if question is not None:
 		Answer(question=question, oneliner=new_oneliner).save()
+	    elif oneliner is not None:
+		oneliner.add_alternative(new_oneliner)
 
 	    return redirect(oneliner, new_oneliner.pk)
     else:
@@ -110,8 +123,17 @@ def oneliner_new(request, question_pk=None):
 
     params['form'] = form
     params['question'] = question
+    params['oneliner'] = oneliner
 
     return render_to_response('main/pages/oneliner_edit.html', params, context_instance=RequestContext(request))
+
+@login_required
+def oneliner_answer(request, question_pk):
+    return oneliner_new(request, question_pk=question_pk)
+
+@login_required
+def oneliner_alternative(request, oneliner_pk):
+    return oneliner_new(request, oneliner_pk=oneliner_pk)
 
 @login_required
 def oneliner_edit(request, pk):

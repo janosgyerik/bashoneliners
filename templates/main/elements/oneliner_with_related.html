@@ -1,6 +1,10 @@
 {% extends 'main/elements/oneliner.html' %}
 
 {% block related %}
+	{% if user.is_authenticated and user != oneliner.user %}
+	<p><a href="{% url bashoneliners.main.views.oneliner_alternative oneliner.pk %}" class="btn">Post an alternative</a></p>
+	{% endif %}
+
 	{% if oneliner.questions %}
 	{% with oneliner.questions as answers %}
 	<div class="related">

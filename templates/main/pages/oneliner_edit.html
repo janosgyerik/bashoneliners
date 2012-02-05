@@ -23,6 +23,13 @@
 </div>
 {% endif %}
 
+{% if oneliner %}
+<div class="alert alert-info compact">
+    <p>The new one-liner will be linked to the following one-liner as an alternative:</p>
+    {% include 'main/elements/oneliner.html' %}
+</div>
+{% endif %}
+
 {% include 'main/elements/oneliner_edit_form.html' %}
 
 {% endblock %}

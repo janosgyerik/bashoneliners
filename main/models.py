@@ -92,6 +92,12 @@ class OneLiner(models.Model):
     def questions(self):
 	return self.answer_set.filter(question__is_published=True)
 
+    def alternatives(self):
+	return self.alternativeoneliner_set.filter(alternative__is_published=True)
+
+    def add_alternative(self, alternative):
+	AlternativeOneLiner(alternative=alternative, oneliner=self).save()
+
     @staticmethod
     def get(pk):
 	return OneLiner.objects.get(pk=pk)
@@ -121,6 +127,14 @@ class OneLiner(models.Model):
     class Meta:
 	get_latest_by = 'pk'
 	ordering = ('-id',)
+
+
+class AlternativeOneLiner(models.Model):
+    alternative = models.ForeignKey(OneLiner, related_name='related_set')
+    oneliner = models.ForeignKey(OneLiner)
+
+    class Meta:
+	unique_together = (('alternative', 'oneliner',),)
 
 
 class Question(models.Model):

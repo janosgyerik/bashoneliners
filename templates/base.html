@@ -22,7 +22,7 @@
 		    {% endif %}
 		    <li><a href="{% url bashoneliners.main.views.sourcecode %}">Source code</a></li>
 		    <li><a href="{% url bashoneliners.main.views.index %}">Latest</a></li>
-		    <li><a href="{% url bashoneliners.main.views.wishlist %}">Questions</a></li>
+		    <li><a href="{% url bashoneliners.main.views.question_list %}">Questions</a></li>
 		    {% if user.is_authenticated %}
 		    <li><a href="{% url bashoneliners.main.views.new_oneliner %}">Post</a>
 		    {% endif %}

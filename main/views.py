@@ -190,7 +190,7 @@ def edit_profile(request):
 
     return render_to_response('main/pages/edit-profile.html', params, context_instance=RequestContext(request))
 
-def wishlist(request):
+def question_list(request):
     params = _common_params(request)
 
     if request.user.is_authenticated:
@@ -203,7 +203,7 @@ def wishlist(request):
 	    form = PostQuestionForm(request.user, data)
 	    if form.is_valid():
 		new_question = form.save()
-		return redirect(wishlist)
+		return redirect(question_list)
 	else:
 	    next_url = request.META.get('HTTP_REFERER', None) or '/'
 	    form = PostQuestionForm(request.user, initial={'next_url': next_url})
@@ -213,7 +213,7 @@ def wishlist(request):
     params['form'] = form
     params['questions'] = Question.top()
 
-    return render_to_response('main/pages/wishlist.html', params, context_instance=RequestContext(request))
+    return render_to_response('main/pages/question_list.html', params, context_instance=RequestContext(request))
 
 def question(request, pk):
     params = _common_params(request)

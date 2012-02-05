@@ -11,7 +11,7 @@
 {% block content %}
 
 {% if question %}
-<div class="alert alert-info compact">
+<div class="alert alert-info related">
     <p>The new one-liner will be linked to the following question as a possible answer:</p>
     {% with 1 as nobuttons %}
     {% include 'main/elements/question.html' %}
@@ -20,7 +20,7 @@
 {% endif %}
 
 {% if oneliner %}
-<div class="alert alert-info compact">
+<div class="alert alert-info related">
     <p>The new one-liner will be linked to the following one-liner as an alternative:</p>
     {% include 'main/elements/oneliner.html' %}
 </div>

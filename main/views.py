@@ -83,7 +83,7 @@ def oneliner(request, pk):
     return render_to_response('main/pages/oneliner.html', params)
 
 @login_required
-def new_oneliner(request, question_pk=None):
+def oneliner_new(request, question_pk=None):
     params = _common_params(request)
     initial = {}
 
@@ -114,7 +114,7 @@ def new_oneliner(request, question_pk=None):
     return render_to_response('main/pages/edit-oneliner.html', params, context_instance=RequestContext(request))
 
 @login_required
-def edit_oneliner(request, pk):
+def oneliner_edit(request, pk):
     params = _common_params(request)
 
     try:
@@ -172,7 +172,7 @@ def profile(request, pk=None):
     return render_to_response('main/pages/profile.html', params)
 
 @login_required
-def edit_profile(request):
+def profile_edit(request):
     params = _common_params(request)
     params['next'] = request.META.get('HTTP_REFERER', None) or '/'
 
@@ -221,7 +221,7 @@ def question(request, pk):
     return render_to_response('main/pages/question.html', params)
 
 @login_required
-def edit_question(request, pk):
+def question_edit(request, pk):
     params = _common_params(request)
 
     try:
@@ -247,7 +247,7 @@ def edit_question(request, pk):
     return render_to_response('main/pages/edit-question.html', params, context_instance=RequestContext(request))
 
 @login_required
-def new_question(request):
+def question_new(request):
     params = _common_params(request)
 
     if request.method == 'POST':

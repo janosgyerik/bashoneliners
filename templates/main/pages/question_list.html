@@ -16,7 +16,7 @@
 Feel free to ask for it here.</p>
 
 {% if user.is_authenticated %}
-<p><a href="{% url bashoneliners.main.views.new_question %}" class="btn btn-primary">Post a question</a></p>
+<p><a href="{% url bashoneliners.main.views.question_new %}" class="btn btn-primary">Post a question</a></p>
 {% else %}
 <p>To post a question, please <a href="{% url bashoneliners.main.views.login %}">login</a> first.</p>
 {% endif %}

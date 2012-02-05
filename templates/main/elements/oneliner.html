@@ -4,7 +4,7 @@
 	<h3 class="summary">
 	    <a href="{% url bashoneliners.main.views.oneliner oneliner.pk %}">{{ oneliner.summary|capfirst }}</a>
 	    {% if user == oneliner.user %}
-	    <a class="edit" href="{% url bashoneliners.main.views.edit_oneliner oneliner.pk %}">{% if not oneliner.is_published %}<span class="draft">(Not published!)</span>{% endif %}</a>
+	    <a class="edit" href="{% url bashoneliners.main.views.oneliner_edit oneliner.pk %}">{% if not oneliner.is_published %}<span class="draft">(Not published!)</span>{% endif %}</a>
 	    {% endif %}
 	</h3>
 

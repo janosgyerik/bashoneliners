@@ -4,10 +4,23 @@ https://trello.com/board/main/4e7da3cf5a94680b35000893
 
 release notes
 =============
-- Migrated to Bootstrap 2 from Twitter, most of all this makes the site readable on mobile devices
-- Revised and improved the formatting of all pages
-- Improved user interface for accepting answers to questions
-- Implemented preview for Explanations and Limitations fields when posting or editing
+-
+
+
+first release
+=============
+- Note: only the things not yet on Trello
+- Commenting
+- Voting
+	- vote up
+	- vote down
+	- cancel vote
+	- see own vote on one-liner
+	- see all own votes on profile page
+- TOP 50
+- fix html5 errors on login page: should not be multiple <input> inside <label>
+- when the content is too short, fill the vertical space before the footer
+- upgrade openid provider, there is a deprecation warning
 
 
 submit the site to ...
@@ -23,25 +36,9 @@ submit the site to ...
 - site owners of the first x matches of a google search for 'bash one-liners'
 
 
-first release
-=============
-- Note: only the things not yet on Trello
-- fix html5 errors on login page: should not be multiple <input> inside <label>
-- when the content is too short, fill the vertical space before the footer
-- Voting
-	- vote up
-	- vote down
-	- cancel vote
-	- see own vote on one-liner
-	- see all own votes on profile page
-- TOP 50
-- Commenting
-- favourites
-- upgrade openid provider, there is a deprecation warning
-
-
 future releases
 ===============
+- mark as favourite
 - ajax controls to change one-liner or question status from public to private
 - the user who asked the question can mark the best answer
 - api with different query options and output format options

@@ -82,7 +82,6 @@ def oneliner(request, pk):
     params['oneliners'] = OneLiner.objects.filter(pk=pk)
     return render_to_response('main/pages/oneliner.html', params)
 
-@login_required
 def oneliner_new(request, question_pk=None, oneliner_pk=None):
     params = _common_params(request)
     initial = {}
@@ -104,22 +103,25 @@ def oneliner_new(request, question_pk=None, oneliner_pk=None):
 	except:
 	    pass
 
-    if request.method == 'POST':
-	form = PostOneLinerForm(request.user, request.POST)
-	if form.is_valid():
-	    new_oneliner = form.save()
-	    tweet(new_oneliner)
+    if request.user.is_authenticated():
+	if request.method == 'POST':
+	    form = PostOneLinerForm(request.user, request.POST)
+	    if form.is_valid():
+		new_oneliner = form.save()
+		tweet(new_oneliner)
 
-	    if question is not None:
-		question.add_answer(new_oneliner)
-	    elif oneliner0 is not None:
-		oneliner0.add_alternative(new_oneliner)
+		if question is not None:
+		    question.add_answer(new_oneliner)
+		elif oneliner0 is not None:
+		    oneliner0.add_alternative(new_oneliner)
 
-	    return redirect(oneliner, new_oneliner.pk)
+		return redirect(oneliner, new_oneliner.pk)
+	else:
+	    next_url = request.META.get('HTTP_REFERER', None) or '/'
+	    initial['next_url'] = next_url
+	    form = PostOneLinerForm(request.user, initial=initial)
     else:
-	next_url = request.META.get('HTTP_REFERER', None) or '/'
-	initial['next_url'] = next_url
-	form = PostOneLinerForm(request.user, initial=initial)
+	form = PostOneLinerForm(request.user)
 
     params['form'] = form
     params['question'] = question

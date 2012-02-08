@@ -26,6 +26,12 @@
 </div>
 {% endif %}
 
+{% if not user.is_authenticated %}
+<div class="alert alert-warning">
+    <h4 class="alert-heading">Warning!</h4>
+    You have to <a href="{% url bashoneliners.main.views.login %}">login</a> to post a One-Liner, this page will not work otherwise.
+</div>
+{% endif %}
 {% include 'main/elements/oneliner_edit_form.html' %}
 
 {% endblock %}

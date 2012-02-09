@@ -41,10 +41,11 @@
 	    <div class="homepage_url">{{ form.homepage_url }}</div>
 	</div>
 	
-	<p class="form-actions">
+	<div class="form-actions">
+	    {% include 'main/elements/please_login.html' %}
 	    <input type="submit" name="action" value="Save" class="btn btn-primary"/>
 	    <a class="btn" href="{{ next }}">Cancel</a>
-	</p>
+	</div>
     </div>
 </form>
 

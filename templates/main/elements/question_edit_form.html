@@ -30,9 +30,10 @@
 	    <div class="is_answered"><label class="checkbox">{{ form.is_answered }} Answered</label></div>
 	</div>
 
-	<p class="form-actions">
+	<div class="form-actions">
+	    {% include 'main/elements/please_login.html' %}
 	    {% for action in form.actions %}<input type="submit" name="action" value="{{ action }}" class="btn btn-primary"/>{% endfor %}
 	    <a class="btn" href="{{ form.next_url.value }}">Cancel</a>
-	</p>
+	</div>
     </div>
 </form>

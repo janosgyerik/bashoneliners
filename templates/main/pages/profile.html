@@ -43,19 +43,19 @@
 {% include 'main/elements/questions.html' %}
 {% endwith %}
 
-<h3>One-Liners posted</h3>
+<h3>One-liners posted</h3>
 
 {% include 'main/elements/oneliners.html' %}
 
 {% if user == hacker %}
-<p><a href="{% url bashoneliners.main.views.oneliner_new %}" class="btn btn-primary">Post a One-Liner</a></p>
+<p><a href="{% url bashoneliners.main.views.oneliner_new %}" class="btn btn-primary">Post a one-liner</a></p>
 {% endif %}
 
-<h3>Favourite One-Liners</h3>
+<h3>Favourite one-liners</h3>
 
 <p class="alert">Not implemented yet.</p>
 
-<h3>One-Liners voted on</h3>
+<h3>One-liners voted on</h3>
 
 <p class="alert">Not implemented yet.</p>
 

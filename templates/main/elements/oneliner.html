@@ -29,6 +29,10 @@
 	</div>
 	{% endif %}
 
+	{% if user != oneliner.user and not nobuttons %}
+	<p><a href="{% url bashoneliners.main.views.oneliner_alternative oneliner.pk %}" class="btn">Post an alternative one-liner</a></p>
+	{% endif %}
+
 	{% block related %}
 	{% endblock %}
 

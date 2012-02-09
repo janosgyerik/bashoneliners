@@ -22,7 +22,9 @@
 {% if oneliner %}
 <div class="alert alert-info related">
     <p>The new one-liner will be linked to the following one-liner as an alternative:</p>
+    {% with 1 as nobuttons %}
     {% include 'main/elements/oneliner.html' %}
+    {% endwith %}
 </div>
 {% endif %}
 

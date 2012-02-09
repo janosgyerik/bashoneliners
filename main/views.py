@@ -129,11 +129,9 @@ def oneliner_new(request, question_pk=None, oneliner_pk=None):
 
     return render_to_response('main/pages/oneliner_edit.html', params, context_instance=RequestContext(request))
 
-@login_required
 def oneliner_answer(request, question_pk):
     return oneliner_new(request, question_pk=question_pk)
 
-@login_required
 def oneliner_alternative(request, oneliner_pk):
     return oneliner_new(request, oneliner_pk=oneliner_pk)
 

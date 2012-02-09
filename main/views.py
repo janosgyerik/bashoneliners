@@ -10,11 +10,6 @@ from bashoneliners.main.forms import *
 from datetime import datetime
 
 
-''' constants '''
-
-#
-
-
 ''' helper methods '''
 
 def _common_params(request):
@@ -70,9 +65,7 @@ def tweet(oneliner, test=False, consumer_key=None, consumer_secret=None, access_
 		pass
 
 
-''' url handlers '''
-
-def index(request):
+def oneliner_list(request):
     params = _common_params(request)
     params['oneliners'] = OneLiner.objects.filter(is_published=True)
     return render_to_response('main/pages/index.html', params)
@@ -81,6 +74,33 @@ def oneliner(request, pk):
     params = _common_params(request)
     params['oneliners'] = OneLiner.objects.filter(pk=pk)
     return render_to_response('main/pages/oneliner.html', params)
+
+@login_required
+def oneliner_edit(request, pk):
+    params = _common_params(request)
+
+    try:
+	oneliner0 = OneLiner.objects.get(pk=pk, user=request.user)
+    except:
+	return render_to_response('main/pages/access_error.html', params)
+
+    if request.method == 'POST':
+	form = EditOneLinerForm(request.user, request.POST, instance=oneliner0)
+	if form.is_valid():
+	    if form.is_save:
+		oneliner1 = form.save()
+		tweet(oneliner1)
+		return redirect(form.cleaned_data.get('next_url'))
+	    elif form.is_delete:
+		oneliner0.delete()
+		return redirect(profile)
+    else:
+	next_url = request.META.get('HTTP_REFERER', None) or '/'
+	form = EditOneLinerForm(request.user, instance=oneliner0, initial={'next_url': next_url})
+
+    params['form'] = form
+
+    return render_to_response('main/pages/oneliner_edit.html', params, context_instance=RequestContext(request))
 
 def oneliner_new(request, question_pk=None, oneliner_pk=None):
     params = _common_params(request)
@@ -135,91 +155,10 @@ def oneliner_answer(request, question_pk):
 def oneliner_alternative(request, oneliner_pk):
     return oneliner_new(request, oneliner_pk=oneliner_pk)
 
-@login_required
-def oneliner_edit(request, pk):
-    params = _common_params(request)
-
-    try:
-	oneliner0 = OneLiner.objects.get(pk=pk, user=request.user)
-    except:
-	return render_to_response('main/pages/access_error.html', params)
-
-    if request.method == 'POST':
-	form = EditOneLinerForm(request.user, request.POST, instance=oneliner0)
-	if form.is_valid():
-	    if form.is_save:
-		oneliner1 = form.save()
-		tweet(oneliner1)
-		return redirect(form.cleaned_data.get('next_url'))
-	    elif form.is_delete:
-		oneliner0.delete()
-		return redirect(profile)
-    else:
-	next_url = request.META.get('HTTP_REFERER', None) or '/'
-	form = EditOneLinerForm(request.user, instance=oneliner0, initial={'next_url': next_url})
-
-    params['form'] = form
-
-    return render_to_response('main/pages/oneliner_edit.html', params, context_instance=RequestContext(request))
-
-def sourcecode(request):
-    params = _common_params(request)
-    return render_to_response('main/pages/sourcecode.html', params)
-
-def mission(request):
-    params = _common_params(request)
-    return render_to_response('main/pages/mission.html', params)
-
-def profile(request, pk=None):
-    params = _common_params(request)
-
-    if request.user.is_authenticated():
-	if pk is None:
-	    pk = request.user.pk
-
-	user = User.objects.get(pk=pk)
-
-	params['hacker'] = user
-
-	oneliners = OneLiner.objects.filter(user=user)
-	if user != request.user:
-	    oneliners = oneliners.filter(is_published=True)
-	params['oneliners'] = oneliners
-
-	questions = Question.objects.filter(user=user)
-	if user != request.user:
-	    questions = questions.filter(is_published=True)
-	params['questions_pending'] = questions.filter(is_answered=False)
-	params['questions_answered'] = questions.filter(is_answered=True)
-    else:
-	params['hacker'] = request.user
-
-    return render_to_response('main/pages/profile.html', params)
-
-def profile_edit(request):
-    params = _common_params(request)
-    params['next'] = request.META.get('HTTP_REFERER', None) or '/'
-
-    if request.user.is_authenticated():
-	hackerprofile = request.user.hackerprofile
-	if request.method == 'POST':
-	    form = EditHackerProfileForm(request.POST, instance=hackerprofile)
-	    if form.is_valid():
-		form.save()
-		return redirect(profile)
-	else:
-	    form = EditHackerProfileForm(instance=hackerprofile)
-    else:
-	form = EditHackerProfileForm()
-
-    params['form'] = form
-
-    return render_to_response('main/pages/profile_edit.html', params, context_instance=RequestContext(request))
 
 def question_list(request):
     params = _common_params(request)
     params['questions'] = Question.top()
-
     return render_to_response('main/pages/question_list.html', params, context_instance=RequestContext(request))
 
 def question(request, pk):
@@ -272,6 +211,54 @@ def question_new(request):
 
     return render_to_response('main/pages/question_edit.html', params, context_instance=RequestContext(request))
 
+
+def profile(request, pk=None):
+    params = _common_params(request)
+
+    if request.user.is_authenticated():
+	if pk is None:
+	    pk = request.user.pk
+
+	user = User.objects.get(pk=pk)
+
+	params['hacker'] = user
+
+	oneliners = OneLiner.objects.filter(user=user)
+	if user != request.user:
+	    oneliners = oneliners.filter(is_published=True)
+	params['oneliners'] = oneliners
+
+	questions = Question.objects.filter(user=user)
+	if user != request.user:
+	    questions = questions.filter(is_published=True)
+	params['questions_pending'] = questions.filter(is_answered=False)
+	params['questions_answered'] = questions.filter(is_answered=True)
+    else:
+	params['hacker'] = request.user
+
+    return render_to_response('main/pages/profile.html', params)
+
+def profile_edit(request):
+    params = _common_params(request)
+    params['next'] = request.META.get('HTTP_REFERER', None) or '/'
+
+    if request.user.is_authenticated():
+	hackerprofile = request.user.hackerprofile
+	if request.method == 'POST':
+	    form = EditHackerProfileForm(request.POST, instance=hackerprofile)
+	    if form.is_valid():
+		form.save()
+		return redirect(profile)
+	else:
+	    form = EditHackerProfileForm(instance=hackerprofile)
+    else:
+	form = EditHackerProfileForm()
+
+    params['form'] = form
+
+    return render_to_response('main/pages/profile_edit.html', params, context_instance=RequestContext(request))
+
+
 def search(request):
     params = _common_params(request)
     form = params['searchform']
@@ -288,6 +275,17 @@ def login(request):
 def logout(request):
     django_logout(request)
     return index(request)
+
+
+''' simple pages '''
+
+def sourcecode(request):
+    params = _common_params(request)
+    return render_to_response('main/pages/sourcecode.html', params)
+
+def mission(request):
+    params = _common_params(request)
+    return render_to_response('main/pages/mission.html', params)
 
 def help_markdown(request):
     return render_to_response('main/help/markdown.html')

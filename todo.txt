@@ -4,7 +4,8 @@ https://trello.com/board/main/4e7da3cf5a94680b35000893
 
 release notes
 =============
--
+- added post buttons to show the pages as a demo
+- adjusted texts to deter duplicate or trivial posts
 
 
 first release

@@ -220,25 +220,6 @@ def profile_edit(request):
 
 def question_list(request):
     params = _common_params(request)
-
-    if request.user.is_authenticated:
-	if request.method == 'POST':
-	    data = dict(request.POST)
-	    data['summary'] = request.POST.get('summary')
-	    data['explanation'] = request.POST.get('explanation')
-	    data['is_published'] = request.POST.get('is_published')
-	    data['is_answered'] = False
-	    form = PostQuestionForm(request.user, data)
-	    if form.is_valid():
-		new_question = form.save()
-		return redirect(question_list)
-	else:
-	    next_url = request.META.get('HTTP_REFERER', None) or '/'
-	    form = PostQuestionForm(request.user, initial={'next_url': next_url})
-    else:
-	form = None
-
-    params['form'] = form
     params['questions'] = Question.top()
 
     return render_to_response('main/pages/question_list.html', params, context_instance=RequestContext(request))

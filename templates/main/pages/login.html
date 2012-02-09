@@ -6,6 +6,12 @@
 
 {% block content %}
 
+<div class="alert alert-info">
+    <strong class="alert-heading">Note:</strong>
+    OpenID login is the only login method we support,
+    in the best interest of our users.
+</div>
+
 <form class="form-horizontal" id="openid-form" method="post" action="/openid/login/">
 <fieldset>
 {% csrf_token %}

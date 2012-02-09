@@ -10,6 +10,7 @@ release notes
 first release
 =============
 - Note: only the things not yet on Trello
+- cancel button on forms does not work after a failed submit
 - Commenting
 - Voting
 	- vote up

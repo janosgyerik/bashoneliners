@@ -1,14 +1,16 @@
 {% extends "base.html" %}
 
-{% block pagetitle %}{{ user.hackerprofile.display_name|default:user.username }}{% endblock %}
+{% block pagetitle %}{{ user.hackerprofile.display_name|default:user.username|default:'Anonymous' }}{% endblock %}
 
-{% block pageheader %}{{ user.hackerprofile.display_name|default:user.username }}{% endblock %}
+{% block pageheader %}{{ user.hackerprofile.display_name|default:user.username|default:'Anonymous' }}{% endblock %}
 
 {% block keywords %}{% endblock %}
 
 {% block description %}{% endblock %}
 
 {% block content %}
+
+{% include 'main/elements/please_login.html' %}
 
 <form action="" method="post" class="">{% csrf_token %}
     <div class="non-field-errors">{{ form.non_field_errors }}</div>

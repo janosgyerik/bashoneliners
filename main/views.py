@@ -175,40 +175,44 @@ def mission(request):
 def profile(request, pk=None):
     params = _common_params(request)
 
-    if pk is None:
-	pk = request.user.pk
+    if request.user.is_authenticated():
+	if pk is None:
+	    pk = request.user.pk
 
-    user = User.objects.get(pk=pk)
+	user = User.objects.get(pk=pk)
 
-    params['hacker'] = user
+	params['hacker'] = user
 
-    oneliners = OneLiner.objects.filter(user=user)
-    if user != request.user:
-	oneliners = oneliners.filter(is_published=True)
-    params['oneliners'] = oneliners
+	oneliners = OneLiner.objects.filter(user=user)
+	if user != request.user:
+	    oneliners = oneliners.filter(is_published=True)
+	params['oneliners'] = oneliners
 
-    questions = Question.objects.filter(user=user)
-    if user != request.user:
-	questions = questions.filter(is_published=True)
-    params['questions_pending'] = questions.filter(is_answered=False)
-    params['questions_answered'] = questions.filter(is_answered=True)
+	questions = Question.objects.filter(user=user)
+	if user != request.user:
+	    questions = questions.filter(is_published=True)
+	params['questions_pending'] = questions.filter(is_answered=False)
+	params['questions_answered'] = questions.filter(is_answered=True)
+    else:
+	params['hacker'] = request.user
 
     return render_to_response('main/pages/profile.html', params)
 
-@login_required
 def profile_edit(request):
     params = _common_params(request)
     params['next'] = request.META.get('HTTP_REFERER', None) or '/'
 
-    hackerprofile = request.user.hackerprofile
-
-    if request.method == 'POST':
-	form = EditHackerProfileForm(request.POST, instance=hackerprofile)
-	if form.is_valid():
-	    form.save()
-	    return redirect(profile)
+    if request.user.is_authenticated():
+	hackerprofile = request.user.hackerprofile
+	if request.method == 'POST':
+	    form = EditHackerProfileForm(request.POST, instance=hackerprofile)
+	    if form.is_valid():
+		form.save()
+		return redirect(profile)
+	else:
+	    form = EditHackerProfileForm(instance=hackerprofile)
     else:
-	form = EditHackerProfileForm(instance=hackerprofile)
+	form = EditHackerProfileForm()
 
     params['form'] = form
 
@@ -270,18 +274,20 @@ def question_edit(request, pk):
 
     return render_to_response('main/pages/question_edit.html', params, context_instance=RequestContext(request))
 
-@login_required
 def question_new(request):
     params = _common_params(request)
 
-    if request.method == 'POST':
-	form = PostQuestionForm(request.user, request.POST)
-	if form.is_valid():
-	    new_question = form.save()
-	    return redirect(form.cleaned_data.get('next_url'))
+    if request.user.is_authenticated():
+	if request.method == 'POST':
+	    form = PostQuestionForm(request.user, request.POST)
+	    if form.is_valid():
+		new_question = form.save()
+		return redirect(form.cleaned_data.get('next_url'))
+	else:
+	    next_url = request.META.get('HTTP_REFERER', None) or '/'
+	    form = PostQuestionForm(request.user, initial={'next_url': next_url})
     else:
-	next_url = request.META.get('HTTP_REFERER', None) or '/'
-	form = PostQuestionForm(request.user, initial={'next_url': next_url})
+	form = PostQuestionForm(request.user)
 
     params['form'] = form
 

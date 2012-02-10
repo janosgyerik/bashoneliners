@@ -31,14 +31,11 @@
 	<div class="comment">{{ form.comment }}</div>
     </div>
     
-    {% if user.is_authenticated %}
     <div class="form-actions">
+	{% include 'main/elements/please_login.html' %}
 	<input class="btn btn-primary" type="submit" name="submit" value="Post"/>
 	<a class="btn" href="{{ form.next_url.value }}">Cancel</a>
     </div>
-    {% else %}
-    {% include 'main/elements/please_login.html' %}
-    {% endif %}
 </form>
 
 {% endblock %}

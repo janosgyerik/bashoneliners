@@ -79,6 +79,7 @@ def oneliner(request, pk):
 @login_required
 def oneliner_edit(request, pk):
     params = _common_params(request)
+    initial = { 'next_url': request.META.get('HTTP_REFERER', None) or '/' }
 
     try:
 	oneliner0 = OneLiner.objects.get(pk=pk, user=request.user)
@@ -96,8 +97,7 @@ def oneliner_edit(request, pk):
 		oneliner0.delete()
 		return redirect(profile)
     else:
-	next_url = request.META.get('HTTP_REFERER', None) or '/'
-	form = EditOneLinerForm(request.user, instance=oneliner0, initial={'next_url': next_url})
+	form = EditOneLinerForm(request.user, instance=oneliner0, initial=initial)
 
     params['form'] = form
 
@@ -105,7 +105,7 @@ def oneliner_edit(request, pk):
 
 def oneliner_new(request, question_pk=None, oneliner_pk=None):
     params = _common_params(request)
-    initial = {}
+    initial = { 'next_url': request.META.get('HTTP_REFERER', None) or '/' }
 
     question = None
     oneliner0 = None
@@ -124,9 +124,9 @@ def oneliner_new(request, question_pk=None, oneliner_pk=None):
 	except:
 	    pass
 
-    if request.user.is_authenticated():
-	if request.method == 'POST':
-	    form = PostOneLinerForm(request.user, request.POST)
+    if request.method == 'POST':
+	form = PostOneLinerForm(request.user, request.POST)
+	if request.user.is_authenticated():
 	    if form.is_valid():
 		new_oneliner = form.save()
 		tweet(new_oneliner)
@@ -137,12 +137,8 @@ def oneliner_new(request, question_pk=None, oneliner_pk=None):
 		    oneliner0.add_alternative(new_oneliner)
 
 		return redirect(oneliner, new_oneliner.pk)
-	else:
-	    next_url = request.META.get('HTTP_REFERER', None) or '/'
-	    initial['next_url'] = next_url
-	    form = PostOneLinerForm(request.user, initial=initial)
     else:
-	form = PostOneLinerForm(request.user)
+	form = PostOneLinerForm(request.user, initial=initial)
 
     params['form'] = form
     params['question'] = question
@@ -158,15 +154,15 @@ def oneliner_alternative(request, oneliner_pk):
 
 def oneliner_comment(request, pk):
     params = _common_params(request)
-    initial = {}
+    initial = { 'next_url': request.META.get('HTTP_REFERER', None) or '/' }
 
     try:
 	oneliner0 = OneLiner.objects.get(pk=pk)
     except:
 	return render_to_response('main/pages/access_error.html', params)
 
-    if request.user.is_authenticated():
-	if request.method == 'POST':
+    if request.method == 'POST':
+	if request.user.is_authenticated():
 	    data = request.POST.copy()
 	    data['name'] = request.user.get_full_name() or request.user.username
 	    data['email'] = request.user.email
@@ -174,11 +170,9 @@ def oneliner_comment(request, pk):
 	    if form.is_valid():
 		return comments.post_comment(request, next=oneliner0.get_absolute_url())
 	else:
-	    next_url = request.META.get('HTTP_REFERER', None) or '/'
-	    initial['next_url'] = next_url
-	    form = PostCommentOnOneLinerForm(oneliner0, initial=initial)
+	    form = PostCommentOnOneLinerForm(oneliner0, request.POST)
     else:
-	form = PostCommentOnOneLinerForm(oneliner0)
+	form = PostCommentOnOneLinerForm(oneliner0, initial=initial)
 
     params['form'] = form
     params['oneliner'] = oneliner0
@@ -199,6 +193,7 @@ def question(request, pk):
 @login_required
 def question_edit(request, pk):
     params = _common_params(request)
+    initial = { 'next_url': request.META.get('HTTP_REFERER', None) or '/' }
 
     try:
 	question0 = Question.objects.get(pk=pk, user=request.user)
@@ -215,8 +210,7 @@ def question_edit(request, pk):
 		question0.delete()
 		return redirect(profile)
     else:
-	next_url = request.META.get('HTTP_REFERER', None) or '/'
-	form = EditQuestionForm(request.user, instance=question0, initial={'next_url': next_url})
+	form = EditQuestionForm(request.user, instance=question0, initial=initial)
 
     params['form'] = form
 
@@ -224,18 +218,16 @@ def question_edit(request, pk):
 
 def question_new(request):
     params = _common_params(request)
+    initial = { 'next_url': request.META.get('HTTP_REFERER', None) or '/' }
 
-    if request.user.is_authenticated():
-	if request.method == 'POST':
-	    form = PostQuestionForm(request.user, request.POST)
+    if request.method == 'POST':
+	form = PostQuestionForm(request.user, request.POST)
+	if request.user.is_authenticated():
 	    if form.is_valid():
 		new_question = form.save()
 		return redirect(form.cleaned_data.get('next_url'))
-	else:
-	    next_url = request.META.get('HTTP_REFERER', None) or '/'
-	    form = PostQuestionForm(request.user, initial={'next_url': next_url})
     else:
-	form = PostQuestionForm(request.user)
+	form = PostQuestionForm(request.user, initial=initial)
 
     params['form'] = form
 
@@ -270,7 +262,7 @@ def profile(request, pk=None):
 
 def profile_edit(request):
     params = _common_params(request)
-    params['next'] = request.META.get('HTTP_REFERER', None) or '/'
+    initial = { 'next_url': request.META.get('HTTP_REFERER', None) or '/' }
 
     if request.user.is_authenticated():
 	hackerprofile = request.user.hackerprofile
@@ -280,9 +272,9 @@ def profile_edit(request):
 		form.save()
 		return redirect(profile)
 	else:
-	    form = EditHackerProfileForm(instance=hackerprofile)
+	    form = EditHackerProfileForm(instance=hackerprofile, initial=initial)
     else:
-	form = EditHackerProfileForm()
+	form = EditHackerProfileForm(initial=initial)
 
     params['form'] = form
 

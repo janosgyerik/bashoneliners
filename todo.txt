@@ -15,7 +15,6 @@ first release
 - bug: cannot clear displayname if another user with '' name exists
 - Commenting
 	- hide-show controls for comments, hide by default
-	- confirm behavior when not logged in
 - Voting
 	- vote up
 	- vote down

@@ -3,6 +3,7 @@ from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import *
 from django.template import RequestContext
 from django.contrib.auth import logout as django_logout
+from django.contrib.comments.views import comments
 
 from bashoneliners.main.models import HackerProfile, OneLiner, User, Answer
 from bashoneliners.main.forms import *
@@ -157,12 +158,31 @@ def oneliner_alternative(request, oneliner_pk):
 
 def oneliner_comment(request, pk):
     params = _common_params(request)
+    initial = {}
 
     try:
 	oneliner0 = OneLiner.objects.get(pk=pk)
     except:
 	return render_to_response('main/pages/access_error.html', params)
 
+    if request.user.is_authenticated():
+	if request.method == 'POST':
+	    data = request.POST.copy()
+	    data['name'] = request.user.get_full_name() or request.user.username
+	    data['email'] = request.user.email
+	    form = PostCommentOnOneLinerForm(oneliner0, data)
+	    if form.is_valid():
+		return comments.post_comment(request, next=oneliner0.get_absolute_url())
+	else:
+	    next_url = request.META.get('HTTP_REFERER', None) or '/'
+	    initial['next_url'] = next_url
+	    form = PostCommentOnOneLinerForm(oneliner0, initial=initial)
+    else:
+	next_url = request.META.get('HTTP_REFERER', None) or '/'
+	initial['next_url'] = next_url
+	form = PostCommentOnOneLinerForm(oneliner0)
+
+    params['form'] = form
     params['oneliner'] = oneliner0
 
     return render_to_response('main/pages/oneliner_comment.html', params, context_instance=RequestContext(request))

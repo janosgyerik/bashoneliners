@@ -171,8 +171,12 @@ class EditQuestionForm(CommonQuestionForm):
 	return self.cleaned_data
 
 
-class OneLinerCommentForm(CommentForm):
-    pass
+class PostCommentOnOneLinerForm(CommentForm):
+    next_url = forms.URLField(required=False)
+
+    def __init__(self, *args, **kwargs):
+	super(PostCommentOnOneLinerForm, self).__init__(*args, **kwargs)
+	self.fields['comment'].widget = forms.Textarea(attrs={'rows': 5, 'class': 'span6', })
 
 
 # eof

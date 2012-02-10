@@ -16,8 +16,7 @@
 
 {% include 'main/elements/please_login.html' %}
 
-{% get_comment_form for oneliner as form %}
-<form action="{% comment_form_target %}" method="post">{% csrf_token %}
+<form action="" method="post">{% csrf_token %}
     {{ form.honeypot.as_hidden }}
     {{ form.content_type.as_hidden }}
     {{ form.object_pk.as_hidden }}
@@ -28,13 +27,13 @@
     <div class="help-block"></div>
     <div class="input">
 	<div class="error">{{ form.comment.errors }}</div>
-	<div class="comment"><textarea id="id_comment" name="comment" class="span6" rows="5"></textarea></div>
+	<div class="comment">{{ form.comment }}</div>
     </div>
     
     {% if user.is_authenticated %}
     <div class="form-actions">
 	<input class="btn btn-primary" type="submit" name="submit" value="Post"/>
-	<a class="btn" href="">Cancel</a>
+	<a class="btn" href="{{ form.next_url.value }}">Cancel</a>
     </div>
     {% else %}
     {% include 'main/elements/please_login.html' %}

@@ -109,6 +109,7 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'django.contrib.admindocs',
     'django.contrib.markup',
+    'django.contrib.comments',
     'bashoneliners.main',
     'bashoneliners.django_openid_auth',
 )

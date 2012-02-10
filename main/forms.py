@@ -5,15 +5,10 @@
     '''
 
 from django import forms
+from django.contrib.comments.forms import CommentForm
 
 from bashoneliners.main.models import OneLiner, HackerProfile, User, Question
 
-''' constants '''
-
-#
-
-
-''' forms '''
 
 class CommonOneLinerForm(forms.ModelForm):
     user = None
@@ -174,6 +169,10 @@ class EditQuestionForm(CommonQuestionForm):
 	    raise forms.ValidationError('User %s is not the owner of this Question' % self.user)
 
 	return self.cleaned_data
+
+
+class OneLinerCommentForm(CommentForm):
+    pass
 
 
 # eof

@@ -155,6 +155,18 @@ def oneliner_answer(request, question_pk):
 def oneliner_alternative(request, oneliner_pk):
     return oneliner_new(request, oneliner_pk=oneliner_pk)
 
+def oneliner_comment(request, pk):
+    params = _common_params(request)
+
+    try:
+	oneliner0 = OneLiner.objects.get(pk=pk)
+    except:
+	return render_to_response('main/pages/access_error.html', params)
+
+    params['oneliner'] = oneliner0
+
+    return render_to_response('main/pages/oneliner_comment.html', params, context_instance=RequestContext(request))
+
 
 def question_list(request):
     params = _common_params(request)

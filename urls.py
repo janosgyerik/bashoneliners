@@ -10,17 +10,14 @@ def feed(request):
     return LatestEntries()(request)
 
 urlpatterns = patterns('',
-    # Example:
     (r'^$', include('bashoneliners.main.urls')),
     (r'^main/', include('bashoneliners.main.urls')),
     (r'^openid/', include('bashoneliners.django_openid_auth.urls')),
-
-    # Uncomment the admin/doc line below to enable admin documentation:
-    (r'^admin/doc/', include('django.contrib.admindocs.urls')),
     (r'feed/$', feed),
 
-    # Uncomment the next line to enable the admin:
+    (r'^admin/doc/', include('django.contrib.admindocs.urls')),
     (r'^admin/', include(admin.site.urls)),
+    (r'^comments/', include('django.contrib.comments.urls')),
 )
 
 from django.conf import settings

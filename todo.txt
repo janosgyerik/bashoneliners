@@ -15,7 +15,6 @@ first release
 - after login, should return to the previous page
 - bug: cannot clear displayname if another user with '' name exists
 - Commenting
-	- fix posted page
 	- hide-show controls for comments, hide by default
 	- confirm behavior when not logged in
 - Voting

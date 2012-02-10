@@ -170,11 +170,8 @@ table.profile {
     color: #468847;
 }
 
-.related .well.comment {
+.related .well.comments {
     background: #eee;
-}
-.related .well.comment blockquote {
-    margin: 0;
 }
 
 .footer {

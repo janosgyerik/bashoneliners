@@ -10,12 +10,9 @@
 
 {% block content %}
 
-<div class="alert alert-info related">
-    <p>The one-liner:</p>
-    {% with 1 as nobuttons %}
-    {% include 'main/elements/oneliner.html' %}
-    {% endwith %}
-</div>
+{% with 1 as nobuttons %}
+{% include 'main/elements/oneliner.html' %}
+{% endwith %}
 
 {% include 'main/elements/please_login.html' %}
 

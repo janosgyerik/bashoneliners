@@ -1,0 +1,11 @@
+{% for comment in comment_list %}
+<div class="well comment">
+<blockquote>
+    <p>{{ comment.comment }}</p>
+    <small>
+	by <a href="{% url bashoneliners.main.views.profile comment.user.pk %}"><span>{{ comment.user.hackerprofile.display_name|default:comment.user.username }}</span> </a>
+	on <span>{{ comment.submit_date }}</span>
+    </small>
+</blockquote>
+</div>
+{% endfor %}

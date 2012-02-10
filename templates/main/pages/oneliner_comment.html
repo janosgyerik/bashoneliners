@@ -17,6 +17,7 @@
 {% include 'main/elements/please_login.html' %}
 
 <form action="" method="post">{% csrf_token %}
+    {{ form.next_url.as_hidden }}
     {{ form.honeypot.as_hidden }}
     {{ form.content_type.as_hidden }}
     {{ form.object_pk.as_hidden }}

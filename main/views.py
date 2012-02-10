@@ -178,8 +178,6 @@ def oneliner_comment(request, pk):
 	    initial['next_url'] = next_url
 	    form = PostCommentOnOneLinerForm(oneliner0, initial=initial)
     else:
-	next_url = request.META.get('HTTP_REFERER', None) or '/'
-	initial['next_url'] = next_url
 	form = PostCommentOnOneLinerForm(oneliner0)
 
     params['form'] = form

@@ -11,7 +11,6 @@ release notes
 first release
 =============
 - Note: only the things not yet on Trello
-- cancel button on forms does not work after a failed submit
 - after login, should return to the previous page
 - bug: cannot clear displayname if another user with '' name exists
 - Commenting

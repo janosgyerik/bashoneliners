@@ -98,6 +98,8 @@ class EditUserForm(forms.ModelForm):
 
 
 class EditHackerProfileForm(forms.ModelForm):
+    next_url = forms.URLField(required=False)
+
     class Meta:
 	model = HackerProfile
 

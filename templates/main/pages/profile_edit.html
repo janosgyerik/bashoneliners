@@ -13,6 +13,7 @@
 {% include 'main/elements/please_login.html' %}
 
 <form action="" method="post" class="">{% csrf_token %}
+    {{ form.next_url.as_hidden }}
     <div class="non-field-errors">{{ form.non_field_errors }}</div>
     <div class="profile">
 	<h3>{{ form.display_name.label }}</h3>
@@ -44,7 +45,7 @@
 	<div class="form-actions">
 	    {% include 'main/elements/please_login.html' %}
 	    <input type="submit" name="action" value="Save" class="btn btn-primary"/>
-	    <a class="btn" href="{{ next }}">Cancel</a>
+	    <a class="btn" href="{{ form.next_url.value }}">Cancel</a>
 	</div>
     </div>
 </form>

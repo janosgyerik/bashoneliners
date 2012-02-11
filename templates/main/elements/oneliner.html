@@ -43,7 +43,7 @@
 
 	{% get_comment_count for oneliner as comment_count %}
 	<div class="related">
-	    <h3 class="">Comments ({{ comment_count }})</h3>
+	    <h3 class="comments-toggle"><img/>Comments ({{ comment_count }})</h3>
 	    <div class="well comments">
 	    {% render_comment_list for oneliner %}
 	    {% if not nobuttons %}

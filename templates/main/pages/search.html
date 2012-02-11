@@ -15,6 +15,7 @@
 
 	function search_success(html) {
 	    $('.oneliners').html($(html).html());
+	    bind_comments_toggle();
 	}
 
 	function search_error(err) {

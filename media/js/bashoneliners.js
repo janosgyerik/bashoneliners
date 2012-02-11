@@ -67,10 +67,17 @@ function bind_preview_markdown() {
     });
 }
 
+function bind_comments_toggle() {
+    $('.comments-toggle').click(function(e) {
+	$(this).toggleClass('expanded').next().toggle('slow');
+    });
+}
+
 $(document).ready(function() {
     bind_help_markdown();
     bind_question_answered();
     bind_preview_markdown();
+    bind_comments_toggle();
 });
 
 // eof

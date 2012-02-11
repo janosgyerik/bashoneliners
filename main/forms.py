@@ -40,7 +40,7 @@ class CommonOneLinerForm(forms.ModelForm):
 
 class PostOneLinerForm(CommonOneLinerForm):
     title = 'Post a One-Liner'
-    actions = ('Post One-Liner',)
+    actions = ({'name': 'Post one-liner', 'cssclass': 'btn-primary'},)
 
     def save(self):
 	self.instance.user = self.user
@@ -49,18 +49,18 @@ class PostOneLinerForm(CommonOneLinerForm):
 
 class EditOneLinerForm(CommonOneLinerForm):
     title = 'Edit one-liner'
-    action_save = 'Save one-liner'
-    action_delete = 'Delete one-liner'
-    actions = (action_save, action_delete,)
+    action_save = {'name': 'Save one-liner', 'cssclass': 'btn-primary'}
+    action_delete = {'name': 'Delete one-liner', 'cssclass': 'btn-danger'}
+    actions = (action_save, action_delete)
     edit = True
     is_save = False
     is_delete = False
 
     def clean_action(self):
 	action = self.cleaned_data['action']
-	if action == self.action_save:
+	if action == self.action_save['name']:
 	    self.is_save = True
-	elif action == self.action_delete:
+	elif action == self.action_delete['name']:
 	    self.is_delete = True
 	return action
 
@@ -142,7 +142,7 @@ class CommonQuestionForm(forms.ModelForm):
 
 class PostQuestionForm(CommonQuestionForm):
     title = 'Post a question'
-    actions = ('Post question',)
+    actions = ({'name': 'Post question', 'cssclass': 'btn-primary'},)
 
     def save(self):
 	self.instance.user = self.user
@@ -151,18 +151,18 @@ class PostQuestionForm(CommonQuestionForm):
 
 class EditQuestionForm(CommonQuestionForm):
     title = 'Edit question'
-    action_save = 'Save question'
-    action_delete = 'Delete question'
-    actions = (action_save, action_delete,)
+    action_save = {'name': 'Save question', 'cssclass': 'btn-primary'}
+    action_delete = {'name': 'Delete question', 'cssclass': 'btn-danger'}
+    actions = (action_save, action_delete)
     edit = True
     is_save = False
     is_delete = False
 
     def clean_action(self):
 	action = self.cleaned_data['action']
-	if action == self.action_save:
+	if action == self.action_save['name']:
 	    self.is_save = True
-	elif action == self.action_delete:
+	elif action == self.action_delete['name']:
 	    self.is_delete = True
 	return action
 

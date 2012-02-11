@@ -179,12 +179,12 @@ table.profile {
 }
 .comments-toggle img {
     background: url(/media/images/arrows.png) no-repeat center;
-    background-position: 0px -51px;
-    padding: 0px 12px;
-    height: 17px;
+    background-position: 0px -81px;
+    padding: 3px 14px;
+    height: 26px;
 }
 .comments-toggle.expanded img {
-    background-position: 0px -34px;
+    background-position: 0px -54px;
 }
 .comments {
     display: none;

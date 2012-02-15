@@ -83,6 +83,7 @@ def oneliner(request, pk):
 def oneliner_edit(request, pk):
     params = _common_params(request)
     initial = _common_initial(request)
+    params['next_url'] = initial['next_url']
 
     try:
 	oneliner0 = OneLiner.objects.get(pk=pk, user=request.user)
@@ -99,6 +100,8 @@ def oneliner_edit(request, pk):
 	    elif form.is_delete:
 		oneliner0.delete()
 		return redirect(profile)
+	else:
+	    params['next_url'] = request.POST.get('next_url')
     else:
 	form = EditOneLinerForm(request.user, instance=oneliner0, initial=initial)
 
@@ -109,6 +112,7 @@ def oneliner_edit(request, pk):
 def oneliner_new(request, question_pk=None, oneliner_pk=None):
     params = _common_params(request)
     initial = _common_initial(request)
+    params['next_url'] = initial['next_url']
 
     question = None
     oneliner0 = None
@@ -140,6 +144,8 @@ def oneliner_new(request, question_pk=None, oneliner_pk=None):
 		    oneliner0.add_alternative(new_oneliner)
 
 		return redirect(oneliner, new_oneliner.pk)
+	    else:
+		params['next_url'] = request.POST.get('next_url')
     else:
 	form = PostOneLinerForm(request.user, initial=initial)
 
@@ -158,6 +164,7 @@ def oneliner_alternative(request, oneliner_pk):
 def oneliner_comment(request, pk):
     params = _common_params(request)
     initial = _common_initial(request)
+    params['next_url'] = initial['next_url']
 
     try:
 	oneliner0 = OneLiner.objects.get(pk=pk)
@@ -172,6 +179,8 @@ def oneliner_comment(request, pk):
 	    form = PostCommentOnOneLinerForm(oneliner0, data)
 	    if form.is_valid():
 		return comments.post_comment(request, next=oneliner0.get_absolute_url())
+	    else:
+		params['next_url'] = request.POST.get('next_url')
 	else:
 	    form = PostCommentOnOneLinerForm(oneliner0, request.POST)
     else:
@@ -197,6 +206,7 @@ def question(request, pk):
 def question_edit(request, pk):
     params = _common_params(request)
     initial = _common_initial(request)
+    params['next_url'] = initial['next_url']
 
     try:
 	question0 = Question.objects.get(pk=pk, user=request.user)
@@ -212,6 +222,8 @@ def question_edit(request, pk):
 	    elif form.is_delete:
 		question0.delete()
 		return redirect(profile)
+	else:
+	    params['next_url'] = request.POST.get('next_url')
     else:
 	form = EditQuestionForm(request.user, instance=question0, initial=initial)
 
@@ -222,6 +234,7 @@ def question_edit(request, pk):
 def question_new(request):
     params = _common_params(request)
     initial = _common_initial(request)
+    params['next_url'] = initial['next_url']
 
     if request.method == 'POST':
 	form = PostQuestionForm(request.user, request.POST)
@@ -229,6 +242,8 @@ def question_new(request):
 	    if form.is_valid():
 		new_question = form.save()
 		return redirect(form.cleaned_data.get('next_url'))
+	    else:
+		params['next_url'] = request.POST.get('next_url')
     else:
 	form = PostQuestionForm(request.user, initial=initial)
 
@@ -266,6 +281,7 @@ def profile(request, pk=None):
 def profile_edit(request):
     params = _common_params(request)
     initial = _common_initial(request)
+    params['next_url'] = initial['next_url']
 
     if request.user.is_authenticated():
 	hackerprofile = request.user.hackerprofile
@@ -274,6 +290,8 @@ def profile_edit(request):
 	    if form.is_valid():
 		form.save()
 		return redirect(profile)
+	    else:
+		params['next_url'] = request.POST.get('next_url')
 	else:
 	    form = EditHackerProfileForm(instance=hackerprofile, initial=initial)
     else:

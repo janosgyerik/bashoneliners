@@ -33,7 +33,7 @@
 	<div class="form-actions">
 	    {% include 'main/elements/please_login.html' %}
 	    {% for action in form.actions %}<input type="submit" name="action" value="{{ action.name }}" class="btn {{ action.cssclass }}"/>{% endfor %}
-	    <a class="btn" href="{{ form.next_url.value }}">Cancel</a>
+	    <a class="btn" href="{{ next_url }}">Cancel</a>
 	</div>
     </div>
 </form>

@@ -4,11 +4,7 @@ https://trello.com/board/main/4e7da3cf5a94680b35000893
 
 release notes
 =============
-- Logged in users can post comments on one-liners
-- Comments are shown collapsed by default
-- Dangerous operations (delete one-liner, question) have more prominent (red) buttons
-- Show more of the user interface even when not logged in, as a demo
-- Clarified, adjusted, simplified the texts here and there, posting tips
+- 
 
 
 first release

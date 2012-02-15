@@ -26,6 +26,9 @@ def _common_params(request):
 
     return params
 
+def _common_initial(request):
+    return { 'next_url': request.META.get('HTTP_REFERER', '/') }
+
 def tweet(oneliner, test=False, consumer_key=None, consumer_secret=None, access_token=None, access_token_secret=None):
     if not oneliner.was_tweeted:
 	if oneliner.is_published:
@@ -79,7 +82,7 @@ def oneliner(request, pk):
 @login_required
 def oneliner_edit(request, pk):
     params = _common_params(request)
-    initial = { 'next_url': request.META.get('HTTP_REFERER', None) or '/' }
+    initial = _common_initial(request)
 
     try:
 	oneliner0 = OneLiner.objects.get(pk=pk, user=request.user)
@@ -105,7 +108,7 @@ def oneliner_edit(request, pk):
 
 def oneliner_new(request, question_pk=None, oneliner_pk=None):
     params = _common_params(request)
-    initial = { 'next_url': request.META.get('HTTP_REFERER', None) or '/' }
+    initial = _common_initial(request)
 
     question = None
     oneliner0 = None
@@ -154,7 +157,7 @@ def oneliner_alternative(request, oneliner_pk):
 
 def oneliner_comment(request, pk):
     params = _common_params(request)
-    initial = { 'next_url': request.META.get('HTTP_REFERER', None) or '/' }
+    initial = _common_initial(request)
 
     try:
 	oneliner0 = OneLiner.objects.get(pk=pk)
@@ -193,7 +196,7 @@ def question(request, pk):
 @login_required
 def question_edit(request, pk):
     params = _common_params(request)
-    initial = { 'next_url': request.META.get('HTTP_REFERER', None) or '/' }
+    initial = _common_initial(request)
 
     try:
 	question0 = Question.objects.get(pk=pk, user=request.user)
@@ -218,7 +221,7 @@ def question_edit(request, pk):
 
 def question_new(request):
     params = _common_params(request)
-    initial = { 'next_url': request.META.get('HTTP_REFERER', None) or '/' }
+    initial = _common_initial(request)
 
     if request.method == 'POST':
 	form = PostQuestionForm(request.user, request.POST)
@@ -262,7 +265,7 @@ def profile(request, pk=None):
 
 def profile_edit(request):
     params = _common_params(request)
-    initial = { 'next_url': request.META.get('HTTP_REFERER', None) or '/' }
+    initial = _common_initial(request)
 
     if request.user.is_authenticated():
 	hackerprofile = request.user.hackerprofile

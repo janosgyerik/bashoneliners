@@ -1,0 +1,13 @@
+Hi {{ user.hackerprofile.get_display_name }},
+
+There is a new comment on your one-liner:
+"{{ oneliner.summary|safe }}"
+{{ baseurl }}{% url bashoneliners.main.views.oneliner oneliner.pk %}
+
+Comment:
+{{ comment|safe|linebreaks }}
+
+Posted by: {{ sender.hackerprofile.get_display_name }}
+{{ baseurl }}{% url bashoneliners.main.views.profile sender.pk %}
+
+{% include 'email/signature.txt' %}

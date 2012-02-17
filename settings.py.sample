@@ -130,7 +130,7 @@ TWITTER = {
 #
 #EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
 #EMAIL_FILE_PATH = '/tmp/django-emails'
-#EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 #import sys
 #sys.path.append('/Library/Python/2.6/site-packages/Markdown-2.0.3-py2.6.egg')

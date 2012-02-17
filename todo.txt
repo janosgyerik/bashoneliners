@@ -12,16 +12,12 @@ first release
 - Note: only the things not yet on Trello
 - after login, should return to the previous page
 - bug: cannot clear displayname if another user with '' name exists
-- Voting
-	- vote up
-	- vote down
-	- cancel vote
-	- see own vote on one-liner
-	- see all own votes on profile page
-- TOP 50
-- fix html5 errors on login page: should not be multiple <input> inside <label>
-- when the content is too short, fill the vertical space before the footer
 - upgrade openid provider, there is a deprecation warning
+
+
+get an html/css buff do it
+==========================
+- when the content is too short, fill the vertical space before the footer
 
 
 submit the site to ...
@@ -39,6 +35,13 @@ submit the site to ...
 
 future releases
 ===============
+- Voting
+	- vote up
+	- vote down
+	- cancel vote
+	- see own vote on one-liner
+	- see all own votes on profile page
+- TOP 50
 - mark as favourite
 - ajax controls to change one-liner or question status from public to private
 - the user who asked the question can mark the best answer

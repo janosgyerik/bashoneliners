@@ -9,10 +9,12 @@ release notes
 
 first release
 =============
-- Note: only the things not yet on Trello
-- after login, should return to the previous page
-- bug: cannot clear displayname if another user with '' name exists
 - upgrade openid provider, there is a deprecation warning
+- multiple rss feed
+	- a creative commons rss icon would be good too...
+- advanced search
+- icon generator
+- bug: cannot clear displayname if another user with '' name exists
 
 
 get an html/css buff do it
@@ -22,6 +24,7 @@ get an html/css buff do it
 
 submit the site to ...
 ======================
+- ycombinator new
 - author of playterm
 	- idea: video maker from script
 	- link exchange

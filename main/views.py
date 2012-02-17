@@ -33,42 +33,41 @@ def _common_initial(request):
 
 def tweet(oneliner, test=False, consumer_key=None, consumer_secret=None, access_token=None, access_token_secret=None):
     if not oneliner.was_tweeted:
-	if oneliner.is_published:
-	    try:
-		import tweepy # 3rd party lib, install with: easy_install tweepy
-		import settings
-		if consumer_key is None:
-		    consumer_key = settings.TWITTER.get('consumer_key')
-		if consumer_secret is None:
-		    consumer_secret = settings.TWITTER.get('consumer_secret')
-		if access_token is None:
-		    access_token = settings.TWITTER.get('access_token')
-		if access_token_secret is None:
-		    access_token_secret = settings.TWITTER.get('access_token_secret')
+	try:
+	    import tweepy # 3rd party lib, install with: easy_install tweepy
+	    import settings
+	    if consumer_key is None:
+		consumer_key = settings.TWITTER.get('consumer_key')
+	    if consumer_secret is None:
+		consumer_secret = settings.TWITTER.get('consumer_secret')
+	    if access_token is None:
+		access_token = settings.TWITTER.get('access_token')
+	    if access_token_secret is None:
+		access_token_secret = settings.TWITTER.get('access_token_secret')
 
-		# set up credentials to use Twitter api.
-		auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
-		auth.set_access_token(access_token, access_token_secret)
-		api = tweepy.API(auth)
+	    # set up credentials to use Twitter api.
+	    auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
+	    auth.set_access_token(access_token, access_token_secret)
+	    api = tweepy.API(auth)
 
-		tweetmsg = 'http://bashoneliners.com/main/oneliner/%d %s: %s' % (
-			oneliner.pk,
-			oneliner.summary,
-			oneliner.line,
-			)
-		if len(tweetmsg) > 160:
-		    tweetmsg = tweetmsg[:156] + ' ...'
-		
-		if test:
-		    print tweetmsg
-		    print
-		    return True
-		else:
-		    oneliner.was_tweeted = True
-		    oneliner.save()
-		    return api.update_status(tweetmsg)
-	    except:
-		pass
+	    tweetmsg = 'http://bashoneliners.com/main/oneliner/%d %s: %s' % (
+		    oneliner.pk,
+		    oneliner.summary,
+		    oneliner.line,
+		    )
+	    if len(tweetmsg) > 160:
+		tweetmsg = tweetmsg[:156] + ' ...'
+	    
+	    if test:
+		print tweetmsg
+		print
+		return True
+	    else:
+		oneliner.was_tweeted = True
+		oneliner.save()
+		return api.update_status(tweetmsg)
+	except:
+	    pass
 
 
 def oneliner_list(request):
@@ -114,7 +113,8 @@ def oneliner_edit(request, pk):
 	if form.is_valid():
 	    if form.is_save:
 		oneliner1 = form.save()
-		tweet(oneliner1)
+		if oneliner1.is_published:
+		    tweet(oneliner1)
 		return redirect(form.cleaned_data.get('next_url'))
 	    elif form.is_delete:
 		oneliner0.delete()
@@ -155,14 +155,17 @@ def oneliner_new(request, question_pk=None, oneliner_pk=None):
 	if request.user.is_authenticated():
 	    if form.is_valid():
 		new_oneliner = form.save()
-		tweet(new_oneliner)
+		if new_oneliner.is_published:
+		    tweet(new_oneliner)
 
 		if question is not None:
 		    question.add_answer(new_oneliner)
-		    send_oneliner_answer(question, new_oneliner)
+		    if new_oneliner.is_published:
+			send_oneliner_answer(question, new_oneliner)
 		elif oneliner0 is not None:
 		    oneliner0.add_alternative(new_oneliner)
-		    send_oneliner_alternative(oneliner0, new_oneliner)
+		    if new_oneliner.is_published:
+			send_oneliner_alternative(oneliner0, new_oneliner)
 
 		return redirect(oneliner, new_oneliner.pk)
 	    else:

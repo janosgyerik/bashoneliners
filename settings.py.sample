@@ -7,7 +7,7 @@ DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
-    ('Your Name', 'your_email@domain.com'),
+    ('Bash One-Liners DEV', 'info@bashoneliners.com'),
 )
 
 MANAGERS = ADMINS

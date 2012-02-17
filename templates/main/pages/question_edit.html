@@ -10,6 +10,8 @@
 
 {% block content %}
 
+{% include 'main/elements/please_login.html' %}
+
 <ul>
     <li>Please use the search box at the top to try to find a one-liner that may already exist to answer your question.</li>
     <li>After you post a question, it will be listed on the <a href="{% url bashoneliners.main.views.question_list %}">open questions</a> page, and other users can suggest (possibly many) one-liners that answer it.</li>
@@ -17,7 +19,6 @@
     <li>You can track your questions on your <a href="{% url bashoneliners.main.views.profile %}">profile</a> page, and mark them <strong>Answered</strong> to remove them from the list of open questions.</li>
 </ul>
 
-{% include 'main/elements/please_login.html' %}
 {% include 'main/elements/question_edit_form.html' %}
 
 {% endblock content %}

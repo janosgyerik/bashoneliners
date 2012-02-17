@@ -28,12 +28,13 @@
 </div>
 {% endif %}
 
+{% include 'main/elements/please_login.html' %}
+
 <ul>
     <li>Please use the search box at the top to try to find a one-liner that may already exist for the same purpose.</li>
     <li>Please post only non-trivial and really useful, interesting or awesome one-liners.</li>
 </ul>
 
-{% include 'main/elements/please_login.html' %}
 {% include 'main/elements/oneliner_edit_form.html' %}
 
 {% endblock %}

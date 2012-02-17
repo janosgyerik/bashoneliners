@@ -1,1 +1,1 @@
-New alternative one-liner for: {{ oneliner.summary }}
+[alternative] {{ oneliner.summary }}

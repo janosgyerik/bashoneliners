@@ -1,1 +1,1 @@
-New answer on: {{ question.summary }}
+[answer] {{ question.summary }}

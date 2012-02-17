@@ -1,1 +1,1 @@
-New comment on: {{ oneliner.summary }}
+[comment] {{ oneliner.summary }}

@@ -1,7 +1,11 @@
 <div class="oneliners">
-    {% for oneliner in oneliners %}
+    {% for oneliner in oneliners_page.object_list %}
     {% include 'main/elements/oneliner_with_related.html' %}
     {% empty %}
     <p class="message">No matching one-liners.</p>
     {% endfor %}
 </div>
+
+{% with oneliners_page as page %}
+{% include 'main/elements/pagination.html' %}
+{% endwith %}

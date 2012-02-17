@@ -79,17 +79,17 @@ def oneliner_list(request):
 
     # Make sure page request is an int. If not, deliver first page. 
     try:
-	page = int(request.GET.get('page', '1'))
+	page_number = int(request.GET.get('page', '1'))
     except ValueError:
-	page = 1
+	page_number = 1
 
     # If page request (9999) is out of range, deliver last page of results. 
     try:
-	items = paginator.page(page)
+	page = paginator.page(page_number)
     except (EmptyPage, InvalidPage):
-	items = paginator.page(paginator.num_pages)
+	page = paginator.page(paginator.num_pages)
 
-    params['oneliners'] = items
+    params['oneliners_page'] = page
     
     return render_to_response('main/pages/index.html', params)
 

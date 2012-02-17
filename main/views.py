@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import *
 from django.template import RequestContext
 from django.contrib.auth import logout as django_logout
 from django.contrib.comments.views import comments
+from django.core.paginator import Paginator, InvalidPage, EmptyPage
 
 from bashoneliners.main.models import HackerProfile, OneLiner, User, Answer
 from bashoneliners.main.forms import *
@@ -72,7 +73,24 @@ def tweet(oneliner, test=False, consumer_key=None, consumer_secret=None, access_
 
 def oneliner_list(request):
     params = _common_params(request)
-    params['oneliners'] = OneLiner.objects.filter(is_published=True)
+
+    items = OneLiner.objects.filter(is_published=True)
+    paginator = Paginator(items, 25) # Show 25 items per page
+
+    # Make sure page request is an int. If not, deliver first page. 
+    try:
+	page = int(request.GET.get('page', '1'))
+    except ValueError:
+	page = 1
+
+    # If page request (9999) is out of range, deliver last page of results. 
+    try:
+	items = paginator.page(page)
+    except (EmptyPage, InvalidPage):
+	items = paginator.page(paginator.num_pages)
+
+    params['oneliners'] = items
+    
     return render_to_response('main/pages/index.html', params)
 
 def oneliner(request, pk):

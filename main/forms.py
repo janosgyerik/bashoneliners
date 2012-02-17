@@ -75,28 +75,6 @@ class SearchOneLinerForm(forms.Form):
     query = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'placeholder': 'Search', 'class': 'search-query', }))
 
 
-class EditUserForm(forms.ModelForm):
-    def __init__(self, *args, **kwargs):
-	super(EditUserForm, self).__init__(*args, **kwargs)
-	self.fields['password'].required = False
-
-    def save(self):
-	user = super(EditUserForm, self).save(commit=False)
-	new_password = self.cleaned_data['password']
-	if new_password is not None:
-	    user.set_password(new_password)
-	user.save()
-	return user
-
-    class Meta:
-	model = User
-
-	fields = (
-		'username',
-		'password',
-		)
-
-
 class EditHackerProfileForm(forms.ModelForm):
     next_url = forms.URLField(required=False)
 

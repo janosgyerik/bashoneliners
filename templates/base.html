@@ -34,7 +34,7 @@
 		{% endif %}
 
 		{% if user.is_authenticated %}
-		<p class="navbar-text pull-right">Logged in as <a href="{% url bashoneliners.main.views.profile %}">{{ user.hackerprofile.display_name|default:user.username }}</a>&mdash;<a href="{% url bashoneliners.main.views.logout %}">Logout</a></p>
+		<p class="navbar-text pull-right">Logged in as <a href="{% url bashoneliners.main.views.profile %}">{{ user.hackerprofile.get_display_name }}</a>&mdash;<a href="{% url bashoneliners.main.views.logout %}">Logout</a></p>
 		{% else %}
 		<p class="navbar-text pull-right"><a href="{% url bashoneliners.main.views.login %}">Login</a></p>
 		{% endif %}

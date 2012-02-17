@@ -12,7 +12,7 @@
 	<pre><span class="add-on">bash$</span>{{ oneliner.line }}</pre>
 
 	<p class="author"><small>
-	&mdash; by <a href="{% url bashoneliners.main.views.profile oneliner.user.pk %}"><span>{{ oneliner.user.hackerprofile.display_name|default:oneliner.user.username }}</span></a>
+	&mdash; by <a href="{% url bashoneliners.main.views.profile oneliner.user.pk %}"><span>{{ oneliner.user.hackerprofile.get_display_name }}</span></a>
 	    on <span>{{ oneliner.created_dt }}</span>
 	</small></p>
 

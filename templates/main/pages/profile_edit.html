@@ -1,8 +1,8 @@
 {% extends "base.html" %}
 
-{% block pagetitle %}{{ user.hackerprofile.display_name|default:user.username|default:'Anonymous' }}{% endblock %}
+{% block pagetitle %}{{ user.hackerprofile.get_display_name|default:'Anonymous' }}{% endblock %}
 
-{% block pageheader %}{{ user.hackerprofile.display_name|default:user.username|default:'Anonymous' }}{% endblock %}
+{% block pageheader %}{{ user.hackerprofile.get_display_name|default:'Anonymous' }}{% endblock %}
 
 {% block keywords %}{% endblock %}
 

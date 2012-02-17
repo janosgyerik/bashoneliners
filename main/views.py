@@ -268,14 +268,14 @@ def question_new(request):
 def profile(request, pk=None):
     params = _common_params(request)
 
-    if request.user.is_authenticated():
-	if pk is None:
-	    pk = request.user.pk
-
+    if pk is not None:
 	user = User.objects.get(pk=pk)
+    else:
+	user = request.user
 
-	params['hacker'] = user
+    params['hacker'] = user
 
+    if user.is_authenticated():
 	oneliners = OneLiner.objects.filter(user=user)
 	if user != request.user:
 	    oneliners = oneliners.filter(is_published=True)
@@ -286,8 +286,6 @@ def profile(request, pk=None):
 	    questions = questions.filter(is_published=True)
 	params['questions_pending'] = questions.filter(is_answered=False)
 	params['questions_answered'] = questions.filter(is_answered=True)
-    else:
-	params['hacker'] = request.user
 
     return render_to_response('main/pages/profile.html', params)
 

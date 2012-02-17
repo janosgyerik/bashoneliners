@@ -10,7 +10,6 @@ release notes
 first release
 =============
 - Note: only the things not yet on Trello
-- bug: viewing user profiles when not logged in is broken
 - do not animate comment toggle, it's annoying
 - simplify templates by using user.hackerprofile.get_display_name
 - after login, should return to the previous page

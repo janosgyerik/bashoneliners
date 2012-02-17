@@ -100,6 +100,12 @@ class EditUserForm(forms.ModelForm):
 class EditHackerProfileForm(forms.ModelForm):
     next_url = forms.URLField(required=False)
 
+    def clean_display_name(self):
+	display_name = self.cleaned_data['display_name']
+	if display_name == '':
+	    display_name = None
+	return display_name
+
     class Meta:
 	model = HackerProfile
 

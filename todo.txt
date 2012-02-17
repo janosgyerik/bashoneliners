@@ -14,7 +14,6 @@ first release
 	- a creative commons rss icon would be good too...
 - advanced search
 - icon generator
-- bug: cannot clear displayname if another user with '' name exists
 
 
 get an html/css buff do it

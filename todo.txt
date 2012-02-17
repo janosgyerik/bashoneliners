@@ -10,7 +10,6 @@ release notes
 first release
 =============
 - Note: only the things not yet on Trello
-- do not animate comment toggle, it's annoying
 - simplify templates by using user.hackerprofile.get_display_name
 - after login, should return to the previous page
 - bug: cannot clear displayname if another user with '' name exists

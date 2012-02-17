@@ -69,7 +69,7 @@ function bind_preview_markdown() {
 
 function bind_comments_toggle() {
     $('.comments-toggle').click(function(e) {
-	$(this).toggleClass('expanded').next().toggle('slow');
+	$(this).toggleClass('expanded').next().toggle(0);
     });
 }
 

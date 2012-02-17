@@ -7,6 +7,7 @@ from django.contrib.comments.views import comments
 
 from bashoneliners.main.models import HackerProfile, OneLiner, User, Answer
 from bashoneliners.main.forms import *
+import bashoneliners.main.email as email
 
 from datetime import datetime
 
@@ -178,6 +179,18 @@ def oneliner_comment(request, pk):
 	    data['email'] = request.user.email
 	    form = PostCommentOnOneLinerForm(oneliner0, data)
 	    if form.is_valid():
+		if oneliner0.user.email:
+		    email.send_email_template(
+			    'email/comment-sub.txt', { 'oneliner': oneliner0, }, 
+			    'email/comment-msg.txt', {
+				'oneliner': oneliner0,
+				'user': oneliner0.user,
+				'sender': request.user,
+				'comment': data['comment'],
+				},
+			    oneliner0.user.email
+			    )
+
 		return comments.post_comment(request, next=oneliner0.get_absolute_url())
 	    else:
 		params['next_url'] = request.POST.get('next_url')

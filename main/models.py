@@ -54,6 +54,9 @@ class HackerProfile(models.Model):
     def get_date_joined(self):
 	return self.user.date_joined
 
+    def get_display_name(self):
+	return self.display_name or self.user.username
+
     def __unicode__(self):
 	return ', '.join([x for x in (self.user.username, self.user.email) if x])
 

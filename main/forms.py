@@ -73,6 +73,12 @@ class EditOneLinerForm(CommonOneLinerForm):
 
 class SearchOneLinerForm(forms.Form):
     query = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'placeholder': 'Search', 'class': 'search-query', }))
+    is_advanced = forms.BooleanField(required=False)
+    match_summary = forms.BooleanField(initial=True, required=False)
+    match_line = forms.BooleanField(initial=True, required=False)
+    match_explanation = forms.BooleanField(initial=True, required=False)
+    match_limitations = forms.BooleanField(initial=True, required=False)
+    match_whole_words = forms.BooleanField(initial=False, required=False)
 
 
 class EditHackerProfileForm(forms.ModelForm):

@@ -118,7 +118,7 @@ class OneLiner(models.Model):
 	return OneLiner.objects.filter(vote__up=True).annotate(votes=Count('vote')).order_by('-votes')[:limit]
 
     @staticmethod
-    def search(query=None, limit=SEARCH_LIMIT):
+    def simplesearch(query=None, limit=SEARCH_LIMIT):
 	qq = Q()
 	for term in get_query_terms(query):
 	    sub_qq = Q()
@@ -128,6 +128,51 @@ class OneLiner(models.Model):
 	    sub_qq |= Q(limitations__icontains=term)
 	    qq &= Q(sub_qq)
 	return OneLiner.objects.filter(is_published=True).filter(qq)[:limit]
+
+    @staticmethod
+    def search(form, limit=SEARCH_LIMIT):
+	query = form.cleaned_data.get('query')
+	match_summary = form.cleaned_data.get('match_summary')
+	match_line = form.cleaned_data.get('match_line')
+	match_explanation = form.cleaned_data.get('match_explanation')
+	match_limitations = form.cleaned_data.get('match_limitations')
+	match_whole_words = form.cleaned_data.get('match_whole_words')
+
+	terms = get_query_terms(query)
+	qq = Q()
+	for term in terms:
+	    sub_qq = Q()
+	    if match_summary:
+		sub_qq |= Q(summary__icontains=term)
+	    if match_line:
+		sub_qq |= Q(line__icontains=term)
+	    if match_explanation:
+		sub_qq |= Q(explanation__icontains=term)
+	    if match_limitations:
+		sub_qq |= Q(limitations__icontains=term)
+	    if len(sub_qq.children) > 0:
+		qq &= Q(sub_qq)
+
+	if len(qq.children) > 0:
+	    results = OneLiner.objects.filter(is_published=True).filter(qq)
+
+	    if match_whole_words:
+		results = [x for x in results if x.matches_words(terms, match_summary, match_line, match_explanation, match_limitations)]
+
+	    return results[:limit]
+	else:
+	    return ()
+
+    def matches_words(self, terms, match_summary, match_line, match_explanation, match_limitations):
+	for term in terms:
+	    if match_summary and re.search(r'\b%s\b' % term, self.summary):
+		return True
+	    if match_line and re.search(r'\b%s\b' % term, self.line):
+		return True
+	    if match_explanation and re.search(r'\b%s\b' % term, self.explanation):
+		return True
+	    if match_limitations and re.search(r'\b%s\b' % term, self.limitations):
+		return True
 
     def get_absolute_url(self):
 	return "/main/oneliner/%i/" % self.pk

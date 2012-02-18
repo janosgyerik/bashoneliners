@@ -32,7 +32,7 @@ def search(request):
 
     if form is not None:
 	if form.is_valid():
-	    params['oneliners'] = OneLiner.search(form.cleaned_data.get('query'))
+	    params['oneliners'] = OneLiner.simplesearch(form.cleaned_data.get('query'))
 	    params['user'] = request.user
 
     return render_to_response('main/elements/oneliners.html', params)

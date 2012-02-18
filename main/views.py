@@ -17,7 +17,18 @@ from datetime import datetime
 
 def _common_params(request):
     if request.method == 'GET':
-	searchform = SearchOneLinerForm(request.GET)
+	if request.GET.get('is_advanced'):
+	    searchform = SearchOneLinerForm(request.GET)
+	else:
+	    data = {
+		    'match_whole_words': False,
+		    'match_summary': True,
+		    'match_line': True,
+		    'match_explanation': True,
+		    'match_limitations': True,
+		    'query': request.GET.get('query'),
+		    }
+	    searchform = SearchOneLinerForm(data)
     else:
 	searchform = SearchOneLinerForm()
 
@@ -331,7 +342,7 @@ def search(request):
     form = params['searchform']
 
     if form.is_valid():
-	params['oneliners'] = OneLiner.search(form.cleaned_data.get('query'))
+	params['oneliners'] = OneLiner.search(form)
 
     return render_to_response('main/pages/search.html', params)
 

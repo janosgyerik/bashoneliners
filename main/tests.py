@@ -11,12 +11,14 @@ class Util:
 	return user
 
     @staticmethod
-    def new_oneliner(user, line, summary=None, explanation=None):
+    def new_oneliner(user, line, summary=None, explanation=None, limitations=None):
 	if summary is None:
 	    summary = '(incorrectly omitted)'
 	if explanation is None:
 	    explanation = '(incorrectly omitted)'
-	oneliner = OneLiner(user=user, line=line, summary=summary, explanation=explanation)
+	if limitations is None:
+	    limitations = '(this is optional)'
+	oneliner = OneLiner(user=user, line=line, summary=summary, explanation=explanation, limitations=limitations)
 	oneliner.save()
 	return oneliner
 
@@ -174,13 +176,79 @@ class SearchTests(TestCase):
 	self.mike = Util.new_user('mike')
 	self.mikes_oneliner = Util.new_oneliner(self.mike, 'echo mike')
 
-    def test_search(self):
-	self.assertEquals(OneLiner.search('echo').count(), 2)
-	self.assertEquals(OneLiner.search('echo jack').count(), 1)
-	self.assertEquals(OneLiner.search('echo mike').count(), 1)
-	self.assertEquals(OneLiner.search('jack')[0], self.jacks_oneliner)
-	self.assertEquals(OneLiner.search('echo jack')[0], self.jacks_oneliner)
-	self.assertEquals(OneLiner.search('echo mike')[0], self.mikes_oneliner)
+	self.vi_oneliner = Util.new_oneliner(self.mike, 'vi is an editor', summary='vi oneliner')
+	self.video_oneliner = Util.new_oneliner(self.mike, 'mplayer is a video manipulator', summary='mplayer oneliner')
+
+	self.mline_oneliner = Util.new_oneliner(self.jack, 'mline')
+	self.msummary_oneliner = Util.new_oneliner(self.jack, '', summary='msummary')
+	self.mexplanation_oneliner = Util.new_oneliner(self.jack, '', explanation='mexplanation')
+	self.mlimitations_oneliner = Util.new_oneliner(self.jack, '', limitations='mlimitations')
+
+    def test_simplesearch(self):
+	self.assertEquals(OneLiner.simplesearch('echo').count(), 2)
+	self.assertEquals(OneLiner.simplesearch('echo jack').count(), 1)
+	self.assertEquals(OneLiner.simplesearch('echo mike').count(), 1)
+	self.assertEquals(OneLiner.simplesearch('jack')[0], self.jacks_oneliner)
+	self.assertEquals(OneLiner.simplesearch('echo jack')[0], self.jacks_oneliner)
+	self.assertEquals(OneLiner.simplesearch('echo mike')[0], self.mikes_oneliner)
+
+    def get_form(self, data):
+	initial = {
+		'match_summary': True,
+		'match_line': True,
+		'match_explanation': True,
+		'match_limitations': True,
+		}
+	initial.update(data)
+	form = SearchOneLinerForm(data=initial)
+	self.assertTrue(form.is_valid())
+	return form
+
+    def test_match_summary(self):
+	results = OneLiner.search(self.get_form({ 'query': 'msummary' }))
+	self.assertEquals(len(results), 1)
+	self.assertEquals(results[0], self.msummary_oneliner)
+
+	results = OneLiner.search(self.get_form({ 'query': 'msummary', 'match_summary': False }))
+	self.assertEquals(len(results), 0)
+
+    def test_match_line(self):
+	results = OneLiner.search(self.get_form({ 'query': 'mline' }))
+	self.assertEquals(len(results), 1)
+	self.assertEquals(results[0], self.mline_oneliner)
+
+	results = OneLiner.search(self.get_form({ 'query': 'mline', 'match_line': False }))
+	self.assertEquals(len(results), 0)
+
+    def test_match_explanation(self):
+	results = OneLiner.search(self.get_form({ 'query': 'mexplanation' }))
+	self.assertEquals(len(results), 1)
+	self.assertEquals(results[0], self.mexplanation_oneliner)
+
+	results = OneLiner.search(self.get_form({ 'query': 'mexplanation', 'match_explanation': False }))
+	self.assertEquals(len(results), 0)
+
+    def test_match_limitations(self):
+	results = OneLiner.search(self.get_form({ 'query': 'mlimitations' }))
+	self.assertEquals(len(results), 1)
+	self.assertEquals(results[0], self.mlimitations_oneliner)
+
+	results = OneLiner.search(self.get_form({ 'query': 'mlimitations', 'match_limitations': False }))
+	self.assertEquals(len(results), 0)
+
+    def test_match_whole_words(self):
+	results = OneLiner.search(self.get_form({ 'query': 'vi', }))
+	self.assertEquals(len(results), 2)
+
+	results = OneLiner.search(self.get_form({ 'query': 'vi', 'match_whole_words': True }))
+	self.assertEquals(len(results), 1)
+	self.assertEquals(results[0], self.vi_oneliner)
+
+    def test_match_nothing(self):
+	form = SearchOneLinerForm(data={'query': 'NOTHINGSHOULDMATCH'})
+	self.assertTrue(form.is_valid())
+	results = OneLiner.search(form)
+	self.assertEquals(len(results), 0)
 
 
 class QuestionTests(TestCase):

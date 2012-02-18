@@ -217,6 +217,10 @@ dl.mission dd {
     margin-left: 2em;
 }
 
+#search-form .controls {
+    margin-top: 1em;
+}
+
 /* overriding bootstrap */
 
 pre code {

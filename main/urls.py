@@ -39,8 +39,6 @@ urlpatterns += patterns('bashoneliners.main.ajax',
 
 urlpatterns += patterns('bashoneliners.main.feeds',
 	(r'^feeds/oneliner/$', 'oneliner'),
-	(r'^feeds/oneliner/u/(?P<username>\w+)$', 'oneliner_by_username'),
-	(r'^feeds/oneliner/query/$', 'oneliner_by_query'),
 	(r'^feeds/question/$', 'question'),
 	)
 

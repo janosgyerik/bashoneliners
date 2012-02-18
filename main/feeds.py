@@ -9,12 +9,6 @@ from bashoneliners.main.models import OneLiner, Question
 def oneliner(request):
     return OneLinerEntries()(request)
 
-def oneliner_by_username(request, username):
-    pass
-
-def oneliner_by_query(request):
-    pass
-
 def question(request):
     return QuestionEntries()(request)
 

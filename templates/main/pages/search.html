@@ -9,7 +9,7 @@
 <form action="" method="get" class="well form-inline" id="search-form">
     <div>
 	<input type="hidden" name="is_advanced" value="1"/>
-	<input type="text" name="query" id="id_query" value="{{ searchform.query.value }}" class="span4" />
+	{{ searchform.query }}
 	<input type="submit" value="Search" class="btn btn-primary"/>
     </div>
     <div class="controls">

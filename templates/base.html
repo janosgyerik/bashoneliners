@@ -29,7 +29,7 @@
 
 		{% if searchform %}
 		<form class="navbar-search pull-left" method="get" action="{% url bashoneliners.main.views.search %}">
-		    {{ searchform.query }}
+		    <input name="query" maxlength="100" placeholder="Search" type="text" class="search-query" id="id_query" />
 		</form>
 		{% endif %}
 

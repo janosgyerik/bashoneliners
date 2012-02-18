@@ -72,7 +72,7 @@ class EditOneLinerForm(CommonOneLinerForm):
 
 
 class SearchOneLinerForm(forms.Form):
-    query = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'placeholder': 'Search', 'class': 'search-query', }))
+    query = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'class': 'span4', }))
     is_advanced = forms.BooleanField(required=False)
     match_summary = forms.BooleanField(initial=True, required=False)
     match_line = forms.BooleanField(initial=True, required=False)

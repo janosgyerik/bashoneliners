@@ -40,6 +40,7 @@
 	{% endblock %}
 
 	{% get_comment_count for oneliner as comment_count %}
+	{% if comment_count > 0 or not nobuttons %}
 	<div class="related">
 	    <h3 class="comments-toggle"><img/>Comments ({{ comment_count }})</h3>
 	    <div class="well comments">
@@ -49,5 +50,6 @@
 	    {% endif %}
 	    </div>
 	</div>
+	{% endif %}
 
     </div>

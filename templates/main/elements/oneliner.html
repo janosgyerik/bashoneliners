@@ -16,12 +16,10 @@
 	    on <span>{{ oneliner.created_dt }}</span>
 	</small></p>
 
-	{% if oneliner.explanation %}
 	<div class="explanation">
 	    <h4>Explanation</h4>
 	    {{ oneliner.explanation|markdown:"safe" }}
 	</div>
-	{% endif %}
 
 	{% if oneliner.limitations %}
 	<div class="limitations">

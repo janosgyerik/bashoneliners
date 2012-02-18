@@ -76,6 +76,7 @@ function bind_comments_toggle() {
 function footer_fix() {
     if ($('body').height() < $(window).height()) {
 	$('.footer').addClass('fixed-bottom');
+	$('body').css('padding-bottom', '50px');
     }
 }
 

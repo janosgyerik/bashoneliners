@@ -9,15 +9,10 @@ release notes
 
 first release
 =============
-- upgrade openid provider, there is a deprecation warning
-- multiple rss feed
-	- a creative commons rss icon would be good too...
-- icon generator
-
-
-get an html/css buff do it
-==========================
+- decorate comment buttons with comment glyph
+- change edit buttons and use pencil glyph
 - when the content is too short, fill the vertical space before the footer
+- fix the navbar bug in a small window and mobile devices
 
 
 submit the site to ...
@@ -36,6 +31,7 @@ submit the site to ...
 
 future releases
 ===============
+- upgrade openid provider, there is a deprecation warning
 - Voting
 	- vote up
 	- vote down

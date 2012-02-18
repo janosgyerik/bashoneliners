@@ -14,6 +14,7 @@ import re
 
 RECENT_LIMIT = 25
 SEARCH_LIMIT = 25
+FEED_LIMIT = 10
 
 
 ''' Helper methods '''
@@ -114,7 +115,15 @@ class OneLiner(models.Model):
 	return OneLiner.objects.get(pk=pk)
 
     @staticmethod
+    def feed(limit=FEED_LIMIT):
+	return OneLiner.recent(limit)
+
+    @staticmethod
     def recent(limit=RECENT_LIMIT):
+	return OneLiner.objects.filter(is_published=True)[:limit]
+
+    @staticmethod
+    def top(limit=SEARCH_LIMIT):
 	return OneLiner.objects.filter(vote__up=True).annotate(votes=Count('vote')).order_by('-votes')[:limit]
 
     @staticmethod
@@ -232,8 +241,12 @@ class Question(models.Model):
 	return Question.objects.get(pk=pk)
 
     @staticmethod
+    def feed(limit=FEED_LIMIT):
+	return Question.objects.filter(is_published=True)[:limit]
+
+    @staticmethod
     def recent(limit=RECENT_LIMIT):
-	return Question.objects.exclude(is_published=False).exclude(is_answered=True)[:limit]
+	return Question.objects.filter(is_published=True).exclude(is_answered=True)[:limit]
 
     @staticmethod
     def latest():
@@ -241,6 +254,9 @@ class Question(models.Model):
 	    return Question.recent(1)[0]
 	except:
 	    pass
+
+    def get_absolute_url(self):
+	return "/main/question/%i/" % self.pk
 
     class Meta:
 	get_latest_by = 'pk'
@@ -294,16 +310,6 @@ class Vote(models.Model):
 
     class Meta:
 	unique_together = (('user', 'oneliner',),)
-
-
-class LatestEntries(Feed):
-    title = "Bash One-Liners"
-    link = "/feed/"
-    description = "Latest One-Liners posted on bashoneliners.com"
-    description_template = 'feed_description.html'
-
-    def items(self):
-	return OneLiner.objects.filter(is_published=True)
 
 
 # eof

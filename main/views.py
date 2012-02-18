@@ -357,6 +357,10 @@ def logout(request):
 
 ''' simple pages '''
 
+def feeds(request):
+    params = _common_params(request)
+    return render_to_response('main/pages/feeds.html', params)
+
 def sourcecode(request):
     params = _common_params(request)
     return render_to_response('main/pages/sourcecode.html', params)

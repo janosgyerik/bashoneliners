@@ -4,21 +4,22 @@ from django.conf.urls.defaults import *
 from django.contrib import admin
 admin.autodiscover()
 
-from bashoneliners.main.models import LatestEntries
-
-def feed(request):
-    return LatestEntries()(request)
-
 urlpatterns = patterns('',
-    (r'^$', include('bashoneliners.main.urls')),
-    (r'^main/', include('bashoneliners.main.urls')),
-    (r'^openid/', include('bashoneliners.django_openid_auth.urls')),
-    (r'feed/$', feed),
+	(r'^$', include('bashoneliners.main.urls')),
+	(r'^main/', include('bashoneliners.main.urls')),
+	(r'^openid/', include('bashoneliners.django_openid_auth.urls')),
 
-    (r'^admin/doc/', include('django.contrib.admindocs.urls')),
-    (r'^admin/', include(admin.site.urls)),
-    (r'^comments/', include('django.contrib.comments.urls')),
-)
+	(r'^admin/doc/', include('django.contrib.admindocs.urls')),
+	(r'^admin/', include(admin.site.urls)),
+	(r'^comments/', include('django.contrib.comments.urls')),
+	)
+
+from bashoneliners.main.feeds import OneLinerEntries
+
+urlpatterns += patterns('',
+	(r'feed/$', OneLinerEntries()),
+	)
+
 
 from django.conf import settings
 

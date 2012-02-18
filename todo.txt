@@ -9,7 +9,6 @@ release notes
 
 first release
 =============
-- decorate comment buttons with comment glyph
 - fix the navbar bug in a small window and mobile devices
 
 

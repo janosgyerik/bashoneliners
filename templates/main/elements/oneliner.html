@@ -45,7 +45,7 @@
 	    <div class="well comments">
 	    {% render_comment_list for oneliner %}
 	    {% if not nobuttons %}
-	    <p><a href="{% url bashoneliners.main.views.oneliner_comment oneliner.pk %}" class="btn">Post a comment on this one-liner</a></p>
+	    <p><a href="{% url bashoneliners.main.views.oneliner_comment oneliner.pk %}" class="btn"><i class="icon-comment"></i> Post a comment on this one-liner</a></p>
 	    {% endif %}
 	    </div>
 	</div>

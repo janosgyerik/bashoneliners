@@ -234,6 +234,11 @@ dl.rss dd {
     width: 100%;
 }
 
+h1 a.btn {
+    margin-left: 1em;
+}
+
+
 /* overriding bootstrap */
 
 pre code {

@@ -4,7 +4,7 @@
 
 {% block pagetitle %}{{ hacker.hackerprofile.get_display_name|default:'Anonymous' }}{% endblock %}
 
-{% block pageheader %}{{ hacker.hackerprofile.get_display_name|default:'Anonymous' }}{% if user == hacker %}<a href="{% url bashoneliners.main.views.profile_edit %}" class="edit"></a>{% endif %}{% endblock %}
+{% block pageheader %}{{ hacker.hackerprofile.get_display_name|default:'Anonymous' }}{% if user == hacker %}<a href="{% url bashoneliners.main.views.profile_edit %}" class="btn"><i class="icon-pencil"></i></a>{% endif %}{% endblock %}
 
 {% block content %}
 

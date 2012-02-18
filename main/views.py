@@ -220,7 +220,7 @@ def oneliner_comment(request, pk):
 
 def question_list(request):
     params = _common_params(request)
-    params['questions'] = Question.top()
+    params['questions'] = Question.recent()
     return render_to_response('main/pages/question_list.html', params, context_instance=RequestContext(request))
 
 def question(request, pk):

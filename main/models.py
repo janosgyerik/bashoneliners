@@ -10,6 +10,11 @@ import random
 import string
 import re
 
+''' Constants '''
+
+RECENT_LIMIT = 25
+SEARCH_LIMIT = 25
+
 
 ''' Helper methods '''
 
@@ -109,11 +114,11 @@ class OneLiner(models.Model):
 	return OneLiner.objects.get(pk=pk)
 
     @staticmethod
-    def top(limit=50):
+    def recent(limit=RECENT_LIMIT):
 	return OneLiner.objects.filter(vote__up=True).annotate(votes=Count('vote')).order_by('-votes')[:limit]
 
     @staticmethod
-    def search(query=None, limit=50):
+    def search(query=None, limit=SEARCH_LIMIT):
 	qq = Q()
 	for term in get_query_terms(query):
 	    sub_qq = Q()
@@ -182,15 +187,15 @@ class Question(models.Model):
 	return Question.objects.get(pk=pk)
 
     @staticmethod
-    def top(limit=50):
+    def recent(limit=RECENT_LIMIT):
 	return Question.objects.exclude(is_published=False).exclude(is_answered=True)[:limit]
 
     @staticmethod
     def latest():
 	try:
-	    return Question.top(1)[0]
+	    return Question.recent(1)[0]
 	except:
-	    return None
+	    pass
 
     class Meta:
 	get_latest_by = 'pk'

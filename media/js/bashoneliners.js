@@ -2,8 +2,8 @@
  * Bash One-Liners JavaScript Library v0.1
  * http://bashoneliners.com/
  *
- * Copyright 2011, Janos Gyerik
- * http://bashoneliners.com/license
+ * Copyright 2012, Janos Gyerik
+ * http://bashoneliners.com/LICENSE
  *
  * Date: Sat Oct  8 06:38:28 CEST 2011
  */

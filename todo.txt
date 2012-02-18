@@ -11,7 +11,6 @@ first release
 =============
 - decorate comment buttons with comment glyph
 - change edit buttons and use pencil glyph
-- when the content is too short, fill the vertical space before the footer
 - fix the navbar bug in a small window and mobile devices
 
 

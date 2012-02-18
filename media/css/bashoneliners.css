@@ -228,6 +228,12 @@ dl.rss dd {
     margin-top: 1em;
 }
 
+.fixed-bottom {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
 /* overriding bootstrap */
 
 pre code {

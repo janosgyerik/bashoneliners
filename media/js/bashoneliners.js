@@ -73,11 +73,18 @@ function bind_comments_toggle() {
     });
 }
 
+function footer_fix() {
+    if ($('body').height() < $(window).height()) {
+	$('.footer').addClass('fixed-bottom');
+    }
+}
+
 $(document).ready(function() {
     bind_help_markdown();
     bind_question_answered();
     bind_preview_markdown();
     bind_comments_toggle();
+    footer_fix();
 });
 
 // eof

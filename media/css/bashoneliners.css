@@ -122,11 +122,6 @@ body {
     text-decoration: inherit;
 }
 
-.edit {
-    padding: 0 12px;
-    background: url(/media/icons/edit.png) no-repeat center;
-}
-
 form .required {
     color: red;
     padding: 0 .5em;

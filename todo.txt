@@ -12,7 +12,6 @@ first release
 - upgrade openid provider, there is a deprecation warning
 - multiple rss feed
 	- a creative commons rss icon would be good too...
-- nicer bootstrap block for 'no matches'
 - icon generator
 
 

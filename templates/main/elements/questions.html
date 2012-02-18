@@ -1,9 +1,7 @@
 <div class="questions">
-
     {% for question in questions %}
     {% include 'main/elements/question_with_related.html' %}
     {% empty %}
-    <p class="message">No matching questions.</p>
+    <div class="alert">No matching questions.</div>
     {% endfor %}
-
 </div>

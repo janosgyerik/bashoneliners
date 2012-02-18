@@ -2,6 +2,6 @@
     {% for oneliner in oneliners %}
     {% include 'main/elements/oneliner_with_related.html' %}
     {% empty %}
-    <p class="message">No matching one-liners.</p>
+    <div class="alert">No matching one-liners.</div>
     {% endfor %}
 </div>

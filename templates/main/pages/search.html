@@ -41,7 +41,7 @@
 	    $('#search-loading').empty();
 	}
 
-	$('x#search-form').submit(function(e) {
+	$('#search-form').submit(function(e) {
 	    e.preventDefault();
 	    $('#search-loading').append($('#templates .search-loading').html());
 	    $('#search-errors').empty();
@@ -49,7 +49,15 @@
 	    var options = {
 		url: '{% url bashoneliners.main.ajax.search %}',
 		type: 'get',
-		data: { 'query': $('#id_query').val() },
+		data: { 
+		    'is_advanced': 'on',
+		    'match_whole_words': $('#id_match_whole_words:checked').val(),
+		    'match_summary': $('#id_match_summary:checked').val(),
+		    'match_line': $('#id_match_line:checked').val(),
+		    'match_explanation': $('#id_match_explanation:checked').val(),
+		    'match_limitations': $('#id_match_limitations:checked').val(),
+		    'query': $('#search-form #id_query').val()
+		},
 		success: search_success,
 		error: search_error,
 		complete: search_completed

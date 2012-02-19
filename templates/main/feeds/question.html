@@ -3,7 +3,7 @@
         <blockquote>
             <p>{{ question.explanation }}</p>
             <small>
-                by <a href="{% url bashoneliners.main.views.profile question.user.pk %}">{{ question.user.hackerprofile.get_display_name }} </a>
+                by <a href="{% url bashoneliners.main.views.profile question.user.pk %}">{{ question.user.hackerprofile.get_display_name }}</a>
                 on {{ question.created_dt }}
             </small>
         </blockquote>

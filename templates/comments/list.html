@@ -1,7 +1,8 @@
+{% load markup %}
 {% for comment in comment_list %}
 <div class="comment">
 <blockquote>
-    <p>{{ comment.comment }}</p>
+    <p>{{ comment.comment|markdown:"safe" }}</p>
     <small>
 	by <a href="{% url bashoneliners.main.views.profile comment.user.pk %}"><span>{{ comment.user.hackerprofile.get_display_name }}</span> </a>
 	on <span>{{ comment.submit_date }}</span>

@@ -211,7 +211,7 @@ class Question(models.Model):
     created_dt = models.DateTimeField(default=datetime.now, blank=True)
 
     def __unicode__(self):
-	return '%s @%s' % (self.summary, self.user)
+	return self.summary
 
     def add_answer(self, oneliner):
 	Answer(question=self, oneliner=oneliner).save()

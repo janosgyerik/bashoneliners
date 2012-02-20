@@ -1,7 +1,7 @@
 from django.contrib.syndication.views import Feed
 from django.core.urlresolvers import reverse
 
-from bashoneliners.main.models import OneLiner, Question
+from bashoneliners.main.models import OneLiner, Question, Comment_feed
 
 
 ### URL handlers
@@ -12,26 +12,38 @@ def oneliner(request):
 def question(request):
     return QuestionEntries()(request)
 
+def comment(request):
+    return CommentEntries()(request)
+
 
 ### Feed classes
 
 class OneLinerEntries(Feed):
     title = "Bash One-Liners"
     link = reverse(oneliner)
-    description = "Latest Bash One-Liners posted on bashoneliners.com"
+    description = "Recently posted bash one-liners on bashoneliners.com"
     description_template = 'main/feeds/oneliner.html'
 
     def items(self):
 	return OneLiner.feed()
 
 class QuestionEntries(Feed):
-    title = "Questions for Bash One-Liners"
+    title = "Questions for bash one-liners"
     link = reverse(question)
-    description = "Latest questions/requests for Bash One-Liners"
+    description = "Recently posted questions/requests on bashoneliners.com"
     description_template = 'main/feeds/question.html'
 
     def items(self):
 	return Question.feed()
+
+class CommentEntries(Feed):
+    title = "Comments on bash one-liners"
+    link = reverse(comment)
+    description = "Recently posted comments on bashoneliners.com"
+    description_template = 'main/feeds/comment.html'
+
+    def items(self):
+	return Comment_feed()
 
 
 # eof

@@ -1,0 +1,21 @@
+{% load markup %}
+<div class="comment well">
+<blockquote>
+    <p>{{ comment.comment|markdown:"safe" }}</p>
+    <small>
+	by <a href="{% url bashoneliners.main.views.profile comment.user.pk %}"><span>{{ comment.user.hackerprofile.get_display_name }}</span> </a>
+	on <span>{{ comment.submit_date }}</span>
+    </small>
+
+    {% with comment.content_type.model as model %}
+    {% if model == 'oneliner' %}
+    {% with comment.content_object as oneliner %}
+    <div class="{{ model }}">
+	<h3 class="summary"><a href="{% url bashoneliners.main.views.oneliner oneliner.pk %}">{{ oneliner.summary|capfirst }}</a></h3>
+	<pre><span class="add-on">bash$</span>{{ oneliner.line }}</pre>
+    </div>
+    {% endwith %}
+    {% endif %}
+    {% endwith %}
+</blockquote>
+</div>

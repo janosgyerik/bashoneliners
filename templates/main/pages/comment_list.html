@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block pagetitle %}Comments{% endblock %}
+{% block pageheader %}Comments{% endblock %}
+
+{% block content %}
+
+{% if comments %}
+
+{% for comment in comments %}
+{% include 'main/elements/comment.html' %}
+{% endfor %}
+
+{% else %}
+<div class="alert">No matching comments.</div>
+{% endif %}
+
+{% endblock %}

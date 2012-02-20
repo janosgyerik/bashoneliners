@@ -23,6 +23,8 @@ urlpatterns = patterns('bashoneliners.main.views',
 	(r'^question/edit/(?P<pk>\d+)/$', 'question_edit'),
 	(r'^question/new/$', 'question_new'),
 
+	(r'^comment/$', 'comment_list'),
+
 	(r'^search/$', 'search'),
 
 	(r'^login/$', 'login'),
@@ -40,6 +42,7 @@ urlpatterns += patterns('bashoneliners.main.ajax',
 urlpatterns += patterns('bashoneliners.main.feeds',
 	(r'^feeds/oneliner/$', 'oneliner'),
 	(r'^feeds/question/$', 'question'),
+	(r'^feeds/comment/$', 'comment'),
 	)
 
 # eof

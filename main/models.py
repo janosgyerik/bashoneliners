@@ -3,6 +3,7 @@ from django.db.models import Count, Q
 from django.db.models.signals import post_save
 from django.contrib.syndication.views import Feed
 from django.contrib.auth.models import User
+from django.contrib.comments.models import Comment
 from django.template import Context, loader
 
 from datetime import datetime
@@ -310,6 +311,13 @@ class Vote(models.Model):
 
     class Meta:
 	unique_together = (('user', 'oneliner',),)
+
+
+def Comment_recent(limit=RECENT_LIMIT):
+    return Comment.objects.filter(is_public=True).exclude(is_removed=True).order_by('-submit_date')[:limit]
+
+def Comment_feed(limit=FEED_LIMIT):
+    return Comment_recent(limit)
 
 
 # eof

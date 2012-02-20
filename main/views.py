@@ -42,8 +42,8 @@ def _common_params(request):
 def _common_initial(request):
     return { 'next_url': request.META.get('HTTP_REFERER', '/') }
 
-def tweet(oneliner, test=False, consumer_key=None, consumer_secret=None, access_token=None, access_token_secret=None):
-    if not oneliner.was_tweeted:
+def tweet(oneliner, test=False, force=False, consumer_key=None, consumer_secret=None, access_token=None, access_token_secret=None):
+    if not oneliner.was_tweeted or force:
 	try:
 	    import tweepy # 3rd party lib, install with: easy_install tweepy
 	    import settings
@@ -61,13 +61,21 @@ def tweet(oneliner, test=False, consumer_key=None, consumer_secret=None, access_
 	    auth.set_access_token(access_token, access_token_secret)
 	    api = tweepy.API(auth)
 
-	    tweetmsg = 'http://bashoneliners.com/main/oneliner/%d %s: %s' % (
-		    oneliner.pk,
-		    oneliner.summary,
+	    # get short URL
+	    import urllib2
+	    data = '{longUrl:"%s", key:"%s"}' % ('http://bashoneliners.com/main/oneliner/%d' % oneliner.pk, settings.GOO_GL_API_KEY)
+	    req = urllib2.Request(settings.GOO_GL_API_URL, data)
+	    req.add_header('Content-type', 'application/json')
+	    result = urllib2.urlopen(req)
+	    import django.utils.simplejson as json
+	    shortUrl = json.loads(result.read()).get('id')
+
+	    tweetmsg = '%s %s' % (
+		    shortUrl,
 		    oneliner.line,
 		    )
-	    if len(tweetmsg) > 160:
-		tweetmsg = tweetmsg[:156] + ' ...'
+	    if len(tweetmsg) > 140:
+		tweetmsg = tweetmsg[:136] + ' ...'
 	    
 	    if test:
 		print tweetmsg

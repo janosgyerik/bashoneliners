@@ -21,7 +21,7 @@ setup_environ(settings)
 
 from django.db.models import Max
 from datetime import timedelta, datetime
-from bashoneliners.main.models import OneLiner, LatestEntries
+from bashoneliners.main.models import OneLiner
 from bashoneliners.main.views import tweet
 
 import optparse
@@ -71,8 +71,7 @@ if __name__ == '__main__':
 	parser.exit()
     
     if options.recent:
-	entries = LatestEntries()
-	for oneliner in entries.items():
+	for oneliner in OneLiner.recent()[:10]:
 	    print oneliner.pk,
 	    print oneliner.summary
 	    print oneliner.line
@@ -84,8 +83,8 @@ if __name__ == '__main__':
 	    oneliner = OneLiner.objects.get(pk=pk)
 
 	    if options.send:
-		print tweet(oneliner, consumer_key=consumer_key, consumer_secret=consumer_secret, access_token=access_token, access_token_secret=access_token_secret)
+		print tweet(oneliner, force=True, consumer_key=consumer_key, consumer_secret=consumer_secret, access_token=access_token, access_token_secret=access_token_secret)
 	    else:
-		print tweet(oneliner, test=True)
+		print tweet(oneliner, force=True, test=True)
 
 # eof

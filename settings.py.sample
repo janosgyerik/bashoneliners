@@ -132,6 +132,11 @@ TWITTER = {
 #EMAIL_FILE_PATH = '/tmp/django-emails'
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
+### url shortening
+#
+GOO_GL_API_URL = 'https://www.googleapis.com/urlshortener/v1/url'
+GOO_GL_API_KEY = ''
+
 #import sys
 #sys.path.append('/Library/Python/2.6/site-packages/Markdown-2.0.3-py2.6.egg')
 

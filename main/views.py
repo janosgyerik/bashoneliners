@@ -74,8 +74,8 @@ def tweet(oneliner, test=False, force=False, consumer_key=None, consumer_secret=
 		    shortUrl,
 		    oneliner.line,
 		    )
-	    if len(tweetmsg) > 140:
-		tweetmsg = tweetmsg[:136] + ' ...'
+	    if len(tweetmsg) > 139:
+		tweetmsg = tweetmsg[:135] + ' ...'
 	    
 	    if test:
 		print tweetmsg

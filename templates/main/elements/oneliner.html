@@ -32,7 +32,7 @@
 	<p><a href="{% url bashoneliners.main.ajax.question_answered question.pk oneliner.pk %}" class="btn btn-primary question-answered" data-parent="question-{{ question.pk }}">Accept this answer</a></p>
 	{% endif %}
 
-	{% if not nobuttons %}
+	{% if user.is_authenticated and not nobuttons %}
 	<p><a href="{% url bashoneliners.main.views.oneliner_alternative oneliner.pk %}" class="btn">Post an alternative one-liner</a></p>
 	{% endif %}
 
@@ -45,7 +45,7 @@
 	    <h3 class="comments-toggle"><img/>Comments ({{ comment_count }})</h3>
 	    <div class="well comments">
 	    {% render_comment_list for oneliner %}
-	    {% if not nobuttons %}
+	    {% if user.is_authenticated and not nobuttons %}
 	    <p><a href="{% url bashoneliners.main.views.oneliner_comment oneliner.pk %}" class="btn"><i class="icon-comment"></i> Post a comment on this one-liner</a></p>
 	    {% endif %}
 	    </div>

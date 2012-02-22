@@ -15,7 +15,14 @@
 <p>If you have a question that can be answered by an appropriate bash one-liner,
 feel free to ask it here!</p>
 
+{% if user.is_authenticated %}
 <p><a href="{% url bashoneliners.main.views.question_new %}" class="btn btn-primary">Post a question</a></p>
+{% else %}
+<div class="alert alert-warning">
+    <strong class="alert-heading">Note:</strong>
+    you have to <a href="{% url bashoneliners.main.views.login %}">login (with an OpenID)</a> to post a question. 
+</div>
+{% endif %}
 
 </div>
 

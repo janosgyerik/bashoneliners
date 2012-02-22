@@ -11,7 +11,7 @@
 	    </small>
 	</blockquote>
 
-	{% if not question.is_answered and not nobuttons %}
+	{% if user.is_answered and not question.is_answered and not nobuttons %}
 	<p><a class="btn" href="{% url bashoneliners.main.views.oneliner_answer question.pk %}">Post a one-liner that answers this!</a></p>
 	{% endif %}
 

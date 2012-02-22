@@ -33,14 +33,17 @@
 	{% endif %}
 
 	{% if user.is_authenticated and not nobuttons %}
-	<p><a href="{% url bashoneliners.main.views.oneliner_alternative oneliner.pk %}" class="btn">Post an alternative one-liner</a></p>
+	<p>
+	    <a href="{% url bashoneliners.main.views.oneliner_alternative oneliner.pk %}" class="btn">Post an alternative one-liner</a>
+	    <a href="{% url bashoneliners.main.views.oneliner_comment oneliner.pk %}" class="btn"><i class="icon-comment"></i> Post a comment on this one-liner</a>
+	</p>
 	{% endif %}
 
 	{% block related %}
 	{% endblock %}
 
 	{% get_comment_count for oneliner as comment_count %}
-	{% if comment_count > 0 or not nobuttons %}
+	{% if comment_count > 0 %}
 	<div class="related">
 	    <h3 class="comments-toggle"><img/>Comments ({{ comment_count }})</h3>
 	    <div class="well comments">

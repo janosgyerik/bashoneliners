@@ -45,5 +45,14 @@ class CommentEntries(Feed):
     def items(self):
 	return Comment_feed()
 
+    def item_title(self, item):
+	return self.ellipsize(item.comment)
+
+    def ellipsize(self, text):
+	if len(text) < 50:
+	    return text
+	else:
+	    return text[:46] + ' ...'
+
 
 # eof

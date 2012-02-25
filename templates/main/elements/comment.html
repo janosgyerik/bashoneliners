@@ -12,7 +12,7 @@
     {% with comment.content_object as oneliner %}
     <div class="{{ model }}">
 	<h3 class="summary"><a href="{% url bashoneliners.main.views.oneliner oneliner.pk %}">{{ oneliner.summary|capfirst }}</a></h3>
-	<pre><span class="add-on">bash$</span>{{ oneliner.line }}</pre>
+	<pre><span class="add-on">bash$ </span>{{ oneliner.line }}</pre>
     </div>
     {% endwith %}
     {% endif %}

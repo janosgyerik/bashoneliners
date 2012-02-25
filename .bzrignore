@@ -4,3 +4,5 @@ settings.py
 scripts/settings.py
 .DS_Store
 main/fixtures
+run.sh
+push.sh

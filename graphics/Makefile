@@ -21,10 +21,6 @@ icons: $(icons_target)
 
 all: launchpad icons
 
-$(icons_dir)/%.png: $(src_dir)/%.png
-	convert -geometry 16x $< $@
-	identify $@
-
 launchpad/icon.png: $(src_dir)/square.png
 	@mkdir -p $(@D)
 	convert -geometry 14x $< $@

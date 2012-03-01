@@ -42,51 +42,21 @@ def _common_params(request):
 def _common_initial(request):
     return { 'next_url': request.META.get('HTTP_REFERER', '/') }
 
-def tweet(oneliner, test=False, force=False, consumer_key=None, consumer_secret=None, access_token=None, access_token_secret=None):
+def tweet(oneliner, force=False, test=False):
     if not oneliner.was_tweeted or force:
-	try:
-	    import tweepy # 3rd party lib, install with: easy_install tweepy
-	    import settings
-	    if consumer_key is None:
-		consumer_key = settings.TWITTER.get('consumer_key')
-	    if consumer_secret is None:
-		consumer_secret = settings.TWITTER.get('consumer_secret')
-	    if access_token is None:
-		access_token = settings.TWITTER.get('access_token')
-	    if access_token_secret is None:
-		access_token_secret = settings.TWITTER.get('access_token_secret')
-
-	    # set up credentials to use Twitter api.
-	    auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
-	    auth.set_access_token(access_token, access_token_secret)
-	    api = tweepy.API(auth)
-
-	    # get short URL
-	    import urllib2
-	    data = '{longUrl:"%s", key:"%s"}' % ('http://bashoneliners.com/main/oneliner/%d' % oneliner.pk, settings.GOO_GL_API_KEY)
-	    req = urllib2.Request(settings.GOO_GL_API_URL, data)
-	    req.add_header('Content-type', 'application/json')
-	    result = urllib2.urlopen(req)
-	    import django.utils.simplejson as json
-	    shortUrl = json.loads(result.read()).get('id')
-
-	    tweetmsg = '%s %s' % (
-		    shortUrl,
-		    oneliner.line,
-		    )
-	    if len(tweetmsg) > 139:
-		tweetmsg = tweetmsg[:135] + ' ...'
-	    
-	    if test:
-		print tweetmsg
-		print
-		return True
-	    else:
-		oneliner.was_tweeted = True
-		oneliner.save()
-		return api.update_status(tweetmsg)
-	except:
-	    pass
+	long_url = 'http://bashoneliners.com/main/oneliner/%d' % oneliner.pk
+	from bashoneliners.main.shorturl import get_goo_gl
+	url = get_goo_gl(long_url) or long_url
+	message = '%s %s' % (
+		url,
+		oneliner.line,
+		)
+	from bashoneliners.main.tweet import tweet as send_tweet
+	result = send_tweet(message, test=test)
+	if result:
+	    oneliner.was_tweeted = True
+	    oneliner.save()
+	    return result
 
 
 def oneliner_list(request):

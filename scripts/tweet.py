@@ -47,16 +47,7 @@ if __name__ == '__main__':
     parser.add_option('--recent', help='List recent OneLiners, do not tweet', action='store_true', default=False)
     parser.add_option('--send', help='Send tweets', action='store_true', default=False)
 
-    parser.add_option('--consumer-key', default=consumer_key)
-    parser.add_option('--consumer-secret', default=consumer_secret)
-    parser.add_option('--access-token', default=access_token)
-    parser.add_option('--access-token-secret', default=access_token_secret)
-
     (options, args) = parser.parse_args()
-    consumer_key = options.consumer_key
-    consumer_secret = options.consumer_secret
-    access_token = options.access_token
-    access_token_secret = options.access_token_secret
 
     if not (consumer_key and consumer_secret and access_token and access_token_secret):
 	if not consumer_key:
@@ -83,7 +74,7 @@ if __name__ == '__main__':
 	    oneliner = OneLiner.objects.get(pk=pk)
 
 	    if options.send:
-		print tweet(oneliner, force=True, consumer_key=consumer_key, consumer_secret=consumer_secret, access_token=access_token, access_token_secret=access_token_secret)
+		print tweet(oneliner, force=True)
 	    else:
 		print tweet(oneliner, force=True, test=True)
 

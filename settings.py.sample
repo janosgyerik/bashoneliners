@@ -80,8 +80,14 @@ MIDDLEWARE_CLASSES = (
 
 AUTH_PROFILE_MODULE = 'bashoneliners.main.models.HackerProfile'
 
-AUTHENTICATION_BACKENDS = (
+try:
+    import openid
+    AUTHENTICATION_BACKENDS = (
 	'django_openid_auth.auth.OpenIDBackend',
+	'django.contrib.auth.backends.ModelBackend',
+    )
+except:
+    AUTHENTICATION_BACKENDS = (
 	'django.contrib.auth.backends.ModelBackend',
 	)
 
@@ -111,10 +117,16 @@ INSTALLED_APPS = (
     'django.contrib.markup',
     'django.contrib.comments',
     'bashoneliners.main',
-    'bashoneliners.django_openid_auth',
 )
 
+try:
+    import openid
+    INSTALLED_APPS += ('bashoneliners.django_openid_auth',)
+except:
+    pass
+
 USE_DJANGO_STATIC_SERVE_FOR_MEDIA = False
+USE_DJANGO_STATIC_SERVE_FOR_MEDIA = True
 
 
 ### project specific custom settings

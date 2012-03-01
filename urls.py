@@ -7,12 +7,19 @@ admin.autodiscover()
 urlpatterns = patterns('',
 	(r'^$', include('bashoneliners.main.urls')),
 	(r'^main/', include('bashoneliners.main.urls')),
-	(r'^openid/', include('bashoneliners.django_openid_auth.urls')),
 
 	(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 	(r'^admin/', include(admin.site.urls)),
 	(r'^comments/', include('django.contrib.comments.urls')),
 	)
+
+try:
+    import openid
+    urlpatterns += patterns('',
+	(r'^openid/', include('bashoneliners.django_openid_auth.urls')),
+	)
+except:
+    pass
 
 from bashoneliners.main.feeds import OneLinerEntries
 

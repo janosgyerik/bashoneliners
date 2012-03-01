@@ -1,6 +1,6 @@
 Requirements
 ============
-* python-openid - if you want to use OpenID authentication
+* install with: pip install -r requirements.txt
 
 
 Setup
@@ -13,11 +13,7 @@ Setup
 
 	./manage.py syncdb
 
-3. Load sample data
-
-	./scripts/loaddata.sh
-
-4. Start local website on localhost:8000
+3. Start local website on localhost:8000
 
 	./manage.py runserver
 

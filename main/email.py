@@ -1,5 +1,6 @@
 from django.template import Context, loader
 from django.core.mail import EmailMessage
+from django.core.mail.backends.base import BaseEmailBackend
 
 import bashoneliners.settings as settings
 
@@ -10,11 +11,11 @@ BCC_EMAIL = FROM_EMAIL
 
 def send_email(subject, message, *recipients):
     email = EmailMessage(
-	    subject = subject,
-	    body = message,
-	    from_email = FROM_EMAIL,
-	    to = recipients,
-	    bcc = [ BCC_EMAIL ], 
+	    subject=subject,
+	    body=message,
+	    from_email=FROM_EMAIL,
+	    to=recipients,
+	    bcc=[ BCC_EMAIL ], 
 	    )
     email.send(fail_silently=False)
 
@@ -58,6 +59,34 @@ def send_oneliner_comment(oneliner, sender, comment):
 		    },
 		oneliner.user.email
 		)
+
+
+class CustomFileEmailBackend(BaseEmailBackend):
+    def send_messages(self, email_messages):
+	from datetime import datetime
+	import re
+	if not email_messages:
+	    return
+	try:
+	    f = open(settings.EMAIL_FILE_PATH, 'a')
+	    for message in email_messages:
+		context = {
+			'subject': message.subject,
+			'from_email': message.from_email,
+			'recipients': ', '.join(message.recipients()),
+			'to': ', '.join(message.to),
+			'bcc': ', '.join(message.bcc),
+			'body': message.body,
+			'date': datetime.now(),
+			}
+		log = loader.get_template('email/log.txt').render(Context(context))
+		log = re.sub(r'\n{3,}', '\n\n', log)
+		f.write(log)
+		f.flush()
+	    f.close()
+	    return len(email_messages)
+	except:
+	    return 0
 
 
 # eof

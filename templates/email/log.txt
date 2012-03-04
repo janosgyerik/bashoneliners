@@ -1,0 +1,9 @@
+Subject: {{ subject }}
+From: {{ from_email }}
+To: {{ to }}
+Date: {{ date|date:'r' }}
+_recipients: {{ recipients }}
+_bcc: {{ bcc }}
+
+{{ body }}# Date: {{ date|date:'r' }}
+-------------------------------------------------------------------------------

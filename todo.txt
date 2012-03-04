@@ -9,10 +9,9 @@ release notes
 
 first release
 =============
-- in advanced search results, show the search params too for visual feedback
-- fix the navbar bug in a small window and mobile devices
-- comment on comments
 - option to subscribe to comments on a one-liner
+- the login page is weird. improve it!
+- fix the navbar bug in a small window and mobile devices
 
 
 submit the site to ...

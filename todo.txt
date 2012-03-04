@@ -9,8 +9,6 @@ release notes
 
 first release
 =============
-- when posting on a one-liner, show comments expanded
-- fix the submit buttons
 - in advanced search results, show the search params too for visual feedback
 - fix the navbar bug in a small window and mobile devices
 - comment on comments

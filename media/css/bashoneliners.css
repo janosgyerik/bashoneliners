@@ -136,8 +136,8 @@ form .input .error ul li {
     color: red;
 }
 
-.form-actions input {
-    margin-right: 2em;
+.form-actions button {
+    margin-right: 1em;
 }
 
 input.openid {

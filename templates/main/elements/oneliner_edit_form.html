@@ -48,8 +48,8 @@
 
 	<div class="form-actions">
 	    {% include 'main/elements/please_login.html' %}
-	    {% for action in form.actions %}<input class="btn {{ action.cssclass }}" type="submit" name="action" value="{{ action.name }}"/>{% endfor %}
-	    <a class="btn" href="{{ next_url }}">Cancel</a>
+	    {% for action in form.actions %}<button class="btn {{ action.cssclass }}" type="submit" name="action" value="{{ action.name }}">{{ action.name }}</button>{% endfor %}
+	    <button class="btn"><a href="{{ next_url }}">Cancel</a></button>
 	</div>
     </div>
 </form>

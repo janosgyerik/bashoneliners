@@ -9,8 +9,6 @@ release notes
 
 first release
 =============
-- option to subscribe to comments on a one-liner
-- the login page is weird. improve it!
 - fix the navbar bug in a small window and mobile devices
 
 

@@ -12,48 +12,82 @@
     in the best interest of our users.
 </div>
 
-<form class="form-horizontal" id="openid-form" method="post" action="/openid/login/">
-<fieldset>
-{% csrf_token %}
-    <div class="control-group">
-	<label class="control-label">Select Open ID provider</label>
-	<div class="controls">
-	    <label class="radio">
-		<input type="radio" name="openid_identifier" id="id_openid_google" value="https://www.google.com/accounts/o8/id"/>
-		Google - https://www.google.com/accounts/o8/id
-	    </label>
+<div class="row">
+    <form class="openid-form form-inline" method="post" action="/openid/login/">
+	<fieldset>
+	    {% csrf_token %}
+	    <input type="hidden" name="openid_identifier" value="https://www.google.com/accounts/o8/id"/>
+	    <div class="span4">https://www.google.com/accounts/o8/id</div>
+	    <input name="bsignin" type="submit" value="Google" class="btn btn-primary span2" />
+	</fieldset>
+    </form>
+</div>
 
-	    <label class="radio">
-		<input type="radio" name="openid_identifier" id="id_openid_yahoo" value="http://yahoo.com"/>
-		Yahoo! - http://yahoo.com
-	    </label>
-	    
-	    <label class="radio">
-		<input type="radio" name="openid_identifier" id="id_openid_wordpress" value="__username__.wordpress.com"/>
-		WordPress:</label> <div class="input-append"><input class="username" type="text" placeholder="username"/><span class="add-on">.wordpress.com</span></div>
-	    
-	    <label class="radio">
-		<input type="radio" name="openid_identifier" id="id_openid_myopenid" value="__username__.myopenid.com"/>
-		MyOpenID:</label> <div class="input-append"><input class="username" type="text" placeholder="username"/><span class="add-on">.myopenid.com</span></div>
-	    
-	    <label class="radio">
-		<input type="radio" name="openid_identifier" id="id_openid_livejournal" value="__username__.livejournal.com"/>
-		LiveJournal:</label> <div class="input-append"><input class="username" type="text" placeholder="username"/><span class="add-on">.livejournal.com</span></div>
-	    
-	    <label class="radio">
-		<input type="radio" name="openid_identifier" id="id_openid_myspace" value="myspace.com/__username__"/>
-		MySpace:</label> <div class="input-prepend"><span class="add-on">myspace.com/</span><input class="username" type="text" placeholder="username"/></div>
-	    
-	    <label class="radio">
-		<input type="radio" name="openid_identifier" id="id_openid_launchpad" value="launchpad.net/~__username__"/>
-		Launchpad:</label> <div class="input-prepend"><span class="add-on">launchpad.net/~</span><input class="username" type="text" placeholder="username"/></div>
-	</div>
-    </div>
-    <div class="form-actions">
-	<input name="bsignin" type="submit" value="Login" class="btn btn-primary" />
-    </div>
-</fieldset>
-</form>
+<div class="row">
+    <form class="openid-form form-inline" method="post" action="/openid/login/">
+	<fieldset>
+	    {% csrf_token %}
+	    <input type="hidden" name="openid_identifier" value="http://yahoo.com"/>
+	    <div class="span4">http://yahoo.com</div>
+	    <input name="bsignin" type="submit" value="Yahoo!" class="btn btn-primary span2" />
+	</fieldset>
+    </form>
+</div>
+
+<div class="row">
+    <form class="openid-form form-inline" method="post" action="/openid/login/">
+	<fieldset>
+	    {% csrf_token %}
+	    <input type="hidden" name="openid_identifier" value="__username__.wordpress.com"/>
+	    <div class="span4 input-append"><input class="username" type="text" placeholder="username"/><span class="add-on">.wordpress.com</span></div>
+	    <input name="bsignin" type="submit" value="WordPress" class="btn btn-primary span2" />
+	</fieldset>
+    </form>
+</div>
+
+<div class="row">
+    <form class="openid-form form-inline" method="post" action="/openid/login/">
+	<fieldset>
+	    {% csrf_token %}
+	    <input type="hidden" name="openid_identifier" value="__username__.myopenid.com"/>
+	    <div class="span4 input-append"><input class="username" type="text" placeholder="username"/><span class="add-on">.myopenid.com</span></div>
+	    <input name="bsignin" type="submit" value="MyOpenID" class="btn btn-primary span2" />
+	</fieldset>
+    </form>
+</div>
+
+<div class="row">
+    <form class="openid-form form-inline" method="post" action="/openid/login/">
+	<fieldset>
+	    {% csrf_token %}
+	    <input type="hidden" name="openid_identifier" value="__username__.livejournal.com"/>
+	    <div class="span4 input-append"><input class="username" type="text" placeholder="username"/><span class="add-on">.livejournal.com</span></div>
+	    <input name="bsignin" type="submit" value="LiveJournal" class="btn btn-primary span2" />
+	</fieldset>
+    </form>
+</div>
+
+<div class="row">
+    <form class="openid-form form-inline" method="post" action="/openid/login/">
+	<fieldset>
+	    {% csrf_token %}
+	    <input type="hidden" name="openid_identifier" value="myspace.com/__username__"/>
+	    <div class="span4 input-prepend"><span class="add-on">myspace.com/</span><input class="username" type="text" placeholder="username"/></div>
+	    <input name="bsignin" type="submit" value="MySpace" class="btn btn-primary span2" />
+	</fieldset>
+    </form>
+</div>
+
+<div class="row">
+    <form class="openid-form form-inline" method="post" action="/openid/login/">
+	<fieldset>
+	    {% csrf_token %}
+	    <input type="hidden" name="openid_identifier" value="launchpad.net/~__username__"/>
+	    <div class="span4 input-prepend"><span class="add-on">launchpad.net/~</span><input class="username" type="text" placeholder="username"/></div>
+	    <input name="bsignin" type="submit" value="Launchpad" class="btn btn-primary span2" />
+	</fieldset>
+    </form>
+</div>
 
 <form id="openid-form-other" method="post" action="/openid/login/"><div>
 {% csrf_token %}
@@ -67,14 +101,10 @@ you can enter its URL directly:</p>
 {% endblock %}
 
 {% block ready %}
-$('#openid-form').bind('submit', function(e) {
-    var openid_provider_url = null;
-    $(this).find(':radio:checked').each(function() {
-	var username = $(this).parent().find('input.username').val();
-	openid_provider_url = $(this).val().replace('__username__', username);
-	$(this).val(openid_provider_url);
-	//console.log(openid_provider_url);
-    });
+$('.openid-form').bind('submit', function(e) {
+    var username = $(this).find('input.username').val();
+    var openid_provider_url = $(this).find('input[name="openid_identifier"]').val().replace('__username__', username);
+    $(this).find('input[name="openid_identifier"]').val(openid_provider_url);
     //e.preventDefault();
 });
 {% endblock %}

@@ -9,20 +9,29 @@ release notes
 
 first release
 =============
+- when posting on a one-liner, show comments expanded
+- fix the submit buttons
+- in advanced search results, show the search params too for visual feedback
 - fix the navbar bug in a small window and mobile devices
+- comment on comments
+- option to subscribe to comments on a one-liner
 
 
 submit the site to ...
 ======================
 - ycombinator new
-- author of playterm
-	- idea: video maker from script
-	- link exchange
-- author of tipscache
 - Linux Journal
 - Linux Magazine
 - Linux Format
 - Ubuntu User
+- Admin UPDATE
+- digg
+- stumbleupon
+- reddit
+- venturebeat profiles
+- http://www.infosnacks.com
+- author of playterm
+- author of tipscache
 - site owners of the first x matches of a google search for 'bash one-liners'
 
 

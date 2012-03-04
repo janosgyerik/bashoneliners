@@ -184,6 +184,9 @@ table.profile {
 .comments {
     display: none;
 }
+.comments.expanded {
+    display: inherit;
+}
 
 .footer {
     background-color: #eee;

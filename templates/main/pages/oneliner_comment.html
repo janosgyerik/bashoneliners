@@ -11,7 +11,9 @@
 {% block content %}
 
 {% with 1 as nobuttons %}
+{% with 'expanded' as comments_expanded %}
 {% include 'main/elements/oneliner.html' %}
+{% endwith %}
 {% endwith %}
 
 {% include 'main/elements/please_login.html' %}

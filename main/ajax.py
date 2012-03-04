@@ -34,8 +34,9 @@ def search(request):
 	if form.is_valid():
 	    params['oneliners'] = OneLiner.search(form)
 	    params['user'] = request.user
+	    params['data'] = form.data
 
-    return render_to_response('main/elements/oneliners.html', params)
+    return render_to_response('main/elements/oneliners_searchresults.html', params)
 
 
 # eof

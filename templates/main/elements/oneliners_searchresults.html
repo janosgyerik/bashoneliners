@@ -1,0 +1,12 @@
+{% extends 'main/elements/oneliners.html' %}
+
+{% block oneliners_empty %}
+    <div class="alert alert-block">
+	<h4 class="alert-heading">No matching one-liners for the query: {{ data.query }}</h4>
+	<p><i class="icon-{% if data.match_whole_words %}ok{% else %}remove{% endif %}"></i> Match whole words</p>
+	<p><i class="icon-{% if data.match_summary %}ok{% else %}remove{% endif %}"></i> Match summary</p>
+	<p><i class="icon-{% if data.match_line %}ok{% else %}remove{% endif %}"></i> Match line</p>
+	<p><i class="icon-{% if data.match_explanation %}ok{% else %}remove{% endif %}"></i> Match explanation</p>
+	<p><i class="icon-{% if data.match_limitations %}ok{% else %}remove{% endif %}"></i> Match limitations</p>
+    </div>
+{% endblock %}

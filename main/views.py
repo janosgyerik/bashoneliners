@@ -327,6 +327,7 @@ def search(request):
 
     if form.is_valid():
 	params['oneliners'] = OneLiner.search(form)
+	params['data'] = form.data
 
     return render_to_response('main/pages/search.html', params)
 

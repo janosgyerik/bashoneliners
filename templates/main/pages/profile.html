@@ -27,7 +27,7 @@
 </table>
 {% endif %}
 
-<h3>Questions asked (waiting for an answer)</h3>
+<h3>Questions asked (still waiting for an answer)</h3>
 
 {% with questions_pending as questions %}
 {% include 'main/elements/questions.html' %}
@@ -37,7 +37,7 @@
 <p><a href="{% url bashoneliners.main.views.question_new %}" class="btn btn-primary">Post a question</a></p>
 {% endif %}
 
-<h3>Questions asked (answered)</h3>
+<h3>Questions asked (marked answered)</h3>
 
 {% with questions_answered as questions %}
 {% include 'main/elements/questions.html' %}
@@ -53,11 +53,11 @@
 
 <h3>Favourite one-liners</h3>
 
-<p class="alert">Not implemented yet.</p>
+<p class="alert alert-block">Not implemented yet.</p>
 
 <h3>One-liners voted on</h3>
 
-<p class="alert">Not implemented yet.</p>
+<p class="alert alert-block">Not implemented yet.</p>
 
 
 {% endblock %}

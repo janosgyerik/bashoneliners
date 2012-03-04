@@ -2,6 +2,6 @@
     {% for question in questions %}
     {% include 'main/elements/question_with_related.html' %}
     {% empty %}
-    <div class="alert">No matching questions.</div>
+    <div class="alert alert-block">No matching questions.</div>
     {% endfor %}
 </div>

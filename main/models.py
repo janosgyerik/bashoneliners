@@ -184,6 +184,22 @@ class OneLiner(models.Model):
 	    if match_limitations and re.search(r'\b%s\b' % term, self.limitations):
 		return True
 
+    def update_tags(self):
+	self.onelinertag_set.all().delete()
+	words = re.split(r'[ ;|]+', self.line)
+	tagwords = set([word for word in words if re.match(r'^[a-z_]{2,}$', word)])
+	for tagword in tagwords:
+	    tag = Tag.create_or_get(tagword)
+	    OneLinerTag(oneliner=self, tag=tag).save()
+
+    def get_tags(self):
+	return [rel.tag.text for rel in self.onelinertag_set.all()]
+
+    def save(self, *args, **kwargs):
+	ret = super(OneLiner, self).save(*args, **kwargs)
+	self.update_tags()
+	return ret
+
     def get_absolute_url(self):
 	return "/main/oneliner/%i/" % self.pk
 
@@ -201,6 +217,31 @@ class AlternativeOneLiner(models.Model):
 
     class Meta:
 	unique_together = (('alternative', 'oneliner',),)
+
+
+class Tag(models.Model):
+    text = models.SlugField(max_length=50)
+
+    def __unicode__(self):
+	return self.text
+
+    @staticmethod
+    def create_or_get(text):
+	try:
+	    return Tag.objects.get(text=text)
+	except:
+	    tag = Tag(text=text)
+	    tag.save()
+	    return tag
+
+    @staticmethod
+    def tagcloud():
+	return Tag.objects.annotate(c=Count('onelinertag')).order_by('-c').values_list('text', 'c')
+
+
+class OneLinerTag(models.Model):
+    oneliner = models.ForeignKey(OneLiner)
+    tag = models.ForeignKey(Tag)
 
 
 class Question(models.Model):

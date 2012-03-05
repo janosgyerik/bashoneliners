@@ -368,11 +368,11 @@ class TagTests(TestCase):
 	Util.new_oneliner(user, 'xargs xargs while sleep done do')
 
 	tagcloud = Tag.tagcloud()
+	tagcloud = tagcloud.values_list('text', 'count')
 	dd = dict(tagcloud)
 	self.assertEquals(3, dd['xargs'])
 	self.assertEquals(3, dd.get('xargs'))
 	self.assertEquals(2, dd['find'])
-	self.assertEquals(1, dd['while'])
 	self.assertFalse(dd.get('BLAH'))
 
 

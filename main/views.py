@@ -6,7 +6,7 @@ from django.contrib.auth import logout as django_logout
 from django.contrib.comments.views import comments
 from django.core.paginator import Paginator, InvalidPage, EmptyPage
 
-from bashoneliners.main.models import HackerProfile, OneLiner, User, Answer, Comment_recent
+from bashoneliners.main.models import HackerProfile, OneLiner, User, Answer, Comment_recent, Tag
 from bashoneliners.main.forms import *
 from bashoneliners.main.email import *
 
@@ -78,6 +78,7 @@ def oneliner_list(request):
 	page = paginator.page(paginator.num_pages)
 
     params['oneliners_page'] = page
+    params['tagcloud'] = Tag.tagcloud()
     
     return render_to_response('main/pages/index.html', params)
 

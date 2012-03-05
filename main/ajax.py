@@ -38,5 +38,19 @@ def search(request):
 
     return render_to_response('main/elements/oneliners_searchresults.html', params)
 
+def search_by_tag(request):
+    params = {}
+    params['user'] = request.user
+
+    text = request.GET.get('text')
+    from django.core.validators import validate_slug
+    try:
+	validate_slug(text)
+	params['oneliners'] = OneLiner.recent_by_tag(text)
+    except:
+	params['oneliners'] = ()
+
+    return render_to_response('main/elements/oneliners.html', params)
+
 
 # eof

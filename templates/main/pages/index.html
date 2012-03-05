@@ -16,8 +16,43 @@ or browse or search the one-liners contributed by others.</p>
 
 <p>You can follow the latest bash one-liners via <a href="{% url bashoneliners.main.views.feeds %}">rss feeds</a> or on twitter <a href="https://twitter.com/#!/bashoneliners">@bashoneliners</a>.</p>
 
-<h2>Latest one-liners</h2>
+<h2>Tags</h2>
+
+<ul class="nav nav-pills tags">
+{% for tag in tagcloud %}
+<li><a href="#">{{ tag.text }}</a></li>
+{% endfor %}
+</ul>
+
+<h2>One-Liners</h2>
 
 {% include 'main/elements/oneliners_page.html' %}
+
+{% endblock %}
+
+{% block ready %}
+	function search_by_tag(text) {
+	    var options = {
+		url: '{% url bashoneliners.main.ajax.search_by_tag %}',
+		type: 'get',
+		data: { 
+		    'text': text
+		},
+		success: search_success
+	    };
+	    $.ajax(options);
+	}
+
+	function search_success(html) {
+	    $('.oneliners').html($(html).html());
+	    $('.pagination').remove();
+	}
+
+	$('.tags a').click(function(e) {
+	    e.preventDefault();
+	    $('.tags li.active').removeClass('active');
+	    $(this).parent().addClass('active');
+	    search_by_tag($(this).text());
+	});
 
 {% endblock %}

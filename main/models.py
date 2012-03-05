@@ -190,11 +190,12 @@ class OneLiner(models.Model):
 
     def update_tags(self):
 	self.onelinertag_set.all().delete()
-	words = re.split(r'[ ;|]+', self.line)
-	tagwords = set([word for word in words if re.match(r'^[a-z_]{2,}$', word)])
-	for tagword in tagwords:
-	    tag = Tag.create_or_get(tagword)
-	    OneLinerTag(oneliner=self, tag=tag).save()
+	if self.is_published:
+	    words = re.split(r'[ ;|]+', self.line)
+	    tagwords = set([word for word in words if re.match(r'^[a-z_]{2,}$', word)])
+	    for tagword in tagwords:
+		tag = Tag.create_or_get(tagword)
+		OneLinerTag(oneliner=self, tag=tag).save()
 
     def get_tags(self):
 	return [rel.tag.text for rel in self.onelinertag_set.all()]

@@ -7,13 +7,9 @@ release notes
 - 
 
 
-first release
-=============
-- fix the navbar bug in a small window and mobile devices
-
-
 submit the site to ...
 ======================
+- dhsotm
 - ycombinator new
 - Linux Journal
 - Linux Magazine

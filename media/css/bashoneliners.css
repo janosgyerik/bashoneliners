@@ -101,6 +101,12 @@ body {
     padding-top: 40px; /* Twitter bootstrap */
 }
 
+@media (max-width: 980px) {
+    body {
+	padding-top: 0;
+    }
+}
+
 .oneliner pre {
     background: #ddd;
 }

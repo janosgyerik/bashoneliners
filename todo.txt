@@ -7,23 +7,15 @@ release notes
 - 
 
 
-submit the site to ...
-======================
-- dhsotm
-- ycombinator new
-- Linux Journal
-- Linux Magazine
-- Linux Format
-- Ubuntu User
-- Admin UPDATE
-- digg
-- stumbleupon
-- reddit
-- venturebeat profiles
-- http://www.infosnacks.com
-- author of playterm
-- author of tipscache
-- site owners of the first x matches of a google search for 'bash one-liners'
+code cleansing
+==============
+- emphasize the importance of explanation
+- make it all work without the 'bashoneliners.' prefix everywhere
+- run pep8 and pyflakes
+- see newproj.views._response
+- remove initial=initial in oneliner_edit (and others)
+- in tweet script prob no need for the 'bashoneliners.' prefix
+- PEP8, remove tabs
 
 
 future releases

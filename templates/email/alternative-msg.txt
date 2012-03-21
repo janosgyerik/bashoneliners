@@ -1,6 +1,6 @@
 Hi {{ oneliner.user.hackerprofile.get_display_name }},
 
-There is a new alterntive to your one-liner:
+There is a new alternative to your one-liner:
 {{ baseurl }}{% url bashoneliners.main.views.oneliner oneliner.pk %}
 "{{ oneliner.summary|safe }}"
 

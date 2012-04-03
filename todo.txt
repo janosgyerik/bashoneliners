@@ -9,7 +9,6 @@ release notes
 
 code cleansing
 ==============
-- emphasize the importance of explanation
 - make it all work without the 'bashoneliners.' prefix everywhere
 - run pep8 and pyflakes
 - see newproj.views._response

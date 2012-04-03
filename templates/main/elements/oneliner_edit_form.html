@@ -10,7 +10,7 @@
 	</div>
 	
 	<h3>The one-liner<span class="required">*</span></h3>
-	<div class="help-block"></div>
+	<div class="help-block">Use a space around "|", single space after ";", UPPERCASE variable names, $() style subshells instead of ``</div>
 	<div class="input input-prepend">
 	    <div class="error">{{ form.line.errors }}</div>
 	    <div class="summary input-prepend">
@@ -19,7 +19,7 @@
 	</div>
 	
 	<h3>Explanation<span class="required">*</span></h3>
-	<div class="help-block">Try to use relevant keywords in the explanation, so that the one-liner is easier to find by search.
+	<div class="help-block">This is the most important field. Explain how the one-liner works as if you're teaching it to a good friend. No need to dissect word by word.
 	    <br/>Note: any html will be escaped, and the text will be formatted with <a class="help help-markdown" href="{% url bashoneliners.main.views.help_markdown %}">markdown</a>.
 	</div>
 	<div class="input">

@@ -1,12 +1,12 @@
 #!/usr/bin/env python
-# 
+#
 # To access twitter with OAuth, you need to first obtain:
-#	consumer key, consumer secret, access token, access token secret
+#    consumer key, consumer secret, access token, access token secret
 #
 # 1. Login to Twitter
 # 2. Go to https://dev.twitter.com/apps/new and fill the form
-#	- Application Type should be Client
-#	- Default Access Type must be Read and Write
+#    - Application Type should be Client
+#    - Default Access Type must be Read and Write
 # 3. Consumer key and secret are here: https://dev.twitter.com/apps
 # 4. Access token and secret are in the My Access Token menu
 #
@@ -50,32 +50,32 @@ if __name__ == '__main__':
     (options, args) = parser.parse_args()
 
     if not (consumer_key and consumer_secret and access_token and access_token_secret):
-	if not consumer_key:
-	    print 'Error: Consumer Key is required!'
-	if not consumer_secret:
-	    print 'Error: Consumer Secret is required!'
-	if not access_token:
-	    print 'Error: Access Token is required!'
-	if not access_token_secret:
-	    print 'Error: Access Token Secret is required!'
-	parser.print_help()
-	parser.exit()
-    
+        if not consumer_key:
+            print 'Error: Consumer Key is required!'
+        if not consumer_secret:
+            print 'Error: Consumer Secret is required!'
+        if not access_token:
+            print 'Error: Access Token is required!'
+        if not access_token_secret:
+            print 'Error: Access Token Secret is required!'
+        parser.print_help()
+        parser.exit()
+
     if options.recent:
-	for oneliner in OneLiner.recent()[:10]:
-	    print oneliner.pk,
-	    print oneliner.summary
-	    print oneliner.line
-	    print
-	parser.exit()
+        for oneliner in OneLiner.recent()[:10]:
+            print oneliner.pk,
+            print oneliner.summary
+            print oneliner.line
+            print
+        parser.exit()
 
     if options.pk:
-	for pk in options.pk:
-	    oneliner = OneLiner.objects.get(pk=pk)
+        for pk in options.pk:
+            oneliner = OneLiner.objects.get(pk=pk)
 
-	    if options.send:
-		print tweet(oneliner, force=True)
-	    else:
-		print tweet(oneliner, force=True, test=True)
+            if options.send:
+                print tweet(oneliner, force=True)
+            else:
+                print tweet(oneliner, force=True, test=True)
 
 # eof

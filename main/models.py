@@ -20,26 +20,30 @@ FEED_LIMIT = 10
 
 ''' Helper methods '''
 
+
 def randomstring(length=16):
     return ''.join(random.choice(string.letters) for i in xrange(length))
 
+
 def get_query_terms(query):
     if query is None:
-	return ()
+        return ()
 
     query = query.strip()
     if query == '':
-	return ()
+        return ()
 
     return re.split(r' +', query)
 
+
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
-	HackerProfile.objects.get_or_create(user=instance)
+        HackerProfile.objects.get_or_create(user=instance)
 
 post_save.connect(create_user_profile, sender=User)
 
 ''' Core models '''
+
 
 class HackerProfile(models.Model):
     user = models.OneToOneField(User)
@@ -50,25 +54,25 @@ class HackerProfile(models.Model):
     homepage_url = models.URLField('Homepage URL', blank=True, null=True)
 
     def twitter_url(self):
-	return 'http://twitter.com/%s/' % self.twitter_name
+        return 'http://twitter.com/%s/' % self.twitter_name
 
     def get_username(self):
-	return self.user.username
+        return self.user.username
 
     def get_email(self):
-	return self.user.email
+        return self.user.email
 
     def get_date_joined(self):
-	return self.user.date_joined
+        return self.user.date_joined
 
     def get_display_name(self):
-	return self.display_name or self.user.username
+        return self.display_name or self.user.username
 
     def __unicode__(self):
-	return ', '.join([x for x in (self.user.username, self.user.email) if x])
+        return ', '.join([x for x in (self.user.username, self.user.email) if x])
 
     class Meta:
-	ordering = ('-id',)
+        ordering = ('-id',)
 
 
 class OneLiner(models.Model):
@@ -85,135 +89,135 @@ class OneLiner(models.Model):
     created_dt = models.DateTimeField(default=datetime.now, blank=True)
 
     def vote_up(self, user):
-	Vote.vote_up(user, self)
+        Vote.vote_up(user, self)
 
     def vote_down(self, user):
-	Vote.vote_down(user, self)
+        Vote.vote_down(user, self)
 
     def get_votes(self):
-	return (self.get_votes_up(), self.get_votes_down())
+        return (self.get_votes_up(), self.get_votes_down())
 
     def get_votes_up(self):
-	return self.vote_set.filter(up=True).count()
+        return self.vote_set.filter(up=True).count()
 
     def get_votes_down(self):
-	return self.vote_set.filter(up=False).count()
+        return self.vote_set.filter(up=False).count()
 
     def questions(self):
-	return self.answer_set.filter(question__is_published=True)
+        return self.answer_set.filter(question__is_published=True)
 
     def alternatives(self):
-	return self.alternativeoneliner_set.filter(alternative__is_published=True)
+        return self.alternativeoneliner_set.filter(alternative__is_published=True)
 
     def add_alternative(self, alternative):
-	AlternativeOneLiner(alternative=alternative, oneliner=self).save()
+        AlternativeOneLiner(alternative=alternative, oneliner=self).save()
 
     def relateds(self):
-	return self.related_set.filter(oneliner__is_published=True)
+        return self.related_set.filter(oneliner__is_published=True)
 
     @staticmethod
     def get(pk):
-	return OneLiner.objects.get(pk=pk)
+        return OneLiner.objects.get(pk=pk)
 
     @staticmethod
     def feed(limit=FEED_LIMIT):
-	return OneLiner.recent(limit)
+        return OneLiner.recent(limit)
 
     @staticmethod
     def recent(limit=RECENT_LIMIT):
-	return OneLiner.objects.filter(is_published=True)[:limit]
+        return OneLiner.objects.filter(is_published=True)[:limit]
 
     @staticmethod
     def recent_by_tag(text, limit=RECENT_LIMIT):
-	return OneLiner.objects.filter(is_published=True, onelinertag__tag__text=text)[:limit]
+        return OneLiner.objects.filter(is_published=True, onelinertag__tag__text=text)[:limit]
 
     @staticmethod
     def top(limit=SEARCH_LIMIT):
-	return OneLiner.objects.filter(vote__up=True).annotate(votes=Count('vote')).order_by('-votes')[:limit]
+        return OneLiner.objects.filter(vote__up=True).annotate(votes=Count('vote')).order_by('-votes')[:limit]
 
     @staticmethod
     def simplesearch(query=None, limit=SEARCH_LIMIT):
-	qq = Q()
-	for term in get_query_terms(query):
-	    sub_qq = Q()
-	    sub_qq |= Q(summary__icontains=term)
-	    sub_qq |= Q(line__icontains=term)
-	    sub_qq |= Q(explanation__icontains=term)
-	    sub_qq |= Q(limitations__icontains=term)
-	    qq &= Q(sub_qq)
-	return OneLiner.objects.filter(is_published=True).filter(qq)[:limit]
+        qq = Q()
+        for term in get_query_terms(query):
+            sub_qq = Q()
+            sub_qq |= Q(summary__icontains=term)
+            sub_qq |= Q(line__icontains=term)
+            sub_qq |= Q(explanation__icontains=term)
+            sub_qq |= Q(limitations__icontains=term)
+            qq &= Q(sub_qq)
+        return OneLiner.objects.filter(is_published=True).filter(qq)[:limit]
 
     @staticmethod
     def search(form, limit=SEARCH_LIMIT):
-	query = form.cleaned_data.get('query')
-	match_summary = form.cleaned_data.get('match_summary')
-	match_line = form.cleaned_data.get('match_line')
-	match_explanation = form.cleaned_data.get('match_explanation')
-	match_limitations = form.cleaned_data.get('match_limitations')
-	match_whole_words = form.cleaned_data.get('match_whole_words')
+        query = form.cleaned_data.get('query')
+        match_summary = form.cleaned_data.get('match_summary')
+        match_line = form.cleaned_data.get('match_line')
+        match_explanation = form.cleaned_data.get('match_explanation')
+        match_limitations = form.cleaned_data.get('match_limitations')
+        match_whole_words = form.cleaned_data.get('match_whole_words')
 
-	terms = get_query_terms(query)
-	qq = Q()
-	for term in terms:
-	    sub_qq = Q()
-	    if match_summary:
-		sub_qq |= Q(summary__icontains=term)
-	    if match_line:
-		sub_qq |= Q(line__icontains=term)
-	    if match_explanation:
-		sub_qq |= Q(explanation__icontains=term)
-	    if match_limitations:
-		sub_qq |= Q(limitations__icontains=term)
-	    if len(sub_qq.children) > 0:
-		qq &= Q(sub_qq)
+        terms = get_query_terms(query)
+        qq = Q()
+        for term in terms:
+            sub_qq = Q()
+            if match_summary:
+                sub_qq |= Q(summary__icontains=term)
+            if match_line:
+                sub_qq |= Q(line__icontains=term)
+            if match_explanation:
+                sub_qq |= Q(explanation__icontains=term)
+            if match_limitations:
+                sub_qq |= Q(limitations__icontains=term)
+            if len(sub_qq.children) > 0:
+                qq &= Q(sub_qq)
 
-	if len(qq.children) > 0:
-	    results = OneLiner.objects.filter(is_published=True).filter(qq)
+        if len(qq.children) > 0:
+            results = OneLiner.objects.filter(is_published=True).filter(qq)
 
-	    if match_whole_words:
-		results = [x for x in results if x.matches_words(terms, match_summary, match_line, match_explanation, match_limitations)]
+            if match_whole_words:
+                results = [x for x in results if x.matches_words(terms, match_summary, match_line, match_explanation, match_limitations)]
 
-	    return results[:limit]
-	else:
-	    return ()
+            return results[:limit]
+        else:
+            return ()
 
     def matches_words(self, terms, match_summary, match_line, match_explanation, match_limitations):
-	for term in terms:
-	    if match_summary and re.search(r'\b%s\b' % term, self.summary):
-		return True
-	    if match_line and re.search(r'\b%s\b' % term, self.line):
-		return True
-	    if match_explanation and re.search(r'\b%s\b' % term, self.explanation):
-		return True
-	    if match_limitations and re.search(r'\b%s\b' % term, self.limitations):
-		return True
+        for term in terms:
+            if match_summary and re.search(r'\b%s\b' % term, self.summary):
+                return True
+            if match_line and re.search(r'\b%s\b' % term, self.line):
+                return True
+            if match_explanation and re.search(r'\b%s\b' % term, self.explanation):
+                return True
+            if match_limitations and re.search(r'\b%s\b' % term, self.limitations):
+                return True
 
     def update_tags(self):
-	self.onelinertag_set.all().delete()
-	if self.is_published:
-	    words = re.split(r'[ ;|]+', self.line)
-	    tagwords = set([word for word in words if re.match(r'^[a-z_]{2,}$', word)])
-	    for tagword in tagwords:
-		tag = Tag.create_or_get(tagword)
-		OneLinerTag(oneliner=self, tag=tag).save()
+        self.onelinertag_set.all().delete()
+        if self.is_published:
+            words = re.split(r'[ ;|]+', self.line)
+            tagwords = set([word for word in words if re.match(r'^[a-z_]{2,}$', word)])
+            for tagword in tagwords:
+                tag = Tag.create_or_get(tagword)
+                OneLinerTag(oneliner=self, tag=tag).save()
 
     def get_tags(self):
-	return [rel.tag.text for rel in self.onelinertag_set.all()]
+        return [rel.tag.text for rel in self.onelinertag_set.all()]
 
     def save(self, *args, **kwargs):
-	ret = super(OneLiner, self).save(*args, **kwargs)
-	self.update_tags()
-	return ret
+        ret = super(OneLiner, self).save(*args, **kwargs)
+        self.update_tags()
+        return ret
 
     def get_absolute_url(self):
-	return "/main/oneliner/%i/" % self.pk
+        return "/main/oneliner/%i/" % self.pk
 
     def __unicode__(self):
-	return self.summary
+        return self.summary
 
     class Meta:
-	get_latest_by = 'pk'
-	ordering = ('-id',)
+        get_latest_by = 'pk'
+        ordering = ('-id',)
 
 
 class AlternativeOneLiner(models.Model):
@@ -221,28 +225,28 @@ class AlternativeOneLiner(models.Model):
     oneliner = models.ForeignKey(OneLiner)
 
     class Meta:
-	unique_together = (('alternative', 'oneliner',),)
+        unique_together = (('alternative', 'oneliner',),)
 
 
 class Tag(models.Model):
     text = models.SlugField(max_length=50)
 
     def __unicode__(self):
-	return self.text
+        return self.text
 
     @staticmethod
     def create_or_get(text):
-	try:
-	    return Tag.objects.get(text=text)
-	except:
-	    tag = Tag(text=text)
-	    tag.save()
-	    return tag
+        try:
+            return Tag.objects.get(text=text)
+        except:
+            tag = Tag(text=text)
+            tag.save()
+            return tag
 
     @staticmethod
     def tagcloud():
-	return Tag.objects.annotate(count=Count('onelinertag')).filter(count__gt=1).order_by('-count').values('text', 'count')
-	#return Tag.objects.annotate(count=Count('onelinertag')).order_by('-count').values_list('text', 'count')
+        return Tag.objects.annotate(count=Count('onelinertag')).filter(count__gt=1).order_by('-count').values('text', 'count')
+        #return Tag.objects.annotate(count=Count('onelinertag')).order_by('-count').values_list('text', 'count')
 
 
 class OneLinerTag(models.Model):
@@ -259,56 +263,56 @@ class Question(models.Model):
     created_dt = models.DateTimeField(default=datetime.now, blank=True)
 
     def __unicode__(self):
-	return self.summary
+        return self.summary
 
     def add_answer(self, oneliner):
-	Answer(question=self, oneliner=oneliner).save()
+        Answer(question=self, oneliner=oneliner).save()
 
     def oneliners(self):
-	return self.answer_set.filter(oneliner__is_published=True)
+        return self.answer_set.filter(oneliner__is_published=True)
 
     def accept_answer(self, oneliner):
-	self.is_answered = True
-	self.save()
-	try:
-	    AcceptedAnswer(question=self, oneliner=oneliner).save()
-	except:
-	    pass
+        self.is_answered = True
+        self.save()
+        try:
+            AcceptedAnswer(question=self, oneliner=oneliner).save()
+        except:
+            pass
 
     def clear_all_answers(self):
-	self.is_answered = False
-	self.save()
+        self.is_answered = False
+        self.save()
 
     def save(self, *args, **kwargs):
-	if not self.is_answered:
-	    AcceptedAnswer.objects.filter(question=self).delete()
-	return super(Question, self).save(*args, **kwargs)
+        if not self.is_answered:
+            AcceptedAnswer.objects.filter(question=self).delete()
+        return super(Question, self).save(*args, **kwargs)
 
     @staticmethod
     def get(pk):
-	return Question.objects.get(pk=pk)
+        return Question.objects.get(pk=pk)
 
     @staticmethod
     def feed(limit=FEED_LIMIT):
-	return Question.objects.filter(is_published=True)[:limit]
+        return Question.objects.filter(is_published=True)[:limit]
 
     @staticmethod
     def recent(limit=RECENT_LIMIT):
-	return Question.objects.filter(is_published=True).exclude(is_answered=True)[:limit]
+        return Question.objects.filter(is_published=True).exclude(is_answered=True)[:limit]
 
     @staticmethod
     def latest():
-	try:
-	    return Question.recent(1)[0]
-	except:
-	    pass
+        try:
+            return Question.recent(1)[0]
+        except:
+            pass
 
     def get_absolute_url(self):
-	return "/main/question/%i/" % self.pk
+        return "/main/question/%i/" % self.pk
 
     class Meta:
-	get_latest_by = 'pk'
-	ordering = ('-id',)
+        get_latest_by = 'pk'
+        ordering = ('-id',)
 
 
 class Answer(models.Model):
@@ -321,7 +325,7 @@ class AcceptedAnswer(models.Model):
     oneliner = models.ForeignKey(OneLiner)
 
     class Meta:
-	unique_together = (('question', 'oneliner',),)
+        unique_together = (('question', 'oneliner',),)
 
 
 class Vote(models.Model):
@@ -333,35 +337,36 @@ class Vote(models.Model):
 
     @staticmethod
     def vote(user, oneliner, updown):
-	if oneliner.user == user:
-	    return
+        if oneliner.user == user:
+            return
 
-	try:
-	    oneliner.vote_set.get(user=user, up=updown)
-	    return
-	except:
-	    pass
+        try:
+            oneliner.vote_set.get(user=user, up=updown)
+            return
+        except:
+            pass
 
-	oneliner.vote_set.filter(user=user).delete()
-	Vote(user=user, oneliner=oneliner, up=updown).save()
+        oneliner.vote_set.filter(user=user).delete()
+        Vote(user=user, oneliner=oneliner, up=updown).save()
 
     @staticmethod
     def vote_up(user, oneliner):
-	Vote.vote(user, oneliner, True)
+        Vote.vote(user, oneliner, True)
 
     @staticmethod
     def vote_down(user, oneliner):
-	Vote.vote(user, oneliner, False)
+        Vote.vote(user, oneliner, False)
 
     def __unicode__(self):
-	return '%s %s %s' % (self.user.full_name, ('--', '++')[self.up], self.oneliner.summary)
+        return '%s %s %s' % (self.user.full_name, ('--', '++')[self.up], self.oneliner.summary)
 
     class Meta:
-	unique_together = (('user', 'oneliner',),)
+        unique_together = (('user', 'oneliner',),)
 
 
 def Comment_recent(limit=RECENT_LIMIT):
     return Comment.objects.filter(is_public=True).exclude(is_removed=True).order_by('-submit_date')[:limit]
+
 
 def Comment_feed(limit=FEED_LIMIT):
     return Comment_recent(limit)

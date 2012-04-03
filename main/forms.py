@@ -16,26 +16,26 @@ class CommonOneLinerForm(forms.ModelForm):
     action = forms.CharField()
 
     def __init__(self, user, *args, **kwargs):
-	self.user = user
-	super(CommonOneLinerForm, self).__init__(*args, **kwargs)
+        self.user = user
+        super(CommonOneLinerForm, self).__init__(*args, **kwargs)
 
     class Meta:
-	model = OneLiner
+        model = OneLiner
 
-	widgets = {
-		'summary': forms.TextInput(attrs={'class': 'span6', }),
-		'line': forms.TextInput(attrs={'class': 'span6', }),
-		'explanation': forms.Textarea(attrs={'rows': 10, 'class': 'span6', }),
-		'limitations': forms.Textarea(attrs={'rows': 3, 'class': 'span6', }),
-		}
+        widgets = {
+                'summary': forms.TextInput(attrs={'class': 'span6', }),
+                'line': forms.TextInput(attrs={'class': 'span6', }),
+                'explanation': forms.Textarea(attrs={'rows': 10, 'class': 'span6', }),
+                'limitations': forms.Textarea(attrs={'rows': 3, 'class': 'span6', }),
+                }
 
-	fields = (
-		'line',
-		'summary',
-		'explanation',
-		'limitations',
-		'is_published',
-		)
+        fields = (
+                'line',
+                'summary',
+                'explanation',
+                'limitations',
+                'is_published',
+                )
 
 
 class PostOneLinerForm(CommonOneLinerForm):
@@ -43,8 +43,8 @@ class PostOneLinerForm(CommonOneLinerForm):
     actions = ({'name': 'Post one-liner', 'cssclass': 'btn-primary'},)
 
     def save(self):
-	self.instance.user = self.user
-	return super(PostOneLinerForm, self).save()
+        self.instance.user = self.user
+        return super(PostOneLinerForm, self).save()
 
 
 class EditOneLinerForm(CommonOneLinerForm):
@@ -57,18 +57,17 @@ class EditOneLinerForm(CommonOneLinerForm):
     is_delete = False
 
     def clean_action(self):
-	action = self.cleaned_data['action']
-	if action == self.action_save['name']:
-	    self.is_save = True
-	elif action == self.action_delete['name']:
-	    self.is_delete = True
-	return action
+        action = self.cleaned_data['action']
+        if action == self.action_save['name']:
+            self.is_save = True
+        elif action == self.action_delete['name']:
+            self.is_delete = True
+        return action
 
     def clean(self):
-	if self.instance.user != self.user:
-	    raise forms.ValidationError('User %s is not the owner of this OneLiner' % self.user)
-
-	return self.cleaned_data
+        if self.instance.user != self.user:
+            raise forms.ValidationError('User %s is not the owner of this OneLiner' % self.user)
+        return self.cleaned_data
 
 
 class SearchOneLinerForm(forms.Form):
@@ -85,24 +84,24 @@ class EditHackerProfileForm(forms.ModelForm):
     next_url = forms.URLField(required=False)
 
     def clean_display_name(self):
-	display_name = self.cleaned_data['display_name']
-	if display_name == '':
-	    display_name = None
-	return display_name
+        display_name = self.cleaned_data['display_name']
+        if display_name == '':
+            display_name = None
+        return display_name
 
     class Meta:
-	model = HackerProfile
+        model = HackerProfile
 
-	widgets = {
-		'display_name': forms.TextInput(attrs={'class': '', }),
-		'twitter_name': forms.TextInput(attrs={'class': '', }),
-		'blog_url': forms.TextInput(attrs={'class': 'span6', }),
-		'homepage_url': forms.TextInput(attrs={'class': 'span6', }),
-		}
+        widgets = {
+                'display_name': forms.TextInput(attrs={'class': '', }),
+                'twitter_name': forms.TextInput(attrs={'class': '', }),
+                'blog_url': forms.TextInput(attrs={'class': 'span6', }),
+                'homepage_url': forms.TextInput(attrs={'class': 'span6', }),
+                }
 
-	exclude = (
-		'user',
-		)
+        exclude = (
+                'user',
+                )
 
 
 class CommonQuestionForm(forms.ModelForm):
@@ -111,23 +110,23 @@ class CommonQuestionForm(forms.ModelForm):
     action = forms.CharField()
 
     def __init__(self, user, *args, **kwargs):
-	self.user = user
-	super(CommonQuestionForm, self).__init__(*args, **kwargs)
+        self.user = user
+        super(CommonQuestionForm, self).__init__(*args, **kwargs)
 
     class Meta:
-	model = Question
+        model = Question
 
-	widgets = {
-		'summary': forms.TextInput(attrs={'class': 'span6', }),
-		'explanation': forms.Textarea(attrs={'rows': 5, 'class': 'span6', }),
-		}
+        widgets = {
+                'summary': forms.TextInput(attrs={'class': 'span6', }),
+                'explanation': forms.Textarea(attrs={'rows': 5, 'class': 'span6', }),
+                }
 
-	fields = (
-		'summary',
-		'explanation',
-		'is_published',
-		'is_answered',
-		)
+        fields = (
+                'summary',
+                'explanation',
+                'is_published',
+                'is_answered',
+                )
 
 
 class PostQuestionForm(CommonQuestionForm):
@@ -135,8 +134,8 @@ class PostQuestionForm(CommonQuestionForm):
     actions = ({'name': 'Post question', 'cssclass': 'btn-primary'},)
 
     def save(self):
-	self.instance.user = self.user
-	return super(PostQuestionForm, self).save()
+        self.instance.user = self.user
+        return super(PostQuestionForm, self).save()
 
 
 class EditQuestionForm(CommonQuestionForm):
@@ -149,26 +148,25 @@ class EditQuestionForm(CommonQuestionForm):
     is_delete = False
 
     def clean_action(self):
-	action = self.cleaned_data['action']
-	if action == self.action_save['name']:
-	    self.is_save = True
-	elif action == self.action_delete['name']:
-	    self.is_delete = True
-	return action
+        action = self.cleaned_data['action']
+        if action == self.action_save['name']:
+            self.is_save = True
+        elif action == self.action_delete['name']:
+            self.is_delete = True
+        return action
 
     def clean(self):
-	if self.instance.user != self.user:
-	    raise forms.ValidationError('User %s is not the owner of this Question' % self.user)
-
-	return self.cleaned_data
+        if self.instance.user != self.user:
+            raise forms.ValidationError('User %s is not the owner of this Question' % self.user)
+        return self.cleaned_data
 
 
 class PostCommentOnOneLinerForm(CommentForm):
     next_url = forms.URLField(required=False)
 
     def __init__(self, *args, **kwargs):
-	super(PostCommentOnOneLinerForm, self).__init__(*args, **kwargs)
-	self.fields['comment'].widget = forms.Textarea(attrs={'rows': 5, 'class': 'span6', })
+        super(PostCommentOnOneLinerForm, self).__init__(*args, **kwargs)
+        self.fields['comment'].widget = forms.Textarea(attrs={'rows': 5, 'class': 'span6', })
 
 
 # eof

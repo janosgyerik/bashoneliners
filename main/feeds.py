@@ -6,17 +6,21 @@ from bashoneliners.main.models import OneLiner, Question, Comment_feed
 
 ### URL handlers
 
+
 def oneliner(request):
     return OneLinerEntries()(request)
 
+
 def question(request):
     return QuestionEntries()(request)
+
 
 def comment(request):
     return CommentEntries()(request)
 
 
 ### Feed classes
+
 
 class OneLinerEntries(Feed):
     title = "Bash One-Liners"
@@ -25,7 +29,8 @@ class OneLinerEntries(Feed):
     description_template = 'main/feeds/oneliner.html'
 
     def items(self):
-	return OneLiner.feed()
+        return OneLiner.feed()
+
 
 class QuestionEntries(Feed):
     title = "Questions for bash one-liners"
@@ -34,7 +39,8 @@ class QuestionEntries(Feed):
     description_template = 'main/feeds/question.html'
 
     def items(self):
-	return Question.feed()
+        return Question.feed()
+
 
 class CommentEntries(Feed):
     title = "Comments on bash one-liners"
@@ -43,16 +49,16 @@ class CommentEntries(Feed):
     description_template = 'main/feeds/comment.html'
 
     def items(self):
-	return Comment_feed()
+        return Comment_feed()
 
     def item_title(self, item):
-	return self.ellipsize(item.comment)
+        return self.ellipsize(item.comment)
 
     def ellipsize(self, text):
-	if len(text) < 50:
-	    return text
-	else:
-	    return text[:46] + ' ...'
+        if len(text) < 50:
+            return text
+        else:
+            return text[:46] + ' ...'
 
 
 # eof

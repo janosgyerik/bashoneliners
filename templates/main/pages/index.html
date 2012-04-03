@@ -14,7 +14,7 @@
 You can post a bash one-liner to share it with the world,
 or browse or search the one-liners contributed by others.</p>
 
-<p>You can follow the latest bash one-liners via <a href="{% url main.views.feeds %}">rss feeds</a> or on twitter <a href="https://twitter.com/#!/bashoneliners">@bashoneliners</a>.</p>
+<p>You can follow the latest bash one-liners via <a href="{% url oneliners.views.feeds %}">rss feeds</a> or on twitter <a href="https://twitter.com/#!/bashoneliners">@bashoneliners</a>.</p>
 
 <h2>Tags</h2>
 
@@ -33,7 +33,7 @@ or browse or search the one-liners contributed by others.</p>
 {% block ready %}
 	function search_by_tag(text) {
 	    var options = {
-		url: '{% url main.ajax.search_by_tag %}',
+		url: '{% url oneliners.ajax.search_by_tag %}',
 		type: 'get',
 		data: { 
 		    'text': text

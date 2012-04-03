@@ -9,9 +9,9 @@ release notes
 
 code cleansing
 ==============
-- rename 'main' module to 'oneliners'
 - replace bashoneliners.com references using Sites
 - move templates inside oneliners module
+    - replace main/ with oneliners/ when rendering templates
 - fix settings import
 - see newproj.views._response
 - remove initial=initial in oneliner_edit (and others)

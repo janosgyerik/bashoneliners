@@ -3,6 +3,6 @@ tmp
 settings.py
 scripts/settings.py
 .DS_Store
-main/fixtures
+oneliners/fixtures
 run.sh
 push.sh

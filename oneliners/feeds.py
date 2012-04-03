@@ -1,7 +1,7 @@
 from django.contrib.syndication.views import Feed
 from django.core.urlresolvers import reverse
 
-from main.models import OneLiner, Question, Comment_feed
+from oneliners.models import OneLiner, Question, Comment_feed
 
 
 ### URL handlers

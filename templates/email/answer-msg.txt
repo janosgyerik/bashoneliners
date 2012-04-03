@@ -1,7 +1,7 @@
 Hi {{ question.user.hackerprofile.get_display_name }},
 
 There is a new one-liner proposed to answer your question:
-{{ baseurl }}{% url main.views.question question.pk %}
+{{ baseurl }}{% url oneliners.views.question question.pk %}
 "{{ question.summary|safe }}"
 
 Summary:
@@ -17,6 +17,6 @@ Explanation:
 {{ oneliner.limitations }}{% endif %}
 
 Posted by: {{ oneliner.user.hackerprofile.get_display_name }}
-{{ baseurl }}{% url main.views.profile oneliner.user.pk %}
+{{ baseurl }}{% url oneliners.views.profile oneliner.user.pk %}
 
 {% include 'email/signature.txt' %}

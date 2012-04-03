@@ -1,7 +1,7 @@
 from django.test import TestCase
 
-from main.models import Tag, AcceptedAnswer, Question, OneLiner, Answer, User
-from main.forms import SearchOneLinerForm, EditOneLinerForm
+from oneliners.models import Tag, AcceptedAnswer, Question, OneLiner, Answer, User
+from oneliners.forms import SearchOneLinerForm, EditOneLinerForm
 
 
 class Util:

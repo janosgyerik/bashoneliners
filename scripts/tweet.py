@@ -19,8 +19,8 @@ from django.core.management import setup_environ
 setup_environ(settings)
 ''' hack to setup django environment END '''
 
-from main.models import OneLiner
-from main.views import tweet
+from oneliners.models import OneLiner
+from oneliners.views import tweet
 
 import optparse
 

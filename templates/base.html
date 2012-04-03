@@ -21,24 +21,24 @@
 		    <li><a href="/admin/">Admin</a></li>
 		    {% endif %}
 		    {% if user.is_authenticated %}
-		    <li><a href="{% url main.views.oneliner_new %}">Post</a>
+		    <li><a href="{% url oneliners.views.oneliner_new %}">Post</a>
 		    {% endif %}
-		    <li><a href="{% url main.views.oneliner_list %}">One-Liners</a></li>
-		    <li><a href="{% url main.views.question_list %}">Questions</a></li>
-		    <li><a href="{% url main.views.feeds %}">Feeds</a></li>
-		    <li><a href="{% url main.views.sourcecode %}">Source code</a></li>
+		    <li><a href="{% url oneliners.views.oneliner_list %}">One-Liners</a></li>
+		    <li><a href="{% url oneliners.views.question_list %}">Questions</a></li>
+		    <li><a href="{% url oneliners.views.feeds %}">Feeds</a></li>
+		    <li><a href="{% url oneliners.views.sourcecode %}">Source code</a></li>
 		</ul>
 
 		{% if searchform %}
-		<form class="navbar-search pull-left" method="get" action="{% url main.views.search %}">
+		<form class="navbar-search pull-left" method="get" action="{% url oneliners.views.search %}">
 		    <input name="query" maxlength="100" placeholder="Search" type="text" class="search-query" id="id_query" />
 		</form>
 		{% endif %}
 
 		{% if user.is_authenticated %}
-		<p class="navbar-text pull-right">Logged in as <a href="{% url main.views.profile %}">{{ user.hackerprofile.get_display_name }}</a>&mdash;<a href="{% url main.views.logout %}">Logout</a></p>
+		<p class="navbar-text pull-right">Logged in as <a href="{% url oneliners.views.profile %}">{{ user.hackerprofile.get_display_name }}</a>&mdash;<a href="{% url oneliners.views.logout %}">Logout</a></p>
 		{% else %}
-		<p class="navbar-text pull-right"><a href="{% url main.views.login %}">Login</a></p>
+		<p class="navbar-text pull-right"><a href="{% url oneliners.views.login %}">Login</a></p>
 		{% endif %}
 	    </div>
 	</div>

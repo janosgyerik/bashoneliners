@@ -16,11 +16,11 @@
 feel free to ask it here!</p>
 
 {% if user.is_authenticated %}
-<p><a href="{% url main.views.question_new %}" class="btn btn-primary">Post a question</a></p>
+<p><a href="{% url oneliners.views.question_new %}" class="btn btn-primary">Post a question</a></p>
 {% else %}
 <div class="alert alert-warning">
     <strong class="alert-heading">Note:</strong>
-    you have to <a href="{% url main.views.login %}">login (with an OpenID)</a> to post a question. 
+    you have to <a href="{% url oneliners.views.login %}">login (with an OpenID)</a> to post a question. 
 </div>
 {% endif %}
 

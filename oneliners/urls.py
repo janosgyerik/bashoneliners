@@ -1,6 +1,6 @@
 from django.conf.urls.defaults import patterns
 
-urlpatterns = patterns('main.views',
+urlpatterns = patterns('oneliners.views',
         (r'^$', 'oneliner_list'),
         (r'^sourcecode/$', 'sourcecode'),
         (r'^mission/$', 'mission'),
@@ -33,14 +33,14 @@ urlpatterns = patterns('main.views',
         (r'^help/markdown/$', 'help_markdown'),
         )
 
-urlpatterns += patterns('main.ajax',
+urlpatterns += patterns('oneliners.ajax',
         (r'^ajax/markdown/$', 'markdown'),
         (r'^ajax/question/(?P<question_pk>\d+)/answered_by/oneliner/(?P<oneliner_pk>\d+)/$', 'question_answered'),
         (r'^ajax/search/$', 'search'),
         (r'^ajax/search/tag/$', 'search_by_tag'),
         )
 
-urlpatterns += patterns('main.feeds',
+urlpatterns += patterns('oneliners.feeds',
         (r'^feeds/oneliner/$', 'oneliner'),
         (r'^feeds/question/$', 'question'),
         (r'^feeds/comment/$', 'comment'),

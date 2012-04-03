@@ -2,7 +2,7 @@
 
 cd $(dirname "$0")/..
 
-default_mod=main
+default_mod=oneliners
 fixtures_dir=./$default_mod/fixtures
 mkdir -p $fixtures_dir
 

@@ -1,13 +1,13 @@
 Hi {{ oneliner.user.hackerprofile.get_display_name }},
 
 There is a new comment on your one-liner:
-{{ baseurl }}{% url main.views.oneliner oneliner.pk %}
+{{ baseurl }}{% url oneliners.views.oneliner oneliner.pk %}
 "{{ oneliner.summary|safe }}"
 
 Comment:
 {{ comment|safe }}
 
 Posted by: {{ sender.hackerprofile.get_display_name }}
-{{ baseurl }}{% url main.views.profile sender.pk %}
+{{ baseurl }}{% url oneliners.views.profile sender.pk %}
 
 {% include 'email/signature.txt' %}

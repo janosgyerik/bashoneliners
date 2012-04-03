@@ -5,9 +5,9 @@ from django.contrib.auth import logout as django_logout
 from django.contrib.comments.views import comments
 from django.core.paginator import Paginator, InvalidPage, EmptyPage
 
-from main.models import OneLiner, User, Comment_recent, Tag, Question
-from main.forms import EditHackerProfileForm, PostOneLinerForm, PostCommentOnOneLinerForm, PostQuestionForm, EditQuestionForm, SearchOneLinerForm, EditOneLinerForm
-from main.email import send_oneliner_answer, send_oneliner_alternative, send_oneliner_comment
+from oneliners.models import OneLiner, User, Comment_recent, Tag, Question
+from oneliners.forms import EditHackerProfileForm, PostOneLinerForm, PostCommentOnOneLinerForm, PostQuestionForm, EditQuestionForm, SearchOneLinerForm, EditOneLinerForm
+from oneliners.email import send_oneliner_answer, send_oneliner_alternative, send_oneliner_comment
 
 
 ''' helper methods '''
@@ -45,13 +45,13 @@ def _common_initial(request):
 def tweet(oneliner, force=False, test=False):
     if not oneliner.was_tweeted or force:
         long_url = 'http://bashoneliners.com/main/oneliner/%d' % oneliner.pk
-        from main.shorturl import get_goo_gl
+        from oneliners.shorturl import get_goo_gl
         url = get_goo_gl(long_url) or long_url
         message = '%s %s' % (
                 url,
                 oneliner.line,
                 )
-        from main.tweet import tweet as send_tweet
+        from oneliners.tweet import tweet as send_tweet
         result = send_tweet(message, test=test)
         if result:
             oneliner.was_tweeted = True

@@ -1,7 +1,7 @@
 from django.test import TestCase
 
-from main.models import *
-from main.forms import *
+from main.models import Tag, AcceptedAnswer, Question, OneLiner, Answer, User
+from main.forms import SearchOneLinerForm, EditOneLinerForm
 
 
 class Util:
@@ -265,12 +265,12 @@ class QuestionTests(TestCase):
         self.assertTrue(Question.objects.all().count() > 0)
 
     def test_list_questions_latestfirst(self):
-        q1 = Util.new_question(self.user)
+        Util.new_question(self.user)
         q2 = Util.new_question(self.user)
         self.assertTrue(Question.objects.latest() == q2)
 
     def test_list_excludes_nonpublished(self):
-        q1 = Util.new_question(self.user)
+        Util.new_question(self.user)
         q2 = Util.new_question(self.user)
         self.assertEquals(Question.latest(), q2)
         q2.is_published = False
@@ -278,7 +278,7 @@ class QuestionTests(TestCase):
         self.assertNotEquals(Question.latest(), q2)
 
     def test_list_excludes_answered(self):
-        q1 = Util.new_question(self.user)
+        Util.new_question(self.user)
         q2 = Util.new_question(self.user)
         self.assertEquals(Question.latest(), q2)
         q2.is_answered = True
@@ -289,16 +289,16 @@ class QuestionTests(TestCase):
         q1 = Util.new_question(self.user)
         jack = Util.new_user('jack')
         o1 = Util.new_oneliner(jack, 'echo jack')
-        a1 = Util.new_answer(q1, o1)
+        Util.new_answer(q1, o1)
 
     def test_multiple_answers(self):
         q1 = Util.new_question(self.user)
         jack = Util.new_user('jack')
         o1 = Util.new_oneliner(jack, 'echo jack')
-        a1 = Util.new_answer(q1, o1)
+        Util.new_answer(q1, o1)
         mike = Util.new_user('mike')
         o2 = Util.new_oneliner(mike, 'echo mike')
-        a2 = Util.new_answer(q1, o2)
+        Util.new_answer(q1, o2)
 
 
 class AcceptedAnswerTests(TestCase):

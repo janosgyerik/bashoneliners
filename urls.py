@@ -1,4 +1,4 @@
-from django.conf.urls.defaults import *
+from django.conf.urls.defaults import patterns, include
 
 from django.contrib import admin
 admin.autodiscover()
@@ -14,6 +14,7 @@ urlpatterns = patterns('',
 
 try:
     import openid
+    openid.VERSION
     urlpatterns += patterns('',
             (r'^openid/', include('django_openid_auth.urls')),
             )

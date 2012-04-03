@@ -1,16 +1,13 @@
 from django.shortcuts import render_to_response, redirect
-from django.core.urlresolvers import reverse
-from django.contrib.auth.decorators import *
+from django.contrib.auth.decorators import login_required
 from django.template import RequestContext
 from django.contrib.auth import logout as django_logout
 from django.contrib.comments.views import comments
 from django.core.paginator import Paginator, InvalidPage, EmptyPage
 
-from bashoneliners.main.models import HackerProfile, OneLiner, User, Answer, Comment_recent, Tag
-from bashoneliners.main.forms import *
-from bashoneliners.main.email import *
-
-from datetime import datetime
+from bashoneliners.main.models import OneLiner, User, Comment_recent, Tag, Question
+from bashoneliners.main.forms import EditHackerProfileForm, PostOneLinerForm, PostCommentOnOneLinerForm, PostQuestionForm, EditQuestionForm, SearchOneLinerForm, EditOneLinerForm
+from bashoneliners.main.email import send_oneliner_answer, send_oneliner_alternative, send_oneliner_comment
 
 
 ''' helper methods '''
@@ -244,7 +241,7 @@ def question_edit(request, pk):
         form = EditQuestionForm(request.user, request.POST, instance=question0)
         if form.is_valid():
             if form.is_save:
-                question1 = form.save()
+                form.save()
                 return redirect(form.cleaned_data.get('next_url'))
             elif form.is_delete:
                 question0.delete()
@@ -268,7 +265,7 @@ def question_new(request):
         form = PostQuestionForm(request.user, request.POST)
         if request.user.is_authenticated():
             if form.is_valid():
-                new_question = form.save()
+                form.save()
                 return redirect(form.cleaned_data.get('next_url'))
             else:
                 params['next_url'] = request.POST.get('next_url')

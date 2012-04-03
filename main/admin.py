@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from bashoneliners.main.models import HackerProfile, OneLiner, Question, Answer
+from bashoneliners.main.models import HackerProfile, OneLiner, Question
 
 
 class OneLinerAdmin(admin.ModelAdmin):

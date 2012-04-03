@@ -1,5 +1,5 @@
 from django.shortcuts import render_to_response
-from django.contrib.auth.decorators import *
+from django.contrib.auth.decorators import login_required
 
 from bashoneliners.main.models import Question, OneLiner
 from bashoneliners.main.forms import SearchOneLinerForm

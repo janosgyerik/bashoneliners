@@ -19,13 +19,10 @@ from django.core.management import setup_environ
 setup_environ(settings)
 ''' hack to setup django environment END '''
 
-from django.db.models import Max
-from datetime import timedelta, datetime
 from bashoneliners.main.models import OneLiner
 from bashoneliners.main.views import tweet
 
 import optparse
-import os
 
 try:
     consumer_key = settings.TWITTER.get('consumer_key')

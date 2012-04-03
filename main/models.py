@@ -1,10 +1,8 @@
 from django.db import models
 from django.db.models import Count, Q
 from django.db.models.signals import post_save
-from django.contrib.syndication.views import Feed
 from django.contrib.auth.models import User
 from django.contrib.comments.models import Comment
-from django.template import Context, loader
 
 from datetime import datetime
 import random

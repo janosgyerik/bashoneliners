@@ -1,4 +1,4 @@
-from django.conf.urls.defaults import *
+from django.conf.urls.defaults import patterns
 
 urlpatterns = patterns('bashoneliners.main.views',
         (r'^$', 'oneliner_list'),

@@ -9,12 +9,13 @@ release notes
 
 code cleansing
 ==============
-- make it all work without the 'bashoneliners.' prefix everywhere
-- run pep8 and pyflakes
+- rename 'main' module to 'oneliners'
+- replace bashoneliners.com references using Sites
+- move templates inside oneliners module
+- fix settings import
 - see newproj.views._response
 - remove initial=initial in oneliner_edit (and others)
-- in tweet script prob no need for the 'bashoneliners.' prefix
-- PEP8, remove tabs
+- make tweet script proper admin command
 
 
 future releases

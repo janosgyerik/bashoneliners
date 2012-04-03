@@ -1,8 +1,8 @@
 from django.shortcuts import render_to_response
 from django.contrib.auth.decorators import login_required
 
-from bashoneliners.main.models import Question, OneLiner
-from bashoneliners.main.forms import SearchOneLinerForm
+from main.models import Question, OneLiner
+from main.forms import SearchOneLinerForm
 
 
 @login_required

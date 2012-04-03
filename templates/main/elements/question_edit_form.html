@@ -24,7 +24,7 @@
 	</div>
 
 	<h3>Answered</h3>
-	<div class="help-block">If checked, the question will not be shown on the <a href="{% url bashoneliners.main.views.question_list %}">questions page</a>.</div>
+	<div class="help-block">If checked, the question will not be shown on the <a href="{% url main.views.question_list %}">questions page</a>.</div>
 	<div class="input">
 	    <div class="error">{{ form.is_answered.errors }}</div>
 	    <div class="is_answered"><label class="checkbox">{{ form.is_answered }} Answered</label></div>

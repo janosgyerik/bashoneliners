@@ -3,7 +3,7 @@
         <pre>{{ oneliner.line }}</pre>
 
         <p><small>
-        &mdash; by <a href="{% url bashoneliners.main.views.profile oneliner.user.pk %}">{{ oneliner.user.hackerprofile.get_display_name }}</a>
+        &mdash; by <a href="{% url main.views.profile oneliner.user.pk %}">{{ oneliner.user.hackerprofile.get_display_name }}</a>
             on {{ oneliner.created_dt }}
         </small></p>
 

@@ -1,7 +1,7 @@
 Hi {{ oneliner.user.hackerprofile.get_display_name }},
 
 There is a new alternative to your one-liner:
-{{ baseurl }}{% url bashoneliners.main.views.oneliner oneliner.pk %}
+{{ baseurl }}{% url main.views.oneliner oneliner.pk %}
 "{{ oneliner.summary|safe }}"
 
 Summary:
@@ -17,6 +17,6 @@ Explanation:
 {{ new_oneliner.limitations }}{% endif %}
 
 Posted by: {{ new_oneliner.user.hackerprofile.get_display_name }}
-{{ baseurl }}{% url bashoneliners.main.views.profile new_oneliner.user.pk %}
+{{ baseurl }}{% url main.views.profile new_oneliner.user.pk %}
 
 {% include 'email/signature.txt' %}

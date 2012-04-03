@@ -7,7 +7,7 @@
 from django import forms
 from django.contrib.comments.forms import CommentForm
 
-from bashoneliners.main.models import OneLiner, HackerProfile, Question
+from main.models import OneLiner, HackerProfile, Question
 
 
 class CommonOneLinerForm(forms.ModelForm):

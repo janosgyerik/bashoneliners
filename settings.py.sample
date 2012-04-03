@@ -14,7 +14,7 @@ MANAGERS = ADMINS
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
+        'ENGINE': 'django.db.backends.sqlite3',  # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
         'NAME': 'sqlite3.db',                      # Or path to database file if using sqlite3.
         'USER': '',                      # Not used with sqlite3.
         'PASSWORD': '',                  # Not used with sqlite3.
@@ -82,14 +82,20 @@ AUTH_PROFILE_MODULE = 'bashoneliners.main.models.HackerProfile'
 
 try:
     import openid
-    AUTHENTICATION_BACKENDS = (
-	'django_openid_auth.auth.OpenIDBackend',
-	'django.contrib.auth.backends.ModelBackend',
-    )
+    type(openid)
+    HAVE_OPENID = True
 except:
+    HAVE_OPENID = False
+
+if HAVE_OPENID:
     AUTHENTICATION_BACKENDS = (
-	'django.contrib.auth.backends.ModelBackend',
-	)
+            'django_openid_auth.auth.OpenIDBackend',
+            'django.contrib.auth.backends.ModelBackend',
+            )
+else:
+    AUTHENTICATION_BACKENDS = (
+            'django.contrib.auth.backends.ModelBackend',
+            )
 
 OPENID_CREATE_USERS = True
 OPENID_UPDATE_DETAILS_FROM_SREG = True
@@ -119,11 +125,8 @@ INSTALLED_APPS = (
     'bashoneliners.main',
 )
 
-try:
-    import openid
-    INSTALLED_APPS += ('bashoneliners.django_openid_auth',)
-except:
-    pass
+if HAVE_OPENID:
+    INSTALLED_APPS += ('django_openid_auth',)
 
 USE_DJANGO_STATIC_SERVE_FOR_MEDIA = False
 USE_DJANGO_STATIC_SERVE_FOR_MEDIA = True
@@ -132,10 +135,10 @@ USE_DJANGO_STATIC_SERVE_FOR_MEDIA = True
 ### project specific custom settings
 
 TWITTER = {
-        'consumer_key': None,
-        'consumer_secret': None,
-        'access_token': None,
-        'access_token_secret': None,
+        'consumer_key': '',
+        'consumer_secret': '',
+        'access_token': '',
+        'access_token_secret': '',
         }
 
 ### emails
@@ -150,9 +153,6 @@ EMAIL_BACKEND = 'bashoneliners.main.email.CustomFileEmailBackend'
 #
 GOO_GL_API_URL = 'https://www.googleapis.com/urlshortener/v1/url'
 GOO_GL_API_KEY = ''
-
-#import sys
-#sys.path.append('/Library/Python/2.6/site-packages/Markdown-2.0.3-py2.6.egg')
 
 
 # eof

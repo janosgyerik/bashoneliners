@@ -14,7 +14,7 @@ urlpatterns = patterns('',
 
 try:
     import openid
-    openid.VERSION
+    type(openid)
     urlpatterns += patterns('',
             (r'^openid/', include('django_openid_auth.urls')),
             )

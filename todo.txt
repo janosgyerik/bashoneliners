@@ -4,18 +4,49 @@ https://trello.com/board/main/4e7da3cf5a94680b35000893
 
 release notes
 =============
-- 
+- Cleaned up many best practice violations
+
+
+prod migration
+==============
+cp sqlite3.db sqlite3.db.before
+
+./manage.py dumpdata --indent=4 | sed -e 's/"model": "main./"model": "oneliners./' > dump.json
+
+cp settings.py settings.py.before
+cp settings.py.prod settings.py
+
+rm sqlite3.db
+./manage.py syncdb  # answer no
+
+delete from django_admin_log;
+delete from django_comment_flags;
+delete from django_comments;
+delete from django_content_type;
+delete from django_openid_auth_association;
+delete from django_openid_auth_nonce;
+delete from django_openid_auth_useropenid;
+delete from django_session;
+delete from django_site;
+
+./manage.py loaddata dump.json
+
+cp passenger_wsgi.py.nextgen passenger_wsgi.py
+touch tmp/restart
+
+# basic test
+# test login is preserved
 
 
 code cleansing
 ==============
-- replace bashoneliners.com references using Sites
 - move templates inside oneliners module
     - replace main/ with oneliners/ when rendering templates
 - fix settings import
+- make tweet script proper admin command
+- replace bashoneliners.com references using Sites
 - see newproj.views._response
 - remove initial=initial in oneliner_edit (and others)
-- make tweet script proper admin command
 
 
 future releases

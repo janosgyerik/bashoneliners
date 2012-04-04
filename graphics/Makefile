@@ -36,5 +36,10 @@ launchpad/brand.png: $(src_dir)/square.png
 	convert -geometry 192x $< $@
 	identify $@
 
+$(icons_dir)/square.png: $(src_dir)/square.png
+	@mkdir -p $(@D)
+	convert -geometry 14x $< $@
+	identify $@
+
 
 # eof

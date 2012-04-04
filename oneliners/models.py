@@ -3,6 +3,7 @@ from django.db.models import Count, Q
 from django.db.models.signals import post_save
 from django.contrib.auth.models import User
 from django.contrib.comments.models import Comment
+from django.dispatch import receiver
 
 from datetime import datetime
 import random
@@ -34,9 +35,13 @@ def get_query_terms(query):
     return re.split(r' +', query)
 
 
+@receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
-        HackerProfile.objects.get_or_create(user=instance)
+        try:
+            HackerProfile.objects.get_or_create(user=instance)
+        except:
+            pass
 
 post_save.connect(create_user_profile, sender=User)
 

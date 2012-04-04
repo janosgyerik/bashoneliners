@@ -10,16 +10,9 @@ urlpatterns = patterns('',
         (r'^admin/doc/', include('django.contrib.admindocs.urls')),
         (r'^admin/', include(admin.site.urls)),
         (r'^comments/', include('django.contrib.comments.urls')),
+        (r'^openid/', include('django_openid_auth.urls')),
         )
 
-try:
-    import openid
-    type(openid)
-    urlpatterns += patterns('',
-            (r'^openid/', include('django_openid_auth.urls')),
-            )
-except:
-    pass
 
 from oneliners.feeds import OneLinerEntries
 

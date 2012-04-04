@@ -91,7 +91,7 @@ OPENID_UPDATE_DETAILS_FROM_SREG = True
 LOGIN_URL = '/openid/login/'
 LOGIN_REDIRECT_URL = '/main/profile'
 
-ROOT_URLCONF = 'bashoneliners.urls'
+ROOT_URLCONF = 'urls'
 
 TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".

@@ -17,5 +17,10 @@ loaddata OneLiner
 loaddata Question
 loaddata Answer
 loaddata AcceptedAnswer
+loaddata AlternativeOneLiner
+loaddata Tag
+loaddata django_openid_auth.Association
+loaddata django_openid_auth.Nonce
+loaddata django_openid_auth.UserOpenID
 
 # eof

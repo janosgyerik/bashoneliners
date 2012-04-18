@@ -78,7 +78,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
 )
 
-AUTH_PROFILE_MODULE = 'bashoneliners.main.models.HackerProfile'
+AUTH_PROFILE_MODULE = 'oneliners.models.HackerProfile'
 
 AUTHENTICATION_BACKENDS = (
         'django_openid_auth.auth.OpenIDBackend',

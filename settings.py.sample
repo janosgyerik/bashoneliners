@@ -133,7 +133,7 @@ TWITTER = {
 #EMAIL_FILE_PATH = '/tmp/django-emails'
 #EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 EMAIL_FILE_PATH = '/tmp/django-emails.log'
-EMAIL_BACKEND = 'bashoneliners.main.email.CustomFileEmailBackend'
+EMAIL_BACKEND = 'oneliners.email.CustomFileEmailBackend'
 
 ### url shortening
 #

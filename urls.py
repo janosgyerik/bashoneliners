@@ -21,11 +21,4 @@ urlpatterns += patterns('',
         )
 
 
-from django.conf import settings
-
-if settings.USE_DJANGO_STATIC_SERVE_FOR_MEDIA:
-    urlpatterns += patterns('',
-            (r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': 'media'}),
-    )
-
 # eof

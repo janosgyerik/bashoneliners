@@ -1,0 +1,44 @@
+{% extends "html5.html" %}
+
+{% block title %}Bash One-Liners :: site maintenance ...{% endblock %}
+
+{% block navbar %}
+
+<div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+	<div class="container">
+	    <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+		<span class="icon-bar"></span>
+		<span class="icon-bar"></span>
+		<span class="icon-bar"></span>
+	    </a>
+
+	    <a class="brand" href="/">Bash One-Liners</a>
+
+	    <div class="nav-collapse">
+	    </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block main %}
+
+<div class="page-header"><h1>Site maintenance ...</h1></div>
+
+<div class="alert alert-info">
+    <p>You caught us in the middle of maintaining the site...</p>
+    <p>Please come back in 30 minutes or so, we should be ready again.</p>
+    <p>If you keep getting this message, then something is wrong.<br/>
+        In that case please drop us an email at
+        <a href="mailto:bashoneliners@googlegroups.com">bashoneliners@googlegroups.com</a>
+    </p>
+</div>
+
+{% endblock main %}
+
+{% block footer %}
+    <div class="container-fluid">
+	<p class="pull-right validators"></p> 
+    </div>
+{% endblock %}

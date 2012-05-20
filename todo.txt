@@ -42,8 +42,6 @@ touch tmp/restart
 next
 ====
 - make use of django's logging
-- update sample settings from django's sample
-- the button on questions to post answer is gone
 - 500 error when trying to post comment
 
 

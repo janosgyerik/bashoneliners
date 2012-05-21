@@ -41,7 +41,6 @@ touch tmp/restart
 
 next
 ====
-- make use of django's logging
 - 500 error when trying to post comment
 
 

@@ -14,17 +14,6 @@ def question_answered(request, question_pk, oneliner_pk):
     return render_to_response('main/ajax/json.js')
 
 
-def markdown(request):
-    if request.method == 'GET':
-        text = request.GET.get('text')
-    elif request.method == 'POST':
-        text = request.POST.get('text')
-    else:
-        text = None
-
-    return render_to_response('main/elements/markdown.html', {'text': text})
-
-
 def search(request):
     params = {}
 

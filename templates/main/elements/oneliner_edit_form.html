@@ -25,9 +25,7 @@
         </div>
         <div class="input">
             <div class="error">{{ form.explanation.errors }}</div>
-            <div class="explanation">{{ form.explanation }}</div>
-            <p><a href="{% url oneliners.ajax.markdown %}" class="btn btn-info preview-markdown" data-source="id_explanation">Preview</a></p>
-            <div id="id_explanation-preview"></div>
+            <div class="explanation markdown">{{ form.explanation }}</div>
         </div>
         
         <h3>Limitations (optional)</h3>
@@ -35,9 +33,7 @@
             <br/>Note: any html will be escaped, and the text will be formatted with <a class="help help-markdown" href="{% url oneliners.views.help_markdown %}">markdown</a>.
         <div class="input">
             <div class="error">{{ form.limitations.errors }}</div>
-            <div class="limitations">{{ form.limitations }}</div>
-            <p><a href="{% url oneliners.ajax.markdown %}" class="btn btn-info preview-markdown" data-source="id_limitations">Preview</a></p>
-            <div id="id_limitations-preview"></div>
+            <div class="limitations markdown">{{ form.limitations }}</div>
         </div>
 
         <h3>Published</h3>

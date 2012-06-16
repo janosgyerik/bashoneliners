@@ -49,20 +49,19 @@ function bind_question_answered() {
 }
 
 function bind_preview_markdown() {
-    $('.preview-markdown').click(function(e) {
-        e.preventDefault();
-        var source = $('#' + $(this).attr('data-source'));
-        var preview = $('#' + $(this).attr('data-source') + '-preview');
-        var update_preview = function(html) {
-            preview.html(html);
-            preview.addClass('well');
-        };
-        $.ajax({
-            url: $(this).attr('href'),
-            type: 'post',
-            data: { text: source.val() },
-            success: update_preview,
-            error: popup_error
+    var converter = new Showdown.converter();
+    $('.markdown').each(function() {
+        var inputPane = $(this).find('textarea').eq(0);
+        var previewPane = $('<div class="preview"/>');
+        previewPane.height(inputPane.height());
+        previewPane.width(inputPane.width());
+        previewPane.insertAfter(inputPane);
+        inputPane.keyup(function() {
+            previewPane.html(converter.makeHtml(inputPane.val()));
+        }).trigger('keyup');
+        inputPane.scroll(function() {
+            previewPane.scrollTop(inputPane.scrollTop());
+            previewPane.scrollLeft(inputPane.scrollLeft());
         });
     });
 }

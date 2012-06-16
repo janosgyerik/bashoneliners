@@ -34,7 +34,6 @@ urlpatterns = patterns('oneliners.views',
         )
 
 urlpatterns += patterns('oneliners.ajax',
-        (r'^ajax/markdown/$', 'markdown'),
         (r'^ajax/question/(?P<question_pk>\d+)/answered_by/oneliner/(?P<oneliner_pk>\d+)/$', 'question_answered'),
         (r'^ajax/search/$', 'search'),
         (r'^ajax/search/tag/$', 'search_by_tag'),

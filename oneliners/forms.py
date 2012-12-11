@@ -26,7 +26,7 @@ class CommonOneLinerForm(forms.ModelForm):
                 'summary': forms.TextInput(attrs={'class': 'span6', }),
                 'line': forms.TextInput(attrs={'class': 'span6', }),
                 'explanation': forms.Textarea(attrs={'rows': 10, 'class': 'span6', }),
-                'limitations': forms.Textarea(attrs={'rows': 3, 'class': 'span6', }),
+                'limitations': forms.Textarea(attrs={'rows': 8, 'class': 'span6', }),
                 }
 
         fields = (

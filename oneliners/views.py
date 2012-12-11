@@ -7,7 +7,6 @@ from django.core.paginator import Paginator, InvalidPage, EmptyPage
 
 from oneliners.models import OneLiner, User, Comment_recent, Tag, Question
 from oneliners.forms import EditHackerProfileForm, PostOneLinerForm, PostCommentOnOneLinerForm, PostQuestionForm, EditQuestionForm, SearchOneLinerForm, EditOneLinerForm
-from oneliners.email import send_oneliner_answer, send_oneliner_alternative, send_oneliner_comment
 
 
 ''' helper methods '''
@@ -153,12 +152,8 @@ def oneliner_new(request, question_pk=None, oneliner_pk=None):
 
                 if question is not None:
                     question.add_answer(new_oneliner)
-                    if new_oneliner.is_published:
-                        send_oneliner_answer(question, new_oneliner)
                 elif oneliner0 is not None:
                     oneliner0.add_alternative(new_oneliner)
-                    if new_oneliner.is_published:
-                        send_oneliner_alternative(oneliner0, new_oneliner)
 
                 return redirect(oneliner, new_oneliner.pk)
             else:
@@ -199,7 +194,6 @@ def oneliner_comment(request, pk):
             form = PostCommentOnOneLinerForm(oneliner0, data)
             if form.is_valid():
                 comment = form.cleaned_data['comment']
-                send_oneliner_comment(oneliner0, request.user, comment)
                 return comments.post_comment(request, next=oneliner0.get_absolute_url())
             else:
                 params['next_url'] = request.POST.get('next_url')

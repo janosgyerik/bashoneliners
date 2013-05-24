@@ -1,0 +1,20 @@
+    <div class="question well question-{{question.pk}}">
+	<h3 class="summary">
+	    <a href="{% url 'oneliners.views.question' question.pk %}">{{ question.summary|capfirst }}</a>
+	    {% if user == question.user %}<a class="btn" href="{% url 'oneliners.views.question_edit' question.pk %}"><i class="icon-pencil"></i>{% if not question.is_published %}<span class="draft">(Not published!)</span>{% endif %}</a>{% endif %}
+	</h3>
+	<blockquote>
+	    <p>{{ question.explanation }}</p>
+	    <small>
+		by <a href="{% url 'oneliners.views.profile' question.user.pk %}"><span>{{ question.user.hackerprofile.get_display_name }}</span> </a>
+		on <span>{{ question.created_dt }}</span>
+	    </small>
+	</blockquote>
+
+	{% if not question.is_answered and not nobuttons %}
+	<p><a class="btn" href="{% url 'oneliners.views.oneliner_answer' question.pk %}">Post a one-liner that answers this!</a></p>
+	{% endif %}
+
+	{% block related %}
+	{% endblock %}
+    </div>

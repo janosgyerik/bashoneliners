@@ -4,24 +4,23 @@ https://trello.com/board/main/4e7da3cf5a94680b35000893
 
 release notes
 -------------
-- Migrated from django 1.2 to django 1.3
+- Migrated from django 1.2 to django 1.5
 - Cleaned up many best practice violations
 
 
 next
 ----
-- make it work by default settings.py
-- migrate to django 1.5
 - 500 error when trying to post comment
-- voting
+- voting!!!
 
 
 code cleansing
 --------------
-- rename /media/ to /static/
+- do not include oneliners.urls twice in top-level urls.py
+- clean up maintenance_urls.py
+- phase out AUTH_PROFILE_MODULE (deprecated in Django 1.5)
 - move templates inside oneliners module
     - replace main/ with oneliners/ when rendering templates
-- fix settings import
 - make tweet script proper admin command
 - replace bashoneliners.com references using Sites
 - see newproj.views._response

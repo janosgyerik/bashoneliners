@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block pagetitle %}Questions{% endblock %}
+
+{% block pageheader %}Questions{% endblock %}
+
+{% block keywords %}{% endblock %}
+
+{% block description %}{% endblock %}
+
+{% block content %}
+
+<div style="margin-bottom: 2em">
+
+<p>If you have a question that can be answered by an appropriate bash one-liner,
+feel free to ask it here!</p>
+
+{% if user.is_authenticated %}
+<p><a href="{% url 'oneliners.views.question_new' %}" class="btn btn-primary">Post a question</a></p>
+{% else %}
+<div class="alert alert-warning">
+    <strong class="alert-heading">Note:</strong>
+    you have to <a href="{% url 'oneliners.views.login' %}">login (with an OpenID)</a> to post a question. 
+</div>
+{% endif %}
+
+</div>
+
+{% if questions %}
+<h2>Recent questions</h2>
+
+{% include 'main/elements/questions.html' %}
+
+{% endif %}
+
+{% endblock %}
+
+{% block ready %}
+	$('#id_summary').focus();
+{% endblock %}

@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block pagetitle %}bashoneliners.com{% endblock %}
+
+{% block pageheader %}bashoneliners.com{% endblock %}
+
+{% block keywords %}bash, ksh, shell, script, one-liner, oneliner, tips, tricks, linux, unix, vote, rank, rss, open-source, django, python, bazaar, launchpad, collaborate{% endblock %}
+
+{% block description %}A collection of practical or just pure awesome bash one-liners or shell script tips and tricks for GNU Linux, UNIX or BSD systems. Open, collaborative system, user friendly, with functions to contribute one-liners, request one-liners, search, rss feed, commenting, Open ID login. Open-source project, using Django, Python, jQuery, Bazaar, Launchpad, HTML5, Bootstrap from Twitter.{% endblock %}
+
+{% block content %}
+
+<p>Welcome to <strong>bashoneliners.com</strong>, a place for practical or just pure awesome bash <em>one-liners</em> or shell script tips and tricks for GNU Linux, UNIX or BSD systems.
+You can post a bash one-liner to share it with the world,
+or browse or search the one-liners contributed by others.</p>
+
+<p>You can follow the latest bash one-liners via <a href="{% url 'oneliners.views.feeds' %}">rss feeds</a> or on twitter <a href="https://twitter.com/#!/bashoneliners">@bashoneliners</a>.</p>
+
+<h2>Tags</h2>
+
+<ul class="nav nav-pills tags">
+{% for tag in tagcloud %}
+<li><a href="#">{{ tag.text }}</a></li>
+{% endfor %}
+</ul>
+
+<h2>One-Liners</h2>
+
+{% include 'main/elements/oneliners_page.html' %}
+
+{% endblock %}
+
+{% block ready %}
+	function search_by_tag(text) {
+	    var options = {
+		url: '{% url 'oneliners.ajax.search_by_tag' %}',
+		type: 'get',
+		data: { 
+		    'text': text
+		},
+		success: search_success
+	    };
+	    $.ajax(options);
+	}
+
+	function search_success(html) {
+	    $('.oneliners').html($(html).html());
+	    $('.pagination').remove();
+	}
+
+	$('.tags a').click(function(e) {
+	    e.preventDefault();
+	    $('.tags li.active').removeClass('active');
+	    $(this).parent().addClass('active');
+	    search_by_tag($(this).text());
+	});
+
+{% endblock %}

@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+
+{% block pagetitle %}{{ hacker.hackerprofile.get_display_name|default:'Anonymous' }}{% endblock %}
+
+{% block pageheader %}{{ hacker.hackerprofile.get_display_name|default:'Anonymous' }}{% if user == hacker %}<a href="{% url 'oneliners.views.profile_edit' %}" class="btn"><i class="icon-pencil"></i></a>{% endif %}{% endblock %}
+
+{% block content %}
+
+{% if hacker.hackerprofile.twitter_name or hacker.hackerprofile.blog_url or hacker.hackerprofile.homepage_url %}
+<table class="profile table table-bordered">
+    <tbody>
+	<tr>
+	    <th>Twitter name</th>
+	    <td><a href="{{ hacker.hackerprofile.twitter_url }}">{{ hacker.hackerprofile.twitter_name }}</a></td>
+	</tr>
+	<tr>
+	    <th>Blog URL</th>
+	    <td>{{ hacker.hackerprofile.blog_url|default:'(not set)'|urlize }}</td>
+	</tr>
+	<tr>
+	    <th>Homepage URL</th>
+	    <td>{{ hacker.hackerprofile.homepage_url|default:'(not set)'|urlize }}</td>
+	</tr>
+    </tbody>
+</table>
+{% endif %}
+
+<h3>Questions asked (still waiting for an answer)</h3>
+
+{% with questions_pending as questions %}
+{% include 'main/elements/questions.html' %}
+{% endwith %}
+
+{% if user == hacker %}
+<p><a href="{% url 'oneliners.views.question_new' %}" class="btn btn-primary">Post a question</a></p>
+{% endif %}
+
+<h3>Questions asked (marked answered)</h3>
+
+{% with questions_answered as questions %}
+{% include 'main/elements/questions.html' %}
+{% endwith %}
+
+<h3>One-liners posted</h3>
+
+{% include 'main/elements/oneliners.html' %}
+
+{% if user == hacker %}
+<p><a href="{% url 'oneliners.views.oneliner_new' %}" class="btn btn-primary">Post a one-liner</a></p>
+{% endif %}
+
+<h3>Favourite one-liners</h3>
+
+<p class="alert alert-block">Not implemented yet.</p>
+
+<h3>One-liners voted on</h3>
+
+<p class="alert alert-block">Not implemented yet.</p>
+
+
+{% endblock %}

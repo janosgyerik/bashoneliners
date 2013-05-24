@@ -1,0 +1,39 @@
+<form action="" method="post" class="">{% csrf_token %}
+    {{ form.next_url.as_hidden }}
+    <div class="non-field-errors">{{ form.non_field_errors }}</div>
+    <div class="question">
+	<h3>Summary<span class="required">*</span></h3>
+	<div class="help-block">In one sentence, what should the one-liner do?</div>
+	<div class="input">
+	    <div class="error">{{ form.summary.errors }}</div>
+	    <div class="summary">{{ form.summary }}</div>
+	</div>
+	
+	<h3>Explanation</h3>
+	<div class="help-block">Be specific. Try to use relevant keywords, so that the question is easier to find by search.</div>
+	<div class="input">
+	    <div class="error">{{ form.explanation.errors }}</div>
+	    <div class="explanation">{{ form.explanation }}</div>
+	</div>
+	
+	<h3>Published</h3>
+	<div class="help-block">If not checked, the question will be visible only by you.</div>
+	<div class="input">
+	    <div class="error">{{ form.is_published.errors }}</div>
+	    <div class="is_published"><label class="checkbox">{{ form.is_published }} Published</label></div>
+	</div>
+
+	<h3>Answered</h3>
+	<div class="help-block">If checked, the question will not be shown on the <a href="{% url 'oneliners.views.question_list' %}">questions page</a>.</div>
+	<div class="input">
+	    <div class="error">{{ form.is_answered.errors }}</div>
+	    <div class="is_answered"><label class="checkbox">{{ form.is_answered }} Answered</label></div>
+	</div>
+
+	<div class="form-actions">
+	    {% include 'main/elements/please_login.html' %}
+	    {% for action in form.actions %}<button type="submit" name="action" class="btn {{ action.cssclass }}" value="{{ action.name }}">{{ action.name }}</button>{% endfor %}
+	    <button class="btn"><a href="{{ next_url }}">Cancel</a></button>
+	</div>
+    </div>
+</form>

@@ -31,4 +31,7 @@ DATABASES = {
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = '__regenerate_this__'
 
-# eof
+# Hosts/domain names that are valid for this site; required if DEBUG is False
+# See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
+ALLOWED_HOSTS = ['www.example.com']
+

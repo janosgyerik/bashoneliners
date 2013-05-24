@@ -41,5 +41,17 @@ $(icons_dir)/square.png: $(src_dir)/square.png
 	convert -geometry 14x $< $@
 	identify $@
 
+gource: gource/gource.webm
+
+gource/gource.webm: gource/gource.ppm
+	ffmpeg -y -r 60 -f image2pipe -vcodec ppm -i $< -vcodec libvpx -b 10000K $@
+	> $<
+	touch $@
+	rm -f opsnr.stt
+
+gource/gource.ppm:
+	mkdir -p gource
+	gource --file-idle-time 0 --seconds-per-day .5 -640x480 -o $@
+
 
 # eof

@@ -1,6 +1,6 @@
 Requirements
 ------------
-* install with: pip install -r pip.txt
+* install with: pip install -r requirements.txt
 
 
 Setup

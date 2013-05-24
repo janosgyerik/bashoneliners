@@ -1,0 +1,5 @@
+*.pyc
+/graphics/gource/
+/run.sh
+/sqlite3.db
+/tmp

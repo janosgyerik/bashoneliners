@@ -171,7 +171,7 @@ LOGGING = {
         'file': {
             'level': 'DEBUG',
             'class': 'logging.FileHandler',
-            'filename': 'logs/debug.log',
+            'filename': os.path.join(DIRNAME, '..', 'logs', 'debug.log'),
             'formatter': 'simple',
         },
     },
@@ -216,6 +216,10 @@ TWITTER = {
 
 ### emails
 #
+# Django default
+#EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+#
+# for development
 #EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
 #EMAIL_FILE_PATH = '/tmp/django-emails'
 #EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'

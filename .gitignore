@@ -1,5 +1,5 @@
 *.pyc
-/bashoneliners/local_settings.py
+/bashoneliners/*_settings.py
 /graphics/gource/
 /logs
 /run.sh

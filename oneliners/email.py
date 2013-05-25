@@ -2,7 +2,7 @@ from django.template import Context, loader
 from django.core.mail import EmailMessage
 from django.core.mail.backends.base import BaseEmailBackend
 
-import bashoneliners.settings as settings
+from django.conf import settings
 
 BASEURL = 'http://bashoneliners.com'
 

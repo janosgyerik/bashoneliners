@@ -1,6 +1,6 @@
 # a simple module to tweet a message, using configuration from settings
 
-import settings
+from django.conf import settings
 
 
 def tweet(message, test=False, consumer_key=None, consumer_secret=None, access_token=None, access_token_secret=None):

@@ -1,6 +1,6 @@
 # a simple module to shorten URLs, using configuration from settings
 
-import settings
+from django.conf import settings
 
 
 def get_goo_gl(url):

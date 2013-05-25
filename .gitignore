@@ -1,7 +1,8 @@
 *.pyc
 /bashoneliners/*_settings.py
 /graphics/gource/
-/logs
+/logs/*
 /run.sh
 /sqlite3.db
+/static/*
 /tmp

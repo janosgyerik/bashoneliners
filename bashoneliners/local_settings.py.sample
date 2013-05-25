@@ -6,7 +6,7 @@ DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
-    ('Bash One-Liners Admin', 'info@bashoneliners.com'),
+    ('Bash One-Liners DEV', 'noreply@bashoneliners.com'),
 )
 
 MANAGERS = ADMINS
@@ -35,3 +35,30 @@ SECRET_KEY = '__regenerate_this__'
 # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
 ALLOWED_HOSTS = ['www.example.com']
 
+### posting to twitter
+
+# 1. Login to Twitter
+# 2. Go to https://dev.twitter.com/apps/new and fill the form
+#    - Application Type should be Client
+#    - Default Access Type must be Read and Write
+# 3. Consumer key and secret are here: https://dev.twitter.com/apps
+# 4. Access token and secret are in the My Access Token menu
+#
+TWITTER = {
+        'consumer_key': '',
+        'consumer_secret': '',
+        'access_token': '',
+        'access_token_secret': '',
+        }
+
+### sending emails
+#EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+#EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+#EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
+EMAIL_FILE_PATH = os.path.join(LOGS_DIR, 'emails.log')
+EMAIL_BACKEND = 'oneliners.email.CustomFileEmailBackend'
+
+### url shortening
+#
+GOO_GL_API_URL = 'https://www.googleapis.com/urlshortener/v1/url'
+GOO_GL_API_KEY = ''

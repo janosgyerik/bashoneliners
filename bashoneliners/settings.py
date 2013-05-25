@@ -8,7 +8,7 @@ DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
-    ('Bash One-Liners DEV', 'info@bashoneliners.com'),
+    ('Bash One-Liners DEV', 'noreply@bashoneliners.com'),
 )
 
 MANAGERS = ADMINS
@@ -146,6 +146,7 @@ INSTALLED_APPS = (
 # import logging
 # logger = logging.getLogger(__name__)
 # logger.debug('something happened')
+LOGS_DIR = os.path.join(DIRNAME, '..', 'logs')
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
@@ -171,7 +172,7 @@ LOGGING = {
         'file': {
             'level': 'DEBUG',
             'class': 'logging.FileHandler',
-            'filename': os.path.join(DIRNAME, '..', 'logs', 'debug.log'),
+            'filename': os.path.join(LOGS_DIR, 'debug.log'),
             'formatter': 'simple',
         },
     },
@@ -205,31 +206,16 @@ LOGIN_URL = '/openid/login/'
 LOGIN_REDIRECT_URL = '/main/profile'
 
 
-### project specific custom settings
+##### project specific custom settings
 
-TWITTER = {
-        'consumer_key': '',
-        'consumer_secret': '',
-        'access_token': '',
-        'access_token_secret': '',
-        }
-
-### emails
-#
-# Django default
+### sending emails
 #EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-#
-# for development
-#EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
-#EMAIL_FILE_PATH = '/tmp/django-emails'
 #EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-EMAIL_FILE_PATH = '/tmp/django-emails.log'
+#EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
+EMAIL_FILE_PATH = os.path.join(LOGS_DIR, 'emails.log')
 EMAIL_BACKEND = 'oneliners.email.CustomFileEmailBackend'
 
 ### url shortening
 #
 GOO_GL_API_URL = 'https://www.googleapis.com/urlshortener/v1/url'
 GOO_GL_API_KEY = ''
-
-
-# eof

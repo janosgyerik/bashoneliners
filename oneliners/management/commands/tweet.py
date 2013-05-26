@@ -37,7 +37,7 @@ class Command(BaseCommand):
     def handle_oneliner(self, oneliner, test=True):
         message = format_tweet(oneliner)
         self.stdout.write('%s: %s' % (oneliner.pk, message))
-        result = tweet(oneliner.line, test)
+        result = tweet(message, test)
         if not test:
             self.stdout.write('# result: ' + str(result))
         self.stdout.write('')

@@ -17,7 +17,6 @@ next
 code cleansing
 --------------
 - do not include oneliners.urls twice in top-level urls.py
-- clean up maintenance_urls.py
 - phase out AUTH_PROFILE_MODULE (deprecated in Django 1.5)
 - move templates inside oneliners module
     - replace main/ with oneliners/ when rendering templates

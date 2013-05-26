@@ -1,4 +1,4 @@
-from django.conf.urls.defaults import patterns
+from django.conf.urls import patterns, include, url
 from django.shortcuts import render_to_response
 
 
@@ -11,7 +11,5 @@ urlpatterns = patterns('',
         (r'^admin/', maintenance_page),
         (r'^comments/', maintenance_page),
         (r'^openid/', maintenance_page),
+        (r'^feed/', maintenance_page),
         )
-
-
-# eof

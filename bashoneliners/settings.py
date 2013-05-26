@@ -107,6 +107,7 @@ MIDDLEWARE_CLASSES = (
 )
 
 ROOT_URLCONF = 'bashoneliners.urls'
+#ROOT_URLCONF = 'bashoneliners.maintenance_urls'
 
 # Python dotted path to the WSGI application used by Django's runserver.
 WSGI_APPLICATION = 'bashoneliners.wsgi.application'

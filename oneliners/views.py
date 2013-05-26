@@ -41,16 +41,21 @@ def _common_initial(request):
     return {'next_url': request.META.get('HTTP_REFERER', '/'), }
 
 
+def format_tweet(oneliner):
+    long_url = 'http://bashoneliners.com/main/oneliner/%d' % oneliner.pk
+    from oneliners.shorturl import get_goo_gl
+    url = get_goo_gl(long_url) or long_url
+    message = '%s %s' % (
+            url,
+            oneliner.line,
+            )
+    return message
+
+
 def tweet(oneliner, force=False, test=False):
     if not oneliner.was_tweeted or force:
-        long_url = 'http://bashoneliners.com/main/oneliner/%d' % oneliner.pk
-        from oneliners.shorturl import get_goo_gl
-        url = get_goo_gl(long_url) or long_url
-        message = '%s %s' % (
-                url,
-                oneliner.line,
-                )
         from oneliners.tweet import tweet as send_tweet
+        message = format_tweet(oneliner)
         result = send_tweet(message, test=test)
         if result:
             oneliner.was_tweeted = True

@@ -62,3 +62,6 @@ EMAIL_BACKEND = 'oneliners.email.CustomFileEmailBackend'
 #
 GOO_GL_API_URL = 'https://www.googleapis.com/urlshortener/v1/url'
 GOO_GL_API_KEY = ''
+
+### google analytics
+GOOGLE_ANALYTICS_ID = 'UA-XXXXXXXX-X'

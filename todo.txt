@@ -21,7 +21,6 @@ code cleansing
 - phase out AUTH_PROFILE_MODULE (deprecated in Django 1.5)
 - move templates inside oneliners module
     - replace main/ with oneliners/ when rendering templates
-- make tweet script proper admin command
 - replace bashoneliners.com references using Sites
 - see newproj.views._response
 - remove initial=initial in oneliner_edit (and others)

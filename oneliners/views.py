@@ -1,3 +1,5 @@
+from functools import wraps
+
 from django.shortcuts import render_to_response, redirect
 from django.contrib.auth.decorators import login_required
 from django.template import RequestContext
@@ -9,7 +11,23 @@ from oneliners.models import OneLiner, User, Comment_recent, Tag, Question
 from oneliners.forms import EditHackerProfileForm, PostOneLinerForm, PostCommentOnOneLinerForm, PostQuestionForm, EditQuestionForm, SearchOneLinerForm, EditOneLinerForm
 
 
-''' helper methods '''
+### decorators
+
+
+def render_with_context(custom_params=False):
+    def _inner(view_method):
+        def _decorator(request, *args, **kwargs):
+            if custom_params:
+                (template_path, params) = view_method(request, *args, **kwargs)
+            else:
+                params = _common_params(request)
+                template_path = view_method(request, *args, **kwargs)
+            return render_to_response(template_path, params, context_instance=RequestContext(request))
+        return wraps(view_method)(_decorator)
+    return _inner
+
+
+### helper methods
 
 
 def _common_params(request):
@@ -63,6 +81,7 @@ def tweet(oneliner, force=False, test=False):
             return result
 
 
+@render_with_context(custom_params=True)
 def oneliner_list(request):
     params = _common_params(request)
 
@@ -84,7 +103,7 @@ def oneliner_list(request):
     params['oneliners_page'] = page
     params['tagcloud'] = Tag.tagcloud()
 
-    return render_to_response('main/pages/index.html', params)
+    return ('main/pages/index.html', params)
 
 
 def oneliner(request, pk):
@@ -213,10 +232,11 @@ def oneliner_comment(request, pk):
     return render_to_response('main/pages/oneliner_comment.html', params, context_instance=RequestContext(request))
 
 
+@render_with_context(custom_params=True)
 def question_list(request):
     params = _common_params(request)
     params['questions'] = Question.recent()
-    return render_to_response('main/pages/question_list.html', params, context_instance=RequestContext(request))
+    return ('main/pages/question_list.html', params)
 
 
 def question(request, pk):
@@ -276,12 +296,14 @@ def question_new(request):
     return render_to_response('main/pages/question_edit.html', params, context_instance=RequestContext(request))
 
 
+@render_with_context(custom_params=True)
 def comment_list(request):
     params = _common_params(request)
     params['comments'] = Comment_recent()
-    return render_to_response('main/pages/comment_list.html', params)
+    return ('main/pages/comment_list.html', params)
 
 
+@render_with_context(custom_params=True)
 def profile(request, pk=None):
     params = _common_params(request)
 
@@ -304,9 +326,10 @@ def profile(request, pk=None):
         params['questions_pending'] = questions.filter(is_answered=False)
         params['questions_answered'] = questions.filter(is_answered=True)
 
-    return render_to_response('main/pages/profile.html', params)
+    return ('main/pages/profile.html', params)
 
 
+@render_with_context(custom_params=True)
 def profile_edit(request):
     params = _common_params(request)
     initial = _common_initial(request)
@@ -328,9 +351,10 @@ def profile_edit(request):
 
     params['form'] = form
 
-    return render_to_response('main/pages/profile_edit.html', params, context_instance=RequestContext(request))
+    return ('main/pages/profile_edit.html', params)
 
 
+@render_with_context(custom_params=True)
 def search(request):
     params = _common_params(request)
     form = params['searchform']
@@ -339,12 +363,12 @@ def search(request):
         params['oneliners'] = OneLiner.search(form)
         params['data'] = form.data
 
-    return render_to_response('main/pages/search.html', params)
+    return ('main/pages/search.html', params)
 
 
+@render_with_context()
 def login(request):
-    params = _common_params(request)
-    return render_to_response('main/pages/login.html', params, context_instance=RequestContext(request))
+    return 'main/pages/login.html'
 
 
 def logout(request):
@@ -355,19 +379,19 @@ def logout(request):
 ''' simple pages '''
 
 
+@render_with_context()
 def feeds(request):
-    params = _common_params(request)
-    return render_to_response('main/pages/feeds.html', params)
+    return 'main/pages/feeds.html'
 
 
+@render_with_context()
 def sourcecode(request):
-    params = _common_params(request)
-    return render_to_response('main/pages/sourcecode.html', params)
+    return 'main/pages/sourcecode.html'
 
 
+@render_with_context()
 def mission(request):
-    params = _common_params(request)
-    return render_to_response('main/pages/mission.html', params)
+    return 'main/pages/mission.html'
 
 
 def help_markdown(request):

@@ -1,27 +1,27 @@
 /* Begin Various Tags */
 
     body {
-	color: black;
-	margin: 0;
-	padding: 0;
-	border: 0;
+        color: black;
+        margin: 0;
+        padding: 0;
+        border: 0;
     }
 
     acronym, abbr {
-	cursor: help;
+        cursor: help;
     }
 
     hr {
-	display: none;
+        display: none;
     }
 
     img {
-	border: none;
-	vertical-align: middle;
+        border: none;
+        vertical-align: middle;
     }
 
     dt {
-	font-weight: bold;
+        font-weight: bold;
     }
 
 /* End Various Tags */
@@ -30,21 +30,21 @@
 /* Begin Images */
 
     img.centered {
-	display: block;
-	margin-left: auto;
-	margin-right: auto;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
     }
 
     img.alignright {
-	padding: 4px;
-	margin: 0 0 2px 7px;
-	display: inline;
+        padding: 4px;
+        margin: 0 0 2px 7px;
+        display: inline;
     }
 
     img.alignleft {
-	padding: 4px;
-	margin: 0 7px 2px 0;
-	display: inline;
+        padding: 4px;
+        margin: 0 7px 2px 0;
+        display: inline;
     }
 
 /* End Images */
@@ -53,45 +53,45 @@
 /* Begin Utility Classes */
 
     .floatleft {
-	float: left;
-	margin-right: 1em;
+        float: left;
+        margin-right: 1em;
     }
 
     .floatright {
-	float: right;
-	margin-left: 1em;
+        float: right;
+        margin-left: 1em;
     }
 
     .alignright {
-	text-align: right;
+        text-align: right;
     }
 
     .center {
-	text-align: center;
+        text-align: center;
     }
 
     .clear {
-	clear: both;
+        clear: both;
     }
 
     .hidden {
-	display: none;
+        display: none;
     }
-	    
+            
     .invisible {
-	visibility: hidden;
+        visibility: hidden;
     }
-	    
+            
     .screen-reader-text {
-	position: absolute;
-	left: -1000em;
+        position: absolute;
+        left: -1000em;
     }
 
     .validators {
-	text-align: right;
+        text-align: right;
     }
     .validators a {
-	margin-left: .5em;
+        margin-left: .5em;
     }
 
 /* End Utility Classes */
@@ -103,7 +103,7 @@ body {
 
 @media (max-width: 980px) {
     body {
-	padding-top: 0;
+        padding-top: 0;
     }
 }
 

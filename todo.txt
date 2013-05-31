@@ -15,7 +15,6 @@ next
 cleaning 1
 ----------
 - favicon!
-- change mailing list address to github issues page
 - isn't there a better way to announce news on github?
 - internal_error.html does not exist
     probably the process gets shot down... adjust the message

@@ -4,30 +4,37 @@ https://trello.com/board/main/4e7da3cf5a94680b35000893
 
 release notes
 -------------
-- Migrated from django 1.2 to django 1.5
-- Cleaned up many best practice violations
+-
 
 
 next
 ----
-- 500 error when trying to post comment
 - voting!!!
+
+
+cleaning 1
+----------
+- favicon!
+- change mailing list address to github issues page
+- isn't there a better way to announce news on github?
+- internal_error.html does not exist
+    probably the process gets shot down... adjust the message
+    donation for hosting to upgrade would be nice
+- add twitter user variable, useful in dev
+- use current site address in tweets, test in BETA
+- do not include oneliners.urls twice in top-level urls.py
 
 
 code cleansing
 --------------
-- do not include oneliners.urls twice in top-level urls.py
 - phase out AUTH_PROFILE_MODULE (deprecated in Django 1.5)
-- move templates inside oneliners module
-    - replace main/ with oneliners/ when rendering templates
+- replace main/ with oneliners/ when rendering templates
 - replace bashoneliners.com references using Sites
-- see newproj.views._response
 - remove initial=initial in oneliner_edit (and others)
 
 
 future releases
 ---------------
-- upgrade openid provider, there is a deprecation warning
 - Voting
 	- vote up
 	- vote down
@@ -40,6 +47,5 @@ future releases
 - the user who asked the question can mark the best answer
 - api with different query options and output format options
 - logo, better design
-- add pip requirements file
 
 

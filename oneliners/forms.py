@@ -12,7 +12,6 @@ from oneliners.models import OneLiner, HackerProfile, Question
 
 class CommonOneLinerForm(forms.ModelForm):
     user = None
-    next_url = forms.URLField(required=False)
     action = forms.CharField()
 
     def __init__(self, user, *args, **kwargs):
@@ -81,8 +80,6 @@ class SearchOneLinerForm(forms.Form):
 
 
 class EditHackerProfileForm(forms.ModelForm):
-    next_url = forms.URLField(required=False)
-
     def clean_display_name(self):
         display_name = self.cleaned_data['display_name']
         if display_name == '':
@@ -106,7 +103,6 @@ class EditHackerProfileForm(forms.ModelForm):
 
 class CommonQuestionForm(forms.ModelForm):
     user = None
-    next_url = forms.URLField(required=False)
     action = forms.CharField()
 
     def __init__(self, user, *args, **kwargs):
@@ -162,8 +158,6 @@ class EditQuestionForm(CommonQuestionForm):
 
 
 class PostCommentOnOneLinerForm(CommentForm):
-    next_url = forms.URLField(required=False)
-
     def __init__(self, *args, **kwargs):
         super(PostCommentOnOneLinerForm, self).__init__(*args, **kwargs)
         self.fields['comment'].widget = forms.Textarea(attrs={'rows': 5, 'class': 'span6', })

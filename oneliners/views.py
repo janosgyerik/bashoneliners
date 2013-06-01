@@ -60,11 +60,6 @@ def _common_params(request):
     return params
 
 
-def get_next_url(request):
-    default_next_url = format_canonical_url(request, reverse('index'))
-    return request.META.get('HTTP_REFERER', default_next_url)
-
-
 def format_tweet(oneliner, baseurl):
     long_url = baseurl + oneliner.get_absolute_url()
     from oneliners.shorturl import get_goo_gl
@@ -121,7 +116,7 @@ def oneliner(request, pk):
 @login_required
 def oneliner_edit(request, pk):
     params = _common_params(request)
-    params['next_url'] = get_next_url(request)
+    params['cancel_url'] = reverse(oneliner, args=(pk,))
 
     try:
         oneliner0 = OneLiner.objects.get(pk=pk, user=request.user)
@@ -139,8 +134,6 @@ def oneliner_edit(request, pk):
             elif form.is_delete:
                 oneliner0.delete()
                 return redirect(profile)
-        else:
-            params['next_url'] = request.POST.get('next_url')
     else:
         form = EditOneLinerForm(request.user, instance=oneliner0)
 
@@ -149,9 +142,11 @@ def oneliner_edit(request, pk):
     return render_to_response('oneliners/pages/oneliner_edit.html', params, context_instance=RequestContext(request))
 
 
-def oneliner_new(request, question_pk=None, oneliner_pk=None):
+def oneliner_new(request, question_pk=None, oneliner_pk=None, cancel_url=None):
     params = _common_params(request)
-    params['next_url'] = get_next_url(request)
+    if not cancel_url:
+        cancel_url = reverse(oneliner_list)
+    params['cancel_url'] = cancel_url
 
     question = None
     oneliner0 = None
@@ -188,8 +183,6 @@ def oneliner_new(request, question_pk=None, oneliner_pk=None):
                     return redirect(oneliner_list)
                 else:
                     return redirect(new_oneliner)
-            else:
-                params['next_url'] = request.POST.get('next_url')
     else:
         form = PostOneLinerForm(request.user, initial=initial)
 
@@ -201,16 +194,18 @@ def oneliner_new(request, question_pk=None, oneliner_pk=None):
 
 
 def oneliner_answer(request, question_pk):
-    return oneliner_new(request, question_pk=question_pk)
+    cancel_url = reverse(question, args=(question_pk,))
+    return oneliner_new(request, question_pk=question_pk, cancel_url=cancel_url)
 
 
 def oneliner_alternative(request, oneliner_pk):
-    return oneliner_new(request, oneliner_pk=oneliner_pk)
+    cancel_url = reverse(oneliner, args=(oneliner_pk,))
+    return oneliner_new(request, oneliner_pk=oneliner_pk, cancel_url=cancel_url)
 
 
 def oneliner_comment(request, pk):
     params = _common_params(request)
-    params['next_url'] = get_next_url(request)
+    params['cancel_url'] = reverse(oneliner, args=(pk,))
 
     try:
         oneliner0 = OneLiner.objects.get(pk=pk)
@@ -226,8 +221,6 @@ def oneliner_comment(request, pk):
             if form.is_valid():
                 comment = form.cleaned_data['comment']
                 return comments.post_comment(request, next=oneliner0.get_absolute_url())
-            else:
-                params['next_url'] = request.POST.get('next_url')
         else:
             form = PostCommentOnOneLinerForm(oneliner0, request.POST)
     else:
@@ -255,7 +248,7 @@ def question(request, pk):
 @login_required
 def question_edit(request, pk):
     params = _common_params(request)
-    params['next_url'] = request.POST.get('next_url')
+    params['cancel_url'] = reverse(question, args=(pk,))
 
     try:
         question0 = Question.objects.get(pk=pk, user=request.user)
@@ -271,8 +264,6 @@ def question_edit(request, pk):
             elif form.is_delete:
                 question0.delete()
                 return redirect(profile)
-        else:
-            params['next_url'] = request.POST.get('next_url')
     else:
         form = EditQuestionForm(request.user, instance=question0)
 
@@ -283,7 +274,7 @@ def question_edit(request, pk):
 
 def question_new(request):
     params = _common_params(request)
-    params['next_url'] = get_next_url(request)
+    params['cancel_url'] = reverse(question_list)
 
     if request.method == 'POST':
         form = PostQuestionForm(request.user, request.POST)
@@ -294,8 +285,6 @@ def question_new(request):
                     return redirect(question_list)
                 else:
                     return redirect(new_question)
-            else:
-                params['next_url'] = request.POST.get('next_url')
     else:
         form = PostQuestionForm(request.user)
 
@@ -340,7 +329,7 @@ def profile(request, pk=None):
 @render_with_context(custom_params=True)
 def profile_edit(request):
     params = _common_params(request)
-    params['next_url'] = request.POST.get('next_url')
+    params['cancel_url'] = reverse(profile)
 
     if request.user.is_authenticated():
         hackerprofile = request.user.hackerprofile
@@ -349,8 +338,6 @@ def profile_edit(request):
             if form.is_valid():
                 form.save()
                 return redirect(profile)
-            else:
-                params['next_url'] = request.POST.get('next_url')
         else:
             form = EditHackerProfileForm(instance=hackerprofile)
     else:

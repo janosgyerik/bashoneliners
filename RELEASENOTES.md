@@ -3,7 +3,8 @@ Release notes
 
 not announced yet
 -----------------
-* double-click highlights one-liner as if by dragging over the mouse
+* Double-click highlights one-liner as if by dragging over the mouse
+* Sanitized the behavior of the Cancel button
 
 
 2013-06-01

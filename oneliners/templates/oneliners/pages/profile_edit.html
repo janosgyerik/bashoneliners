@@ -13,7 +13,6 @@
 {% include 'oneliners/elements/please_login.html' %}
 
 <form action="" method="post" class="">{% csrf_token %}
-    {{ form.next_url.as_hidden }}
     <div class="non-field-errors">{{ form.non_field_errors }}</div>
     <div class="profile">
 	<h3>{{ form.display_name.label }}</h3>
@@ -45,7 +44,7 @@
 	<div class="form-actions">
 	    {% include 'oneliners/elements/please_login.html' %}
 	    <button type="submit" name="action" class="btn btn-primary" value="Save">Save</button>
-	    <button class="btn"><a href="{{ next_url }}">Cancel</a></button>
+	    <button class="btn"><a href="{{ cancel_url }}">Cancel</a></button>
 	</div>
     </div>
 </form>

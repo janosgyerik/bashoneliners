@@ -19,7 +19,6 @@
 {% include 'oneliners/elements/please_login.html' %}
 
 <form action="" method="post">{% csrf_token %}
-    {{ form.next_url.as_hidden }}
     {{ form.honeypot.as_hidden }}
     {{ form.content_type.as_hidden }}
     {{ form.object_pk.as_hidden }}
@@ -36,7 +35,7 @@
     <div class="form-actions">
 	{% include 'oneliners/elements/please_login.html' %}
 	<button class="btn btn-primary" type="submit" name="submit" value="Post">Post</button>
-	<button class="btn"><a href="{{ next_url }}">Cancel</a></button>
+	<button class="btn"><a href="{{ cancel_url }}">Cancel</a></button>
     </div>
 </form>
 

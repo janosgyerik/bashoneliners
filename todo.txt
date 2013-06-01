@@ -22,7 +22,6 @@ cleaning 1
     donation for hosting to upgrade would be nice
 - explanation should be required on questions
 - setup automatic deployment of master
-- fix url deprecation
 - change next url behavior
     - my oneliners after posting oneliner
     - my question after posting question

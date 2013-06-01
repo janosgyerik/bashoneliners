@@ -1,4 +1,4 @@
-{% extends 'main/elements/oneliner.html' %}
+{% extends 'oneliners/elements/oneliner.html' %}
 
 {% block related %}
 	{% if oneliner.relateds %}
@@ -8,7 +8,7 @@
 	    <div class="oneliners">
 	    {% for alternative in alternatives %}
 	    {% with alternative.oneliner as oneliner %}
-	    {% include 'main/elements/oneliner.html' %}
+	    {% include 'oneliners/elements/oneliner.html' %}
 	    {% endwith %}
 	    {% endfor %}
 	    </div>
@@ -23,7 +23,7 @@
 	    <div class="oneliners">
 	    {% for alternative in alternatives %}
 	    {% with alternative.alternative as oneliner %}
-	    {% include 'main/elements/oneliner.html' %}
+	    {% include 'oneliners/elements/oneliner.html' %}
 	    {% endwith %}
 	    {% endfor %}
 	    </div>
@@ -38,7 +38,7 @@
 	    <div class="questions">
 	    {% for answer in answers %}
 	    {% with answer.question as question %}
-	    {% include 'main/elements/question.html' %}
+	    {% include 'oneliners/elements/question.html' %}
 	    {% endwith %}
 	    {% endfor %}
 	    </div>

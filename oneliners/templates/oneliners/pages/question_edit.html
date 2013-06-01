@@ -10,7 +10,7 @@
 
 {% block content %}
 
-{% include 'main/elements/please_login.html' %}
+{% include 'oneliners/elements/please_login.html' %}
 
 <ul>
     <li>Before you post, please do a quick search to confirm there is no one-liner that already answers your question.</li>
@@ -18,7 +18,7 @@
     <li>You can track your questions on your <a href="{% url 'oneliners.views.profile' %}">profile</a> page, and mark them <strong>Answered</strong> to remove them from the list of open questions.</li>
 </ul>
 
-{% include 'main/elements/question_edit_form.html' %}
+{% include 'oneliners/elements/question_edit_form.html' %}
 
 {% endblock content %}
 

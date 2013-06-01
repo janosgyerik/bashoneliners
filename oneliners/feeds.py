@@ -26,7 +26,7 @@ class OneLinerEntries(Feed):
     title = "Bash One-Liners"
     link = reverse(oneliner)
     description = "Recently posted bash one-liners on bashoneliners.com"
-    description_template = 'main/feeds/oneliner.html'
+    description_template = 'oneliners/feeds/oneliner.html'
 
     def items(self):
         return OneLiner.feed()
@@ -36,7 +36,7 @@ class QuestionEntries(Feed):
     title = "Questions for bash one-liners"
     link = reverse(question)
     description = "Recently posted questions on bashoneliners.com"
-    description_template = 'main/feeds/question.html'
+    description_template = 'oneliners/feeds/question.html'
 
     def items(self):
         return Question.feed()
@@ -46,7 +46,7 @@ class CommentEntries(Feed):
     title = "Comments on bash one-liners"
     link = reverse(comment)
     description = "Recently posted comments on bashoneliners.com"
-    description_template = 'main/feeds/comment.html'
+    description_template = 'oneliners/feeds/comment.html'
 
     def items(self):
         return Comment_feed()

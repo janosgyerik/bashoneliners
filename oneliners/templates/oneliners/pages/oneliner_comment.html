@@ -12,11 +12,11 @@
 
 {% with 1 as nobuttons %}
 {% with 'expanded' as comments_expanded %}
-{% include 'main/elements/oneliner.html' %}
+{% include 'oneliners/elements/oneliner.html' %}
 {% endwith %}
 {% endwith %}
 
-{% include 'main/elements/please_login.html' %}
+{% include 'oneliners/elements/please_login.html' %}
 
 <form action="" method="post">{% csrf_token %}
     {{ form.next_url.as_hidden }}
@@ -34,7 +34,7 @@
     </div>
     
     <div class="form-actions">
-	{% include 'main/elements/please_login.html' %}
+	{% include 'oneliners/elements/please_login.html' %}
 	<button class="btn btn-primary" type="submit" name="submit" value="Post">Post</button>
 	<button class="btn"><a href="{{ next_url }}">Cancel</a></button>
     </div>

@@ -10,7 +10,7 @@
 
 {% block content %}
 
-{% include 'main/elements/please_login.html' %}
+{% include 'oneliners/elements/please_login.html' %}
 
 <form action="" method="post" class="">{% csrf_token %}
     {{ form.next_url.as_hidden }}
@@ -43,7 +43,7 @@
 	</div>
 	
 	<div class="form-actions">
-	    {% include 'main/elements/please_login.html' %}
+	    {% include 'oneliners/elements/please_login.html' %}
 	    <button type="submit" name="action" class="btn btn-primary" value="Save">Save</button>
 	    <button class="btn"><a href="{{ next_url }}">Cancel</a></button>
 	</div>

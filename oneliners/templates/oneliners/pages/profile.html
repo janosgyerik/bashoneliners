@@ -30,7 +30,7 @@
 <h3>Questions asked (still waiting for an answer)</h3>
 
 {% with questions_pending as questions %}
-{% include 'main/elements/questions.html' %}
+{% include 'oneliners/elements/questions.html' %}
 {% endwith %}
 
 {% if user == hacker %}
@@ -40,12 +40,12 @@
 <h3>Questions asked (marked answered)</h3>
 
 {% with questions_answered as questions %}
-{% include 'main/elements/questions.html' %}
+{% include 'oneliners/elements/questions.html' %}
 {% endwith %}
 
 <h3>One-liners posted</h3>
 
-{% include 'main/elements/oneliners.html' %}
+{% include 'oneliners/elements/oneliners.html' %}
 
 {% if user == hacker %}
 <p><a href="{% url 'oneliners.views.oneliner_new' %}" class="btn btn-primary">Post a one-liner</a></p>

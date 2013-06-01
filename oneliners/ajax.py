@@ -11,7 +11,7 @@ def question_answered(request, question_pk, oneliner_pk):
     oneliner = OneLiner.objects.get(pk=oneliner_pk)
     question.accept_answer(oneliner)
 
-    return render_to_response('main/ajax/json.js')
+    return render_to_response('oneliners/ajax/json.js')
 
 
 def search(request):
@@ -28,7 +28,7 @@ def search(request):
             params['user'] = request.user
             params['data'] = form.data
 
-    return render_to_response('main/elements/oneliners_searchresults.html', params)
+    return render_to_response('oneliners/elements/oneliners_searchresults.html', params)
 
 
 def search_by_tag(request):
@@ -43,7 +43,7 @@ def search_by_tag(request):
     except:
         params['oneliners'] = ()
 
-    return render_to_response('main/elements/oneliners.html', params)
+    return render_to_response('oneliners/elements/oneliners.html', params)
 
 
 # eof

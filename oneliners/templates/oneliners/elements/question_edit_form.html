@@ -31,7 +31,7 @@
 	</div>
 
 	<div class="form-actions">
-	    {% include 'main/elements/please_login.html' %}
+	    {% include 'oneliners/elements/please_login.html' %}
 	    {% for action in form.actions %}<button type="submit" name="action" class="btn {{ action.cssclass }}" value="{{ action.name }}">{{ action.name }}</button>{% endfor %}
 	    <button class="btn"><a href="{{ next_url }}">Cancel</a></button>
 	</div>

@@ -109,13 +109,13 @@ def oneliner_list(request):
     params['oneliners_page'] = page
     params['tagcloud'] = Tag.tagcloud()
 
-    return ('main/pages/index.html', params)
+    return ('oneliners/pages/index.html', params)
 
 
 def oneliner(request, pk):
     params = _common_params(request)
     params['oneliners'] = OneLiner.objects.filter(pk=pk)
-    return render_to_response('main/pages/oneliner.html', params)
+    return render_to_response('oneliners/pages/oneliner.html', params)
 
 
 @login_required
@@ -127,7 +127,7 @@ def oneliner_edit(request, pk):
     try:
         oneliner0 = OneLiner.objects.get(pk=pk, user=request.user)
     except:
-        return render_to_response('main/pages/access_error.html', params)
+        return render_to_response('oneliners/pages/access_error.html', params)
 
     if request.method == 'POST':
         form = EditOneLinerForm(request.user, request.POST, instance=oneliner0)
@@ -147,7 +147,7 @@ def oneliner_edit(request, pk):
 
     params['form'] = form
 
-    return render_to_response('main/pages/oneliner_edit.html', params, context_instance=RequestContext(request))
+    return render_to_response('oneliners/pages/oneliner_edit.html', params, context_instance=RequestContext(request))
 
 
 def oneliner_new(request, question_pk=None, oneliner_pk=None):
@@ -198,7 +198,7 @@ def oneliner_new(request, question_pk=None, oneliner_pk=None):
     params['question'] = question
     params['oneliner'] = oneliner0
 
-    return render_to_response('main/pages/oneliner_edit.html', params, context_instance=RequestContext(request))
+    return render_to_response('oneliners/pages/oneliner_edit.html', params, context_instance=RequestContext(request))
 
 
 def oneliner_answer(request, question_pk):
@@ -217,7 +217,7 @@ def oneliner_comment(request, pk):
     try:
         oneliner0 = OneLiner.objects.get(pk=pk)
     except:
-        return render_to_response('main/pages/access_error.html', params)
+        return render_to_response('oneliners/pages/access_error.html', params)
 
     if request.method == 'POST':
         if request.user.is_authenticated():
@@ -238,20 +238,20 @@ def oneliner_comment(request, pk):
     params['form'] = form
     params['oneliner'] = oneliner0
 
-    return render_to_response('main/pages/oneliner_comment.html', params, context_instance=RequestContext(request))
+    return render_to_response('oneliners/pages/oneliner_comment.html', params, context_instance=RequestContext(request))
 
 
 @render_with_context(custom_params=True)
 def question_list(request):
     params = _common_params(request)
     params['questions'] = Question.recent()
-    return ('main/pages/question_list.html', params)
+    return ('oneliners/pages/question_list.html', params)
 
 
 def question(request, pk):
     params = _common_params(request)
     params['questions'] = Question.objects.filter(pk=pk)
-    return render_to_response('main/pages/question.html', params)
+    return render_to_response('oneliners/pages/question.html', params)
 
 
 @login_required
@@ -263,7 +263,7 @@ def question_edit(request, pk):
     try:
         question0 = Question.objects.get(pk=pk, user=request.user)
     except:
-        return render_to_response('main/pages/access_error.html', params)
+        return render_to_response('oneliners/pages/access_error.html', params)
 
     if request.method == 'POST':
         form = EditQuestionForm(request.user, request.POST, instance=question0)
@@ -281,7 +281,7 @@ def question_edit(request, pk):
 
     params['form'] = form
 
-    return render_to_response('main/pages/question_edit.html', params, context_instance=RequestContext(request))
+    return render_to_response('oneliners/pages/question_edit.html', params, context_instance=RequestContext(request))
 
 
 def question_new(request):
@@ -305,14 +305,14 @@ def question_new(request):
 
     params['form'] = form
 
-    return render_to_response('main/pages/question_edit.html', params, context_instance=RequestContext(request))
+    return render_to_response('oneliners/pages/question_edit.html', params, context_instance=RequestContext(request))
 
 
 @render_with_context(custom_params=True)
 def comment_list(request):
     params = _common_params(request)
     params['comments'] = Comment_recent()
-    return ('main/pages/comment_list.html', params)
+    return ('oneliners/pages/comment_list.html', params)
 
 
 @render_with_context(custom_params=True)
@@ -338,7 +338,7 @@ def profile(request, pk=None):
         params['questions_pending'] = questions.filter(is_answered=False)
         params['questions_answered'] = questions.filter(is_answered=True)
 
-    return ('main/pages/profile.html', params)
+    return ('oneliners/pages/profile.html', params)
 
 
 @render_with_context(custom_params=True)
@@ -363,7 +363,7 @@ def profile_edit(request):
 
     params['form'] = form
 
-    return ('main/pages/profile_edit.html', params)
+    return ('oneliners/pages/profile_edit.html', params)
 
 
 @render_with_context(custom_params=True)
@@ -375,12 +375,12 @@ def search(request):
         params['oneliners'] = OneLiner.search(form)
         params['data'] = form.data
 
-    return ('main/pages/search.html', params)
+    return ('oneliners/pages/search.html', params)
 
 
 @render_with_context()
 def login(request):
-    return 'main/pages/login.html'
+    return 'oneliners/pages/login.html'
 
 
 def logout(request):
@@ -393,20 +393,20 @@ def logout(request):
 
 @render_with_context()
 def feeds(request):
-    return 'main/pages/feeds.html'
+    return 'oneliners/pages/feeds.html'
 
 
 @render_with_context()
 def sourcecode(request):
-    return 'main/pages/sourcecode.html'
+    return 'oneliners/pages/sourcecode.html'
 
 
 @render_with_context()
 def mission(request):
-    return 'main/pages/mission.html'
+    return 'oneliners/pages/mission.html'
 
 
 def help_markdown(request):
-    return render_to_response('main/help/markdown.html')
+    return render_to_response('oneliners/help/markdown.html')
 
 # eof

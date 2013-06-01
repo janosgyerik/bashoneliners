@@ -204,7 +204,7 @@ OPENID_CREATE_USERS = True
 OPENID_UPDATE_DETAILS_FROM_SREG = True
 
 LOGIN_URL = '/openid/login/'
-LOGIN_REDIRECT_URL = '/main/profile'
+LOGIN_REDIRECT_URL = '/oneliners/profile'
 
 from django.conf.global_settings import TEMPLATE_CONTEXT_PROCESSORS
 TEMPLATE_CONTEXT_PROCESSORS += (

@@ -13,6 +13,7 @@ urlpatterns = patterns('',
 
     (r'^$', include('oneliners.urls')),
     (r'^main/', include('oneliners.urls')),
+    (r'^oneliners/', include('oneliners.urls')),
 
     # Uncomment the admin/doc line below to enable admin documentation:
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),

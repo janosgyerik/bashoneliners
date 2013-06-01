@@ -7,7 +7,7 @@ next
 - voting!!!
 
 
-cleaning 1
+code cleansing
 ----------
 - favicon!
 - internal_error.html does not exist
@@ -15,18 +15,9 @@ cleaning 1
     donation for hosting to upgrade would be nice
 - fix deprecated markdown filter warnings
 - fix naive datetime warnings
-- add twitter user variable, useful in dev
 - format everything with markdown
 - do not include oneliners.urls twice in top-level urls.py
-- get SERVER* info in tweet admin command from settings
-- remove 'bash$' prefix in listing for easier copy-to-clipboard by triple-click
-
-
-code cleansing
---------------
 - phase out AUTH_PROFILE_MODULE (deprecated in Django 1.5)
-- replace main/ with oneliners/ when rendering templates
-- replace bashoneliners.com references using Sites
 - remove initial=initial in oneliner_edit (and others)
 
 
@@ -46,3 +37,8 @@ future releases
 - logo, better design
 
 
+minor
+-----
+- replace bashoneliners.com references using Sites
+- add twitter user variable, useful in dev
+- get SERVER* info in tweet admin command from settings

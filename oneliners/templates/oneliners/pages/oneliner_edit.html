@@ -14,7 +14,7 @@
 <div class="alert alert-info related">
     <p>The new one-liner will be linked to the following question as a possible answer:</p>
     {% with 1 as nobuttons %}
-    {% include 'main/elements/question.html' %}
+    {% include 'oneliners/elements/question.html' %}
     {% endwith %}
 </div>
 {% endif %}
@@ -23,12 +23,12 @@
 <div class="alert alert-info related">
     <p>The new one-liner will be linked to the following one-liner as an alternative:</p>
     {% with 1 as nobuttons %}
-    {% include 'main/elements/oneliner.html' %}
+    {% include 'oneliners/elements/oneliner.html' %}
     {% endwith %}
 </div>
 {% endif %}
 
-{% include 'main/elements/please_login.html' %}
+{% include 'oneliners/elements/please_login.html' %}
 
 <ul>
     <li>Before you post, please do a quick search to confirm the one-liner does not exist yet.</li>
@@ -36,7 +36,7 @@
     <li>The <strong>Explanation</strong> is very important. The purpose of this site is to teach, not to show off.</li>
 </ul>
 
-{% include 'main/elements/oneliner_edit_form.html' %}
+{% include 'oneliners/elements/oneliner_edit_form.html' %}
 
 {% endblock %}
 

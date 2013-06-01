@@ -213,7 +213,7 @@ class OneLiner(models.Model):
         return ret
 
     def get_absolute_url(self):
-        return "/main/oneliner/%i/" % self.pk
+        return "/oneliners/oneliner/%i/" % self.pk
 
     def __unicode__(self):
         return self.summary
@@ -311,7 +311,7 @@ class Question(models.Model):
             pass
 
     def get_absolute_url(self):
-        return "/main/question/%i/" % self.pk
+        return "/oneliners/question/%i/" % self.pk
 
     class Meta:
         get_latest_by = 'pk'

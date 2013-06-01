@@ -8,6 +8,7 @@ def maintenance_page(request):
 urlpatterns = patterns('',
         (r'^$', maintenance_page),
         (r'^main/', maintenance_page),
+        (r'^oneliners/', maintenance_page),
         (r'^admin/', maintenance_page),
         (r'^comments/', maintenance_page),
         (r'^openid/', maintenance_page),

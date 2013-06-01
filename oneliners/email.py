@@ -68,7 +68,7 @@ def send_oneliner_comment(oneliner, sender, comment):
 
 class CustomFileEmailBackend(BaseEmailBackend):
     def send_messages(self, email_messages):
-        from datetime import datetime
+        from django.utils.timezone import now
         import re
         if not email_messages:
             return
@@ -82,7 +82,7 @@ class CustomFileEmailBackend(BaseEmailBackend):
                         'to': ', '.join(message.to),
                         'bcc': ', '.join(message.bcc),
                         'body': message.body,
-                        'date': datetime.now(),
+                        'date': now(),
                         }
                 log = loader.get_template('email/log.txt').render(Context(context))
                 log = re.sub(r'\n{3,}', '\n\n', log)

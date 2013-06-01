@@ -7,3 +7,4 @@ pep8==1.4.5
 pyflakes==0.7.2
 python-openid==2.2.5
 tweepy==2.0
+pytz==2013b

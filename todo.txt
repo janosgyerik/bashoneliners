@@ -12,7 +12,6 @@ next
 minor fixes and code cleansing
 ------------------------------
 - favicon!
-- fix naive datetime warnings
 - format everything with markdown
     - questions
     - comments

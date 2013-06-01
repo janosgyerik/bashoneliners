@@ -4,8 +4,8 @@ from django.db.models.signals import post_save
 from django.contrib.auth.models import User
 from django.contrib.comments.models import Comment
 from django.dispatch import receiver
+from django.utils.timezone import now
 
-from datetime import datetime
 import random
 import string
 import re
@@ -89,7 +89,7 @@ class OneLiner(models.Model):
     is_published = models.BooleanField(default=True)
     was_tweeted = models.BooleanField(default=False)
 
-    created_dt = models.DateTimeField(default=datetime.now, blank=True)
+    created_dt = models.DateTimeField(default=now, blank=True)
 
     def vote_up(self, user):
         Vote.vote_up(user, self)
@@ -263,7 +263,7 @@ class Question(models.Model):
     explanation = models.TextField()
     is_published = models.BooleanField(default=True)
     is_answered = models.BooleanField(default=False)
-    created_dt = models.DateTimeField(default=datetime.now, blank=True)
+    created_dt = models.DateTimeField(default=now, blank=True)
 
     def __unicode__(self):
         return self.summary
@@ -336,7 +336,7 @@ class Vote(models.Model):
     oneliner = models.ForeignKey(OneLiner)
     up = models.BooleanField(default=True)
 
-    created_dt = models.DateTimeField(default=datetime.now)
+    created_dt = models.DateTimeField(default=now)
 
     @staticmethod
     def vote(user, oneliner, updown):

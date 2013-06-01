@@ -260,7 +260,7 @@ class OneLinerTag(models.Model):
 class Question(models.Model):
     user = models.ForeignKey(User)
     summary = models.CharField(max_length=200)
-    explanation = models.TextField(blank=True, null=True)
+    explanation = models.TextField()
     is_published = models.BooleanField(default=True)
     is_answered = models.BooleanField(default=False)
     created_dt = models.DateTimeField(default=datetime.now, blank=True)

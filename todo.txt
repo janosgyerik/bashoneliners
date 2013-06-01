@@ -20,7 +20,6 @@ cleaning 1
 - internal_error.html does not exist
     probably the process gets shot down... adjust the message
     donation for hosting to upgrade would be nice
-- explanation should be required on questions
 - setup automatic deployment of master
 - change next url behavior
     - my oneliners after posting oneliner

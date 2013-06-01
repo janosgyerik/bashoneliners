@@ -35,7 +35,7 @@ class OneLinerEntries(Feed):
 class QuestionEntries(Feed):
     title = "Questions for bash one-liners"
     link = reverse(question)
-    description = "Recently posted questions/requests on bashoneliners.com"
+    description = "Recently posted questions on bashoneliners.com"
     description_template = 'main/feeds/question.html'
 
     def items(self):

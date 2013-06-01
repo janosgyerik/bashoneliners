@@ -9,7 +9,7 @@
 	    {% endif %}
 	</h3>
 
-	<pre><span class="add-on">bash$ </span>{{ oneliner.line }}</pre>
+	<pre class="line"><span class="add-on">&nbsp;$&nbsp;</span>{{ oneliner.line }}</pre>
 
 	<p class="author"><small>
 	&mdash; by <a href="{% url 'oneliners.views.profile' oneliner.user.pk %}"><span>{{ oneliner.user.hackerprofile.get_display_name }}</span></a>

@@ -107,10 +107,10 @@ body {
     }
 }
 
-.oneliner pre {
+.oneliner .line {
     background: #ddd;
 }
-.oneliner pre .add-on {
+.oneliner .line .add-on {
     color: #253;
     padding-right: .5em;
     font-weight: bold;

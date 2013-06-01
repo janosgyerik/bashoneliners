@@ -2,11 +2,6 @@ See Trello for a more up to date near-term todo list!
 https://trello.com/board/main/4e7da3cf5a94680b35000893
 
 
-release notes
--------------
--
-
-
 next
 ----
 - voting!!!
@@ -18,13 +13,15 @@ cleaning 1
 - internal_error.html does not exist
     probably the process gets shot down... adjust the message
     donation for hosting to upgrade would be nice
-- setup automatic deployment of master
+- setup post-receive hook to upgrade on server
 - fix deprecated markdown filter warnings
 - fix naive datetime warnings
 - add twitter user variable, useful in dev
 - format everything with markdown
-- use current site address in tweets, test in BETA
 - do not include oneliners.urls twice in top-level urls.py
+- get SERVER* info in tweet admin command from settings
+- eliminate all hardcoded occurrances of bashoneliners.com
+- remove 'bash$' prefix in listing for easier copy-to-clipboard by triple-click
 
 
 code cleansing

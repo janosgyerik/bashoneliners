@@ -1,10 +1,11 @@
 from optparse import make_option
 
 from django.core.management.base import BaseCommand
+from django.test.client import RequestFactory
 
 from oneliners.models import OneLiner
 from oneliners.tweet import tweet
-from oneliners.views import format_tweet
+from oneliners.views import format_tweet, format_canonical_url
 
 default_limit = 5
 
@@ -35,7 +36,13 @@ class Command(BaseCommand):
             self.handle_oneliner(oneliner, test)
 
     def handle_oneliner(self, oneliner, test=True):
-        message = format_tweet(oneliner)
+        request = RequestFactory().get('/')
+        request.META = {
+                'SERVER_NAME': 'localhost',
+                'SERVER_PORT': '8000',
+                }
+        baseurl = format_canonical_url(request)
+        message = format_tweet(oneliner, baseurl)
         self.stdout.write('%s: %s' % (oneliner.pk, message))
         result = tweet(message, test)
         if not test:

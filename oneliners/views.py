@@ -31,7 +31,7 @@ def render_with_context(custom_params=False):
 ### helper methods
 
 
-def format_canonical_url(request, relpath):
+def format_canonical_url(request, relpath=''):
     return 'http://%s:%s%s' % (request.META.get('SERVER_NAME'), request.META.get('SERVER_PORT'), relpath)
 
 
@@ -65,8 +65,8 @@ def _common_initial(request):
     return {'next_url': request.META.get('HTTP_REFERER', default_next_url), }
 
 
-def format_tweet(oneliner):
-    long_url = 'http://bashoneliners.com/main/oneliner/%d' % oneliner.pk
+def format_tweet(oneliner, baseurl):
+    long_url = baseurl + oneliner.get_absolute_url()
     from oneliners.shorturl import get_goo_gl
     url = get_goo_gl(long_url) or long_url
     message = '%s %s' % (
@@ -76,10 +76,10 @@ def format_tweet(oneliner):
     return message
 
 
-def tweet(oneliner, force=False, test=False):
+def tweet(oneliner, baseurl, force=False, test=False):
     if not oneliner.was_tweeted or force:
         from oneliners.tweet import tweet as send_tweet
-        message = format_tweet(oneliner)
+        message = format_tweet(oneliner, baseurl)
         result = send_tweet(message, test=test)
         if result:
             oneliner.was_tweeted = True
@@ -135,7 +135,7 @@ def oneliner_edit(request, pk):
             if form.is_save:
                 oneliner1 = form.save()
                 if oneliner1.is_published:
-                    tweet(oneliner1)
+                    tweet(oneliner1, format_canonical_url(request))
                 return redirect(oneliner1)
             elif form.is_delete:
                 oneliner0.delete()
@@ -178,7 +178,7 @@ def oneliner_new(request, question_pk=None, oneliner_pk=None):
             if form.is_valid():
                 new_oneliner = form.save()
                 if new_oneliner.is_published:
-                    tweet(new_oneliner)
+                    tweet(new_oneliner, format_canonical_url(request))
 
                 if question is not None:
                     question.add_answer(new_oneliner)

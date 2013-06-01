@@ -5,6 +5,8 @@ https://trello.com/board/main/4e7da3cf5a94680b35000893
 next
 ----
 - voting!!!
+- switch to using social-auth
+    - make sure existing accounts remain unaffected
 
 
 code cleansing
@@ -12,6 +14,8 @@ code cleansing
 - favicon!
 - fix naive datetime warnings
 - format everything with markdown
+    - questions
+    - comments
 - do not include oneliners.urls twice in top-level urls.py
 - phase out AUTH_PROFILE_MODULE (deprecated in Django 1.5)
 - remove initial=initial in oneliner_edit (and others)

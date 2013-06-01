@@ -14,8 +14,10 @@ urlpatterns = patterns('',
     # url(r'^bashoneliners/', include('bashoneliners.foo.urls')),
 
     (r'^$', include('oneliners.urls')),
-    (r'^main/', include('oneliners.urls')),
     (r'^oneliners/', include('oneliners.urls')),
+
+    # deprecated url handlers kept for a while for old tweets and feeds
+    (r'^main/', include('oneliners.urls_deprecated')),
 
     # Uncomment the admin/doc line below to enable admin documentation:
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),

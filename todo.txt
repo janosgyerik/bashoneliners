@@ -7,7 +7,6 @@ next
 - voting!!!
 - switch to using social-auth
     - make sure existing accounts remain unaffected
-- favicon!
 - format everything with markdown
     - questions
     - comments

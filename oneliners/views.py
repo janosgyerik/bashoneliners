@@ -60,9 +60,9 @@ def _common_params(request):
     return params
 
 
-def _common_initial(request):
+def get_next_url(request):
     default_next_url = format_canonical_url(request, reverse('index'))
-    return {'next_url': request.META.get('HTTP_REFERER', default_next_url), }
+    return request.META.get('HTTP_REFERER', default_next_url)
 
 
 def format_tweet(oneliner, baseurl):
@@ -121,8 +121,7 @@ def oneliner(request, pk):
 @login_required
 def oneliner_edit(request, pk):
     params = _common_params(request)
-    initial = _common_initial(request)
-    params['next_url'] = initial['next_url']
+    params['next_url'] = get_next_url(request)
 
     try:
         oneliner0 = OneLiner.objects.get(pk=pk, user=request.user)
@@ -143,7 +142,7 @@ def oneliner_edit(request, pk):
         else:
             params['next_url'] = request.POST.get('next_url')
     else:
-        form = EditOneLinerForm(request.user, instance=oneliner0, initial=initial)
+        form = EditOneLinerForm(request.user, instance=oneliner0)
 
     params['form'] = form
 
@@ -152,11 +151,11 @@ def oneliner_edit(request, pk):
 
 def oneliner_new(request, question_pk=None, oneliner_pk=None):
     params = _common_params(request)
-    initial = _common_initial(request)
-    params['next_url'] = initial['next_url']
+    params['next_url'] = get_next_url(request)
 
     question = None
     oneliner0 = None
+    initial = {}
 
     if question_pk is not None:
         try:
@@ -211,8 +210,7 @@ def oneliner_alternative(request, oneliner_pk):
 
 def oneliner_comment(request, pk):
     params = _common_params(request)
-    initial = _common_initial(request)
-    params['next_url'] = initial['next_url']
+    params['next_url'] = get_next_url(request)
 
     try:
         oneliner0 = OneLiner.objects.get(pk=pk)
@@ -233,7 +231,7 @@ def oneliner_comment(request, pk):
         else:
             form = PostCommentOnOneLinerForm(oneliner0, request.POST)
     else:
-        form = PostCommentOnOneLinerForm(oneliner0, initial=initial)
+        form = PostCommentOnOneLinerForm(oneliner0)
 
     params['form'] = form
     params['oneliner'] = oneliner0
@@ -257,8 +255,7 @@ def question(request, pk):
 @login_required
 def question_edit(request, pk):
     params = _common_params(request)
-    initial = _common_initial(request)
-    params['next_url'] = initial['next_url']
+    params['next_url'] = request.POST.get('next_url')
 
     try:
         question0 = Question.objects.get(pk=pk, user=request.user)
@@ -277,7 +274,7 @@ def question_edit(request, pk):
         else:
             params['next_url'] = request.POST.get('next_url')
     else:
-        form = EditQuestionForm(request.user, instance=question0, initial=initial)
+        form = EditQuestionForm(request.user, instance=question0)
 
     params['form'] = form
 
@@ -286,8 +283,7 @@ def question_edit(request, pk):
 
 def question_new(request):
     params = _common_params(request)
-    initial = _common_initial(request)
-    params['next_url'] = initial['next_url']
+    params['next_url'] = get_next_url(request)
 
     if request.method == 'POST':
         form = PostQuestionForm(request.user, request.POST)
@@ -301,7 +297,7 @@ def question_new(request):
             else:
                 params['next_url'] = request.POST.get('next_url')
     else:
-        form = PostQuestionForm(request.user, initial=initial)
+        form = PostQuestionForm(request.user)
 
     params['form'] = form
 
@@ -344,8 +340,7 @@ def profile(request, pk=None):
 @render_with_context(custom_params=True)
 def profile_edit(request):
     params = _common_params(request)
-    initial = _common_initial(request)
-    params['next_url'] = initial['next_url']
+    params['next_url'] = request.POST.get('next_url')
 
     if request.user.is_authenticated():
         hackerprofile = request.user.hackerprofile
@@ -357,9 +352,9 @@ def profile_edit(request):
             else:
                 params['next_url'] = request.POST.get('next_url')
         else:
-            form = EditHackerProfileForm(instance=hackerprofile, initial=initial)
+            form = EditHackerProfileForm(instance=hackerprofile)
     else:
-        form = EditHackerProfileForm(initial=initial)
+        form = EditHackerProfileForm()
 
     params['form'] = form
 

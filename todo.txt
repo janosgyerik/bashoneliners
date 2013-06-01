@@ -9,15 +9,14 @@ next
     - make sure existing accounts remain unaffected
 
 
-code cleansing
-----------
+minor fixes and code cleansing
+------------------------------
 - favicon!
 - fix naive datetime warnings
 - format everything with markdown
     - questions
     - comments
 - phase out AUTH_PROFILE_MODULE (deprecated in Django 1.5)
-- remove initial=initial in oneliner_edit (and others)
 
 
 future releases

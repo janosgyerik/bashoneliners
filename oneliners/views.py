@@ -136,7 +136,7 @@ def oneliner_edit(request, pk):
                 oneliner1 = form.save()
                 if oneliner1.is_published:
                     tweet(oneliner1)
-                return redirect(form.cleaned_data.get('next_url'))
+                return redirect(oneliner1)
             elif form.is_delete:
                 oneliner0.delete()
                 return redirect(profile)
@@ -185,7 +185,10 @@ def oneliner_new(request, question_pk=None, oneliner_pk=None):
                 elif oneliner0 is not None:
                     oneliner0.add_alternative(new_oneliner)
 
-                return redirect(oneliner, new_oneliner.pk)
+                if new_oneliner.is_published:
+                    return redirect(oneliner_list)
+                else:
+                    return redirect(new_oneliner)
             else:
                 params['next_url'] = request.POST.get('next_url')
     else:
@@ -267,7 +270,7 @@ def question_edit(request, pk):
         if form.is_valid():
             if form.is_save:
                 form.save()
-                return redirect(form.cleaned_data.get('next_url'))
+                return redirect(question0)
             elif form.is_delete:
                 question0.delete()
                 return redirect(profile)
@@ -290,8 +293,11 @@ def question_new(request):
         form = PostQuestionForm(request.user, request.POST)
         if request.user.is_authenticated():
             if form.is_valid():
-                form.save()
-                return redirect(form.cleaned_data.get('next_url'))
+                new_question = form.save()
+                if new_question.is_published:
+                    return redirect(question_list)
+                else:
+                    return redirect(new_question)
             else:
                 params['next_url'] = request.POST.get('next_url')
     else:

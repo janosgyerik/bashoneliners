@@ -15,17 +15,14 @@ next
 cleaning 1
 ----------
 - favicon!
-- verify that all forms show 'other' errors too
-    - post one-liner did not show when next_url invalid
 - internal_error.html does not exist
     probably the process gets shot down... adjust the message
     donation for hosting to upgrade would be nice
 - setup automatic deployment of master
-- change next url behavior
-    - my oneliners after posting oneliner
-    - my question after posting question
-    - the oneliner after posting comment
+- fix deprecated markdown filter warnings
+- fix naive datetime warnings
 - add twitter user variable, useful in dev
+- format everything with markdown
 - use current site address in tweets, test in BETA
 - do not include oneliners.urls twice in top-level urls.py
 

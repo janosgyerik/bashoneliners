@@ -1,7 +1,7 @@
-from django.conf.urls.defaults import patterns
+from django.conf.urls import patterns, url
 
 urlpatterns = patterns('oneliners.views',
-        (r'^$', 'oneliner_list'),
+        url(r'^$', 'oneliner_list', name='index'),
         (r'^sourcecode/$', 'sourcecode'),
         (r'^mission/$', 'mission'),
         (r'^feeds/$', 'feeds'),

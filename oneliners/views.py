@@ -1,11 +1,12 @@
 from functools import wraps
 
-from django.shortcuts import render_to_response, redirect
 from django.contrib.auth.decorators import login_required
-from django.template import RequestContext
 from django.contrib.auth import logout as django_logout
 from django.contrib.comments.views import comments
 from django.core.paginator import Paginator, InvalidPage, EmptyPage
+from django.core.urlresolvers import reverse
+from django.shortcuts import render_to_response, redirect
+from django.template import RequestContext
 
 from oneliners.models import OneLiner, User, Comment_recent, Tag, Question
 from oneliners.forms import EditHackerProfileForm, PostOneLinerForm, PostCommentOnOneLinerForm, PostQuestionForm, EditQuestionForm, SearchOneLinerForm, EditOneLinerForm
@@ -28,6 +29,10 @@ def render_with_context(custom_params=False):
 
 
 ### helper methods
+
+
+def format_canonical_url(request, relpath):
+    return 'http://%s:%s%s' % (request.META.get('SERVER_NAME'), request.META.get('SERVER_PORT'), relpath)
 
 
 def _common_params(request):
@@ -56,7 +61,8 @@ def _common_params(request):
 
 
 def _common_initial(request):
-    return {'next_url': request.META.get('HTTP_REFERER', '/'), }
+    default_next_url = format_canonical_url(request, reverse('index'))
+    return {'next_url': request.META.get('HTTP_REFERER', default_next_url), }
 
 
 def format_tweet(oneliner):

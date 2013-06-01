@@ -3,7 +3,7 @@ Release notes
 
 not announced yet
 -----------------
-*
+* double-click highlights one-liner as if by dragging over the mouse
 
 
 2013-06-01

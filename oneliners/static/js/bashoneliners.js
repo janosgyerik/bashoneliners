@@ -79,12 +79,26 @@ function footer_fix() {
     }
 }
 
+function bind_dblclick_to_select_oneliner() {
+    if (window.getSelection) {
+        $('.oneliner-line').dblclick(function(e) {
+            var element = $(this)[0];
+            var selection = window.getSelection();
+            var range = document.createRange();
+            range.selectNodeContents(element);
+            selection.removeAllRanges();
+            selection.addRange(range);
+        });
+    }
+}
+
 $(document).ready(function() {
     bind_help_markdown();
     bind_question_answered();
     bind_preview_markdown();
     bind_comments_toggle();
     footer_fix();
+    bind_dblclick_to_select_oneliner();
 });
 
 // eof

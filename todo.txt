@@ -10,7 +10,6 @@ next
 code cleansing
 ----------
 - favicon!
-- fix deprecated markdown filter warnings
 - fix naive datetime warnings
 - format everything with markdown
 - do not include oneliners.urls twice in top-level urls.py

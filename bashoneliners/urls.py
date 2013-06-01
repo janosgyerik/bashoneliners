@@ -6,6 +6,8 @@ from django.conf.urls import patterns, include, url
 from django.contrib import admin
 admin.autodiscover()
 
+from dreamhost.views import internal_error
+
 urlpatterns = patterns('',
     # Examples:
     # url(r'^$', 'bashoneliners.views.home', name='home'),
@@ -24,6 +26,8 @@ urlpatterns = patterns('',
     (r'^admin/', include(admin.site.urls)),
     (r'^comments/', include('django.contrib.comments.urls')),
     (r'^openid/', include('django_openid_auth.urls')),
+
+    (r'^internal_error.html$', internal_error),
 )
 
 from oneliners.feeds import OneLinerEntries

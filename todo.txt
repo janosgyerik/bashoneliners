@@ -10,9 +10,6 @@ next
 code cleansing
 ----------
 - favicon!
-- internal_error.html does not exist
-    probably the process gets shot down... adjust the message
-    donation for hosting to upgrade would be nice
 - fix deprecated markdown filter warnings
 - fix naive datetime warnings
 - format everything with markdown

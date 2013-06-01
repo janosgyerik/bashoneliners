@@ -1,18 +1,27 @@
-<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
-<html><head>
-<title>500 Internal Server Error</title>
-</head><body>
-<h1>Internal Server Error</h1>
-<p>The server encountered an internal error or
-misconfiguration and was unable to complete
-your request.</p>
-<p>Please check the mailing list to see if
-somebody is working on the problem right now or not:
-<a href="http://groups.google.com/group/bashoneliners/topics">http://groups.google.com/group/bashoneliners/topics</a>
-</p>
-<p>If there is no obvious sign of an ongoing issue,
-please email the team at
-<a href="mailto:bashoneliners@googlegroups.com">bashoneliners@googlegroups.com</a>,
-along with anything you might have done that may have caused the error.
-</p>
-</body></html>
+{% extends "base.html" %}
+
+{% block pagetitle %}Internal Server Error{% endblock %}
+
+{% block pageheader %}Internal Server Error{% endblock %}
+
+{% block content %}
+
+<div class="alert alert-error">
+    <p>Ouch! That... really... HURT!</p>
+    <p>Whatever you were trying to do, it failed, and
+    most probably it is *our* fault, NOT yours.</p>
+    <p>We want to know about this problem,
+    and for that we need a little help from you.</p>
+    <p>Please send us an email at this address:
+    <a href="mailto:bashoneliners@googlegroups.com">bashoneliners@googlegroups.com</a></p>
+    <p>Please explain what happened,
+    and if you can reproduce the problem anytime or
+    if it only happens sometimes but not always.</p>
+    <p>It is very important that you email us,
+    otherwise who knows when we will notice that there is a problem...</p>
+    <p>Once we get your message, we will sort this thing out ASAP.</p>
+</div>
+
+<p><a href="/">Back to the main page.</a></p>
+
+{% endblock %}

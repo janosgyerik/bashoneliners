@@ -1,0 +1,13 @@
+#!/bin/sh
+
+target=beta
+webapp_dir=~/webapps/beta.bashoneliners.com/bashoneliners
+upgrade_script=$webapp_dir/local/upgrade.sh
+
+while read oldrev newrev refname
+do
+    branch=$(git rev-parse --symbolic --abbrev-ref $refname)
+    if test $target = $branch; then
+        $upgrade_script
+    fi
+done

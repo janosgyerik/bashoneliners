@@ -13,7 +13,6 @@ cleaning 1
 - internal_error.html does not exist
     probably the process gets shot down... adjust the message
     donation for hosting to upgrade would be nice
-- setup post-receive hook to upgrade on server
 - fix deprecated markdown filter warnings
 - fix naive datetime warnings
 - add twitter user variable, useful in dev

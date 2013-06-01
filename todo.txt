@@ -16,7 +16,6 @@ code cleansing
 - format everything with markdown
     - questions
     - comments
-- do not include oneliners.urls twice in top-level urls.py
 - phase out AUTH_PROFILE_MODULE (deprecated in Django 1.5)
 - remove initial=initial in oneliner_edit (and others)
 

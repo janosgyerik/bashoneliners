@@ -1,8 +1,3 @@
-Requirements
-------------
-* install with: `pip install -r requirements.txt`
-
-
 Setup
 -----
 1. Install required python modules

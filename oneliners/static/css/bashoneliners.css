@@ -181,8 +181,8 @@ table.profile {
 .comments-toggle img {
     background: url(/static/images/arrows.png) no-repeat center;
     background-position: 0px -81px;
-    padding: 3px 14px;
     height: 26px;
+    padding: 3px;
 }
 .comments-toggle.expanded img {
     background-position: 0px -54px;

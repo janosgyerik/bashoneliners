@@ -368,7 +368,7 @@ class Vote(models.Model):
         Vote.vote(user, oneliner, -1)
 
     def __unicode__(self):
-        return '%s %s %s' % (self.user.full_name, ('--', '++')[self.up], self.oneliner.summary)
+        return '%s %s %s' % (self.user.get_full_name(), ('--', '++')[self.up], self.oneliner.summary)
 
     class Meta:
         unique_together = (('user', 'oneliner',),)

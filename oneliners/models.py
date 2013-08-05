@@ -1,5 +1,5 @@
 from django.db import models
-from django.db.models import Count, Q
+from django.db.models import Count, Q, Sum
 from django.db.models.signals import post_save
 from django.contrib.auth.models import User
 from django.contrib.comments.models import Comment
@@ -101,10 +101,17 @@ class OneLiner(models.Model):
         return (self.get_votes_up(), self.get_votes_down())
 
     def get_votes_up(self):
-        return self.vote_set.filter(up=True).count()
+        return self.vote_set.filter(value=1).count()
 
     def get_votes_down(self):
-        return self.vote_set.filter(up=False).count()
+        return self.vote_set.filter(value=-1).count()
+
+    def score(self):
+        score = self.vote_set.aggregate(score=Sum('value'))['score']
+        if score:
+            return score
+        else:
+            return 0
 
     def questions(self):
         return self.answer_set.filter(question__is_published=True)
@@ -334,31 +341,31 @@ class AcceptedAnswer(models.Model):
 class Vote(models.Model):
     user = models.ForeignKey(User)
     oneliner = models.ForeignKey(OneLiner)
-    up = models.BooleanField(default=True)
+    value = models.IntegerField(default=0)
 
     created_dt = models.DateTimeField(default=now)
 
     @staticmethod
-    def vote(user, oneliner, updown):
+    def vote(user, oneliner, value):
         if oneliner.user == user:
             return
 
         try:
-            oneliner.vote_set.get(user=user, up=updown)
+            oneliner.vote_set.get(user=user, value=value)
             return
         except:
             pass
 
         oneliner.vote_set.filter(user=user).delete()
-        Vote(user=user, oneliner=oneliner, up=updown).save()
+        Vote(user=user, oneliner=oneliner, value=value).save()
 
     @staticmethod
     def vote_up(user, oneliner):
-        Vote.vote(user, oneliner, True)
+        Vote.vote(user, oneliner, 1)
 
     @staticmethod
     def vote_down(user, oneliner):
-        Vote.vote(user, oneliner, False)
+        Vote.vote(user, oneliner, -1)
 
     def __unicode__(self):
         return '%s %s %s' % (self.user.full_name, ('--', '++')[self.up], self.oneliner.summary)

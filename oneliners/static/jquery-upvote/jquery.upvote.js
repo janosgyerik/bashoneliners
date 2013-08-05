@@ -36,9 +36,11 @@
         return this.each(function() {
             methods.destroy.call(this);
 
+            var count = parseInt($(this).find('.count').text());
+            count = isNaN(count) ? 0 : count;
             var initial = {
                 id: $(this).attr('data-id'),
-                count: parseInt(0 + $(this).find('.count').text()),
+                count: count,
                 upvoted: $(this).find('.upvoted').size(),
                 downvoted: $(this).find('.downvoted').size(),
                 starred: $(this).find('.starred').size(),

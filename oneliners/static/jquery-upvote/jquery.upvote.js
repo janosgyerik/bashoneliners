@@ -37,7 +37,7 @@
             methods.destroy.call(this);
 
             var initial = {
-                id: 0,
+                id: $(this).attr('data-id'),
                 count: parseInt(0 + $(this).find('.count').text()),
                 upvoted: $(this).find('.upvoted').size(),
                 downvoted: $(this).find('.downvoted').size(),

@@ -92,11 +92,33 @@ function bind_dblclick_to_select_oneliner() {
     }
 }
 
+function bind_upvote() {
+    if (App.user_id == 'None') return;
+
+    var callback = function(data) {
+        // TODO: why is this necessary? can we eliminate?
+        if (!data) return;
+        $.ajax({
+            type: 'get',
+            // TODO: clean up hardcoded url
+            url: '/oneliners/ajax/oneliner/' + data.id + '/vote/',
+            data: data
+        });
+    };
+    $('div.upvote').each(function(i, item) {
+        var oneliner_user_id = $(item).attr('data-user-id');
+        if (oneliner_user_id != App.user_id) {
+            $(item).upvote({ callback: callback });
+        }
+    });
+}
+
 $(document).ready(function() {
     bind_help_markdown();
     bind_question_answered();
     bind_preview_markdown();
     bind_comments_toggle();
+    bind_upvote();
     footer_fix();
     bind_dblclick_to_select_oneliner();
 });

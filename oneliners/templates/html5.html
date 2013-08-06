@@ -83,6 +83,8 @@
 
     <script type="text/javascript">
 	<!--
+	var App = window.App = {};
+	App.user_id = '{{ user.id }}';
 	$(document).ready(function() {
 	    {% block ready %}{% endblock %}
 	});

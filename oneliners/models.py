@@ -106,13 +106,6 @@ class OneLiner(models.Model):
     def get_votes_down(self):
         return self.vote_set.filter(value=-1).count()
 
-    def score(self):
-        score = self.vote_set.aggregate(score=Sum('value'))['score']
-        if score:
-            return score
-        else:
-            return 0
-
     def questions(self):
         return self.answer_set.filter(question__is_published=True)
 

@@ -4,6 +4,7 @@ https://trello.com/board/main/4e7da3cf5a94680b35000893
 
 next
 ----
+- bug: listing pages still use deprecatead /main/ url somehow
 - voting!!!
 - switch to using social-auth
     - make sure existing accounts remain unaffected

@@ -7,6 +7,7 @@ from django.core.paginator import Paginator, InvalidPage, EmptyPage
 from django.core.urlresolvers import reverse
 from django.shortcuts import render_to_response, redirect
 from django.template import RequestContext
+from django.db.models import Sum
 
 from oneliners.models import OneLiner, User, Comment_recent, Tag, Question
 from oneliners.forms import EditHackerProfileForm, PostOneLinerForm, PostCommentOnOneLinerForm, PostQuestionForm, EditQuestionForm, SearchOneLinerForm, EditOneLinerForm
@@ -86,7 +87,7 @@ def tweet(oneliner, baseurl, force=False, test=False):
 def oneliner_list(request):
     params = _common_params(request)
 
-    items = OneLiner.objects.filter(is_published=True)
+    items = OneLiner.objects.filter(is_published=True).annotate(score=Sum('vote__value'))
     paginator = Paginator(items, 25)  # Show 25 items per page
 
     # Make sure page request is an int. If not, deliver first page.
@@ -109,7 +110,9 @@ def oneliner_list(request):
 
 def oneliner(request, pk):
     params = _common_params(request)
-    params['oneliners'] = OneLiner.objects.filter(pk=pk)
+    # TODO: move the logic to the model
+    items = OneLiner.objects.filter(pk=pk).annotate(score=Sum('vote__value'))
+    params['oneliners'] = items
     return render_to_response('oneliners/pages/oneliner.html', params)
 
 

@@ -1,15 +1,18 @@
 {% load markup %}
 {% load comments %}
 {% load staticfiles %}
+{% load upvote %}
 
 <table width="90%">
     <tr>
         <td style="vertical-align: top; width: 50px">
-            <div id="topic-{{oneliner.pk}}" class="upvote">
-                <a class="upvote {{oneliner.upvoted}}"></a>
-                <span class="count">{{oneliner.score}}</span>
-                <a class="downvote {{oneliner.downvoted}}"></a>
+            <div class="upvote" data-id="{{oneliner.pk}}" data-user-id="{{oneliner.user.id}}">
+                <a class="upvote {% upvoted oneliner %}"></a>
+                <span class="count">{{oneliner.score|default:'0'}}</span>
+                <a class="downvote {% downvoted oneliner %}"></a>
+                <!-- coming soon!
                 <a class="star {{oneliner.starred}}"></a>
+                -->
             </div>
         </td>
 

@@ -326,7 +326,6 @@ def profile(request, pk=None):
     return ('oneliners/pages/profile.html', params)
 
 
-@render_with_context(custom_params=True)
 def profile_edit(request):
     params = _common_params(request)
     params['cancel_url'] = reverse(profile)
@@ -345,7 +344,8 @@ def profile_edit(request):
 
     params['form'] = form
 
-    return ('oneliners/pages/profile_edit.html', params)
+    template_path = 'oneliners/pages/profile_edit.html'
+    return render_to_response(template_path, params, context_instance=RequestContext(request))
 
 
 @render_with_context(custom_params=True)

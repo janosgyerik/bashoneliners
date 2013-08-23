@@ -19,7 +19,7 @@
         <td>
             <div class="oneliner oneliner-{{oneliner.pk}}">
                 <h3 class="summary">
-                    <a href="{% url 'oneliners.views.oneliner' oneliner.pk %}">{{ oneliner.summary|capfirst }}</a>
+                    <a href="{% url 'oneliner' oneliner.pk %}">{{ oneliner.summary|capfirst }}</a>
                     {% if user == oneliner.user %}
                     <a class="btn" href="{% url 'oneliners.views.oneliner_edit' oneliner.pk %}"><i class="icon-pencil"></i>{% if not oneliner.is_published %}<span class="draft">(Not published!)</span>{% endif %}</a>
                     {% endif %}

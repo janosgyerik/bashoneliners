@@ -7,7 +7,7 @@ urlpatterns = patterns('oneliners.views',
         (r'^feeds/$', 'feeds'),
 
         (r'^oneliner/$', 'oneliner_list'),
-        (r'^oneliner/(?P<pk>\d+)/$', 'oneliner'),
+        url(r'^oneliner/(?P<pk>\d+)/$', 'oneliner', name='oneliner'),
         (r'^oneliner/edit/(?P<pk>\d+)/$', 'oneliner_edit'),
         (r'^oneliner/new/$', 'oneliner_new'),
         (r'^oneliner/new/question/(?P<question_pk>\d+)/$', 'oneliner_answer'),

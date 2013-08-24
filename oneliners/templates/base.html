@@ -23,9 +23,6 @@
 		    <li><a href="/admin/">Admin</a></li>
 		    {% endif %}
 		    <li><a href="{% url 'oneliners.views.oneliner_list' %}">One-Liners</a></li>
-		    {% if user.is_authenticated %}
-		    <li><a href="{% url 'oneliners.views.question_new' %}">Ask</a>
-		    {% endif %}
 		    <li><a href="{% url 'oneliners.views.question_list' %}">Questions</a></li>
 		    <li><a href="{% url 'oneliners.views.feeds' %}">Feeds</a></li>
 		    <li><a href="{% url 'oneliners.views.sourcecode' %}">Source</a></li>

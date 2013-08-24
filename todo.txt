@@ -5,7 +5,6 @@ https://trello.com/board/main/4e7da3cf5a94680b35000893
 next
 ----
 - bug: cannot vote in search results updated by ajax
-- bug: vote counts wrong in ajax search results
 - add method oneliner.vote_up(user), ...
 - centralize the score counting (all annotate(..) magic in one place)
 - small bug: cannot delete question if explanation is blank (bad input validation)

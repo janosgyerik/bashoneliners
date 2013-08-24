@@ -1,6 +1,7 @@
 from django.shortcuts import render_to_response
 from django.contrib.auth.decorators import login_required
 from django.core.validators import validate_slug, ValidationError
+from django.db.models import Sum
 
 from oneliners.models import Question, OneLiner, Vote
 from oneliners.forms import SearchOneLinerForm
@@ -58,7 +59,7 @@ def search_by_tag(request):
     text = request.GET.get('text')
     try:
         validate_slug(text)
-        params['oneliners'] = OneLiner.recent_by_tag(text)
+        params['oneliners'] = OneLiner.recent_by_tag(text).annotate(score=Sum('vote__value'))
     except ValidationError:
         params['oneliners'] = ()
 

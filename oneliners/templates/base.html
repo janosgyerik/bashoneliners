@@ -38,7 +38,7 @@
 		{% endif %}
 
 		{% if user.is_authenticated %}
-		<p class="navbar-text pull-right">Logged in as <a href="{% url 'oneliners.views.profile' %}">{{ user.hackerprofile.get_display_name }}</a>&mdash;<a href="{% url 'oneliners.views.logout' %}">Logout</a></p>
+		<p class="navbar-text pull-right"><a href="{% url 'oneliners.views.profile' %}">{{ user.hackerprofile.get_display_name }}</a>&mdash;<a href="{% url 'oneliners.views.logout' %}">Logout</a></p>
 		{% else %}
 		<p class="navbar-text pull-right"><a href="{% url 'oneliners.views.login' %}">Login</a></p>
 		{% endif %}

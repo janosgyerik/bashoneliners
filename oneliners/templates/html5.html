@@ -23,14 +23,15 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
 
   <!-- Place favicon.ico and apple-touch-icon.png in the root directory: mathiasbynens.be/notes/touch-icons -->
-  <link href="{{ STATIC_URL }}images/favicon.ico" rel="icon" type="image/x-icon" />
-  <link href="{{ STATIC_URL }}images/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+  <link href="{% static 'images/favicon.ico' %}" rel="icon" type="image/x-icon" />
+  <link href="{% static 'images/favicon.ico' %}" rel="shortcut icon" type="image/x-icon" />
 
   <!-- CSS: implied media=all -->
   <!-- CSS concatenated and minified via ant build script-->
   <link rel="stylesheet" href="{% static 'css/smoothness/jquery-ui-1.8.17.custom.css' %}">
   <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
   <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap-responsive.min.css' %}">
+  <link rel="stylesheet" href="{% static 'jquery-upvote/jquery.upvote.css' %}">
   <link rel="stylesheet" href="{% static 'css/bashoneliners.css' %}">
   <!-- end CSS-->
 
@@ -76,11 +77,14 @@
   <script defer src="{% static 'js/django-jquery-csrf.js' %}"></script>
   <script defer src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
   <script defer src="{% static 'js/showdown.js' %}"></script>
+  <script defer src="{% static 'jquery-upvote/jquery.upvote.js' %}"></script>
   <script defer src="{% static 'js/bashoneliners.js' %}"></script>
   <!-- end scripts-->
 
     <script type="text/javascript">
 	<!--
+	var App = window.App = {};
+	App.user_id = '{{ user.id }}';
 	$(document).ready(function() {
 	    {% block ready %}{% endblock %}
 	});

@@ -11,9 +11,11 @@
 {% block content %}
 
 {% with 1 as nobuttons %}
-{% with 'expanded' as comments_expanded %}
-{% include 'oneliners/elements/oneliner.html' %}
-{% endwith %}
+    {% with 'expanded' as comments_expanded %}
+        {% with oneliner.score as score %}
+            {% include 'oneliners/elements/oneliner.html' %}
+        {% endwith %}
+    {% endwith %}
 {% endwith %}
 
 {% include 'oneliners/elements/please_login.html' %}

@@ -1,0 +1,142 @@
+div.upvote {
+    text-align: center;
+}
+
+div.upvote a.upvote-enabled {
+    cursor: pointer;
+}
+
+div.upvote a {
+    color: transparent;
+    background-image: url('images/sprites-stackoverflow.png?v=1');
+    background-repeat: no-repeat;
+    overflow: hidden;
+    display: block;
+    margin: 0 auto;
+    width: 41px;
+    height: 25px;
+}
+
+div.upvote span.count {
+    display: block;
+    font-size: 24px;
+    font-family: Arial, Liberation, Sans, DejaVu Sans, sans-serif;
+    color: #555;
+    text-align: center;
+    line-height: 1;
+}
+
+div.upvote a.upvote {
+    background-position: 0px -265px;
+}
+
+div.upvote a.upvote.upvoted {
+    background-position: 0px -230px;
+}
+
+div.upvote a.downvote {
+    background-position: 0px -300px;
+}
+
+div.upvote a.downvote.downvoted {
+    background-position: 0px -330px;
+}
+
+div.upvote a.star {
+    width: 33px;
+    height: 31px;
+    background-position: 0px -150px;
+}
+
+div.upvote a.star.starred {
+    background-position: 0px -190px;
+}
+
+div.upvote-serverfault a {
+    background-image: url('images/sprites-serverfault.png?v=1');
+}
+
+div.upvote-unix a {
+    background-image: url('images/sprites-unix.png?v=1');
+    width: 42px;
+    height: 27px;
+}
+
+div.upvote-unix a.upvote {
+    background-position: 0px -237px;
+}
+
+div.upvote-unix a.upvote.upvoted {
+    background-position: 0px -198px;
+}
+
+div.upvote-unix a.downvote {
+    background-position: 0px -281px;
+}
+
+div.upvote-unix a.downvote.downvoted {
+    background-position: 0px -319px;
+}
+
+div.upvote-unix a.star {
+    width: 42px;
+    height: 30px;
+    background-position: 0px -126px;
+}
+
+div.upvote-unix a.star.starred {
+    background-position: 0px -164px;
+}
+
+div.upvote-unix span.count {
+    color: #333;
+    line-height: 15px;
+    padding: 9px 0;
+    font-family: "DejaVu Sans Mono","Bitstream Vera Sans Mono","Courier New",Courier,Consolas,"Andale Mono WT","Andale Mono","Lucida Console","Lucida Sans Typewriter",monospace;
+    text-shadow; 1px 1px 0 #ffffff;
+    font-weight: bold;
+    margin: 0;
+    border: 0;
+    vertical-align: baseline;
+}
+
+div.upvote-programmers a {
+    background-image: url('images/sprites-programmers.png?v=1');
+    width: 42px;
+    height: 20px;
+}
+
+div.upvote-programmers a.upvote {
+    background-position: 5px -248px;
+}
+
+div.upvote-programmers a.upvote.upvoted {
+    background-position: 5px -211px;
+}
+
+div.upvote-programmers a.downvote {
+    background-position: 5px -282px;
+}
+
+div.upvote-programmers a.downvote.downvoted {
+    background-position: 5px -320px;
+}
+
+div.upvote-programmers a.star {
+    width: 42px;
+    height: 30px;
+    background-position: 6px -128px;
+}
+
+div.upvote-programmers a.star.starred {
+    background-position: 6px -166px;
+}
+
+div.upvote-programmers span.count {
+    color: #333;
+    line-height: 15px;
+    padding: 5px 0 7px;
+    font-size: 20px;
+    font-weight: bold;
+    font-family: Tahoma,Geneva,Arial,sans-serif;
+}

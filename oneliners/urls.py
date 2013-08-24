@@ -7,7 +7,7 @@ urlpatterns = patterns('oneliners.views',
         (r'^feeds/$', 'feeds'),
 
         (r'^oneliner/$', 'oneliner_list'),
-        (r'^oneliner/(?P<pk>\d+)/$', 'oneliner'),
+        url(r'^oneliner/(?P<pk>\d+)/$', 'oneliner', name='oneliner'),
         (r'^oneliner/edit/(?P<pk>\d+)/$', 'oneliner_edit'),
         (r'^oneliner/new/$', 'oneliner_new'),
         (r'^oneliner/new/question/(?P<question_pk>\d+)/$', 'oneliner_answer'),
@@ -35,6 +35,7 @@ urlpatterns = patterns('oneliners.views',
 
 urlpatterns += patterns('oneliners.ajax',
         (r'^ajax/question/(?P<question_pk>\d+)/answered_by/oneliner/(?P<oneliner_pk>\d+)/$', 'question_answered'),
+        (r'^ajax/oneliner/(?P<oneliner_pk>\d+)/vote/$', 'oneliner_vote'),
         (r'^ajax/search/$', 'search'),
         (r'^ajax/search/tag/$', 'search_by_tag'),
         )

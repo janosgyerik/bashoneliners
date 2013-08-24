@@ -1,4 +1,4 @@
-from django.conf.urls import patterns, include, url
+from django.conf.urls import patterns
 from django.shortcuts import render_to_response
 
 

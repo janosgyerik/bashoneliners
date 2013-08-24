@@ -11,10 +11,6 @@
         cursor: help;
     }
 
-    hr {
-        display: none;
-    }
-
     img {
         border: none;
         vertical-align: middle;
@@ -256,6 +252,12 @@ h1 a.btn {
     -moz-border-radius: 3px;
     border-radius: 3px;
     overflow: auto;
+}
+
+
+/* voting */
+
+div.upvote {
 }
 
 

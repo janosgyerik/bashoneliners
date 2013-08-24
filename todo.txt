@@ -4,7 +4,12 @@ https://trello.com/board/main/4e7da3cf5a94680b35000893
 
 next
 ----
-- voting!!!
+- what is bind_question_answered for?
+- replace ugly static methods with more ergonomic ones:
+    - oneliner.vote_up(user)
+    - ...
+- centralize the score counting (all annotate(..) magic in one place)
+- small bug: cannot delete question if explanation is blank (bad input validation)
 - switch to using social-auth
     - make sure existing accounts remain unaffected
 - format everything with markdown
@@ -15,12 +20,7 @@ next
 
 future releases
 ---------------
-- Voting
-	- vote up
-	- vote down
-	- cancel vote
-	- see own vote on one-liner
-	- see all own votes on profile page
+- See all own votes on profile page
 - TOP 50
 - mark as favourite
 - ajax controls to change one-liner or question status from public to private

@@ -24,35 +24,39 @@ or browse or search the one-liners contributed by others.</p>
 {% endfor %}
 </ul>
 
-<h2>One-Liners</h2>
+<h2 class="page-header">One-Liners</h2>
 
 {% include 'oneliners/elements/oneliners_page.html' %}
 
 {% endblock %}
 
 {% block ready %}
-	function search_by_tag(text) {
-	    var options = {
-		url: '{% url 'oneliners.ajax.search_by_tag' %}',
-		type: 'get',
-		data: { 
-		    'text': text
-		},
-		success: search_success
-	    };
-	    $.ajax(options);
-	}
+    function search_by_tag(text) {
+        var options = {
+            url: '{% url 'oneliners.ajax.search_by_tag' %}',
+            type: 'get',
+            data: {
+                'text': text
+            },
+            success: search_success
+        };
+        $.ajax(options);
+    }
 
-	function search_success(html) {
-	    $('.oneliners').html($(html).html());
-	    $('.pagination').remove();
-	}
+    function search_success(html) {
+        $('.oneliners').html($(html).html());
+        $('.pagination').remove();
+        bind_comments_toggle();
+        bind_upvote();
+        //footer_fix();
+        bind_dblclick_to_select_oneliner();
+    }
 
-	$('.tags a').click(function(e) {
-	    e.preventDefault();
-	    $('.tags li.active').removeClass('active');
-	    $(this).parent().addClass('active');
-	    search_by_tag($(this).text());
-	});
+    $('.tags a').click(function(e) {
+        e.preventDefault();
+        $('.tags li.active').removeClass('active');
+        $(this).parent().addClass('active');
+        search_by_tag($(this).text());
+    });
 
 {% endblock %}

@@ -2,17 +2,19 @@
 
 {% block related %}
 	{% if question.oneliners %}
-	{% with question.oneliners as answers %}
-	<div class="related">
-	    <h3>Proposed answers</h3>
-	    <div class="oneliners">
-	    {% for answer in answers %}
-	    {% with answer.oneliner as oneliner %}
-	    {% include 'oneliners/elements/oneliner.html' %}
-	    {% endwith %}
-	    {% endfor %}
-	    </div>
-	</div>
-	{% endwith %}
+        {% with question.oneliners as answers %}
+            <div class="related">
+                <h3>Proposed answers</h3>
+                <div class="oneliners">
+                {% for answer in answers %}
+                    {% with answer.oneliner as oneliner %}
+                        {% with answer.score as score %}
+                            {% include 'oneliners/elements/oneliner.html' %}
+                        {% endwith %}
+                    {% endwith %}
+                {% endfor %}
+                </div>
+            </div>
+        {% endwith %}
 	{% endif %}
 {% endblock %}

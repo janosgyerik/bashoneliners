@@ -7,6 +7,7 @@ from django.core.paginator import Paginator, InvalidPage, EmptyPage
 from django.core.urlresolvers import reverse
 from django.shortcuts import render_to_response, redirect
 from django.template import RequestContext
+from django.db.models import Sum
 
 from oneliners.models import OneLiner, User, Comment_recent, Tag, Question
 from oneliners.forms import EditHackerProfileForm, PostOneLinerForm, PostCommentOnOneLinerForm, PostQuestionForm, EditQuestionForm, SearchOneLinerForm, EditOneLinerForm
@@ -86,7 +87,7 @@ def tweet(oneliner, baseurl, force=False, test=False):
 def oneliner_list(request):
     params = _common_params(request)
 
-    items = OneLiner.objects.filter(is_published=True)
+    items = OneLiner.objects.filter(is_published=True).annotate(score=Sum('vote__value'))
     paginator = Paginator(items, 25)  # Show 25 items per page
 
     # Make sure page request is an int. If not, deliver first page.
@@ -109,7 +110,9 @@ def oneliner_list(request):
 
 def oneliner(request, pk):
     params = _common_params(request)
-    params['oneliners'] = OneLiner.objects.filter(pk=pk)
+    # TODO: move the logic to the model
+    items = OneLiner.objects.filter(pk=pk).annotate(score=Sum('vote__value'))
+    params['oneliners'] = items
     return render_to_response('oneliners/pages/oneliner.html', params)
 
 
@@ -120,7 +123,8 @@ def oneliner_edit(request, pk):
 
     try:
         oneliner0 = OneLiner.objects.get(pk=pk, user=request.user)
-    except:
+        oneliner0.score = sum([x.value for x in oneliner0.vote_set.all()])
+    except OneLiner.DoesNotExist:
         return render_to_response('oneliners/pages/access_error.html', params)
 
     if request.method == 'POST':
@@ -156,14 +160,15 @@ def oneliner_new(request, question_pk=None, oneliner_pk=None, cancel_url=None):
         try:
             question = Question.objects.get(pk=question_pk)
             initial['summary'] = question.summary
-        except:
+        except Question.DoesNotExist:
             pass
 
     elif oneliner_pk is not None:
         try:
             oneliner0 = OneLiner.objects.get(pk=oneliner_pk)
+            oneliner0.score = sum([x.value for x in oneliner0.vote_set.all()])
             initial['summary'] = oneliner0.summary
-        except:
+        except OneLiner.DoesNotExist:
             pass
 
     if request.method == 'POST':
@@ -209,7 +214,8 @@ def oneliner_comment(request, pk):
 
     try:
         oneliner0 = OneLiner.objects.get(pk=pk)
-    except:
+        oneliner0.score = sum([x.value for x in oneliner0.vote_set.all()])
+    except OneLiner.DoesNotExist:
         return render_to_response('oneliners/pages/access_error.html', params)
 
     if request.method == 'POST':
@@ -219,7 +225,6 @@ def oneliner_comment(request, pk):
             data['email'] = request.user.email
             form = PostCommentOnOneLinerForm(oneliner0, data)
             if form.is_valid():
-                comment = form.cleaned_data['comment']
                 return comments.post_comment(request, next=oneliner0.get_absolute_url())
         else:
             form = PostCommentOnOneLinerForm(oneliner0, request.POST)
@@ -252,7 +257,7 @@ def question_edit(request, pk):
 
     try:
         question0 = Question.objects.get(pk=pk, user=request.user)
-    except:
+    except Question.DoesNotExist:
         return render_to_response('oneliners/pages/access_error.html', params)
 
     if request.method == 'POST':
@@ -312,7 +317,7 @@ def profile(request, pk=None):
     params['hacker'] = user
 
     if user.is_authenticated():
-        oneliners = OneLiner.objects.filter(user=user)
+        oneliners = OneLiner.objects.filter(user=user).annotate(score=Sum('vote__value'))
         if user != request.user:
             oneliners = oneliners.filter(is_published=True)
         params['oneliners'] = oneliners

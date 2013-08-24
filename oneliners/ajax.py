@@ -1,7 +1,9 @@
 from django.shortcuts import render_to_response
 from django.contrib.auth.decorators import login_required
+from django.core.validators import validate_slug, ValidationError
+from django.db.models import Sum
 
-from oneliners.models import Question, OneLiner
+from oneliners.models import Question, OneLiner, Vote
 from oneliners.forms import SearchOneLinerForm
 
 
@@ -10,6 +12,25 @@ def question_answered(request, question_pk, oneliner_pk):
     question = Question.objects.get(pk=question_pk, user=request.user)
     oneliner = OneLiner.objects.get(pk=oneliner_pk)
     question.accept_answer(oneliner)
+
+    return render_to_response('oneliners/ajax/json.js')
+
+
+@login_required
+def oneliner_vote(request, oneliner_pk):
+    oneliner = None
+    try:
+        oneliner = OneLiner.objects.get(pk=oneliner_pk)
+    except OneLiner.DoesNotExist:
+        pass
+
+    if oneliner:
+        if request.GET['upvoted'] == 'true':
+            Vote.vote_up(request.user, oneliner)
+        elif request.GET['downvoted'] == 'true':
+            Vote.vote_down(request.user, oneliner)
+        else:
+            Vote.vote_clear(request.user, oneliner)
 
     return render_to_response('oneliners/ajax/json.js')
 
@@ -36,11 +57,10 @@ def search_by_tag(request):
     params['user'] = request.user
 
     text = request.GET.get('text')
-    from django.core.validators import validate_slug
     try:
         validate_slug(text)
-        params['oneliners'] = OneLiner.recent_by_tag(text)
-    except:
+        params['oneliners'] = OneLiner.recent_by_tag(text).annotate(score=Sum('vote__value'))
+    except ValidationError:
         params['oneliners'] = ()
 
     return render_to_response('oneliners/elements/oneliners.html', params)

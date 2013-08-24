@@ -53,8 +53,14 @@ def tweet(message, test=False):
     auth.set_access_token(access_token, access_token_secret)
     api = tweepy.API(auth)
 
-    if len(message) > 139:
-        message = message[:135] + ' ...'
+    # shorten the text to make room for #bash
+    if len(message) > 134:
+        message = message[:130] + ' ...'
+    message += ' #bash'
+
+    # if there is still room for #linux, append it
+    if len(message) < 134:
+        message += ' #linux'
 
     if test:
         logger.info(message)

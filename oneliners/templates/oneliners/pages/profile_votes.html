@@ -1,0 +1,13 @@
+{% extends "oneliners/pages/profile_common.html" %}
+
+{% block profiletab %}
+
+{% with 'active' as active_votes %}
+    {% include 'oneliners/elements/profile_nav.html' %}
+{% endwith %}
+
+<h2 class="page-header">Votes</h2>
+
+{% include 'oneliners/elements/oneliners.html' %}
+
+{% endblock %}

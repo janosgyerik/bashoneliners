@@ -365,16 +365,13 @@ def profile_questions(request, pk=None):
 
 
 @render_with_context(custom_params=True)
-def profile_votes(request, pk=None):
-    params = _common_profile_params(request, pk)
-    '''
-    hacker = params['hacker']
-    oneliners = OneLiner.objects.filter(user=hacker).annotate(score=Sum('vote__value'))
-    if hacker != request.user:
-        oneliners = oneliners.filter(is_published=True)
+def profile_votes(request):
+    params = _common_params(request)
+    user = request.user
+    oneliners = OneLiner.objects.annotate(score=Sum('vote__value')).filter(vote__user=user)
     params['oneliners'] = oneliners
-    '''
-    return ('oneliners/pages/profile_oneliners.html', params)
+    params['hacker'] = user
+    return ('oneliners/pages/profile_votes.html', params)
 
 
 @render_with_context(custom_params=True)

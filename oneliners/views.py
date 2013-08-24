@@ -225,7 +225,6 @@ def oneliner_comment(request, pk):
             data['email'] = request.user.email
             form = PostCommentOnOneLinerForm(oneliner0, data)
             if form.is_valid():
-                comment = form.cleaned_data['comment']
                 return comments.post_comment(request, next=oneliner0.get_absolute_url())
         else:
             form = PostCommentOnOneLinerForm(oneliner0, request.POST)

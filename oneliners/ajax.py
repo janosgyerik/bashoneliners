@@ -1,5 +1,6 @@
 from django.shortcuts import render_to_response
 from django.contrib.auth.decorators import login_required
+from django.core.validators import validate_slug, ValidationError
 
 from oneliners.models import Question, OneLiner, Vote
 from oneliners.forms import SearchOneLinerForm
@@ -55,11 +56,10 @@ def search_by_tag(request):
     params['user'] = request.user
 
     text = request.GET.get('text')
-    from django.core.validators import validate_slug
     try:
         validate_slug(text)
         params['oneliners'] = OneLiner.recent_by_tag(text)
-    except:
+    except ValidationError:
         params['oneliners'] = ()
 
     return render_to_response('oneliners/elements/oneliners.html', params)

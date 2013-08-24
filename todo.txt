@@ -4,6 +4,7 @@ https://trello.com/board/main/4e7da3cf5a94680b35000893
 
 next
 ----
+- clean up the site logos
 - what is bind_question_answered for?
 - replace ugly static methods with more ergonomic ones:
     - oneliner.vote_up(user)

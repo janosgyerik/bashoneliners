@@ -1,10 +1,13 @@
 Release notes
 =============
 
-not announced yet
------------------
-* Double-click highlights one-liner as if by dragging over the mouse
-* Sanitized the behavior of the Cancel button
+
+next
+----
+* You can upvote and downvote one-liners
+* Add #bash to all tweets, and #linux too if there is room for it
+* Double-click on a one-liner to select it for easy copy & paste
+* Bugfix: the Cancel button worked very strangely, now it's more sane
 
 
 2013-06-01

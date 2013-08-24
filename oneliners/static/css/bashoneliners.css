@@ -103,6 +103,10 @@ body {
     }
 }
 
+table.oneliner {
+    width: 100%;
+}
+
 .oneliner .line {
     background: #ddd;
 }

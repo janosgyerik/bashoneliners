@@ -40,7 +40,7 @@ def create_user_profile(sender, instance, created, **kwargs):
     if created:
         try:
             HackerProfile.objects.get_or_create(user=instance)
-        except:
+        except HackerProfile.DoesNotExist:
             pass
 
 post_save.connect(create_user_profile, sender=User)
@@ -241,7 +241,7 @@ class Tag(models.Model):
     def create_or_get(text):
         try:
             return Tag.objects.get(text=text)
-        except:
+        except Tag.DoesNotExist:
             tag = Tag(text=text)
             tag.save()
             return tag
@@ -279,7 +279,7 @@ class Question(models.Model):
         self.save()
         try:
             AcceptedAnswer(question=self, oneliner=oneliner).save()
-        except:
+        except AcceptedAnswer.DoesNotExist:
             pass
 
     def clear_all_answers(self):
@@ -307,7 +307,7 @@ class Question(models.Model):
     def latest():
         try:
             return Question.recent(1)[0]
-        except:
+        except IndexError:
             pass
 
     def get_absolute_url(self):
@@ -346,7 +346,7 @@ class Vote(models.Model):
         try:
             oneliner.vote_set.get(user=user, value=value)
             return
-        except:
+        except Vote.DoesNotExist:
             pass
 
         oneliner.vote_set.filter(user=user).delete()

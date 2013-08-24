@@ -1,5 +1,7 @@
 from django import template
 
+from oneliners.models import Vote
+
 register = template.Library()
 
 @register.simple_tag(takes_context=True)
@@ -9,7 +11,7 @@ def upvoted(context, oneliner):
         vote = oneliner.vote_set.get(user=user)
         if vote.value > 0:
             return 'upvoted'
-    except:
+    except Vote.DoesNotExist:
         pass
     return ''
 
@@ -21,6 +23,6 @@ def downvoted(context, oneliner):
         vote = oneliner.vote_set.get(user=user)
         if vote.value < 0:
             return 'downvoted'
-    except:
+    except Vote.DoesNotExist:
         pass
     return ''

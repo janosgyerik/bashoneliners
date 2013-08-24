@@ -8,6 +8,7 @@ next
 * Add #bash to all tweets, and #linux too if there is room for it
 * Double-click on a one-liner to select it for easy copy & paste
 * Bugfix: the Cancel button worked very strangely, now it's more sane
+* Made the navbar more compact
 
 
 2013-06-01

@@ -113,6 +113,15 @@ function bind_upvote() {
     });
 }
 
+function bind_search_navbar() {
+    $('.navbar-search .search-query').focus(function() {
+        $(this).addClass('input-large');
+    });
+    $('.navbar-search .search-query').blur(function() {
+        $(this).removeClass('input-large');
+    });
+}
+
 $(document).ready(function() {
     bind_help_markdown();
     bind_question_answered();
@@ -121,6 +130,7 @@ $(document).ready(function() {
     bind_upvote();
     footer_fix();
     bind_dblclick_to_select_oneliner();
+    bind_search_navbar();
 });
 
 // eof

@@ -1,11 +1,13 @@
 <div class="oneliners">
     {% for oneliner in oneliners_page.object_list %}
-    {% include 'oneliners/elements/oneliner_with_related.html' %}
+        {% with oneliner.score as score %}
+            {% include 'oneliners/elements/oneliner_with_related.html' %}
+        {% endwith %}
     {% empty %}
     <div class="alert">No matching one-liners.</div>
     {% endfor %}
 </div>
 
 {% with oneliners_page as page %}
-{% include 'oneliners/elements/pagination.html' %}
+    {% include 'oneliners/elements/pagination.html' %}
 {% endwith %}

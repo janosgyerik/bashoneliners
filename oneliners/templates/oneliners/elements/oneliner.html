@@ -9,7 +9,7 @@
             <td style="vertical-align: top; width: 50px">
                 <div class="upvote" data-id="{{oneliner.pk}}" data-user-id="{{oneliner.user.id}}">
                     <a class="upvote {% upvoted oneliner %}"></a>
-                    <span class="count">{{oneliner.score|default:'0'}}</span>
+                    <span class="count">{{score|default:'0'}}</span>
                     <a class="downvote {% downvoted oneliner %}"></a>
                     <!-- coming soon!
                     <a class="star {{oneliner.starred}}"></a>

@@ -5,9 +5,9 @@ https://trello.com/board/main/4e7da3cf5a94680b35000893
 next
 ----
 - bug: cannot vote in search results updated by ajax
-- bug: incorrect vote count in alternative one-liners
-    - http://localhost:8000/oneliners/oneliner/154/
-    - http://localhost:8000/oneliners/oneliner/2/
+- bug: vote counts wrong in ajax search results
+- add method oneliner.vote_up(user), ...
+- centralize the score counting (all annotate(..) magic in one place)
 - switch to using social-auth
     - make sure existing accounts remain unaffected
 - format everything with markdown

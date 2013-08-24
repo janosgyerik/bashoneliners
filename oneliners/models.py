@@ -110,13 +110,13 @@ class OneLiner(models.Model):
         return self.answer_set.filter(question__is_published=True)
 
     def alternatives(self):
-        return self.alternativeoneliner_set.filter(alternative__is_published=True)
+        return self.alternativeoneliner_set.filter(alternative__is_published=True).annotate(score=Sum('alternative__vote__value'))
 
     def add_alternative(self, alternative):
         AlternativeOneLiner(alternative=alternative, oneliner=self).save()
 
     def relateds(self):
-        return self.related_set.filter(oneliner__is_published=True)
+        return self.related_set.filter(oneliner__is_published=True).annotate(score=Sum('oneliner__vote__value'))
 
     @staticmethod
     def get(pk):
@@ -175,7 +175,7 @@ class OneLiner(models.Model):
                 qq &= Q(sub_qq)
 
         if len(qq.children) > 0:
-            results = OneLiner.objects.filter(is_published=True).filter(qq).annotate(score=Sum('vote__value'))
+            results = OneLiner.objects.filter(is_published=True).annotate(score=Sum('vote__value')).filter(qq)
 
             if match_whole_words:
                 results = [x for x in results if x.matches_words(terms, match_summary, match_line, match_explanation, match_limitations)]
@@ -272,7 +272,7 @@ class Question(models.Model):
         Answer(question=self, oneliner=oneliner).save()
 
     def oneliners(self):
-        return self.answer_set.filter(oneliner__is_published=True)
+        return self.answer_set.filter(oneliner__is_published=True).annotate(score=Sum('oneliner__vote__value'))
 
     def accept_answer(self, oneliner):
         self.is_answered = True

@@ -27,6 +27,8 @@ def oneliner_vote(request, oneliner_pk):
             Vote.vote_up(request.user, oneliner)
         elif request.GET['downvoted'] == 'true':
             Vote.vote_down(request.user, oneliner)
+        else:
+            Vote.vote_clear(request.user, oneliner)
 
     return render_to_response('oneliners/ajax/json.js')
 

@@ -360,6 +360,10 @@ class Vote(models.Model):
     def vote_down(user, oneliner):
         Vote.vote(user, oneliner, -1)
 
+    @staticmethod
+    def vote_clear(user, oneliner):
+        oneliner.vote_set.filter(user=user).delete()
+
     def __unicode__(self):
         return '%s %s %s' % (self.user.get_full_name(), ('--', '++')[self.up], self.oneliner.summary)
 

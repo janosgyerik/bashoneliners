@@ -4,7 +4,15 @@ https://trello.com/board/main/4e7da3cf5a94680b35000893
 
 next
 ----
+- bug: 500 error on /profile/ page when not logged in
 - clean up the site logos
+- Recent questions -> pending questions
+- Should indicate question pending state on profile
+- Implement favoriting
+- Show number of starred questions
+    - update first upstream in jquery-upvote
+    - also better init examples
+    - push new release of jquery-upvote
 - what is bind_question_answered for?
 - replace ugly static methods with more ergonomic ones:
     - oneliner.vote_up(user)

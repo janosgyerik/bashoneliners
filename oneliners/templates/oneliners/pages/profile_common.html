@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block pagetitle %}{{ hacker.hackerprofile.get_display_name|default:'Anonymous' }}{% endblock %}
+
+{% block pageheader %}{{ hacker.hackerprofile.get_display_name|default:'Anonymous' }}
+    {% if user == hacker %}
+    <a href="{% url 'oneliners.views.profile_edit' %}" class="btn btn-primary pull-right">Edit your profile</a>
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+
+<table class="profile table table-bordered">
+    <tbody>
+        <tr>
+            <th>Twitter</th>
+            <td>{{ hacker.hackerprofile.twitter_url|default:'(not set)'|urlize }}</td>
+        </tr>
+        <tr>
+            <th>Blog</th>
+            <td>{{ hacker.hackerprofile.blog_url|default:'(not set)'|urlize }}</td>
+        </tr>
+        <tr>
+            <th>Website</th>
+            <td>{{ hacker.hackerprofile.homepage_url|default:'(not set)'|urlize }}</td>
+        </tr>
+    </tbody>
+</table>
+
+<br clear="all"/>
+
+{% block profiletab %}
+{% endblock %}
+
+{% endblock %}

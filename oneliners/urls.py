@@ -15,8 +15,13 @@ urlpatterns = patterns('oneliners.views',
         (r'^oneliner/comment/(?P<pk>\d+)/$', 'oneliner_comment'),
 
         (r'^profile/(?P<pk>\d+)/$', 'profile'),
+        url(r'^profile/(?P<pk>\d+)/oneliners/$', 'profile_oneliners', name='profile_oneliners'),
+        url(r'^profile/(?P<pk>\d+)/questions/$', 'profile_questions', name='profile_questions'),
         (r'^profile/$', 'profile'),
         (r'^profile/edit/$', 'profile_edit'),
+        (r'^profile/oneliners/$', 'profile_oneliners'),
+        (r'^profile/questions/$', 'profile_questions'),
+        url(r'^profile/votes/$', 'profile_votes', name='profile_votes'),
 
         (r'^question/$', 'question_list'),
         (r'^question/(?P<pk>\d+)/$', 'question'),

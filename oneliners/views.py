@@ -305,30 +305,8 @@ def comment_list(request):
     return ('oneliners/pages/comment_list.html', params)
 
 
-@render_with_context(custom_params=True)
 def profile(request, pk=None):
-    params = _common_params(request)
-
-    if pk is not None:
-        user = User.objects.get(pk=pk)
-    else:
-        user = request.user
-
-    params['hacker'] = user
-
-    if user.is_authenticated():
-        oneliners = OneLiner.objects.filter(user=user).annotate(score=Sum('vote__value'))
-        if user != request.user:
-            oneliners = oneliners.filter(is_published=True)
-        params['oneliners'] = oneliners
-
-        questions = Question.objects.filter(user=user)
-        if user != request.user:
-            questions = questions.filter(is_published=True)
-        params['questions_pending'] = questions.filter(is_answered=False)
-        params['questions_answered'] = questions.filter(is_answered=True)
-
-    return ('oneliners/pages/profile.html', params)
+    return profile_oneliners(request, pk)
 
 
 def profile_edit(request):
@@ -351,6 +329,49 @@ def profile_edit(request):
 
     template_path = 'oneliners/pages/profile_edit.html'
     return render_to_response(template_path, params, context_instance=RequestContext(request))
+
+
+def _common_profile_params(request, pk):
+    params = _common_params(request)
+    try:
+        user = User.objects.get(pk=pk)
+    except User.DoesNotExist:
+        user = request.user
+
+    params['hacker'] = user
+    return params
+
+
+@render_with_context(custom_params=True)
+def profile_oneliners(request, pk=None):
+    params = _common_profile_params(request, pk)
+    hacker = params['hacker']
+    oneliners = OneLiner.objects.filter(user=hacker).annotate(score=Sum('vote__value'))
+    if hacker != request.user:
+        oneliners = oneliners.filter(is_published=True)
+    params['oneliners'] = oneliners
+    return ('oneliners/pages/profile_oneliners.html', params)
+
+
+@render_with_context(custom_params=True)
+def profile_questions(request, pk=None):
+    params = _common_profile_params(request, pk)
+    hacker = params['hacker']
+    questions = Question.objects.filter(user=hacker)
+    if hacker != request.user:
+        questions = questions.filter(is_published=True)
+    params['questions'] = questions
+    return ('oneliners/pages/profile_questions.html', params)
+
+
+@render_with_context(custom_params=True)
+def profile_votes(request):
+    params = _common_params(request)
+    user = request.user
+    oneliners = OneLiner.objects.annotate(score=Sum('vote__value')).filter(vote__user=user)
+    params['oneliners'] = oneliners
+    params['hacker'] = user
+    return ('oneliners/pages/profile_votes.html', params)
 
 
 @render_with_context(custom_params=True)

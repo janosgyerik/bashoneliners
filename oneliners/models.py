@@ -57,7 +57,8 @@ class HackerProfile(models.Model):
     homepage_url = models.URLField('Homepage URL', blank=True, null=True)
 
     def twitter_url(self):
-        return 'http://twitter.com/%s/' % self.twitter_name
+        if self.twitter_name:
+            return 'http://twitter.com/%s/' % self.twitter_name
 
     def get_username(self):
         return self.user.username
@@ -277,10 +278,8 @@ class Question(models.Model):
     def accept_answer(self, oneliner):
         self.is_answered = True
         self.save()
-        try:
-            AcceptedAnswer(question=self, oneliner=oneliner).save()
-        except AcceptedAnswer.DoesNotExist:
-            pass
+        self.acceptedanswer_set.all().delete()
+        AcceptedAnswer(question=self, oneliner=oneliner).save()
 
     def clear_all_answers(self):
         self.is_answered = False

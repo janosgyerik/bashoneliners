@@ -46,6 +46,10 @@ or browse or search the one-liners contributed by others.</p>
     function search_success(html) {
         $('.oneliners').html($(html).html());
         $('.pagination').remove();
+        bind_comments_toggle();
+        bind_upvote();
+        //footer_fix();
+        bind_dblclick_to_select_oneliner();
     }
 
     $('.tags a').click(function(e) {

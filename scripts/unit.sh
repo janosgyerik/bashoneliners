@@ -1,10 +1,8 @@
-#!/bin/sh
-
-set -e
+#!/bin/sh -e
 
 cd $(dirname "$0")/..
 
 echo '### main'
-./manage.py test oneliners
+./manage.sh test oneliners
 
 # eof

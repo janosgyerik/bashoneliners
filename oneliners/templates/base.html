@@ -22,9 +22,6 @@
 		    {% if user.is_superuser %}
 		    <li><a href="/admin/">Admin</a></li>
 		    {% endif %}
-		    {% if user.is_authenticated %}
-		    <li><a href="{% url 'oneliners.views.oneliner_new' %}">Post</a>
-		    {% endif %}
 		    <li><a href="{% url 'oneliners.views.oneliner_list' %}">One-Liners</a></li>
 		    {% if user.is_authenticated %}
 		    <li><a href="{% url 'oneliners.views.question_new' %}">Ask</a>

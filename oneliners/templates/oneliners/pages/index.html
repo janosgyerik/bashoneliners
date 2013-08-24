@@ -24,7 +24,11 @@ or search the one-liners contributed by others.</p>
 {% endfor %}
 </ul>
 
-<h2 class="page-header">One-Liners</h2>
+<h2 class="page-header">One-Liners
+    {% if user.is_authenticated %}
+    <a href="{% url 'oneliners.views.oneliner_new' %}" class="btn btn-primary pull-right">Post a one-liner</a>
+    {% endif %}
+</h2>
 
 {% include 'oneliners/elements/oneliners_page.html' %}
 

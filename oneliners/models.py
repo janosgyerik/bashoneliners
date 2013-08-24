@@ -278,10 +278,8 @@ class Question(models.Model):
     def accept_answer(self, oneliner):
         self.is_answered = True
         self.save()
-        try:
-            AcceptedAnswer(question=self, oneliner=oneliner).save()
-        except AcceptedAnswer.DoesNotExist:
-            pass
+        self.acceptedanswer_set.all().delete()
+        AcceptedAnswer(question=self, oneliner=oneliner).save()
 
     def clear_all_answers(self):
         self.is_answered = False

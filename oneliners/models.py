@@ -57,7 +57,8 @@ class HackerProfile(models.Model):
     homepage_url = models.URLField('Homepage URL', blank=True, null=True)
 
     def twitter_url(self):
-        return 'http://twitter.com/%s/' % self.twitter_name
+        if self.twitter_name:
+            return 'http://twitter.com/%s/' % self.twitter_name
 
     def get_username(self):
         return self.user.username

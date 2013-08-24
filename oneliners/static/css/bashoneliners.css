@@ -164,6 +164,10 @@ table.profile {
     width: auto;
 }
 
+.nav-profile li {
+    float: right;
+}
+
 .related .well {
     background: #dff0d8;
 }

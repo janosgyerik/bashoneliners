@@ -2,12 +2,14 @@
 
 cd $(dirname "$0")/..
 
+dirs='bashoneliners oneliners'
+
 echo '### pep8'
-pep8 . | grep -v 'line too long'
+pep8 $dirs | grep -v 'line too long'
 echo
 
 echo '### pyflakes'
-pyflakes .
+pyflakes $dirs
 echo
 
 # eof

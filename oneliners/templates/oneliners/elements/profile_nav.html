@@ -1,12 +1,14 @@
 <ul class="nav nav-tabs nav-profile">
     {% if hacker == user %}
-    <li class="{{ active_votes }}">
-        <a href="{% url 'profile_votes' %}">Votes</a>
-    </li>
+        <li class="{{ active_votes }}">
+            <a href="{% url 'profile_votes' %}">Votes</a>
+        </li>
     {% endif %}
+    <!--
     <li class="{{ active_questions }}">
         <a href="{% url 'profile_questions' hacker.pk %}">Questions</a>
     </li>
+    -->
     <li class="{{ active_oneliners }}">
         <a href="{% url 'profile_oneliners' hacker.pk %}">One-Liners</a>
     </li>

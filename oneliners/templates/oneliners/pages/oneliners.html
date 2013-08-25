@@ -10,16 +10,39 @@
 
 {% block content %}
 
-<p>Welcome to <strong>bashoneliners.com</strong>,
-a growing collection of practical,
-awesome <em>bash one-liners</em> that you can use in
-GNU/Linux, UNIX or BSD systems.
-Post your cool one-liners to share with the world.
-Make sure to explain your shell script tips and tricks well.
-Think of this as an opportunity to spread good and clean coding practices.</p>
+<p>
+Welcome to <strong>bashoneliners.com</strong>,
+a collection of shell script tips and tricks on a single line
+that can be very useful in
+GNU/Linux, UNIX, BSD, and similar systems.
+Post your cool bash one-liners to share with the world,
+or search our database of existing one-liners contributed by others.
+</p>
 
-<p>To get the latest bash one-liners, follow our <a href="{% url 'oneliners.feeds.oneliner' %}">rss feed</a>
-or <a href="https://twitter.com/#!/bashoneliners">@bashoneliners</a> on Twitter.</p>
+<p>
+Shell scripting can be an ugly business.
+It is easy to write quick and dirty hacks that only a few hardcore hackers understand.
+Our goal is to gather nicely written,
+clean, well-explained one-liners
+that conform to today's best practices,
+and do something useful in real life.
+Or just pure awesome and wicked cool, that's ok too.
+</p>
+
+<p>
+To get the latest bash one-liners, follow our <a href="{% url 'oneliners.feeds.oneliner' %}">rss feed</a>
+or <a href="https://twitter.com/#!/bashoneliners">@bashoneliners</a> on Twitter.
+</p>
+
+<div class="alert alert-block alert-info">
+The site is still pretty far from what we want it to be.
+Mainly we need more Django coders.
+At the minimum it would be great help if you could spread the word and talk about this site on Twitter, Google+, Facebook, all your social outlets.
+If you want to help with coding,
+you can <a href="{% url 'oneliners.views.sourcecode' %} ">grab the source code</a> from GitHub or others.
+Take a look at our <a href="https://trello.com/b/PdQFoRDt/bash-one-liners">public todo list on Trello</a>,
+and dive in!
+</div>
 
 <h2>Tags</h2>
 

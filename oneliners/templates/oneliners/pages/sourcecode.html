@@ -4,49 +4,69 @@
 
 {% block pageheader %}Source code{% endblock %}
 
-{% block keywords %}{% endblock %}
-
-{% block description %}{% endblock %}
-
 {% block content %}
 
-<p>This is an open-source project. 
-If you would like to participate or contribute, 
-please read the <a href="{% url 'oneliners.views.mission' %}">mission statement</a> first, 
-it is the foundation of the project.
-If you are still interested, 
-please contact us via the mailing list at <a href="mailto:bashoneliners@googlegroups.com">bashoneliners@googlegroups.com</a>
-or privately at <a href="mailto:info@bashoneliners.com">info@bashoneliners.com</a> and let's start the conversation!</p>
+<p>
+The purpose of this page is to give you all the links,
+resources and contact info that you might need to participate in this project.
+Do <a href="mailto:info@bashoneliners.com">let us know</a> if something is missing.
+</p>
+
+<p>Right now the site is still pretty far from what we want it to be.</p>
+
+<ul>
+    <li>
+        <strong>Perfect one-liners following today's best-practices:</strong>
+        Expert users should be able to edit and improve poorly written one-liners.
+        The site needs peer-review and collaborative editing features,
+        similar to <a href="http://stackoverflow.com/">stackoverflow.com</a>.
+        Keep in mind that StackOverflow is about questions and answers.
+        On StackOverflow, answers do not collaborate with each other,
+        and very often the accepted answer is not the best solution.
+        Very often the combination of multiple answers is the best solution.
+        The goal of this site is a collection of one-liners optimized and perfected by the community.
+    </li>
+    <li>
+        <strong>Gamification:</strong>
+        Gamification features are probably crucial to attract more users,
+        and for keeping existing users interested.
+    </li>
+</ul>
+
+<p>To make all these things happen we need more Django coders.</p>
 
 <dl class="sourcecode">
-    <dt>Project homepage</dt>
+    <dt>Get the source code</dt>
     <dd>
-        <a href="https://github.com/janosgyerik/bashoneliners">https://github.com/janosgyerik/bashoneliners</a>
+        <pre>git clone https://github.com/janosgyerik/bashoneliners.git</pre>
     </dd>
 
-    <dt>Issue tracking</dt>
-    <dd>
-        <a href="https://github.com/janosgyerik/bashoneliners/issues">https://github.com/janosgyerik/bashoneliners/issues</a>
-    </dd>
-
-    <dt>Task management, upcoming features</dt>
+    <dt>Task management, upcoming features, todo lists</dt>
     <dd>
         <a href="https://trello.com/b/PdQFoRDt/bash-one-liners">https://trello.com/b/PdQFoRDt/bash-one-liners</a>
     </dd>
 
+    <dt>Issue tracking, bug reports</dt>
+    <dd>
+        <a href="https://github.com/janosgyerik/bashoneliners/issues">https://github.com/janosgyerik/bashoneliners/issues</a>
+    </dd>
+
     <dt>Mailing list address</dt>
-    <dd><a href="mailto:bashoneliners@googlegroups.com">bashoneliners@googlegroups.com</a></dd>
+    <dd>
+        <a href="mailto:bashoneliners@googlegroups.com">bashoneliners@googlegroups.com</a>
+        <p><em>Messages you send here will be publicly visible.</em></p>
+    </dd>
 
     <dt>Mailing list public archive</dt>
     <dd><a href="http://groups.google.com/group/bashoneliners/topics">http://groups.google.com/group/bashoneliners/topics</a></dd>
 
-    <dt>Get the source code</dt>
+    <dt>Private contact</dt>
+    <dd><a href="mailto:info@bashoneliners.com">info@bashoneliners.com</a></dd>
+
+    <dt>Alternative source code repositories</dt>
     <dd>
-        <p>We appreciate your contribution in any of these version control systems:</p>
+        <p>These are usually not up to date. Drop us an email and we can update them if you prefer.</p>
         <ul>
-            <li>Using Git -- {{ "https://github.com/janosgyerik/bashoneliners"|urlize }}
-                <pre>git clone https://github.com/janosgyerik/bashoneliners.git</pre>
-            </li>
             <li>Using Bazaar -- {{ "https://launchpad.net/bashoneliners"|urlize }}
                 <pre>bzr branch lp:bashoneliners</pre>
             </li>

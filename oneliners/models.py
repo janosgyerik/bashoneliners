@@ -175,7 +175,7 @@ class OneLiner(models.Model):
                 qq &= Q(sub_qq)
 
         if len(qq.children) > 0:
-            results = OneLiner.objects.filter(is_published=True).annotate(score=Sum('vote__value')).filter(qq)
+            results = OneLiner.objects.filter(is_published=True).annotate(score=Sum('vote__value')).filter(qq).order_by('-score', '-id')
 
             if match_whole_words:
                 results = [x for x in results if x.matches_words(terms, match_summary, match_line, match_explanation, match_limitations)]

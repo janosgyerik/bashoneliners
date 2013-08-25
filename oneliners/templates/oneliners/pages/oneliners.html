@@ -45,13 +45,12 @@ or <a href="https://twitter.com/#!/bashoneliners">@bashoneliners</a> on Twitter.
     var ordering = '{{ ordering }}';
     var selected_tag;
 
-    function search_by_tag(tag) {
-        selected_tag = tag;
+    function search_by_tag() {
         var options = {
             url: '{% url 'oneliners.ajax.search_by_tag' %}',
             type: 'get',
             data: {
-                'tag': tag,
+                'tag': selected_tag,
                 'ordering': ordering
             },
             success: search_success
@@ -70,9 +69,16 @@ or <a href="https://twitter.com/#!/bashoneliners">@bashoneliners</a> on Twitter.
 
     $('.tags a').click(function(e) {
         e.preventDefault();
-        $('.tags li.active').removeClass('active');
-        $(this).parent().addClass('active');
-        search_by_tag($(this).text());
+        if ($(this).parent().hasClass('active')) {
+            selected_tag = null;
+            $(this).parent().removeClass('active');
+            location.reload();
+        } else {
+            $('.tags li.active').removeClass('active');
+            $(this).parent().addClass('active');
+            selected_tag = $(this).text();
+            search_by_tag();
+        }
     });
 
     $('.nav-oneliners li a').click(function(e) {
@@ -81,7 +87,7 @@ or <a href="https://twitter.com/#!/bashoneliners">@bashoneliners</a> on Twitter.
             $('.nav-oneliners li').removeClass('active');
             $(this).parent().addClass('active');
             ordering = $(this).attr('data-ordering');
-            search_by_tag(selected_tag);
+            search_by_tag();
         }
     });
 

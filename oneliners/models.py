@@ -132,8 +132,8 @@ class OneLiner(models.Model):
         return OneLiner.objects.filter(is_published=True)[:limit]
 
     @staticmethod
-    def filter_by_tag(text, order_by=None, limit=RECENT_LIMIT):
-        query = OneLiner.objects.filter(is_published=True).annotate(score=Sum('vote__value')).filter(onelinertag__tag__text=text)
+    def filter_by_tag(tagname, order_by=None, limit=RECENT_LIMIT):
+        query = OneLiner.objects.filter(is_published=True).annotate(score=Sum('vote__value')).filter(onelinertag__tag__text=tagname)
         if order_by:
             query = query.order_by(order_by)
         return query[:limit]

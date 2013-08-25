@@ -56,15 +56,15 @@ def search_by_tag(request):
     params = {}
     params['user'] = request.user
 
-    text = request.GET.get('text')
+    tagname = request.GET.get('tag')
     order_by = request.GET.get('order_by')
     try:
-        validate_slug(text)
+        validate_slug(tagname)
         if order_by == 'popular':
             order_by = '-score'
         else:
             order_by = None
-        items = OneLiner.filter_by_tag(text, order_by=order_by)
+        items = OneLiner.filter_by_tag(tagname, order_by=order_by)
         params['oneliners'] = items
     except ValidationError:
         params['oneliners'] = ()

@@ -164,7 +164,7 @@ table.profile {
     width: auto;
 }
 
-.nav-profile li {
+.nav-profile li, .nav-oneliners li {
     float: right;
 }
 

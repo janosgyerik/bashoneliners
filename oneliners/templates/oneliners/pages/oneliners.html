@@ -43,13 +43,15 @@ or <a href="https://twitter.com/#!/bashoneliners">@bashoneliners</a> on Twitter.
 
 {% block ready %}
     var order_by = '{{ order_by }}';
+    var selected_tag;
 
-    function search_by_tag(text) {
+    function search_by_tag(tag) {
+        selected_tag = tag;
         var options = {
             url: '{% url 'oneliners.ajax.search_by_tag' %}',
             type: 'get',
             data: {
-                'text': text,
+                'tag': tag,
                 'order_by': order_by
             },
             success: search_success

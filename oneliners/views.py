@@ -83,11 +83,17 @@ def tweet(oneliner, baseurl, force=False, test=False):
             return result
 
 
-@render_with_context(custom_params=True)
-def oneliner_list(request):
+def index(request):
+    return oneliners_default(request)
+
+
+def oneliners_default(request):
+    return oneliners_newest(request)
+
+
+def _common_oneliners_params(request, items):
     params = _common_params(request)
 
-    items = OneLiner.objects.filter(is_published=True).annotate(score=Sum('vote__value'))
     paginator = Paginator(items, 25)  # Show 25 items per page
 
     # Make sure page request is an int. If not, deliver first page.
@@ -104,8 +110,23 @@ def oneliner_list(request):
 
     params['oneliners_page'] = page
     params['tagcloud'] = Tag.tagcloud()
+    return params
 
-    return ('oneliners/pages/index.html', params)
+
+@render_with_context(custom_params=True)
+def oneliners_newest(request):
+    items = OneLiner.objects.filter(is_published=True).annotate(score=Sum('vote__value'))
+    params = _common_oneliners_params(request, items)
+    params['active_newest'] = 'active'
+    return ('oneliners/pages/oneliners.html', params)
+
+
+@render_with_context(custom_params=True)
+def oneliners_popular(request):
+    items = OneLiner.objects.filter(is_published=True).annotate(score=Sum('vote__value')).order_by('-score')
+    params = _common_oneliners_params(request, items)
+    params['active_popular'] = 'active'
+    return ('oneliners/pages/oneliners.html', params)
 
 
 def oneliner(request, pk):
@@ -149,7 +170,7 @@ def oneliner_edit(request, pk):
 def oneliner_new(request, question_pk=None, oneliner_pk=None, cancel_url=None):
     params = _common_params(request)
     if not cancel_url:
-        cancel_url = reverse(oneliner_list)
+        cancel_url = reverse(oneliners_newest)
     params['cancel_url'] = cancel_url
 
     question = None
@@ -185,7 +206,7 @@ def oneliner_new(request, question_pk=None, oneliner_pk=None, cancel_url=None):
                     oneliner0.add_alternative(new_oneliner)
 
                 if new_oneliner.is_published:
-                    return redirect(oneliner_list)
+                    return redirect(oneliners_newest)
                 else:
                     return redirect(new_oneliner)
     else:
@@ -393,7 +414,7 @@ def login(request):
 
 def logout(request):
     django_logout(request)
-    return oneliner_list(request)
+    return index(request)
 
 
 ''' simple pages '''

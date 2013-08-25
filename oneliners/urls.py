@@ -1,12 +1,14 @@
 from django.conf.urls import patterns, url
 
 urlpatterns = patterns('oneliners.views',
-        url(r'^$', 'oneliner_list', name='index'),
+        url(r'^$', 'oneliners_default', name='index'),
         (r'^sourcecode/$', 'sourcecode'),
         (r'^mission/$', 'mission'),
         (r'^feeds/$', 'feeds'),
 
-        (r'^oneliner/$', 'oneliner_list'),
+        url(r'^oneliner/$', 'oneliners_default', name='oneliners_default'),
+        url(r'^oneliner/newest/$', 'oneliners_newest', name='oneliners_newest'),
+        url(r'^oneliner/popular/$', 'oneliners_popular', name='oneliners_popular'),
         url(r'^oneliner/(?P<pk>\d+)/$', 'oneliner', name='oneliner'),
         (r'^oneliner/edit/(?P<pk>\d+)/$', 'oneliner_edit'),
         (r'^oneliner/new/$', 'oneliner_new'),

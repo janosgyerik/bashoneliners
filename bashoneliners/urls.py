@@ -7,14 +7,14 @@ from django.contrib import admin
 admin.autodiscover()
 
 from dreamhost.views import internal_error
-from oneliners.views import oneliner_list
+from oneliners.views import oneliners_default
 
 urlpatterns = patterns('',
     # Examples:
     # url(r'^$', 'bashoneliners.views.home', name='home'),
     # url(r'^bashoneliners/', include('bashoneliners.foo.urls')),
 
-    (r'^$', oneliner_list),
+    (r'^$', oneliners_default),
     (r'^oneliners/', include('oneliners.urls')),
 
     # deprecated url handlers kept for a while for old tweets and feeds

@@ -2,7 +2,15 @@
 
 {% block pagetitle %}bashoneliners.com{% endblock %}
 
-{% block pageheader %}bashoneliners.com{% endblock %}
+{% block pageheader %}
+bashoneliners.com
+    {% if SERVER_NAME != 'bashoneliners.com' %}
+        <a href="http://bashoneliners.com/" class="btn btn-success pull-right">bashoneliners.com</a>
+    {% endif %}
+    {% if SERVER_NAME != 'beta.bashoneliners.com' %}
+        <a href="http://beta.bashoneliners.com/" class="btn btn-info pull-right">Try the BETA site</a>
+    {% endif %}
+{% endblock %}
 
 {% block keywords %}bash, ksh, shell, script, one-liner, oneliner, tips, tricks, linux, unix, vote, rank, rss, open-source, django, python, git, github, bazaar, launchpad, collaborate{% endblock %}
 

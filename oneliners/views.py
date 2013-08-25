@@ -56,6 +56,7 @@ def _common_params(request):
     params = {
             'user': request.user,
             'searchform': searchform,
+            'SERVER_NAME': request.META['SERVER_NAME'],
             }
 
     return params

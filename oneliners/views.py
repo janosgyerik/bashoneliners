@@ -118,6 +118,7 @@ def oneliners_newest(request):
     items = OneLiner.objects.filter(is_published=True).annotate(score=Sum('vote__value'))
     params = _common_oneliners_params(request, items)
     params['active_newest'] = 'active'
+    params['order_by'] = 'newest'
     return ('oneliners/pages/oneliners.html', params)
 
 
@@ -126,6 +127,7 @@ def oneliners_popular(request):
     items = OneLiner.objects.filter(is_published=True).annotate(score=Sum('vote__value')).order_by('-score')
     params = _common_oneliners_params(request, items)
     params['active_popular'] = 'active'
+    params['order_by'] = 'popular'
     return ('oneliners/pages/oneliners.html', params)
 
 

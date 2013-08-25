@@ -42,12 +42,15 @@ or <a href="https://twitter.com/#!/bashoneliners">@bashoneliners</a> on Twitter.
 {% endblock %}
 
 {% block ready %}
+    var order_by = '{{ order_by }}';
+
     function search_by_tag(text) {
         var options = {
             url: '{% url 'oneliners.ajax.search_by_tag' %}',
             type: 'get',
             data: {
-                'text': text
+                'text': text,
+                'order_by': order_by
             },
             success: search_success
         };

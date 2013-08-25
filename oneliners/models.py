@@ -135,7 +135,7 @@ class OneLiner(models.Model):
     def filter_by_tag(tagname, order_by=None, limit=RECENT_LIMIT):
         query = OneLiner.objects.filter(is_published=True).annotate(score=Sum('vote__value')).filter(onelinertag__tag__text=tagname)
         if order_by:
-            query = query.order_by(order_by)
+            query = query.order_by(order_by, '-id')
         return query[:limit]
 
     @staticmethod

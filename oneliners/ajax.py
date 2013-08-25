@@ -57,10 +57,10 @@ def search_by_tag(request):
     params['user'] = request.user
 
     tagname = request.GET.get('tag')
-    order_by = request.GET.get('order_by')
+    ordering = request.GET.get('ordering')
     try:
         validate_slug(tagname)
-        if order_by == 'popular':
+        if ordering == 'popular':
             order_by = '-score'
         else:
             order_by = None

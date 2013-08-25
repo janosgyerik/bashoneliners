@@ -42,7 +42,7 @@ or <a href="https://twitter.com/#!/bashoneliners">@bashoneliners</a> on Twitter.
 {% endblock %}
 
 {% block ready %}
-    var order_by = '{{ order_by }}';
+    var ordering = '{{ ordering }}';
     var selected_tag;
 
     function search_by_tag(tag) {
@@ -52,7 +52,7 @@ or <a href="https://twitter.com/#!/bashoneliners">@bashoneliners</a> on Twitter.
             type: 'get',
             data: {
                 'tag': tag,
-                'order_by': order_by
+                'ordering': ordering
             },
             success: search_success
         };
@@ -73,6 +73,16 @@ or <a href="https://twitter.com/#!/bashoneliners">@bashoneliners</a> on Twitter.
         $('.tags li.active').removeClass('active');
         $(this).parent().addClass('active');
         search_by_tag($(this).text());
+    });
+
+    $('.nav-oneliners li a').click(function(e) {
+        if (selected_tag) {
+            e.preventDefault();
+            $('.nav-oneliners li').removeClass('active');
+            $(this).parent().addClass('active');
+            ordering = $(this).attr('data-ordering');
+            search_by_tag(selected_tag);
+        }
     });
 
 {% endblock %}

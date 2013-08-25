@@ -8,41 +8,41 @@
 
 <div class="navbar navbar-fixed-top">
     <div class="navbar-inner">
-	<div class="container">
-	    <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-		<span class="icon-bar"></span>
-		<span class="icon-bar"></span>
-		<span class="icon-bar"></span>
-	    </a>
+        <div class="container">
+            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </a>
 
-	    <a class="brand" href="/">Bash One-Liners</a>
+            <a class="brand" href="/">Bash One-Liners</a>
 
-	    <div class="nav-collapse">
-		<ul class="nav">
-		    {% if user.is_superuser %}
-		    <li><a href="/admin/">Admin</a></li>
-		    {% endif %}
-		    <li><a href="{% url 'oneliners_default' %}">One-Liners</a></li>
-            <!--
-		    <li><a href="{% url 'oneliners.views.question_list' %}">Questions</a></li>
-            -->
-		    <li><a href="{% url 'oneliners.views.sourcecode' %}">Source</a></li>
+            <div class="nav-collapse">
+                <ul class="nav">
+                    {% if user.is_superuser %}
+                    <li><a href="/admin/">Admin</a></li>
+                    {% endif %}
+                    <li><a href="{% url 'oneliners_default' %}">One-Liners</a></li>
+                    <!--
+                    <li><a href="{% url 'oneliners.views.question_list' %}">Questions</a></li>
+                    -->
+                    <li><a href="{% url 'oneliners.views.sourcecode' %}">Source</a></li>
             <li><a href="{% url 'oneliners.views.feeds' %}"><span class="label label-info">RSS</span></a></li>
-		</ul>
+                </ul>
 
-		{% if searchform %}
-		<form class="navbar-search" method="get" action="{% url 'oneliners.views.search' %}">
-		    <input name="query" maxlength="100" placeholder="Search" type="text" class="search-query input-small" id="id_query" />
-		</form>
-		{% endif %}
+                {% if searchform %}
+                    <form class="navbar-search" method="get" action="{% url 'oneliners.views.search' %}">
+                        <input name="query" maxlength="100" placeholder="Search" type="text" class="search-query input-small" id="id_query" />
+                    </form>
+                {% endif %}
 
-		{% if user.is_authenticated %}
-		<p class="navbar-text pull-right"><a href="{% url 'oneliners.views.profile' %}">{{ user.hackerprofile.get_display_name }}</a>&mdash;<a href="{% url 'oneliners.views.logout' %}">Logout</a></p>
-		{% else %}
-		<p class="navbar-text pull-right"><a href="{% url 'oneliners.views.login' %}">Login</a></p>
-		{% endif %}
-	    </div>
-	</div>
+                {% if user.is_authenticated %}
+                    <p class="navbar-text pull-right"><a href="{% url 'oneliners.views.profile' %}">{{ user.hackerprofile.get_display_name }}</a>&mdash;<a href="{% url 'oneliners.views.logout' %}">Logout</a></p>
+                {% else %}
+                    <p class="navbar-text pull-right"><a href="{% url 'oneliners.views.login' %}">Login</a></p>
+                {% endif %}
+            </div>
+        </div>
     </div>
 </div>
 
@@ -58,12 +58,12 @@
 
 {% block footer %}
     <div class="container-fluid">
-	<p class="pull-right validators"> 
-    <a href="http://wiki.dreamhost.com/index.php/DHSOTM#2012_Winners"><img alt="DreamHost Site of the Month for March!" src="{% static 'images/dhsotm2.gif' %}" /></a> 
-    <a href="http://www.dreamhost.com/r.cgi?455568"><img alt="This site hosted by DreamHost. Unlimited storage and bandwidth for only $8.95" src="{% static 'images/dreamhost.gif' %}" /></a> 
-    <a href="http://www.dreamhost.com/donate.cgi?id=15533"><img style="border: 0" alt="Donate towards my web hosting bill!" src="{% static 'images/hosting.gif' %}" /></a>
-    <a href="http://www.dreamhost.com/green.cgi"><img alt="Green Web Hosting! This site hosted by DreamHost." src="{% static 'images/green1.gif' %}" height="31" /></a> 
-    <a href="http://validator.w3.org/check?uri=referer"><img src="{% static 'images/valid-xhtml10.png' %}" alt="Valid HTML5" /></a> 
-	</p> 
+        <p class="pull-right validators"> 
+            <a href="http://wiki.dreamhost.com/index.php/DHSOTM#2012_Winners"><img alt="DreamHost Site of the Month for March!" src="{% static 'images/dhsotm2.gif' %}" /></a> 
+            <a href="http://www.dreamhost.com/r.cgi?455568"><img alt="This site hosted by DreamHost. Unlimited storage and bandwidth for only $8.95" src="{% static 'images/dreamhost.gif' %}" /></a> 
+            <a href="http://www.dreamhost.com/donate.cgi?id=15533"><img style="border: 0" alt="Donate towards my web hosting bill!" src="{% static 'images/hosting.gif' %}" /></a>
+            <a href="http://www.dreamhost.com/green.cgi"><img alt="Green Web Hosting! This site hosted by DreamHost." src="{% static 'images/green1.gif' %}" height="31" /></a> 
+            <a href="http://validator.w3.org/check?uri=referer"><img src="{% static 'images/valid-xhtml10.png' %}" alt="Valid HTML5" /></a> 
+        </p> 
     </div>
 {% endblock %}

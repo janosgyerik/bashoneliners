@@ -120,7 +120,7 @@ def oneliners_newest(request):
     params = _common_oneliners_params(request, items)
     params['active_newest'] = 'active'
     params['ordering'] = 'newest'
-    return ('oneliners/pages/oneliners.html', params)
+    return ('oneliners/pages/index.html', params)
 
 
 @render_with_context(custom_params=True)
@@ -129,7 +129,7 @@ def oneliners_popular(request):
     params = _common_oneliners_params(request, items)
     params['active_popular'] = 'active'
     params['ordering'] = 'popular'
-    return ('oneliners/pages/oneliners.html', params)
+    return ('oneliners/pages/index.html', params)
 
 
 def oneliner(request, pk):

@@ -2,13 +2,15 @@ Release notes
 =============
 
 
-next
-----
+2013-08-26
+----------
 * You can upvote and downvote one-liners
-* Add #bash to all tweets, and #linux too if there is room for it
 * Double-click on a one-liner to select it for easy copy & paste
+* 'newest' and 'popular' tabs to view one-liners ordered by date or votes
+* User profile page is more compact, using tabs
+* Navbar is more compact
 * Bugfix: the Cancel button worked very strangely, now it's more sane
-* Made the navbar more compact
+* Add #bash to all tweets, and #linux too if there is room for it
 
 
 2013-06-01

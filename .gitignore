@@ -2,8 +2,8 @@
 /bashoneliners/*_settings.py
 /graphics/gource/
 /logs/*
-/run.sh
 /sqlite3.db
 /static/*
 /tmp
 /local/
+/virtualenv/

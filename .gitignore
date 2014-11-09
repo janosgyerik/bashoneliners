@@ -7,3 +7,6 @@
 /tmp
 /local/
 /virtualenv/
+
+# PyCharm
+.idea

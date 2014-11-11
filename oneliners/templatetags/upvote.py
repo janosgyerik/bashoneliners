@@ -4,6 +4,7 @@ from oneliners.models import Vote
 
 register = template.Library()
 
+
 @register.simple_tag(takes_context=True)
 def upvoted(context, oneliner):
     user = context['user']

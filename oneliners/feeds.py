@@ -4,7 +4,7 @@ from django.core.urlresolvers import reverse
 from oneliners.models import OneLiner, Question, Comment_feed
 
 
-### URL handlers
+# URL handlers
 
 
 def oneliner(request):
@@ -19,7 +19,7 @@ def comment(request):
     return CommentEntries()(request)
 
 
-### Feed classes
+# Feed classes
 
 
 class OneLinerEntries(Feed):
@@ -59,6 +59,3 @@ class CommentEntries(Feed):
             return text
         else:
             return text[:46] + ' ...'
-
-
-# eof

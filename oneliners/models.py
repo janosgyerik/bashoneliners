@@ -249,7 +249,7 @@ class Tag(models.Model):
     @staticmethod
     def tagcloud():
         return Tag.objects.annotate(count=Count('onelinertag')).filter(count__gt=1).order_by('-count').values('text', 'count')
-        #return Tag.objects.annotate(count=Count('onelinertag')).order_by('-count').values_list('text', 'count')
+        # return Tag.objects.annotate(count=Count('onelinertag')).order_by('-count').values_list('text', 'count')
 
 
 class OneLinerTag(models.Model):

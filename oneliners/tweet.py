@@ -32,8 +32,8 @@ try:
     have_creds = True
 except AttributeError:
     logger.warn('settings.TWITTER is missing. Will not be able to authenticate to Twitter.')
-#except TypeError:
-    #logger.warn('settings.TWITTER is missing. Will not be able to authenticate to Twitter.')
+# except TypeError:
+    # logger.warn('settings.TWITTER is missing. Will not be able to authenticate to Twitter.')
 except KeyError, key:
     logger.warn('settings.TWITTER[%s] is missing. Will not be able to authenticate to Twitter.', key)
 

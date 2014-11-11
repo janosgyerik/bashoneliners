@@ -3,7 +3,7 @@
 Django==1.5.1
 Markdown==2.5.1
 django-openid-auth==0.5
-pep8==1.4.5
+pep8==1.5.7
 pyflakes==0.7.2
 python-openid==2.2.5
 pytz==2013b

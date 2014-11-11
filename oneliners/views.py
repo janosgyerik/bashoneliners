@@ -13,7 +13,7 @@ from oneliners.models import OneLiner, User, Comment_recent, Tag, Question
 from oneliners.forms import EditHackerProfileForm, PostOneLinerForm, PostCommentOnOneLinerForm, PostQuestionForm, EditQuestionForm, SearchOneLinerForm, EditOneLinerForm
 
 
-### decorators
+# decorators
 
 
 def render_with_context(custom_params=False):
@@ -29,7 +29,7 @@ def render_with_context(custom_params=False):
     return _inner
 
 
-### helper methods
+# helper methods
 
 
 def format_canonical_url(request, relpath=''):

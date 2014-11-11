@@ -6,6 +6,6 @@ django-openid-auth==0.5
 pep8==1.5.7
 pyflakes==0.7.2
 python-openid==2.2.5
-pytz==2013b
+pytz==2014.9
 tweepy==2.0
 wsgiref==0.1.2

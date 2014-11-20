@@ -29,8 +29,7 @@
   <!-- CSS: implied media=all -->
   <!-- CSS concatenated and minified via ant build script-->
   <link rel="stylesheet" href="{% static 'css/smoothness/jquery-ui-1.8.17.custom.css' %}">
-  <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
-  <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap-responsive.min.css' %}">
+  <link rel="stylesheet" href="{% static 'bs3/dist/css/bootstrap.min.css' %}">
   <link rel="stylesheet" href="{% static 'jquery-upvote/jquery.upvote.css' %}">
   <link rel="stylesheet" href="{% static 'css/bashoneliners.css' %}">
   <!-- end CSS-->
@@ -45,23 +44,15 @@
 
 <body>
     
-  <div id="container">
     {% block navbar %}{% endblock %}
 
-    <header>
-    {% block header %}{% endblock %}
-    </header>
-
-    <section id="main" role="main">
     <div class="container">
     {% block main %}{% endblock %}
     </div>
-    </section>
 
     <footer class="footer">
     {% block footer %}{% endblock %}
     </footer>
-  </div> <!--! end of #container -->
 
 
   <!-- JavaScript at the bottom for fast page loading -->
@@ -75,7 +66,7 @@
   <!-- scripts concatenated and minified via ant build script-->
   <script defer src="{% static 'js/plugins.js' %}"></script>
   <script defer src="{% static 'js/django-jquery-csrf.js' %}"></script>
-  <script defer src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+  <script defer src="{% static 'bs3/dist/js/bootstrap.min.js' %}"></script>
   <script defer src="{% static 'js/showdown.js' %}"></script>
   <script defer src="{% static 'jquery-upvote/jquery.upvote.js' %}"></script>
   <script defer src="{% static 'js/bashoneliners.js' %}"></script>

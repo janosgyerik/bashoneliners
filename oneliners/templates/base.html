@@ -6,45 +6,43 @@
 
 {% block navbar %}
 
-<div class="navbar navbar-fixed-top">
-    <div class="navbar-inner">
-        <div class="container">
-            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
-            </a>
+            </button>
+            <a class="navbar-brand" href="/">Bash One-Liners</a>
+        </div>
 
-            <a class="brand" href="/">Bash One-Liners</a>
-
-            <div class="nav-collapse">
-                <ul class="nav">
-                    {% if user.is_superuser %}
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                {% if user.is_superuser %}
                     <li><a href="/admin/">Admin</a></li>
-                    {% endif %}
-                    <li><a href="{% url 'oneliners_default' %}">One-Liners</a></li>
-                    {% if user.is_authenticated %}
-                    <li><a href="{% url 'oneliners.views.oneliner_new' %}">Post</a></li>
-                    {% endif %}
-                    <!--
-                    <li><a href="{% url 'oneliners.views.question_list' %}">Questions</a></li>
-                    -->
-                    <li><a href="{% url 'oneliners.views.sourcecode' %}">Source</a></li>
-                    <li><a href="{% url 'oneliners.feeds.oneliner' %}"><span class="label label-info">RSS</span></a></li>
-                </ul>
-
-                {% if searchform %}
-                    <form class="navbar-search" method="get" action="{% url 'oneliners.views.search' %}">
-                        <input name="query" maxlength="100" placeholder="Search" type="text" class="search-query input-small" id="id_query" />
-                    </form>
                 {% endif %}
-
+                <li><a href="{% url 'oneliners_default' %}">One-Liners</a></li>
                 {% if user.is_authenticated %}
-                    <p class="navbar-text pull-right"><a href="{% url 'oneliners.views.profile' %}">{{ user.hackerprofile.get_display_name }}</a>&mdash;<a href="{% url 'oneliners.views.logout' %}">Logout</a></p>
-                {% else %}
-                    <p class="navbar-text pull-right"><a href="{% url 'oneliners.views.login' %}">Login</a></p>
+                    <li><a href="{% url 'oneliners.views.oneliner_new' %}">Post</a></li>
                 {% endif %}
-            </div>
+                <li><a href="{% url 'oneliners.views.sourcecode' %}">Source</a></li>
+                <li><a href="{% url 'oneliners.feeds.oneliner' %}"><span class="label label-info">RSS</span></a></li>
+            </ul>
+
+            {% if searchform %}
+                <form class="navbar-form navbar-left" role="form" method="get" action="{% url 'oneliners.views.search' %}">
+                    <input name="query" maxlength="100" placeholder="Search" type="text" class="form-control search-query" id="id_query" />
+                </form>
+            {% endif %}
+
+            {% if user.is_authenticated %}
+                <p class="navbar-text pull-right"><a href="{% url 'oneliners.views.profile' %}">{{ user.hackerprofile.get_display_name }}</a>&mdash;<a href="{% url 'oneliners.views.logout' %}">Logout</a></p>
+            {% else %}
+                <p class="navbar-text pull-right"><a href="{% url 'oneliners.views.login' %}">Login</a></p>
+            {% endif %}
         </div>
     </div>
 </div>

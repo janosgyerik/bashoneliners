@@ -22,10 +22,10 @@ class CommonOneLinerForm(forms.ModelForm):
         model = OneLiner
 
         widgets = {
-                'summary': forms.TextInput(attrs={'class': 'span6', }),
-                'line': forms.TextInput(attrs={'class': 'span6', }),
-                'explanation': forms.Textarea(attrs={'rows': 10, 'class': 'span6', }),
-                'limitations': forms.Textarea(attrs={'rows': 8, 'class': 'span6', }),
+                'summary': forms.TextInput(attrs={'class': 'form-control', }),
+                'line': forms.TextInput(attrs={'class': 'form-control', }),
+                'explanation': forms.Textarea(attrs={'rows': 10, 'class': 'col-sm-6', }),
+                'limitations': forms.Textarea(attrs={'rows': 8, 'class': 'col-sm-6', }),
                 }
 
         fields = (

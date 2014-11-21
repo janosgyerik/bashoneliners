@@ -63,7 +63,7 @@
         <div class="form-actions">
             {% include 'oneliners/elements/please_login.html' %}
             {% for action in form.actions %}<button class="btn {{ action.cssclass }}" type="submit" name="action" value="{{ action.name }}">{{ action.name }}</button>{% endfor %}
-            <button class="btn"><a href="{{ cancel_url }}">Cancel</a></button>
+            <button class="btn btn-default"><a href="{{ cancel_url }}">Cancel</a></button>
         </div>
     </div>
 </form>

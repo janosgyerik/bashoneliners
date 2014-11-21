@@ -22,7 +22,7 @@
                     <h3 class="summary">
                         <a href="{% url 'oneliner' oneliner.pk %}">{{ oneliner.summary|capfirst }}</a>
                         {% if user == oneliner.user %}
-                        <a class="btn" href="{% url 'oneliners.views.oneliner_edit' oneliner.pk %}"><i class="icon-pencil"></i>{% if not oneliner.is_published %}<span class="draft">(Not published!)</span>{% endif %}</a>
+                        <a class="btn btn-default" href="{% url 'oneliners.views.oneliner_edit' oneliner.pk %}"><i class="glyphicon glyphicon-pencil"></i>{% if not oneliner.is_published %}<span class="draft">(Not published!)</span>{% endif %}</a>
                         {% endif %}
                     </h3>
 
@@ -51,8 +51,8 @@
 
                     {% if user.is_authenticated and not nobuttons %}
                     <p>
-                        <a href="{% url 'oneliners.views.oneliner_alternative' oneliner.pk %}" class="btn">Post an alternative one-liner</a>
-                        <a href="{% url 'oneliners.views.oneliner_comment' oneliner.pk %}" class="btn"><i class="icon-comment"></i> Post a comment on this one-liner</a>
+                        <a href="{% url 'oneliners.views.oneliner_alternative' oneliner.pk %}" class="btn btn-default">Post an alternative one-liner</a>
+                        <a href="{% url 'oneliners.views.oneliner_comment' oneliner.pk %}" class="btn btn-default"><i class="glyphicon glyphtoicon-comment"></i> Post a comment on this one-liner</a>
                     </p>
                     {% endif %}
 
@@ -66,7 +66,7 @@
                         <div class="well comments {{ comments_expanded }}">
                         {% render_comment_list for oneliner %}
                         {% if user.is_authenticated and not nobuttons %}
-                        <p><a href="{% url 'oneliners.views.oneliner_comment' oneliner.pk %}" class="btn"><i class="icon-comment"></i> Post a comment on this one-liner</a></p>
+                        <p><a href="{% url 'oneliners.views.oneliner_comment' oneliner.pk %}" class="btn btn-default"><i class="glyphicon glyphicon-comment"></i> Post a comment on this one-liner</a></p>
                         {% endif %}
                         </div>
                     </div>

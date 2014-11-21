@@ -4,6 +4,27 @@ https://trello.com/board/main/4e7da3cf5a94680b35000893
 
 next
 ----
+- migrate to bs3
+    - review static/css/bashoneliners.css
+    - review templates/html5.html
+    - fix all button styles
+    - fix all glyphs
+    - change login / logout to not use <p> which breaks strangely on mid-size
+    - make footer full width
+    - fix input fields when posting one-liner
+        - summary
+        - oneliner
+        - explanation
+        - limitations
+        - buttons
+    - fix input when posting comment
+        - text
+        - buttons
+    - fix search form http://localhost:8000/oneliners/search/?query=mvn
+        - input box
+        - checkboxes too tightly packed
+    - fix input on edit profile page
+- remove tabs from all template files -> use PyCharm reformat
 - strip trailing whitespace and ; from oneliners
 - change RSS in navbar to Follow, and update the feeds page
     - mailing list

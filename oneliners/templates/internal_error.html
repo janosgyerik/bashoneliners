@@ -6,47 +6,55 @@
 
 {% block content %}
 
-<div class="alert alert-error">
-    <p>OUCH! That... really... HURT!</p>
-    <p>Let me guess: you were using the site as usual,
-    doing things that normally work fine,
-    and BANG!!!...suddenly *this* page comes in your face. Right?</p>
-    <p>The good news is that you can probably just hit the reload button,
-    and hopefully whatever you were trying to do earlier,
-    this time it will work as usual.</p>
-    <p>The BAD news is that this kind of crash tends to happen...
-    It's because this site is on a relatively low-budget shared hosting plan
-    at <a href="http://www.dreamhost.com/r.cgi?455568">DreamHost</a>, 
-    and the thing is their *Process Watcher* occasionally kills
-    processes if the used memory or CPU exceeds some quota of our account.
-    Even though, the truth is, we're really not using
-    all that much memory, but well, apparently, it's just
-    that we're using too much for our current subscription.</p>
-    <p>The solution is simple: we should upgrade our
-    subscription to *private hosting*, that way
-    our processes will never get shot down just randomly.
-    We cannot afford this yet, but we're working on that,
-    by trying to become profitable by making this site really great,
-    and by collecting donations.</p>
-    <p>If you would like to help us,
-    you can donate to our hosting bills on
-    <a href="http://www.dreamhost.com/donate.cgi?id=15533">this page</a>.
-    Money donated here can only be used to pay for our hosting bills,
-    such as the regular bills and upgrades to improved services.
-    We cannot withdraw this money in cash and party it away.
-    Another way to help us is by <a href="{% url 'oneliners.views.sourcecode' %}">joining the project</a> and
-    make it hugely popular and profitable together
-    so that we don't need to worry about petty hosting bills...</p>
-    <p>If you need more info or explanation,
-    you can get in touch with us here:
-    <a href="mailto:bashoneliners@googlegroups.com">bashoneliners@googlegroups.com</a></p>
-    <p>And now, to continue whatever you were doing,
-    try to simply reload the page,
-    and hopefully it will *just work* this time.</p>
-    <p>Thanks, and, well, sorry,
-    but this is the best we can offer at the moment...</p>
-</div>
+    <div class="alert alert-error">
+        <p>OUCH! That... really... HURT!</p>
 
-<p><a href="/">Back to the main page.</a></p>
+        <p>Let me guess: you were using the site as usual,
+            doing things that normally work fine,
+            and BANG!!!...suddenly *this* page comes in your face. Right?</p>
+
+        <p>The good news is that you can probably just hit the reload button,
+            and hopefully whatever you were trying to do earlier,
+            this time it will work as usual.</p>
+
+        <p>The BAD news is that this kind of crash tends to happen...
+            It's because this site is on a relatively low-budget shared hosting plan
+            at <a href="http://www.dreamhost.com/r.cgi?455568">DreamHost</a>,
+            and the thing is their *Process Watcher* occasionally kills
+            processes if the used memory or CPU exceeds some quota of our account.
+            Even though, the truth is, we're really not using
+            all that much memory, but well, apparently, it's just
+            that we're using too much for our current subscription.</p>
+
+        <p>The solution is simple: we should upgrade our
+            subscription to *private hosting*, that way
+            our processes will never get shot down just randomly.
+            We cannot afford this yet, but we're working on that,
+            by trying to become profitable by making this site really great,
+            and by collecting donations.</p>
+
+        <p>If you would like to help us,
+            you can donate to our hosting bills on
+            <a href="http://www.dreamhost.com/donate.cgi?id=15533">this page</a>.
+            Money donated here can only be used to pay for our hosting bills,
+            such as the regular bills and upgrades to improved services.
+            We cannot withdraw this money in cash and party it away.
+            Another way to help us is by <a href="{% url 'oneliners.views.sourcecode' %}">joining the project</a> and
+            make it hugely popular and profitable together
+            so that we don't need to worry about petty hosting bills...</p>
+
+        <p>If you need more info or explanation,
+            you can get in touch with us here:
+            <a href="mailto:bashoneliners@googlegroups.com">bashoneliners@googlegroups.com</a></p>
+
+        <p>And now, to continue whatever you were doing,
+            try to simply reload the page,
+            and hopefully it will *just work* this time.</p>
+
+        <p>Thanks, and, well, sorry,
+            but this is the best we can offer at the moment...</p>
+    </div>
+
+    <p><a href="/">Back to the main page.</a></p>
 
 {% endblock %}

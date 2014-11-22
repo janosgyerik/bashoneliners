@@ -6,16 +6,18 @@
 
 {% block content %}
 
-<div class="alert alert-error">
-    <p>The page you are trying to reach does not exist (404).</p>
-    <p>Path: <strong>{{ request_path }}</strong></p>
-    <p>If you think this is some kind of error, 
-    please drop us an email at
-    <a href="mailto:bashoneliners@googlegroups.com">bashoneliners@googlegroups.com</a>,
-    along with anything you might have done that may have caused the error.
-    </p>
-</div>
+    <div class="alert alert-error">
+        <p>The page you are trying to reach does not exist (404).</p>
 
-<p><a href="/">Back to the main page.</a></p>
+        <p>Path: <strong>{{ request_path }}</strong></p>
+
+        <p>If you think this is some kind of error,
+            please drop us an email at
+            <a href="mailto:bashoneliners@googlegroups.com">bashoneliners@googlegroups.com</a>,
+            along with anything you might have done that may have caused the error.
+        </p>
+    </div>
+
+    <p><a href="/">Back to the main page.</a></p>
 
 {% endblock %}

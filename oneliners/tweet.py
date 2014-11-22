@@ -1,7 +1,7 @@
 # a simple module to tweet a message, using configuration from settings
 #
 # To access twitter via OAuth, you need to first obtain:
-#    consumer key, consumer secret, access token, access token secret
+# consumer key, consumer secret, access token, access token secret
 #
 # 1. Login to Twitter
 # 2. Go to https://dev.twitter.com/apps/new and fill the form
@@ -11,14 +11,17 @@
 # 4. Access token and secret are in the My Access Token menu
 #
 
-from django.conf import settings
 from logging import getLogger
+
+from django.conf import settings
+
 
 logger = getLogger(__name__)
 
 have_tweepy = False
 try:
     import tweepy
+
     have_tweepy = True
 except ImportError:
     logger.warn('Could not import tweepy. Will not be able to tweet.')
@@ -33,7 +36,7 @@ try:
 except AttributeError:
     logger.warn('settings.TWITTER is missing. Will not be able to authenticate to Twitter.')
 # except TypeError:
-    # logger.warn('settings.TWITTER is missing. Will not be able to authenticate to Twitter.')
+# logger.warn('settings.TWITTER is missing. Will not be able to authenticate to Twitter.')
 except KeyError, key:
     logger.warn('settings.TWITTER[%s] is missing. Will not be able to authenticate to Twitter.', key)
 

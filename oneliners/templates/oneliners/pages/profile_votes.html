@@ -2,12 +2,12 @@
 
 {% block profiletab %}
 
-{% with 'active' as active_votes %}
-    {% include 'oneliners/elements/profile_nav.html' %}
-{% endwith %}
+    {% with 'active' as active_votes %}
+        {% include 'oneliners/elements/profile_nav.html' %}
+    {% endwith %}
 
-<h2 class="page-header">Votes</h2>
+    <h2 class="page-header">Votes</h2>
 
-{% include 'oneliners/elements/oneliners.html' %}
+    {% include 'oneliners/elements/oneliners.html' %}
 
 {% endblock %}

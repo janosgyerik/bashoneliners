@@ -1,7 +1,7 @@
 ////////////////////////////////////////////////////////////////
 // jQuery.ajaxSend patch to send X-CSRFToken on all AJAX POST //
 ////////////////////////////////////////////////////////////////
-$(document).ajaxSend(function(event, xhr, settings) {
+$(document).ajaxSend(function (event, xhr, settings) {
     function getCookie(name) {
         var cookieValue = null;
         if (document.cookie && document.cookie != '') {
@@ -17,6 +17,7 @@ $(document).ajaxSend(function(event, xhr, settings) {
         }
         return cookieValue;
     }
+
     function sameOrigin(url) {
         // url could be relative or scheme relative or absolute
         var host = document.location.host; // host + port
@@ -29,6 +30,7 @@ $(document).ajaxSend(function(event, xhr, settings) {
             // or any other URL that isn't scheme relative or absolute i.e relative.
             !(/^(\/\/|http:|https:).*/.test(url));
     }
+
     function safeMethod(method) {
         return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
     }

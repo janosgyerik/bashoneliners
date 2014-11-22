@@ -5,14 +5,14 @@
 
 {% block content %}
 
-{% if comments %}
+    {% if comments %}
 
-{% for comment in comments %}
-{% include 'oneliners/elements/comment.html' %}
-{% endfor %}
+        {% for comment in comments %}
+            {% include 'oneliners/elements/comment.html' %}
+        {% endfor %}
 
-{% else %}
-<div class="alert">No matching comments.</div>
-{% endif %}
+    {% else %}
+        <div class="alert">No matching comments.</div>
+    {% endif %}
 
 {% endblock %}

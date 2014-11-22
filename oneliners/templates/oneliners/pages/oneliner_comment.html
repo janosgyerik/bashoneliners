@@ -10,39 +10,40 @@
 
 {% block content %}
 
-{% with 1 as nobuttons %}
-    {% with 'expanded' as comments_expanded %}
-        {% with oneliner.score as score %}
-            {% include 'oneliners/elements/oneliner.html' %}
+    {% with 1 as nobuttons %}
+        {% with 'expanded' as comments_expanded %}
+            {% with oneliner.score as score %}
+                {% include 'oneliners/elements/oneliner.html' %}
+            {% endwith %}
         {% endwith %}
     {% endwith %}
-{% endwith %}
 
-{% include 'oneliners/elements/please_login.html' %}
+    {% include 'oneliners/elements/please_login.html' %}
 
-<form action="" method="post">{% csrf_token %}
-    {{ form.honeypot.as_hidden }}
-    {{ form.content_type.as_hidden }}
-    {{ form.object_pk.as_hidden }}
-    {{ form.timestamp.as_hidden }}
-    {{ form.security_hash.as_hidden }}
-    <div class="non-field-errors">{{ form.non_field_errors }}</div>
-    <h3>Comment<span class="required">*</span></h3>
-    <div class="help-block"></div>
-    <div class="input">
-	<div class="error">{{ form.comment.errors }}</div>
-	<div class="comment">{{ form.comment }}</div>
-    </div>
-    
-    <div class="form-actions">
-	{% include 'oneliners/elements/please_login.html' %}
-	<button class="btn btn-primary" type="submit" name="submit" value="Post">Post</button>
-	<button class="btn btn-default"><a href="{{ cancel_url }}">Cancel</a></button>
-    </div>
-</form>
+    <form action="" method="post">{% csrf_token %}
+        {{ form.honeypot.as_hidden }}
+        {{ form.content_type.as_hidden }}
+        {{ form.object_pk.as_hidden }}
+        {{ form.timestamp.as_hidden }}
+        {{ form.security_hash.as_hidden }}
+        <div class="non-field-errors">{{ form.non_field_errors }}</div>
+        <h3>Comment<span class="required">*</span></h3>
+
+        <div class="help-block"></div>
+        <div class="input">
+            <div class="error">{{ form.comment.errors }}</div>
+            <div class="comment">{{ form.comment }}</div>
+        </div>
+
+        <div class="form-actions">
+            {% include 'oneliners/elements/please_login.html' %}
+            <button class="btn btn-primary" type="submit" name="submit" value="Post">Post</button>
+            <button class="btn btn-default"><a href="{{ cancel_url }}">Cancel</a></button>
+        </div>
+    </form>
 
 {% endblock %}
 
 {% block ready %}
-	$('#id_comment').focus();
+    $('#id_comment').focus();
 {% endblock %}

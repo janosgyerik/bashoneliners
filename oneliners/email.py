@@ -12,12 +12,12 @@ BCC_EMAIL = FROM_EMAIL
 
 def send_email(subject, message, *recipients):
     email = EmailMessage(
-            subject=subject,
-            body=message,
-            from_email=FROM_EMAIL,
-            to=recipients,
-            bcc=[BCC_EMAIL],
-            )
+        subject=subject,
+        body=message,
+        from_email=FROM_EMAIL,
+        to=recipients,
+        bcc=[BCC_EMAIL],
+    )
     email.send(fail_silently=False)
 
 
@@ -32,58 +32,59 @@ def send_email_template(subject_template, subject_context, message_template, mes
 def send_oneliner_answer(question, oneliner):
     if question.user.email:
         send_email_template(
-                'email/answer-sub.txt', {'question': question, },
-                'email/answer-msg.txt', {
-                    'question': question,
-                    'oneliner': oneliner,
-                    },
-                question.user.email
-                )
+            'email/answer-sub.txt', {'question': question, },
+            'email/answer-msg.txt', {
+                'question': question,
+                'oneliner': oneliner,
+            },
+            question.user.email
+        )
 
 
 def send_oneliner_alternative(oneliner, new_oneliner):
     if oneliner.user.email:
         send_email_template(
-                'email/alternative-sub.txt', {'oneliner': oneliner, },
-                'email/alternative-msg.txt', {
-                    'oneliner': oneliner,
-                    'new_oneliner': new_oneliner,
-                    },
-                oneliner.user.email
-                )
+            'email/alternative-sub.txt', {'oneliner': oneliner, },
+            'email/alternative-msg.txt', {
+                'oneliner': oneliner,
+                'new_oneliner': new_oneliner,
+            },
+            oneliner.user.email
+        )
 
 
 def send_oneliner_comment(oneliner, sender, comment):
     if oneliner.user.email:
         send_email_template(
-                'email/comment-sub.txt', {'oneliner': oneliner, },
-                'email/comment-msg.txt', {
-                    'oneliner': oneliner,
-                    'sender': sender,
-                    'comment': comment,
-                    },
-                oneliner.user.email
-                )
+            'email/comment-sub.txt', {'oneliner': oneliner, },
+            'email/comment-msg.txt', {
+                'oneliner': oneliner,
+                'sender': sender,
+                'comment': comment,
+            },
+            oneliner.user.email
+        )
 
 
 class CustomFileEmailBackend(BaseEmailBackend):
     def send_messages(self, email_messages):
         from django.utils.timezone import now
         import re
+
         if not email_messages:
             return
         try:
             f = open(settings.EMAIL_FILE_PATH, 'a')
             for message in email_messages:
                 context = {
-                        'subject': message.subject,
-                        'from_email': message.from_email,
-                        'recipients': ', '.join(message.recipients()),
-                        'to': ', '.join(message.to),
-                        'bcc': ', '.join(message.bcc),
-                        'body': message.body,
-                        'date': now(),
-                        }
+                    'subject': message.subject,
+                    'from_email': message.from_email,
+                    'recipients': ', '.join(message.recipients()),
+                    'to': ', '.join(message.to),
+                    'bcc': ', '.join(message.bcc),
+                    'body': message.body,
+                    'date': now(),
+                }
                 log = loader.get_template('email/log.txt').render(Context(context))
                 log = re.sub(r'\n{3,}', '\n\n', log)
                 f.write(log)

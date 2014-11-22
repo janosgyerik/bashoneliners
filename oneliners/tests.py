@@ -51,11 +51,11 @@ class EditOneLinerTests(TestCase):
     def test_save_own_success(self):
         oneliner0 = self.jacks_oneliner
         data = {
-                'summary': oneliner0.summary,
-                'line': oneliner0.line,
-                'explanation': oneliner0.explanation,
-                'action': EditOneLinerForm.action_save,
-                }
+            'summary': oneliner0.summary,
+            'line': oneliner0.line,
+            'explanation': oneliner0.explanation,
+            'action': EditOneLinerForm.action_save,
+        }
         new_summary = oneliner0.summary + ' some change'
         data['summary'] = new_summary
 
@@ -69,10 +69,10 @@ class EditOneLinerTests(TestCase):
     def test_save_own_failure(self):
         oneliner0 = self.jacks_oneliner
         data = {
-                'summary': oneliner0.summary,
-                'line': oneliner0.line,
-                'action': EditOneLinerForm.action_save,
-                }
+            'summary': oneliner0.summary,
+            'line': oneliner0.line,
+            'action': EditOneLinerForm.action_save,
+        }
         new_summary = oneliner0.summary + ' some change'
         data['summary'] = new_summary
 
@@ -86,11 +86,11 @@ class EditOneLinerTests(TestCase):
     def test_save_notown_failure(self):
         oneliner0 = self.jacks_oneliner
         data = {
-                'summary': oneliner0.summary,
-                'line': oneliner0.line,
-                'explanation': oneliner0.explanation,
-                'action': EditOneLinerForm.action_save,
-                }
+            'summary': oneliner0.summary,
+            'line': oneliner0.line,
+            'explanation': oneliner0.explanation,
+            'action': EditOneLinerForm.action_save,
+        }
 
         form = EditOneLinerForm(self.frank, data, instance=self.jacks_oneliner)
         self.assertFalse(form.is_valid())
@@ -195,11 +195,11 @@ class SearchTests(TestCase):
 
     def get_form(self, data):
         initial = {
-                'match_summary': True,
-                'match_line': True,
-                'match_explanation': True,
-                'match_limitations': True,
-                }
+            'match_summary': True,
+            'match_line': True,
+            'match_explanation': True,
+            'match_limitations': True,
+        }
         initial.update(data)
         form = SearchOneLinerForm(data=initial)
         self.assertTrue(form.is_valid())
@@ -359,7 +359,8 @@ class TagTests(TestCase):
 
         line = '''MAX=$(NUM=1;cat author.xml |perl -p -e 's/(Times Cited)/\n$1/g'|grep "Times Cited" |perl -p -e 's/^Times Cited:([0-9]*).*$/$1/g'|sort -nr | while read LINE; do if [ $LINE -ge $NUM ]; then echo "$NUM"; fi; NUM=$[$NUM+1]; done;); echo "$MAX"|tail -1'''
         oneliner = Util.new_oneliner(user, line)
-        self.assertItemsEqual((u'sort', u'do', u'grep', u'then', u'read', u'tail', u'perl', u'while', u'done', u'echo', u'fi', u'cat', u'if'), oneliner.get_tags())
+        self.assertItemsEqual((u'sort', u'do', u'grep', u'then', u'read', u'tail', u'perl', u'while', u'done', u'echo',
+                               u'fi', u'cat', u'if'), oneliner.get_tags())
 
     def test_tag_cloud(self):
         user = Util.new_user('jack')

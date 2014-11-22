@@ -1,97 +1,95 @@
 /* Begin Various Tags */
 
-    body {
-        color: black;
-        margin: 0;
-        padding: 0;
-        border: 0;
-    }
+body {
+    color: black;
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
 
-    acronym, abbr {
-        cursor: help;
-    }
+acronym, abbr {
+    cursor: help;
+}
 
-    img {
-        border: none;
-        vertical-align: middle;
-    }
+img {
+    border: none;
+    vertical-align: middle;
+}
 
-    dt {
-        font-weight: bold;
-    }
+dt {
+    font-weight: bold;
+}
 
 /* End Various Tags */
 
-
 /* Begin Images */
 
-    img.centered {
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
-    }
+img.centered {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
 
-    img.alignright {
-        padding: 4px;
-        margin: 0 0 2px 7px;
-        display: inline;
-    }
+img.alignright {
+    padding: 4px;
+    margin: 0 0 2px 7px;
+    display: inline;
+}
 
-    img.alignleft {
-        padding: 4px;
-        margin: 0 7px 2px 0;
-        display: inline;
-    }
+img.alignleft {
+    padding: 4px;
+    margin: 0 7px 2px 0;
+    display: inline;
+}
 
 /* End Images */
 
-
 /* Begin Utility Classes */
 
-    .floatleft {
-        float: left;
-        margin-right: 1em;
-    }
+.floatleft {
+    float: left;
+    margin-right: 1em;
+}
 
-    .floatright {
-        float: right;
-        margin-left: 1em;
-    }
+.floatright {
+    float: right;
+    margin-left: 1em;
+}
 
-    .alignright {
-        text-align: right;
-    }
+.alignright {
+    text-align: right;
+}
 
-    .center {
-        text-align: center;
-    }
+.center {
+    text-align: center;
+}
 
-    .clear {
-        clear: both;
-    }
+.clear {
+    clear: both;
+}
 
-    .hidden {
-        display: none;
-    }
-            
-    .invisible {
-        visibility: hidden;
-    }
-            
-    .screen-reader-text {
-        position: absolute;
-        left: -1000em;
-    }
+.hidden {
+    display: none;
+}
 
-    .validators {
-        text-align: center;
-    }
-    .validators a {
-        margin-left: .5em;
-    }
+.invisible {
+    visibility: hidden;
+}
+
+.screen-reader-text {
+    position: absolute;
+    left: -1000em;
+}
+
+.validators {
+    text-align: center;
+}
+
+.validators a {
+    margin-left: .5em;
+}
 
 /* End Utility Classes */
-
 
 body {
     padding-top: 40px; /* Twitter bootstrap */
@@ -110,6 +108,7 @@ table.oneliner {
 .oneliner .line {
     background: #ddd;
 }
+
 .oneliner .line .add-on {
     color: #253;
     padding-right: .5em;
@@ -171,6 +170,7 @@ table.profile {
 .related .well {
     background: #dff0d8;
 }
+
 .related .well .summary {
     color: #468847;
 }
@@ -182,18 +182,22 @@ table.profile {
 .comments-toggle {
     cursor: pointer;
 }
+
 .comments-toggle img {
     background: url(/static/images/arrows.png) no-repeat center;
     background-position: 0px -81px;
     height: 26px;
     padding: 3px;
 }
+
 .comments-toggle.expanded img {
     background-position: 0px -54px;
 }
+
 .comments {
     display: none;
 }
+
 .comments.expanded {
     display: inherit;
 }
@@ -219,6 +223,7 @@ dl.mission dt {
     font-variant: small-caps;
     text-transform: uppercase;
 }
+
 dl.mission dd {
     margin-bottom: .5em;
     margin-left: 2em;
@@ -227,6 +232,7 @@ dl.mission dd {
 dl.rss a:hover {
     text-decoration: none;
 }
+
 dl.rss dd {
     margin-bottom: .5em;
     margin-left: 2em;
@@ -246,7 +252,6 @@ h1 a.btn {
     margin-left: 1em;
 }
 
-
 /* markdown preview */
 
 .preview {
@@ -262,18 +267,15 @@ h1 a.btn {
     overflow: auto;
 }
 
-
 /* voting */
 
 div.upvote {
 }
-
 
 /* overriding bootstrap */
 
 pre code {
     border: 0;
 }
-
 
 /* eof */

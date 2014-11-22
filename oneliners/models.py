@@ -1,3 +1,6 @@
+import random
+import string
+
 from django.db import models
 from django.db.models import Count, Q, Sum
 from django.db.models.signals import post_save
@@ -5,17 +8,14 @@ from django.contrib.auth.models import User
 from django.contrib.comments.models import Comment
 from django.dispatch import receiver
 from django.utils.timezone import now
-
-import random
-import string
 import re
+
 
 ''' Constants '''
 
 RECENT_LIMIT = 25
 SEARCH_LIMIT = 25
 FEED_LIMIT = 10
-
 
 ''' Helper methods '''
 
@@ -42,6 +42,7 @@ def create_user_profile(sender, instance, created, **kwargs):
             HackerProfile.objects.get_or_create(user=instance)
         except HackerProfile.DoesNotExist:
             pass
+
 
 post_save.connect(create_user_profile, sender=User)
 
@@ -111,7 +112,8 @@ class OneLiner(models.Model):
         return self.answer_set.filter(question__is_published=True)
 
     def alternatives(self):
-        return self.alternativeoneliner_set.filter(alternative__is_published=True).annotate(score=Sum('alternative__vote__value'))
+        return self.alternativeoneliner_set.filter(alternative__is_published=True).annotate(
+            score=Sum('alternative__vote__value'))
 
     def add_alternative(self, alternative):
         AlternativeOneLiner(alternative=alternative, oneliner=self).save()
@@ -133,7 +135,8 @@ class OneLiner(models.Model):
 
     @staticmethod
     def filter_by_tag(tagname, order_by=None, limit=RECENT_LIMIT):
-        query = OneLiner.objects.filter(is_published=True).annotate(score=Sum('vote__value')).filter(onelinertag__tag__text=tagname)
+        query = OneLiner.objects.filter(is_published=True).annotate(score=Sum('vote__value')).filter(
+            onelinertag__tag__text=tagname)
         if order_by:
             query = query.order_by(order_by, '-id')
         return query[:limit]
@@ -175,10 +178,12 @@ class OneLiner(models.Model):
                 qq &= Q(sub_qq)
 
         if len(qq.children) > 0:
-            results = OneLiner.objects.filter(is_published=True).annotate(score=Sum('vote__value')).filter(qq).order_by('-score', '-id')
+            results = OneLiner.objects.filter(is_published=True).annotate(score=Sum('vote__value')).filter(qq).order_by(
+                '-score', '-id')
 
             if match_whole_words:
-                results = [x for x in results if x.matches_words(terms, match_summary, match_line, match_explanation, match_limitations)]
+                results = [x for x in results if
+                           x.matches_words(terms, match_summary, match_line, match_explanation, match_limitations)]
 
             return results[:limit]
         else:
@@ -248,7 +253,8 @@ class Tag(models.Model):
 
     @staticmethod
     def tagcloud():
-        return Tag.objects.annotate(count=Count('onelinertag')).filter(count__gt=1).order_by('-count').values('text', 'count')
+        return Tag.objects.annotate(count=Count('onelinertag')).filter(count__gt=1).order_by('-count').values('text',
+                                                                                                              'count')
         # return Tag.objects.annotate(count=Count('onelinertag')).order_by('-count').values_list('text', 'count')
 
 

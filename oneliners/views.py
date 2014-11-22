@@ -8,9 +8,9 @@ from django.core.urlresolvers import reverse
 from django.shortcuts import render_to_response, redirect
 from django.template import RequestContext
 from django.db.models import Sum
-
 from oneliners.models import OneLiner, User, Comment_recent, Tag, Question
-from oneliners.forms import EditHackerProfileForm, PostOneLinerForm, PostCommentOnOneLinerForm, PostQuestionForm, EditQuestionForm, SearchOneLinerForm, EditOneLinerForm
+from oneliners.forms import EditHackerProfileForm, PostOneLinerForm, PostCommentOnOneLinerForm, PostQuestionForm, \
+    EditQuestionForm, SearchOneLinerForm, EditOneLinerForm
 
 
 # decorators
@@ -25,7 +25,9 @@ def render_with_context(custom_params=False):
                 params = _common_params(request)
                 template_path = view_method(request, *args, **kwargs)
             return render_to_response(template_path, params, context_instance=RequestContext(request))
+
         return wraps(view_method)(_decorator)
+
     return _inner
 
 
@@ -42,22 +44,22 @@ def _common_params(request):
             searchform = SearchOneLinerForm(request.GET)
         else:
             data = {
-                    'match_whole_words': False,
-                    'match_summary': True,
-                    'match_line': True,
-                    'match_explanation': True,
-                    'match_limitations': True,
-                    'query': request.GET.get('query'),
-                    }
+                'match_whole_words': False,
+                'match_summary': True,
+                'match_line': True,
+                'match_explanation': True,
+                'match_limitations': True,
+                'query': request.GET.get('query'),
+            }
             searchform = SearchOneLinerForm(data)
     else:
         searchform = SearchOneLinerForm()
 
     params = {
-            'user': request.user,
-            'searchform': searchform,
-            'SERVER_NAME': request.META['SERVER_NAME'],
-            }
+        'user': request.user,
+        'searchform': searchform,
+        'SERVER_NAME': request.META['SERVER_NAME'],
+    }
 
     return params
 
@@ -65,17 +67,19 @@ def _common_params(request):
 def format_tweet(oneliner, baseurl):
     long_url = baseurl + oneliner.get_absolute_url()
     from oneliners.shorturl import get_goo_gl
+
     url = get_goo_gl(long_url) or long_url
     message = '%s %s' % (
-            url,
-            oneliner.line,
-            )
+        url,
+        oneliner.line,
+    )
     return message
 
 
 def tweet(oneliner, baseurl, force=False, test=False):
     if not oneliner.was_tweeted or force:
         from oneliners.tweet import tweet as send_tweet
+
         message = format_tweet(oneliner, baseurl)
         result = send_tweet(message, test=test)
         if result:

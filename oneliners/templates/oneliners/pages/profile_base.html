@@ -4,14 +4,14 @@
 
 {% block pageheader %}{{ hacker.hackerprofile.get_display_name|default:'Anonymous' }}
     {% if user == hacker %}
-    <a href="{% url 'oneliners.views.profile_edit' %}" class="btn btn-primary pull-right">Edit your profile</a>
+        <a href="{% url 'oneliners.views.profile_edit' %}" class="btn btn-primary pull-right">Edit your profile</a>
     {% endif %}
 {% endblock %}
 
 {% block content %}
 
-<table class="profile table table-bordered">
-    <tbody>
+    <table class="profile table table-bordered">
+        <tbody>
         <tr>
             <th>Twitter</th>
             <td>{{ hacker.hackerprofile.twitter_url|default:'(not set)'|urlize }}</td>
@@ -24,12 +24,12 @@
             <th>Website</th>
             <td>{{ hacker.hackerprofile.homepage_url|default:'(not set)'|urlize }}</td>
         </tr>
-    </tbody>
-</table>
+        </tbody>
+    </table>
 
-<br clear="all"/>
+    <br clear="all"/>
 
-{% block profiletab %}
-{% endblock %}
+    {% block profiletab %}
+    {% endblock %}
 
 {% endblock %}

@@ -1,12 +1,14 @@
 {% load markup %}
 {% for comment in comment_list %}
-<div class="comment">
-<blockquote>
-    {{ comment.comment|markdown:"safe" }}
-    <small>
-	by <a href="{% url 'oneliners.views.profile' comment.user.pk %}"><span>{{ comment.user.hackerprofile.get_display_name }}</span> </a>
-	on <span>{{ comment.submit_date }}</span>
-    </small>
-</blockquote>
-</div>
+    <div class="comment">
+        <blockquote>
+            {{ comment.comment|markdown:"safe" }}
+            <small>
+                by <a
+                    href="{% url 'oneliners.views.profile' comment.user.pk %}"><span>{{ comment.user.hackerprofile.get_display_name }}</span>
+            </a>
+                on <span>{{ comment.submit_date }}</span>
+            </small>
+        </blockquote>
+    </div>
 {% endfor %}

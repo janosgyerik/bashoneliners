@@ -6,65 +6,77 @@
 
 {% block navbar %}
 
-<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-    <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
-                    aria-expanded="false" aria-controls="navbar">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="/">Bash One-Liners</a>
-        </div>
+    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                        aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">Bash One-Liners</a>
+            </div>
 
-        <div id="navbar" class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
-                {% if user.is_superuser %}
-                    <li><a href="/admin/">Admin</a></li>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    {% if user.is_superuser %}
+                        <li><a href="/admin/">Admin</a></li>
+                    {% endif %}
+                    <li><a href="{% url 'oneliners_default' %}">One-Liners</a></li>
+                    {% if user.is_authenticated %}
+                        <li><a href="{% url 'oneliners.views.oneliner_new' %}">Post</a></li>
+                    {% endif %}
+                    <li><a href="{% url 'oneliners.views.sourcecode' %}">Source</a></li>
+                    <li><a href="{% url 'oneliners.feeds.oneliner' %}"><span class="label label-info">RSS</span></a>
+                    </li>
+                </ul>
+
+                {% if searchform %}
+                    <form class="navbar-form navbar-left" role="form" method="get"
+                          action="{% url 'oneliners.views.search' %}">
+                        <input name="query" maxlength="100" placeholder="Search" type="text"
+                               class="form-control search-query" id="id_query"/>
+                    </form>
                 {% endif %}
-                <li><a href="{% url 'oneliners_default' %}">One-Liners</a></li>
+
                 {% if user.is_authenticated %}
-                    <li><a href="{% url 'oneliners.views.oneliner_new' %}">Post</a></li>
+                    <p class="navbar-text pull-right"><a
+                            href="{% url 'oneliners.views.profile' %}">{{ user.hackerprofile.get_display_name }}</a>&mdash;<a
+                            href="{% url 'oneliners.views.logout' %}">Logout</a></p>
+                {% else %}
+                    <p class="navbar-text pull-right"><a href="{% url 'oneliners.views.login' %}">Login</a></p>
                 {% endif %}
-                <li><a href="{% url 'oneliners.views.sourcecode' %}">Source</a></li>
-                <li><a href="{% url 'oneliners.feeds.oneliner' %}"><span class="label label-info">RSS</span></a></li>
-            </ul>
-
-            {% if searchform %}
-                <form class="navbar-form navbar-left" role="form" method="get" action="{% url 'oneliners.views.search' %}">
-                    <input name="query" maxlength="100" placeholder="Search" type="text" class="form-control search-query" id="id_query" />
-                </form>
-            {% endif %}
-
-            {% if user.is_authenticated %}
-                <p class="navbar-text pull-right"><a href="{% url 'oneliners.views.profile' %}">{{ user.hackerprofile.get_display_name }}</a>&mdash;<a href="{% url 'oneliners.views.logout' %}">Logout</a></p>
-            {% else %}
-                <p class="navbar-text pull-right"><a href="{% url 'oneliners.views.login' %}">Login</a></p>
-            {% endif %}
+            </div>
         </div>
     </div>
-</div>
 
 {% endblock %}
 
 {% block main %}
 
-<div class="page-header"><h1>{% block pageheader %}{% endblock %}</h1></div>
+    <div class="page-header"><h1>{% block pageheader %}{% endblock %}</h1></div>
 
-{% block content %}{% endblock %}
+    {% block content %}{% endblock %}
 
 {% endblock main %}
 
 {% block footer %}
     <div class="container-fluid">
-        <p class="validators"> 
-            <a href="http://wiki.dreamhost.com/index.php/DHSOTM#2012_Winners"><img alt="DreamHost Site of the Month for March!" src="{% static 'images/dhsotm2.gif' %}" /></a> 
-            <a href="http://www.dreamhost.com/r.cgi?455568"><img alt="This site hosted by DreamHost. Unlimited storage and bandwidth for only $8.95" src="{% static 'images/dreamhost.gif' %}" /></a> 
-            <a href="http://www.dreamhost.com/donate.cgi?id=15533"><img style="border: 0" alt="Donate towards my web hosting bill!" src="{% static 'images/hosting.gif' %}" /></a>
-            <a href="http://www.dreamhost.com/green.cgi"><img alt="Green Web Hosting! This site hosted by DreamHost." src="{% static 'images/green1.gif' %}" height="31" /></a> 
-            <a href="http://validator.w3.org/check?uri=referer"><img src="{% static 'images/valid-xhtml10.png' %}" alt="Valid HTML5" /></a> 
-        </p> 
+        <p class="validators">
+            <a href="http://wiki.dreamhost.com/index.php/DHSOTM#2012_Winners"><img
+                    alt="DreamHost Site of the Month for March!" src="{% static 'images/dhsotm2.gif' %}"/></a>
+            <a href="http://www.dreamhost.com/r.cgi?455568"><img
+                    alt="This site hosted by DreamHost. Unlimited storage and bandwidth for only $8.95"
+                    src="{% static 'images/dreamhost.gif' %}"/></a>
+            <a href="http://www.dreamhost.com/donate.cgi?id=15533"><img style="border: 0"
+                                                                        alt="Donate towards my web hosting bill!"
+                                                                        src="{% static 'images/hosting.gif' %}"/></a>
+            <a href="http://www.dreamhost.com/green.cgi"><img alt="Green Web Hosting! This site hosted by DreamHost."
+                                                              src="{% static 'images/green1.gif' %}" height="31"/></a>
+            <a href="http://validator.w3.org/check?uri=referer"><img src="{% static 'images/valid-xhtml10.png' %}"
+                                                                     alt="Valid HTML5"/></a>
+        </p>
     </div>
 {% endblock %}

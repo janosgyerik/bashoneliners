@@ -1,21 +1,24 @@
 {% load markup %}
 {% with obj as oneliner %}
-        <pre>{{ oneliner.line }}</pre>
+    <pre>{{ oneliner.line }}</pre>
 
-        <p><small>
-        &mdash; by <a href="{% url 'oneliners.views.profile' oneliner.user.pk %}">{{ oneliner.user.hackerprofile.get_display_name }}</a>
+    <p>
+        <small>
+            &mdash; by <a
+                href="{% url 'oneliners.views.profile' oneliner.user.pk %}">{{ oneliner.user.hackerprofile.get_display_name }}</a>
             on {{ oneliner.created_dt }}
-        </small></p>
+        </small>
+    </p>
 
-        <div class="explanation">
-            <h4>Explanation</h4>
-            {{ oneliner.explanation|markdown:"safe"|linebreaks }}
-        </div>
+    <div class="explanation">
+        <h4>Explanation</h4>
+        {{ oneliner.explanation|markdown:"safe"|linebreaks }}
+    </div>
 
-        {% if oneliner.limitations %}
+    {% if oneliner.limitations %}
         <div class="limitations">
             <h4>Limitations</h4>
             {{ oneliner.limitations|markdown:"safe"|linebreaks }}
         </div>
-        {% endif %}
+    {% endif %}
 {% endwith %}

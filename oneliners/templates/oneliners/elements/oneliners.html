@@ -4,8 +4,8 @@
             {% include 'oneliners/elements/oneliner_with_related.html' %}
         {% endwith %}
     {% empty %}
-    {% block oneliners_empty %}
-    <div class="alert alert-block">No matching one-liners.</div>
-    {% endblock %}
+        {% block oneliners_empty %}
+            <div class="alert alert-block">No matching one-liners.</div>
+        {% endblock %}
     {% endfor %}
 </div>

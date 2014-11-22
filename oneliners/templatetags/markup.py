@@ -53,7 +53,8 @@ def markdown(value, arg=''):
         import markdown
     except ImportError:
         if settings.DEBUG:
-            raise template.TemplateSyntaxError("Error in 'markdown' filter: The Python markdown library isn't installed.")
+            raise template.TemplateSyntaxError(
+                "Error in 'markdown' filter: The Python markdown library isn't installed.")
         return force_text(value)
     else:
         markdown_vers = getattr(markdown, "version_info", 0)
@@ -79,7 +80,8 @@ def restructuredtext(value):
         from docutils.core import publish_parts
     except ImportError:
         if settings.DEBUG:
-            raise template.TemplateSyntaxError("Error in 'restructuredtext' filter: The Python docutils library isn't installed.")
+            raise template.TemplateSyntaxError(
+                "Error in 'restructuredtext' filter: The Python docutils library isn't installed.")
         return force_text(value)
     else:
         docutils_settings = getattr(settings, "RESTRUCTUREDTEXT_FILTER_SETTINGS", {})

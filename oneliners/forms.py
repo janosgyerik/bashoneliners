@@ -22,19 +22,19 @@ class CommonOneLinerForm(forms.ModelForm):
         model = OneLiner
 
         widgets = {
-                'summary': forms.TextInput(attrs={'class': 'form-control', }),
-                'line': forms.TextInput(attrs={'class': 'form-control', }),
-                'explanation': forms.Textarea(attrs={'rows': 10, 'class': 'col-sm-6', }),
-                'limitations': forms.Textarea(attrs={'rows': 8, 'class': 'col-sm-6', }),
-                }
+            'summary': forms.TextInput(attrs={'class': 'form-control', }),
+            'line': forms.TextInput(attrs={'class': 'form-control', }),
+            'explanation': forms.Textarea(attrs={'rows': 10, 'class': 'col-sm-6', }),
+            'limitations': forms.Textarea(attrs={'rows': 8, 'class': 'col-sm-6', }),
+        }
 
         fields = (
-                'line',
-                'summary',
-                'explanation',
-                'limitations',
-                'is_published',
-                )
+            'line',
+            'summary',
+            'explanation',
+            'limitations',
+            'is_published',
+        )
 
 
 class PostOneLinerForm(CommonOneLinerForm):
@@ -90,15 +90,15 @@ class EditHackerProfileForm(forms.ModelForm):
         model = HackerProfile
 
         widgets = {
-                'display_name': forms.TextInput(attrs={'class': '', }),
-                'twitter_name': forms.TextInput(attrs={'class': '', }),
-                'blog_url': forms.TextInput(attrs={'class': 'span6', }),
-                'homepage_url': forms.TextInput(attrs={'class': 'span6', }),
-                }
+            'display_name': forms.TextInput(attrs={'class': '', }),
+            'twitter_name': forms.TextInput(attrs={'class': '', }),
+            'blog_url': forms.TextInput(attrs={'class': 'span6', }),
+            'homepage_url': forms.TextInput(attrs={'class': 'span6', }),
+        }
 
         exclude = (
-                'user',
-                )
+            'user',
+        )
 
 
 class CommonQuestionForm(forms.ModelForm):
@@ -113,16 +113,16 @@ class CommonQuestionForm(forms.ModelForm):
         model = Question
 
         widgets = {
-                'summary': forms.TextInput(attrs={'class': 'span6', }),
-                'explanation': forms.Textarea(attrs={'rows': 5, 'class': 'span6', }),
-                }
+            'summary': forms.TextInput(attrs={'class': 'span6', }),
+            'explanation': forms.Textarea(attrs={'rows': 5, 'class': 'span6', }),
+        }
 
         fields = (
-                'summary',
-                'explanation',
-                'is_published',
-                'is_answered',
-                )
+            'summary',
+            'explanation',
+            'is_published',
+            'is_answered',
+        )
 
 
 class PostQuestionForm(CommonQuestionForm):

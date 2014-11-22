@@ -13,11 +13,13 @@ function popup_error() {
 }
 
 function bind_help_markdown() {
-    $('.help-markdown').click(function() {
+    $('.help-markdown').click(function () {
         var url = this.href;
         var dialog = $('<div class="loading"></div>').appendTo('body');
         dialog.dialog({
-            close: function(event, ui) { dialog.remove(); },
+            close: function (event, ui) {
+                dialog.remove();
+            },
             height: 400,
             width: 500,
             title: 'Markdown Syntax Quick Reference'
@@ -25,19 +27,19 @@ function bind_help_markdown() {
         dialog.load(
             url,
             '',
-            function(responseText, textStatus, XMLHttpRequest) {
+            function (responseText, textStatus, XMLHttpRequest) {
                 dialog.removeClass('loading');
             }
-            );
+        );
         return false;
     });
 }
 
 function bind_question_answered() {
-    $('.question-answered').click(function(e) {
+    $('.question-answered').click(function (e) {
         e.preventDefault();
         var question = $('.' + $(this).attr('data-parent'));
-        var remove_buttons = function() {
+        var remove_buttons = function () {
             question.find('.question-answered').remove();
         };
         $.ajax({
@@ -50,16 +52,16 @@ function bind_question_answered() {
 
 function bind_preview_markdown() {
     var converter = new Showdown.converter();
-    $('.markdown').each(function() {
+    $('.markdown').each(function () {
         var inputPane = $(this).find('textarea').eq(0);
         var previewPane = $('<div class="preview"/>');
         previewPane.height(inputPane.height());
         previewPane.width(inputPane.width());
         previewPane.insertAfter(inputPane);
-        inputPane.keyup(function() {
+        inputPane.keyup(function () {
             previewPane.html(converter.makeHtml(inputPane.val()));
         }).trigger('keyup');
-        inputPane.scroll(function() {
+        inputPane.scroll(function () {
             previewPane.scrollTop(inputPane.scrollTop());
             previewPane.scrollLeft(inputPane.scrollLeft());
         });
@@ -67,7 +69,7 @@ function bind_preview_markdown() {
 }
 
 function bind_comments_toggle() {
-    $('.comments-toggle').click(function(e) {
+    $('.comments-toggle').click(function (e) {
         $(this).toggleClass('expanded').next().toggle(0);
     });
 }
@@ -81,7 +83,7 @@ function footer_fix() {
 
 function bind_dblclick_to_select_oneliner() {
     if (window.getSelection) {
-        $('.oneliner-line').dblclick(function(e) {
+        $('.oneliner-line').dblclick(function (e) {
             var element = $(this)[0];
             var selection = window.getSelection();
             var range = document.createRange();
@@ -95,7 +97,7 @@ function bind_dblclick_to_select_oneliner() {
 function bind_upvote() {
     if (App.user_id == 'None') return;
 
-    var callback = function(data) {
+    var callback = function (data) {
         // TODO: why is this necessary? can we eliminate?
         if (!data) return;
         $.ajax({
@@ -105,7 +107,7 @@ function bind_upvote() {
             data: data
         });
     };
-    $('div.upvote').each(function(i, item) {
+    $('div.upvote').each(function (i, item) {
         var oneliner_user_id = $(item).attr('data-user-id');
         if (oneliner_user_id != App.user_id) {
             $(item).upvote({ callback: callback });
@@ -114,15 +116,15 @@ function bind_upvote() {
 }
 
 function bind_search_navbar() {
-    $('.navbar-search .search-query').focus(function() {
+    $('.navbar-search .search-query').focus(function () {
         $(this).addClass('input-large');
     });
-    $('.navbar-search .search-query').blur(function() {
+    $('.navbar-search .search-query').blur(function () {
         $(this).removeClass('input-large');
     });
 }
 
-$(document).ready(function() {
+$(document).ready(function () {
     bind_help_markdown();
     bind_question_answered();
     bind_preview_markdown();

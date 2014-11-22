@@ -1,1 +1,5 @@
-{{ json|safe }}
+{
+    {
+        json | safe
+    }
+}

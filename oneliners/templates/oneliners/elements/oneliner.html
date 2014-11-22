@@ -22,19 +22,17 @@
                     <h3 class="summary">
                         <a href="{% url 'oneliner' oneliner.pk %}">{{ oneliner.summary|capfirst }}</a>
                         {% if user == oneliner.user %}
-                            <a class="btn btn-default" href="{% url 'oneliners.views.oneliner_edit' oneliner.pk %}"><i
-                                    class="glyphicon glyphicon-pencil"></i>{% if not oneliner.is_published %}
+                            <a class="btn btn-default" href="{% url 'oneliners.views.oneliner_edit' oneliner.pk %}">
+                                <i class="glyphicon glyphicon-pencil"></i>{% if not oneliner.is_published %}
                                 <span class="draft">(Not published!)</span>{% endif %}</a>
                         {% endif %}
                     </h3>
 
-                    <pre class="line"><span class="add-on">&nbsp;$&nbsp;</span><span
-                            class="oneliner-line">{{ oneliner.line }}</span></pre>
+                    <pre class="line"><span class="add-on">&nbsp;$&nbsp;</span><span class="oneliner-line">{{ oneliner.line }}</span></pre>
 
                     <p class="author">
                         <small>
-                            &mdash; by <a
-                                href="{% url 'oneliners.views.profile' oneliner.user.pk %}"><span>{{ oneliner.user.hackerprofile.get_display_name }}</span></a>
+                            &mdash; by <a href="{% url 'oneliners.views.profile' oneliner.user.pk %}"><span>{{ oneliner.user.hackerprofile.get_display_name }}</span></a>
                             on <span>{{ oneliner.created_dt }}</span>
                         </small>
                     </p>
@@ -53,8 +51,8 @@
 
                     {% if user == question.user and not question.is_answered %}
                         <p><a href="{% url 'oneliners.ajax.question_answered' question.pk oneliner.pk %}"
-                              class="btn btn-primary question-answered" data-parent="question-{{ question.pk }}">Accept
-                            this answer</a></p>
+                              class="btn btn-primary question-answered" data-parent="question-{{ question.pk }}">
+                            Accept this answer</a></p>
                     {% endif %}
 
                     {% if user.is_authenticated and not nobuttons %}
@@ -62,8 +60,8 @@
                             <a href="{% url 'oneliners.views.oneliner_alternative' oneliner.pk %}"
                                class="btn btn-default">Post an alternative one-liner</a>
                             <a href="{% url 'oneliners.views.oneliner_comment' oneliner.pk %}"
-                               class="btn btn-default"><i class="glyphicon glyphtoicon-comment"></i> Post a comment on
-                                this one-liner</a>
+                               class="btn btn-default"><i class="glyphicon glyphicon-comment"></i>
+                                Post a comment on this one-liner</a>
                         </p>
                     {% endif %}
 
@@ -73,8 +71,8 @@
                     {% get_comment_count for oneliner as comment_count %}
                     {% if comment_count > 0 %}
                         <div class="related">
-                            <h3 class="comments-toggle {{ comments_expanded }}"><img
-                                    src="{% static 'images/arrows0.png' %}" alt="[comments]"/>Comments
+                            <h3 class="comments-toggle {{ comments_expanded }}">
+                                <img src="{% static 'images/arrows0.png' %}" alt="[comments]"/>Comments
                                 ({{ comment_count }})</h3>
 
                             <div class="well comments {{ comments_expanded }}">

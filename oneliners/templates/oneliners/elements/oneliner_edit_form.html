@@ -21,10 +21,10 @@
             as concise as possible,
             without unnecessary elements.
         </div>
-        <div class="input input-prepend">
+        <div class="input">
             <div class="error">{{ form.line.errors }}</div>
-            <div class="oneliner input-prepend">
-                <span class="add-on">&nbsp;$&nbsp;</span>
+            <div class="input-group">
+                <div class="input-group-addon">$</div>
                 {{ form.line }}
             </div>
         </div>
@@ -43,7 +43,7 @@
         </div>
         <div class="input">
             <div class="error">{{ form.explanation.errors }}</div>
-            <div class="explanation markdown">{{ form.explanation }}</div>
+            <div class="explanation markdown form-group">{{ form.explanation }}</div>
         </div>
 
         <h3>Limitations (optional)</h3>
@@ -73,8 +73,9 @@
                 {% include 'oneliners/elements/please_login.html' %}
                 {% for action in form.actions %}
                     <button class="btn {{ action.cssclass }}" type="submit" name="action" value="{{ action.name }}">
-                    {{ action.name }}</button>{% endfor %}
+                        {{ action.name }}</button>{% endfor %}
                 <button class="btn btn-default"><a href="{{ cancel_url }}">Cancel</a></button>
             </div>
         </div>
+    </div>
 </form>

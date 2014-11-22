@@ -58,24 +58,24 @@
                 <div class="error">{{ form.limitations.errors }}</div>
                 <div class="limitations markdown">{{ form.limitations }}</div>
             </div>
+        </div>
 
-            <h3>Published</h3>
+        <h3>Published</h3>
 
-            <div class="help-block">If checked, the one-liner will be visible in public listings, and will be tweeted on
-                Twitter with <a href="https://twitter.com/#!/bashoneliners">@bashoneliners</a></div>
-            <div class="input">
-                <div class="error">{{ form.is_published.errors }}</div>
-                <div class="is_published"><label class="checkbox">{{ form.is_published }} <span>Published</span></label>
-                </div>
+        <div class="help-block">If checked, the one-liner will be visible in public listings, and will be tweeted on
+            Twitter with <a href="https://twitter.com/#!/bashoneliners">@bashoneliners</a></div>
+        <div class="input">
+            <div class="error">{{ form.is_published.errors }}</div>
+            <div class="is_published"><label class="checkbox">{{ form.is_published }} <span>Published</span></label>
             </div>
+        </div>
 
-            <div class="form-actions">
-                {% include 'oneliners/elements/please_login.html' %}
-                {% for action in form.actions %}
-                    <button class="btn {{ action.cssclass }}" type="submit" name="action" value="{{ action.name }}">
-                        {{ action.name }}</button>{% endfor %}
-                <button class="btn btn-default"><a href="{{ cancel_url }}">Cancel</a></button>
-            </div>
+        <div class="form-group">
+            {% include 'oneliners/elements/please_login.html' %}
+            {% for action in form.actions %}
+                <button class="btn {{ action.cssclass }}" type="submit" name="action" value="{{ action.name }}">
+                    {{ action.name }}</button>{% endfor %}
+            <button class="btn btn-default"><a href="{{ cancel_url }}">Cancel</a></button>
         </div>
     </div>
 </form>

@@ -160,7 +160,4 @@ class EditQuestionForm(CommonQuestionForm):
 class PostCommentOnOneLinerForm(CommentForm):
     def __init__(self, *args, **kwargs):
         super(PostCommentOnOneLinerForm, self).__init__(*args, **kwargs)
-        self.fields['comment'].widget = forms.Textarea(attrs={'rows': 5, 'class': 'span6', })
-
-
-# eof
+        self.fields['comment'].widget = forms.Textarea(attrs={'rows': 5, 'class': 'form-control', })

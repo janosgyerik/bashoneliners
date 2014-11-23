@@ -6,23 +6,25 @@
 
 {% block content %}
 
-    <form action="" method="get" class="well form-inline" id="search-form">
-        <div>
-            <input type="hidden" name="is_advanced" value="1"/>
-            {{ searchform.query }}
-            <input type="submit" value="Search" class="btn btn-primary"/>
-        </div>
-        <div class="controls">
-            <label class="checkbox inline">
-                {{ searchform.match_whole_words }}{{ searchform.match_whole_words.label }}</label>
-            <label class="checkbox inline">{{ searchform.match_summary }}{{ searchform.match_summary.label }}</label>
-            <label class="checkbox inline">{{ searchform.match_line }}{{ searchform.match_line.label }}</label>
-            <label class="checkbox inline">
-                {{ searchform.match_explanation }}{{ searchform.match_explanation.label }}</label>
-            <label class="checkbox inline">
-                {{ searchform.match_limitations }}{{ searchform.match_limitations.label }}</label>
-        </div>
-    </form>
+    <div class="well">
+        <form action="" method="get" class="form-inline" id="search-form" role="form">
+            <div class="form-group">
+                <input type="hidden" name="is_advanced" value="1"/>
+                {{ searchform.query }}
+            </div>
+            <input type="submit" value="Search" class="btn btn-primary form-inline"/>
+            <div class="controls">
+                <label class="checkbox-inline">
+                    {{ searchform.match_whole_words }}{{ searchform.match_whole_words.label }}</label>
+                <label class="checkbox-inline">{{ searchform.match_summary }}{{ searchform.match_summary.label }}</label>
+                <label class="checkbox-inline">{{ searchform.match_line }}{{ searchform.match_line.label }}</label>
+                <label class="checkbox-inline">
+                    {{ searchform.match_explanation }}{{ searchform.match_explanation.label }}</label>
+                <label class="checkbox-inline">
+                    {{ searchform.match_limitations }}{{ searchform.match_limitations.label }}</label>
+            </div>
+        </form>
+    </div>
 
     {% include 'oneliners/elements/oneliners_searchresults.html' %}
 

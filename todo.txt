@@ -10,9 +10,6 @@ next
     - change login / logout to not use <p> which breaks strangely on mid-size
     - fix footer height
     - fix ugly comment dropdown toggle, replace with glyphs if possible
-    - fix search form http://localhost:8000/oneliners/search/?query=mvn
-        - input box
-        - checkboxes too tightly packed
     - fix input on edit profile page
     - check on w3c validator
 - remove all dreamhost stuff

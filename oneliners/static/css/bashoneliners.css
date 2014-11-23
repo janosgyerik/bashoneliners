@@ -253,6 +253,10 @@ h1 a.btn {
     margin-left: 1em;
 }
 
+.navbar a.login {
+    color: #08c !important;
+}
+
 /* markdown preview */
 
 .preview {

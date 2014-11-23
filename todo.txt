@@ -5,12 +5,12 @@ https://trello.com/board/main/4e7da3cf5a94680b35000893
 next
 ----
 - migrate to bs3
-    - review static/css/bashoneliners.css
-    - review templates/html5.html
-    - change login / logout to not use <p> which breaks strangely on mid-size
+    - fix login page
     - fix footer height
     - fix ugly comment dropdown toggle, replace with glyphs if possible
     - fix input on edit profile page
+    - review static/css/bashoneliners.css
+    - review templates/html5.html
     - check on w3c validator
 - remove all dreamhost stuff
 - strip trailing whitespace and ; from oneliners

@@ -41,13 +41,22 @@
                     </form>
                 {% endif %}
 
-                {% if user.is_authenticated %}
-                    <p class="navbar-text pull-right"><a
-                            href="{% url 'oneliners.views.profile' %}">{{ user.hackerprofile.get_display_name }}</a>&mdash;<a
-                            href="{% url 'oneliners.views.logout' %}">Logout</a></p>
-                {% else %}
-                    <p class="navbar-text pull-right"><a href="{% url 'oneliners.views.login' %}">Login</a></p>
-                {% endif %}
+                <ul class="nav navbar-nav navbar-right">
+                    {% if user.is_authenticated %}
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle login" data-toggle="dropdown" role="button" aria-expanded="false">
+                            {{ user.hackerprofile.get_display_name }}
+                            <span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="{% url 'oneliners.views.profile' %}">Profile</a></li>
+                            <li class="divider"></li>
+                            <li><a href="{% url 'oneliners.views.logout' %}">Logout</a></li>
+                        </ul>
+                    </li>
+                    {% else %}
+                        <li><a href="{% url 'oneliners.views.login' %}" class="login">Login</a></li>
+                    {% endif %}
+                </ul>
             </div>
         </div>
     </div>

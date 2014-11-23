@@ -34,40 +34,40 @@
     var i18n_search_error = 'An error occurred during search.';
 
     function search_success(html) {
-    $('.oneliners').html($(html).html());
-    bind_comments_toggle();
+        $('.oneliners').html($(html).html());
+        bind_comments_toggle();
     }
 
     function search_error(err) {
-    $('#search-errors').text(i18n_search_error);
+        $('#search-errors').text(i18n_search_error);
     }
 
     function search_completed() {
-    $('#search-loading').empty();
+        $('#search-loading').empty();
     }
 
     $('#search-form').submit(function(e) {
-    e.preventDefault();
-    $('#search-loading').append($('#templates .search-loading').html());
-    $('#search-errors').empty();
+        e.preventDefault();
+        $('#search-loading').append($('#templates .search-loading').html());
+        $('#search-errors').empty();
 
-    var options = {
-    url: '{% url 'oneliners.ajax.search' %}',
-    type: 'get',
-    data: {
-    'is_advanced': 'on',
-    'match_whole_words': $('#id_match_whole_words:checked').val(),
-    'match_summary': $('#id_match_summary:checked').val(),
-    'match_line': $('#id_match_line:checked').val(),
-    'match_explanation': $('#id_match_explanation:checked').val(),
-    'match_limitations': $('#id_match_limitations:checked').val(),
-    'query': $('#search-form #id_query').val()
-    },
-    success: search_success,
-    error: search_error,
-    complete: search_completed
-    };
-    $.ajax(options);
+        var options = {
+            url: '{% url 'oneliners.ajax.search' %}',
+            type: 'get',
+            data: {
+                'is_advanced': 'on',
+                'match_whole_words': $('#id_match_whole_words:checked').val(),
+                'match_summary': $('#id_match_summary:checked').val(),
+                'match_line': $('#id_match_line:checked').val(),
+                'match_explanation': $('#id_match_explanation:checked').val(),
+                'match_limitations': $('#id_match_limitations:checked').val(),
+                'query': $('#search-form #id_query').val()
+            },
+            success: search_success,
+            error: search_error,
+            complete: search_completed
+        };
+        $.ajax(options);
     });
 
     $('#search-form #id_query').focus();

@@ -90,10 +90,10 @@ class EditHackerProfileForm(forms.ModelForm):
         model = HackerProfile
 
         widgets = {
-            'display_name': forms.TextInput(attrs={'class': '', }),
-            'twitter_name': forms.TextInput(attrs={'class': '', }),
-            'blog_url': forms.TextInput(attrs={'class': 'span6', }),
-            'homepage_url': forms.TextInput(attrs={'class': 'span6', }),
+            'display_name': forms.TextInput(attrs={'class': 'form-control', }),
+            'twitter_name': forms.TextInput(attrs={'class': 'form-control', }),
+            'blog_url': forms.TextInput(attrs={'class': 'form-control', }),
+            'homepage_url': forms.TextInput(attrs={'class': 'form-control', }),
         }
 
         exclude = (

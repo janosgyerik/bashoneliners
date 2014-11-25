@@ -149,11 +149,19 @@ form .input .error ul li {
 input.openid {
     background: url(/openid/logo.gif) no-repeat;
     background-position: 0 50%;
-    padding-left: 16px;
+    padding-left: 2em;
 }
 
 #openid-form input[type="radio"] {
     float: none;
+}
+
+.openid-form {
+    margin-left: 1em;
+}
+
+.openid-form .btn-primary {
+    margin-left: 1em;
 }
 
 form .profile label {

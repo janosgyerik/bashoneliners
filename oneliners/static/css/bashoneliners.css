@@ -26,8 +26,6 @@ dt {
     margin-left: .5em;
 }
 
-/* End Utility Classes */
-
 body {
     padding-top: 40px; /* Twitter bootstrap */
 }
@@ -213,15 +211,8 @@ h1 a.btn {
     overflow: auto;
 }
 
-/* voting */
-
-div.upvote {
-}
-
 /* overriding bootstrap */
 
 pre code {
     border: 0;
 }
-
-/* eof */

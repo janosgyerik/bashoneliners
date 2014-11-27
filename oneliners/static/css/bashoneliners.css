@@ -1,5 +1,3 @@
-/* Begin Various Tags */
-
 body {
     color: black;
     margin: 0;
@@ -18,67 +16,6 @@ img {
 
 dt {
     font-weight: bold;
-}
-
-/* End Various Tags */
-
-/* Begin Images */
-
-img.centered {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-img.alignright {
-    padding: 4px;
-    margin: 0 0 2px 7px;
-    display: inline;
-}
-
-img.alignleft {
-    padding: 4px;
-    margin: 0 7px 2px 0;
-    display: inline;
-}
-
-/* End Images */
-
-/* Begin Utility Classes */
-
-.floatleft {
-    float: left;
-    margin-right: 1em;
-}
-
-.floatright {
-    float: right;
-    margin-left: 1em;
-}
-
-.alignright {
-    text-align: right;
-}
-
-.center {
-    text-align: center;
-}
-
-.clear {
-    clear: both;
-}
-
-.hidden {
-    display: none;
-}
-
-.invisible {
-    visibility: hidden;
-}
-
-.screen-reader-text {
-    position: absolute;
-    left: -1000em;
 }
 
 .validators {

@@ -5,8 +5,6 @@ https://trello.com/board/main/4e7da3cf5a94680b35000893
 next
 ----
 - migrate to bs3
-    - fix footer height
-        - edit profile alone is magically correct!
     - fix pagination
     - fix ugly comment dropdown toggle, replace with glyphs if possible
     - review templates/html5.html

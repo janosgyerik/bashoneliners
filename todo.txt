@@ -9,7 +9,6 @@ next
         - edit profile alone is magically correct!
     - fix pagination
     - fix ugly comment dropdown toggle, replace with glyphs if possible
-    - review static/css/bashoneliners.css
     - review templates/html5.html
     - check on w3c validator
 - remove all dreamhost stuff

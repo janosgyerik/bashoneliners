@@ -1,11 +1,3 @@
-.validators {
-    text-align: center;
-}
-
-.validators a {
-    margin-left: .5em;
-}
-
 body {
     padding-top: 40px; /* Twitter bootstrap */
 }
@@ -118,9 +110,27 @@ table.profile {
     display: inherit;
 }
 
+.navbar a.login {
+    color: #08c !important;
+}
+
 .footer {
     background-color: #eee;
     border: 1px solid transparent;
+}
+
+.fixed-bottom {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+.validators {
+    text-align: center;
+}
+
+.validators a {
+    margin-left: .5em;
 }
 
 table.help {
@@ -153,16 +163,6 @@ dl.rss a:hover {
 dl.rss dd {
     margin-bottom: .5em;
     margin-left: 2em;
-}
-
-.fixed-bottom {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-}
-
-.navbar a.login {
-    color: #08c !important;
 }
 
 /* markdown preview */

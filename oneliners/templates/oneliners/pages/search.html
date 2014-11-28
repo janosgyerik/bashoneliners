@@ -8,20 +8,21 @@
 
     <div class="well">
         <form action="" method="get" class="form-inline" id="search-form" role="form">
-            <div class="form-group">
-                <input type="hidden" name="is_advanced" value="1"/>
-                {{ searchform.query }}
+            <div class="row">
+                <div class="col-sm-9">
+                    <input type="hidden" name="is_advanced" value="1"/>
+                    {{ searchform.query }}
+                </div>
+                <div class="col-sm-3">
+                    <input type="submit" value="Search" class="btn btn-primary form-inline"/>
+                </div>
             </div>
-            <input type="submit" value="Search" class="btn btn-primary form-inline"/>
-            <div class="controls">
-                <label class="checkbox-inline">
-                    {{ searchform.match_whole_words }}{{ searchform.match_whole_words.label }}</label>
+            <div class="form-group">
+                <label class="checkbox-inline">{{ searchform.match_whole_words }}{{ searchform.match_whole_words.label }}</label>
                 <label class="checkbox-inline">{{ searchform.match_summary }}{{ searchform.match_summary.label }}</label>
                 <label class="checkbox-inline">{{ searchform.match_line }}{{ searchform.match_line.label }}</label>
-                <label class="checkbox-inline">
-                    {{ searchform.match_explanation }}{{ searchform.match_explanation.label }}</label>
-                <label class="checkbox-inline">
-                    {{ searchform.match_limitations }}{{ searchform.match_limitations.label }}</label>
+                <label class="checkbox-inline">{{ searchform.match_explanation }}{{ searchform.match_explanation.label }}</label>
+                <label class="checkbox-inline">{{ searchform.match_limitations }}{{ searchform.match_limitations.label }}</label>
             </div>
         </form>
     </div>

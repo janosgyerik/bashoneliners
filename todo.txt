@@ -4,9 +4,6 @@ https://trello.com/board/main/4e7da3cf5a94680b35000893
 
 next
 ----
-- migrate to bs3
-    - check on w3c validator
-- strip trailing whitespace and ; from oneliners
 - change RSS in navbar to Follow, and update the feeds page
     - mailing list
     - twitter
@@ -14,9 +11,6 @@ next
     - bug reports
     - feeds
 - bug: 500 error on /profile/ page when not logged in
-- clean up the site logos
-- Recent questions -> pending questions
-- Should indicate question pending state on profile
 - Implement favoriting
 - Show number of starred questions
     - update first upstream in jquery-upvote
@@ -27,11 +21,9 @@ next
     - oneliner.vote_up(user)
     - ...
 - centralize the score counting (all annotate(..) magic in one place)
-- small bug: cannot delete question if explanation is blank (bad input validation)
 - switch to using social-auth
     - make sure existing accounts remain unaffected
 - format everything with markdown
-    - questions
     - comments
 - phase out AUTH_PROFILE_MODULE (deprecated in Django 1.5)
 

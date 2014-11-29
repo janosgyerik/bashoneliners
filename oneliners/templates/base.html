@@ -74,18 +74,9 @@
 {% block footer %}
     <div class="container-fluid">
         <p class="validators">
-            <a href="http://wiki.dreamhost.com/index.php/DHSOTM#2012_Winners"><img
-                    alt="DreamHost Site of the Month for March!" src="{% static 'images/dhsotm2.gif' %}"/></a>
-            <a href="http://www.dreamhost.com/r.cgi?455568"><img
-                    alt="This site hosted by DreamHost. Unlimited storage and bandwidth for only $8.95"
-                    src="{% static 'images/dreamhost.gif' %}"/></a>
-            <a href="http://www.dreamhost.com/donate.cgi?id=15533"><img style="border: 0"
-                                                                        alt="Donate towards my web hosting bill!"
-                                                                        src="{% static 'images/hosting.gif' %}"/></a>
-            <a href="http://www.dreamhost.com/green.cgi"><img alt="Green Web Hosting! This site hosted by DreamHost."
-                                                              src="{% static 'images/green1.gif' %}" height="31"/></a>
-            <a href="http://validator.w3.org/check?uri=referer"><img src="{% static 'images/valid-xhtml10.png' %}"
-                                                                     alt="Valid HTML5"/></a>
+            <a href="http://validator.w3.org/check?uri=referer">
+                <img src="{% static 'images/valid-xhtml10.png' %}" alt="Valid HTML5"/>
+            </a>
         </p>
     </div>
 {% endblock %}

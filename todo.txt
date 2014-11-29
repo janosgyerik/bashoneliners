@@ -6,9 +6,7 @@ next
 ----
 - migrate to bs3
     - fix pagination
-    - review templates/html5.html
     - check on w3c validator
-- remove all dreamhost stuff
 - strip trailing whitespace and ; from oneliners
 - change RSS in navbar to Follow, and update the feeds page
     - mailing list

@@ -71,6 +71,7 @@ function bind_preview_markdown() {
 function bind_comments_toggle() {
     $('.comments-toggle').click(function (e) {
         $(this).toggleClass('expanded').next().toggle(0);
+        $(this).find('i.glyphicon').toggleClass('glyphicon-chevron-right glyphicon-chevron-down');
     });
 }
 

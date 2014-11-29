@@ -6,7 +6,6 @@ next
 ----
 - migrate to bs3
     - fix pagination
-    - fix ugly comment dropdown toggle, replace with glyphs if possible
     - review templates/html5.html
     - check on w3c validator
 - remove all dreamhost stuff

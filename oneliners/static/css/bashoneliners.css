@@ -91,17 +91,6 @@ table.profile {
     cursor: pointer;
 }
 
-.comments-toggle img {
-    background: url(/static/images/arrows.png) no-repeat center;
-    background-position: 0px -81px;
-    height: 26px;
-    padding: 3px;
-}
-
-.comments-toggle.expanded img {
-    background-position: 0px -54px;
-}
-
 .comments {
     display: none;
 }

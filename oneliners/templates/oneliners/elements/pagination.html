@@ -1,6 +1,6 @@
 {% if page.paginator.num_pages > 1 %}
-    <div class="pagination pagination-centered">
-        <ul>
+    <nav class="text-center">
+        <ul class="pagination">
             <!--
 	{% if page.has_previous %}
 	<li><a href="?page={{ page.previous_page_number }}">&larr;</a></li>
@@ -15,5 +15,5 @@
 	{% endif %}
             -->
         </ul>
-    </div>
+    </nav>
 {% endif %}

@@ -2,7 +2,6 @@
 # pip install -r requirements.txt
 Django==1.5.1
 Markdown==2.6.5
-django-openid-auth==0.5
 django-social-auth==0.7.28
 httplib2==0.9
 oauth2==1.5.211

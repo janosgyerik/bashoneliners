@@ -1,7 +1,7 @@
 # Install required python packages using pip:
 # pip install -r requirements.txt
 Django==1.5.1
-Markdown==2.5.1
+Markdown==2.6.5
 django-openid-auth==0.5
 pep8==1.5.7
 pyflakes==0.8.1

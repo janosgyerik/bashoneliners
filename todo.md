@@ -18,10 +18,10 @@ social auth
 
 cleaning
 --------
+- fix robots, verify google webmaster
 - upgrade to latest django
 - verify it works on server
 - verify backups
-- drop bzr support
 - review and clean old todos
 - review and clean trello
 - review and clean all texts

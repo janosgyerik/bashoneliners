@@ -28,7 +28,8 @@ urlpatterns = patterns('',
     # url(r'^admin/', include(admin.site.urls)),
     (r'^admin/', include(admin.site.urls)),
     (r'^comments/', include('django.contrib.comments.urls')),
-    (r'^openid/', include('django_openid_auth.urls')),
+    (r'^social_auth/', include('social_auth.urls')),
+    (r'^accounts/', include('accounts.urls')),
 
     (r'^internal_error.html$', internal_error),
 )

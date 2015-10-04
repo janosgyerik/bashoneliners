@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block main %}
+
+        <h1 class="page-header">Status</h1>
+
+        <p>is_active={{ user.is_active }}</p>
+        <p>is_staff={{ user.is_staff }}</p>
+        <p>is_superuser={{ user.is_superuser }}</p>
+
+{% endblock %}

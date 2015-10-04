@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block main %}
+
+        <style type="text/css">
+          .openid_btns a {
+              width: 100px;
+              height: 60px;
+              border: 2px solid #ddd;
+              border-radius: 5px;
+              -moz-border-radius: 5px;
+              -webkit-border-radius: 5px;
+              box-shadow: 2px 2px 4px #ddd;
+              -moz-box-shadow: 2px 2px 4px #ddd;
+              -webkit-box-shadow: 2px 2px 4px #ddd;
+              margin: 3px;
+              float: left;
+          }
+          .openid_btns a:hover {
+              border: 2px solid #999;
+              box-shadow: none;
+              -moz-box-shadow: none;
+              -webkit-box-shadow: none;
+          }
+          .openid_large_btn {
+              background: #fff url(http://cdn.sstatic.net/Img/openid/openid-logos.png?v=8);
+              background-position: -1px -518px;
+          }
+          .openid_large_btn-stack-exchange {
+              background-position: -1px -518px;
+          }
+          .openid_large_btn-google {
+              background-position: -1px -1px;
+          }
+          .openid_large_btn-facebook {
+              background-position: -1px -456px;
+          }
+          .openid_large_btn-yahoo {
+              background-position: -1px -63px;
+          }
+        </style>
+
+        <h1 class="page-header">{% trans 'Login' %}</h1>
+
+        <div class="row">
+            <div class="col-lg-8 col-md-9 col-sm-6">
+                <p>Do you already have an account on one of these sites?
+                Click the logo to log in with it here:
+                </p>
+
+                <div class="openid_btns">
+                    <!--
+                    <a title="login with Stack Exchange" href="{% url "socialauth_begin" "stackexchange" %}?next={{ next|default:'' }}" class="openid_large_btn openid_large_btn-stack_exchange"></a>
+                    -->
+                    <a title="login with Google" href="{% url "socialauth_begin" "google" %}?next={{ next|default:'' }}" class="openid_large_btn openid_large_btn-google"></a>
+                    <a title="login with Facebook" href="{% url "socialauth_begin" "facebook" %}?next={{ next|default:'' }}" class="openid_large_btn openid_large_btn-facebook"></a>
+                    <a title="login with Yahoo" href="{% url "socialauth_begin" "yahoo" %}?next={{ next|default:'' }}" class="openid_large_btn openid_large_btn-yahoo"></a>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-3 col-sm-6 well">
+                <h4>Why OpenID?</h4>
+                <p>It’s a single username and password that allows you to login to any OpenID-enabled site.</p>
+                <p>It works on thousands of websites.</p>
+                <p>It’s an open standard.</p>
+                <p class="pull-right"><a href="http://openid.net/what/">learn more »</a></p>
+            </div>
+        </div>
+
+{% endblock %}

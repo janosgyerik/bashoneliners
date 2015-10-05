@@ -1,6 +1,6 @@
 # Install required python packages using pip:
 # pip install -r requirements.txt
-Django==1.5.1
+Django==1.9
 Markdown==2.6.5
 PyJWT==1.4.0
 httplib2==0.9

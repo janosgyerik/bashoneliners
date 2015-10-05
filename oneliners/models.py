@@ -5,7 +5,6 @@ from django.db import models
 from django.db.models import Count, Q, Sum
 from django.db.models.signals import post_save
 from django.contrib.auth.models import User
-from django.contrib.comments.models import Comment
 from django.dispatch import receiver
 from django.utils.timezone import now
 import re

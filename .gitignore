@@ -2,7 +2,7 @@
 /bashoneliners/*_settings.py
 /graphics/gource/
 /logs/*
-/sqlite3.db
+/db.sqlite3
 /static/*
 /tmp
 /local/

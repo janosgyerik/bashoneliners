@@ -5,7 +5,6 @@
     '''
 
 from django import forms
-from django.contrib.comments.forms import CommentForm
 
 from oneliners.models import OneLiner, HackerProfile, Question
 
@@ -157,7 +156,8 @@ class EditQuestionForm(CommonQuestionForm):
         return self.cleaned_data
 
 
-class PostCommentOnOneLinerForm(CommentForm):
+# class PostCommentOnOneLinerForm(CommentForm): TODO
+class PostCommentOnOneLinerForm:
     def __init__(self, *args, **kwargs):
         super(PostCommentOnOneLinerForm, self).__init__(*args, **kwargs)
         self.fields['comment'].widget = forms.Textarea(attrs={'rows': 5, 'class': 'form-control', })

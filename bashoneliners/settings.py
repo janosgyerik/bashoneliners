@@ -193,6 +193,7 @@ AUTHENTICATION_BACKENDS = (
     'social.backends.yahoo.YahooOAuth2',
     'social.backends.yahoo.YahooOAuth',
     'social.backends.twitter.TwitterOAuth',
+    'social.backends.launchpad.LaunchpadOpenId',
     'django.contrib.auth.backends.ModelBackend',
 )
 
@@ -218,6 +219,9 @@ SOCIAL_AUTH_TWITTER_SECRET = ''
 
 # Yahoo works out of the box:
 # http://127.0.0.1:8000/login/yahoo
+
+# Launchpad works out of the box:
+# http://127.0.0.1:8000/login/launchpad
 
 # project specific custom settings
 

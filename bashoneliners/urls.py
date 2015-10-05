@@ -14,6 +14,8 @@ urlpatterns = patterns('',
     # url(r'^$', 'bashoneliners.views.home', name='home'),
     # url(r'^bashoneliners/', include('bashoneliners.foo.urls')),
 
+    ('', include('social.apps.django_app.urls', namespace='social')),
+
     (r'^$', oneliners_default),
     (r'^oneliners/', include('oneliners.urls')),
 
@@ -28,7 +30,6 @@ urlpatterns = patterns('',
     # url(r'^admin/', include(admin.site.urls)),
     (r'^admin/', include(admin.site.urls)),
     (r'^comments/', include('django.contrib.comments.urls')),
-    (r'^social_auth/', include('social_auth.urls')),
     (r'^accounts/', include('accounts.urls')),
 
     (r'^internal_error.html$', internal_error),

@@ -131,7 +131,7 @@ INSTALLED_APPS = (
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
     'django.contrib.admindocs',
-    'social_auth',
+    'social.apps.django_app.default',
     'oneliners',
     'accounts',
     'django.contrib.comments',
@@ -196,26 +196,14 @@ LOGGING = {
 AUTH_PROFILE_MODULE = 'oneliners.models.HackerProfile'
 
 AUTHENTICATION_BACKENDS = (
-    'social_auth.backends.twitter.TwitterBackend',
-    'social_auth.backends.facebook.FacebookBackend',
-    'social_auth.backends.google.GoogleOAuthBackend',
-    'social_auth.backends.google.GoogleOAuth2Backend',
-    'social_auth.backends.google.GoogleBackend',
-    'social_auth.backends.yahoo.YahooBackend',
-    'social_auth.backends.browserid.BrowserIDBackend',
-    'social_auth.backends.contrib.linkedin.LinkedinBackend',
-    'social_auth.backends.contrib.disqus.DisqusBackend',
-    'social_auth.backends.contrib.livejournal.LiveJournalBackend',
-    'social_auth.backends.contrib.orkut.OrkutBackend',
-    'social_auth.backends.contrib.foursquare.FoursquareBackend',
-    'social_auth.backends.contrib.github.GithubBackend',
-    'social_auth.backends.contrib.vk.VKOAuth2Backend',
-    'social_auth.backends.contrib.live.LiveBackend',
-    'social_auth.backends.contrib.skyrock.SkyrockBackend',
-    'social_auth.backends.contrib.yahoo.YahooOAuthBackend',
-    'social_auth.backends.contrib.readability.ReadabilityBackend',
-    'social_auth.backends.contrib.fedora.FedoraBackend',
-    'social_auth.backends.OpenIDBackend',
+    'social.backends.open_id.OpenIdAuth',
+    'social.backends.google.GoogleOpenId',
+    'social.backends.google.GoogleOAuth2',
+    'social.backends.google.GoogleOAuth',
+    'social.backends.yahoo.YahooOpenId',
+    'social.backends.yahoo.YahooOAuth2',
+    'social.backends.yahoo.YahooOAuth',
+    'social.backends.twitter.TwitterOAuth',
     'django.contrib.auth.backends.ModelBackend',
 )
 
@@ -227,6 +215,8 @@ LOGIN_REDIRECT_URL = '/'
 
 from django.conf.global_settings import TEMPLATE_CONTEXT_PROCESSORS
 TEMPLATE_CONTEXT_PROCESSORS += (
+        'social.apps.django_app.context_processors.backends',
+        'social.apps.django_app.context_processors.login_redirect',
         'oneliners.context_processors.google_analytics',
 )
 

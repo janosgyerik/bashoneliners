@@ -175,7 +175,14 @@ LOGGING = {
 
 # project specific django settings
 
-AUTH_PROFILE_MODULE = 'oneliners.models.HackerProfile'
+from django.conf.global_settings import TEMPLATE_CONTEXT_PROCESSORS
+TEMPLATE_CONTEXT_PROCESSORS += (
+    'social.apps.django_app.context_processors.backends',
+    'social.apps.django_app.context_processors.login_redirect',
+    'oneliners.context_processors.google_analytics',
+)
+
+# AUTH_PROFILE_MODULE = 'oneliners.models.HackerProfile'
 
 AUTHENTICATION_BACKENDS = (
     'social.backends.open_id.OpenIdAuth',
@@ -195,13 +202,18 @@ AUTHENTICATION_BACKENDS = (
 #LOGIN_URL = '/accounts/login/'
 #LOGIN_REDIRECT_URL = '/'
 
-from django.conf.global_settings import TEMPLATE_CONTEXT_PROCESSORS
-TEMPLATE_CONTEXT_PROCESSORS += (
-    'social.apps.django_app.context_processors.backends',
-    'social.apps.django_app.context_processors.login_redirect',
-    'oneliners.context_processors.google_analytics',
-)
+SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/oneliners/'
+SOCIAL_AUTH_LOGIN_URL = '/'
 
+# https://realpython.com/blog/python/adding-social-authentication-to-django/
+# Go to https://apps.twitter.com/app/new
+# As callback url specify: http://127.0.0.1:8000/complete/twitter
+# Go to Keys and Access Tokens tab
+# SOCIAL_AUTH_TWITTER_KEY = Consumer Key (API Key)
+# SOCIAL_AUTH_TWITTER_SECRET = Consumer Secret (API Secret)
+# Test with http://127.0.0.1:8000/login/twitter
+SOCIAL_AUTH_TWITTER_KEY = ''
+SOCIAL_AUTH_TWITTER_SECRET = ''
 
 # project specific custom settings
 

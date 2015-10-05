@@ -3,6 +3,7 @@ https://trello.com/board/main/4e7da3cf5a94680b35000893
 
 social auth
 -----------
++ poc: twitter
 - poc: google
 - poc: yahoo
 - poc: launchpad
@@ -16,6 +17,13 @@ social auth
     - or else, plan migration
 
 
+complete django 1.9 migration
+-----------------------------
+- upgrade to python 3
+- sort out all reported false errors in pycharm
+- unit tests working
+
+
 cleaning
 --------
 - fix robots, verify google webmaster
@@ -25,6 +33,7 @@ cleaning
 - review and clean old todos
 - review and clean trello
 - review and clean all texts
+- delete maintenance_urls
 
 
 kick-ass REST API

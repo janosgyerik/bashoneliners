@@ -205,6 +205,7 @@ AUTHENTICATION_BACKENDS = (
 SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/oneliners/'
 SOCIAL_AUTH_LOGIN_URL = '/'
 
+# http://python-social-auth.readthedocs.org/en/latest/backends/twitter.html
 # https://realpython.com/blog/python/adding-social-authentication-to-django/
 # Go to https://apps.twitter.com/app/new
 # As callback url specify: http://127.0.0.1:8000/complete/twitter
@@ -214,6 +215,9 @@ SOCIAL_AUTH_LOGIN_URL = '/'
 # Test with http://127.0.0.1:8000/login/twitter
 SOCIAL_AUTH_TWITTER_KEY = ''
 SOCIAL_AUTH_TWITTER_SECRET = ''
+
+# Yahoo works out of the box:
+# http://127.0.0.1:8000/login/yahoo
 
 # project specific custom settings
 

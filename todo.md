@@ -5,7 +5,7 @@ social auth
 -----------
 + poc: twitter
 - poc: google
-- poc: yahoo
++ poc: yahoo
 - poc: launchpad
 - poc: generic openid url
 - poc: all relevant providers

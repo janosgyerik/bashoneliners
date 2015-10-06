@@ -54,9 +54,9 @@ form .input .error ul li {
 }
 
 input.openid {
-    background: url(/openid/logo.gif) no-repeat;
-    background-position: 0 50%;
-    padding-left: 2em;
+    /*background: url(/openid/logo.gif) no-repeat;*/
+    /*background-position: 0 50%;*/
+    /*padding-left: 2em;*/
 }
 
 .openid-form {

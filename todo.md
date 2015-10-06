@@ -14,10 +14,6 @@ social auth
     it gets linked to it, even if it might be completely different user.
     See for example JanosGyerik, same for yahoo and google, so if logged in
     with yahoo first, a second login with google will link to same as yahoo
-- rework login page
-    - make buttons work
-    - remove unused buttons
-    - make sure openid with url works too
 - poc: verify smooth transition from old account to new
     - or else, plan migration
     - fyi: accounts were correctly matched prod -> beta for yahoo and launchpad
@@ -28,6 +24,7 @@ complete django 1.9 migration
 - upgrade to python 3
 - sort out all reported false errors in pycharm
 - unit tests working
+- fix urls in templates
 
 
 cleaning

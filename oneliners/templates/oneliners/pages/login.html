@@ -12,7 +12,7 @@
     </div>
 
     <div class="row">
-        <form class="openid-form form-horizontal" method="post" action="/openid/login/" role="form">
+        <form class="openid-form form-horizontal" method="post" action="/login/openid/" role="form">
             {% csrf_token %}
             <input type="hidden" name="openid_identifier" value="https://www.google.com/accounts/o8/id"/>
             <div class="form-group col-sm-4">
@@ -25,7 +25,7 @@
     </div>
 
     <div class="row">
-        <form class="openid-form form-horizontal" method="post" action="/openid/login/" role="form">
+        <form class="openid-form form-horizontal" method="post" action="/login/yahoo/" role="form">
             {% csrf_token %}
             <input type="hidden" name="openid_identifier" value="http://yahoo.com"/>
             <div class="form-group col-sm-4">
@@ -38,7 +38,7 @@
     </div>
 
     <div class="row">
-        <form class="openid-form form-horizontal" method="post" action="/openid/login/" role="form">
+        <form class="openid-form form-horizontal" method="post" action="/login/openid/" role="form">
             <fieldset>
                 {% csrf_token %}
                 <input type="hidden" name="openid_identifier" value="__username__.wordpress.com"/>
@@ -57,7 +57,7 @@
     </div>
 
     <div class="row">
-        <form class="openid-form form-horizontal" method="post" action="/openid/login/" role="form">
+        <form class="openid-form form-horizontal" method="post" action="/login/openid/" role="form">
             <fieldset>
                 {% csrf_token %}
                 <input type="hidden" name="openid_identifier" value="__username__.myopenid.com"/>
@@ -76,7 +76,7 @@
     </div>
 
     <div class="row">
-        <form class="openid-form form-horizontal" method="post" action="/openid/login/" role="form">
+        <form class="openid-form form-horizontal" method="post" action="/login/openid/" role="form">
             <fieldset>
                 {% csrf_token %}
                 <input type="hidden" name="openid_identifier" value="__username__.livejournal.com"/>
@@ -95,7 +95,7 @@
     </div>
 
     <div class="row">
-        <form class="openid-form form-horizontal" method="post" action="/openid/login/" role="form">
+        <form class="openid-form form-horizontal" method="post" action="/login/openid/" role="form">
             <fieldset>
                 {% csrf_token %}
                 <input type="hidden" name="openid_identifier" value="myspace.com/__username__"/>
@@ -114,7 +114,7 @@
     </div>
 
     <div class="row">
-        <form class="openid-form form-horizontal" method="post" action="/openid/login/" role="form">
+        <form class="openid-form form-horizontal" method="post" action="/login/openid/" role="form">
             <fieldset>
                 {% csrf_token %}
                 <input type="hidden" name="openid_identifier" value="launchpad.net/~__username__"/>
@@ -133,7 +133,7 @@
     </div>
 
     <div class="row">
-        <form id="openid-form-other" method="post" action="/openid/login/" role="form" class="form-horizontal openid-form">
+        <form id="openid-form-other" method="post" action="/login/openid/" role="form" class="form-horizontal openid-form">
             <fieldset>
                 {% csrf_token %}
                 <p>If your favourite OpenID provider is not in the list above,

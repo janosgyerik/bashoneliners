@@ -7,7 +7,7 @@ social auth
 - poc: google
 + poc: yahoo
 + poc: launchpad
-- poc: generic openid url
++ poc: generic openid url
 - poc: all relevant providers
     - make a list of providers used by users
     - verify each

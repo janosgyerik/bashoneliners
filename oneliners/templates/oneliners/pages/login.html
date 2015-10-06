@@ -12,14 +12,12 @@
     </div>
 
     <div class="row">
-        <form class="openid-form form-horizontal" method="post" action="/login/openid/" role="form">
-            {% csrf_token %}
-            <input type="hidden" name="openid_identifier" value="https://www.google.com/accounts/o8/id"/>
+        <form class="openid-form form-horizontal">
             <div class="form-group col-sm-4">
-                <p class="form-control-static">https://www.google.com/accounts/o8/id</p>
+                <p class="form-control-static">Google OAuth2</p>
             </div>
             <div class="form-group col-sm-2">
-                <input name="bsignin" type="submit" value="Google" class="btn btn-primary"/>
+                <a class="btn btn-primary" href="/login/google-oauth2/">Google</a>
             </div>
         </form>
     </div>

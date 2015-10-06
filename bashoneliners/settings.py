@@ -217,6 +217,16 @@ SOCIAL_AUTH_LOGIN_URL = '/'
 SOCIAL_AUTH_TWITTER_KEY = ''
 SOCIAL_AUTH_TWITTER_SECRET = ''
 
+# http://python-social-auth.readthedocs.org/en/latest/backends/google.html#google-openid
+# Go to Google Developer Console: https://console.developers.google.com/
+# Go to API Manager, enable Google+ API
+# Go to API Manager / Credentials
+SOCIAL_AUTH_GOOGLE_OAUTH2_SCOPE = [
+    'https://www.googleapis.com/auth/userinfo.email',
+]
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = ''
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = ''
+
 # Yahoo works out of the box:
 # http://127.0.0.1:8000/login/yahoo
 

@@ -4,17 +4,23 @@ https://trello.com/board/main/4e7da3cf5a94680b35000893
 social auth
 -----------
 + poc: twitter
-- poc: google
++ poc: google
 + poc: yahoo
 + poc: launchpad
 + poc: generic openid url
-- poc: all relevant providers
-    - make a list of providers used by users
-    - verify each
-- rework login page // simplify, replace dedicated boxes with single box
-    - ok to add tooltip-like info box (bootstrap style) with example urls
+- stack exchange
+- github
+- bug: on social login, if username already exists for another social login,
+    it gets linked to it, even if it might be completely different user.
+    See for example JanosGyerik, same for yahoo and google, so if logged in
+    with yahoo first, a second login with google will link to same as yahoo
+- rework login page
+    - make buttons work
+    - remove unused buttons
+    - make sure openid with url works too
 - poc: verify smooth transition from old account to new
     - or else, plan migration
+    - fyi: accounts were correctly matched prod -> beta for yahoo and launchpad
 
 
 complete django 1.9 migration
@@ -34,6 +40,7 @@ cleaning
 - review and clean trello
 - review and clean all texts
 - delete maintenance_urls
+- delete dreamhost views
 
 
 kick-ass REST API

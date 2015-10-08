@@ -185,6 +185,7 @@ TEMPLATE_CONTEXT_PROCESSORS += (
 # AUTH_PROFILE_MODULE = 'oneliners.models.HackerProfile'
 
 AUTHENTICATION_BACKENDS = (
+    'social.backends.github.GithubOAuth2',
     'social.backends.google.GoogleOpenId',
     'social.backends.google.GoogleOAuth2',
     'social.backends.google.GoogleOAuth',
@@ -216,6 +217,11 @@ SOCIAL_AUTH_GOOGLE_OAUTH2_SCOPE = [
 ]
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = ''
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = ''
+
+# http://python-social-auth.readthedocs.org/en/latest/backends/github.html
+# https://github.com/settings/applications/new
+SOCIAL_AUTH_GITHUB_KEY = ''
+SOCIAL_AUTH_GITHUB_SECRET = ''
 
 # http://python-social-auth.readthedocs.org/en/latest/backends/twitter.html
 # https://realpython.com/blog/python/adding-social-authentication-to-django/

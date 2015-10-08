@@ -8,7 +8,7 @@ social auth
 + poc: yahoo
 + poc: launchpad
 + poc: generic openid url
-- stack exchange
++ stack exchange
 - github
 - bug: on social login, if username already exists for another social login,
     it gets linked to it, even if it might be completely different user.

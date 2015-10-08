@@ -189,6 +189,7 @@ AUTHENTICATION_BACKENDS = (
     'social.backends.google.GoogleOAuth2',
     'social.backends.google.GoogleOAuth',
     'social.backends.twitter.TwitterOAuth',
+    'social.backends.stackoverflow.StackoverflowOAuth2',
     'social.backends.yahoo.YahooOpenId',
     'social.backends.yahoo.YahooOAuth2',
     'social.backends.yahoo.YahooOAuth',
@@ -226,6 +227,14 @@ SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = ''
 # Test with http://127.0.0.1:8000/login/twitter
 SOCIAL_AUTH_TWITTER_KEY = ''
 SOCIAL_AUTH_TWITTER_SECRET = ''
+
+# http://python-social-auth.readthedocs.org/en/latest/backends/stackoverflow.html
+# https://api.stackexchange.com/
+# http://stackapps.com/apps/oauth/register
+# Note: the OAuth Domain must match the domain where the site is running
+SOCIAL_AUTH_STACKOVERFLOW_KEY = ''
+SOCIAL_AUTH_STACKOVERFLOW_SECRET = ''
+SOCIAL_AUTH_STACKOVERFLOW_API_KEY = ''
 
 # Yahoo works out of the box:
 # http://127.0.0.1:8000/login/yahoo

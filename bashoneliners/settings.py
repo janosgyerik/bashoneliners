@@ -185,15 +185,15 @@ TEMPLATE_CONTEXT_PROCESSORS += (
 # AUTH_PROFILE_MODULE = 'oneliners.models.HackerProfile'
 
 AUTHENTICATION_BACKENDS = (
-    'social.backends.open_id.OpenIdAuth',
     'social.backends.google.GoogleOpenId',
     'social.backends.google.GoogleOAuth2',
     'social.backends.google.GoogleOAuth',
+    'social.backends.twitter.TwitterOAuth',
     'social.backends.yahoo.YahooOpenId',
     'social.backends.yahoo.YahooOAuth2',
     'social.backends.yahoo.YahooOAuth',
-    'social.backends.twitter.TwitterOAuth',
     'social.backends.launchpad.LaunchpadOpenId',
+    'social.backends.open_id.OpenIdAuth',
     'django.contrib.auth.backends.ModelBackend',
 )
 
@@ -206,6 +206,16 @@ AUTHENTICATION_BACKENDS = (
 SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/oneliners/'
 SOCIAL_AUTH_LOGIN_URL = '/'
 
+# http://python-social-auth.readthedocs.org/en/latest/backends/google.html#google-openid
+# Go to Google Developer Console: https://console.developers.google.com/
+# Go to API Manager, enable Google+ API
+# Go to API Manager / Credentials
+SOCIAL_AUTH_GOOGLE_OAUTH2_SCOPE = [
+    'https://www.googleapis.com/auth/userinfo.email',
+]
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = ''
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = ''
+
 # http://python-social-auth.readthedocs.org/en/latest/backends/twitter.html
 # https://realpython.com/blog/python/adding-social-authentication-to-django/
 # Go to https://apps.twitter.com/app/new
@@ -216,16 +226,6 @@ SOCIAL_AUTH_LOGIN_URL = '/'
 # Test with http://127.0.0.1:8000/login/twitter
 SOCIAL_AUTH_TWITTER_KEY = ''
 SOCIAL_AUTH_TWITTER_SECRET = ''
-
-# http://python-social-auth.readthedocs.org/en/latest/backends/google.html#google-openid
-# Go to Google Developer Console: https://console.developers.google.com/
-# Go to API Manager, enable Google+ API
-# Go to API Manager / Credentials
-SOCIAL_AUTH_GOOGLE_OAUTH2_SCOPE = [
-    'https://www.googleapis.com/auth/userinfo.email',
-]
-SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = ''
-SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = ''
 
 # Yahoo works out of the box:
 # http://127.0.0.1:8000/login/yahoo

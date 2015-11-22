@@ -1,22 +1,15 @@
 See Trello for a more up to date near-term todo list!
 https://trello.com/board/main/4e7da3cf5a94680b35000893
 
-social auth
------------
-+ poc: twitter
-+ poc: google
-+ poc: yahoo
-+ poc: launchpad
-+ poc: generic openid url
-+ stack exchange
-+ github
-- bug: on social login, if username already exists for another social login,
-    it gets linked to it, even if it might be completely different user.
-    See for example JanosGyerik, same for yahoo and google, so if logged in
-    with yahoo first, a second login with google will link to same as yahoo
-- poc: verify smooth transition from old account to new
-    - or else, plan migration
-    - fyi: accounts were correctly matched prod -> beta for yahoo and launchpad
+
+release
+-------
+- make front page work again
+- re-enable django openid auth, for easy review and matching of accounts
+- merge branch to master
+- make a backup on the server
+- upgrade on server
+- review all existing data and clean up any garbage
 
 
 complete django 1.9 migration
@@ -27,8 +20,8 @@ complete django 1.9 migration
 - fix urls in templates
 
 
-cleaning
---------
+cleaning up
+-----------
 - fix robots, verify google webmaster
 - upgrade to latest django
 - verify it works on server
@@ -38,6 +31,13 @@ cleaning
 - review and clean all texts
 - delete maintenance_urls
 - delete dreamhost views
+
+
+post migration features
+-----------------------
+- command to merge users
+    - change association from id_source to id_target
+    - change id of all content having id_source to id_target
 
 
 kick-ass REST API

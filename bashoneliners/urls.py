@@ -20,12 +20,12 @@ from django.contrib import admin
 # admin.autodiscover()
 
 # from dreamhost.views import internal_error
-# from oneliners.views import oneliners_default
+from oneliners.views import oneliners_default
 
 urlpatterns = [
     url('', include('social.apps.django_app.urls', namespace='social')),
 
-    # url(r'^$', oneliners_default),
+    url(r'^$', oneliners_default, name='index'),
     url(r'^oneliners/', include('oneliners.urls')),
 
     # deprecated url handlers kept for a while for old tweets and feeds

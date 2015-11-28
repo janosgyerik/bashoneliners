@@ -4,7 +4,6 @@ https://trello.com/board/main/4e7da3cf5a94680b35000893
 
 release
 -------
-- make front page work again
 - merge branch to master
 - make a backup on the server
 - upgrade on server

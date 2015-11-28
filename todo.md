@@ -5,7 +5,6 @@ https://trello.com/board/main/4e7da3cf5a94680b35000893
 release
 -------
 - make front page work again
-- re-enable django openid auth, for easy review and matching of accounts
 - merge branch to master
 - make a backup on the server
 - upgrade on server

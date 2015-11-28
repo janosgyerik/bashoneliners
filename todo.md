@@ -2,14 +2,6 @@ See Trello for a more up to date near-term todo list!
 https://trello.com/board/main/4e7da3cf5a94680b35000893
 
 
-release
--------
-- merge branch to master
-- make a backup on the server
-- upgrade on server
-- review all existing data and clean up any garbage
-
-
 complete django 1.9 migration
 -----------------------------
 - upgrade to python 3

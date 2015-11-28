@@ -1,5 +1,4 @@
 {% load markup %}
-{% load comments %}
 {% load staticfiles %}
 {% load upvote %}
 
@@ -59,33 +58,11 @@
                         <p>
                             <a href="{% url 'oneliners.views.oneliner_alternative' oneliner.pk %}"
                                class="btn btn-default">Post an alternative one-liner</a>
-                            <a href="{% url 'oneliners.views.oneliner_comment' oneliner.pk %}"
-                               class="btn btn-default"><i class="glyphicon glyphicon-comment"></i>
-                                Post a comment on this one-liner</a>
                         </p>
                     {% endif %}
 
                     {% block related %}
                     {% endblock %}
-
-                    {% get_comment_count for oneliner as comment_count %}
-                    {% if comment_count > 0 %}
-                        <div class="related">
-                            <h4 class="comments-toggle {{ comments_expanded }}">
-                                <i class="glyphicon glyphicon-chevron-{% if comments_expanded %}down{% else %}right{% endif %}"></i>
-                                Comments
-                                ({{ comment_count }})</h4>
-
-                            <div class="well comments {{ comments_expanded }}">
-                                {% render_comment_list for oneliner %}
-                                {% if user.is_authenticated and not nobuttons %}
-                                    <p><a href="{% url 'oneliners.views.oneliner_comment' oneliner.pk %}"
-                                          class="btn btn-default"><i class="glyphicon glyphicon-comment"></i> Post a
-                                        comment on this one-liner</a></p>
-                                {% endif %}
-                            </div>
-                        </div>
-                    {% endif %}
                 </div>
             </td>
         </tr>

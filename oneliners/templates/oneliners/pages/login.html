@@ -8,145 +8,78 @@
 
     <div class="alert alert-info">
         <strong class="alert-heading">Note:</strong>
-        we only support OpenID / social login. <a href="http://openid.net/get-an-openid/what-is-openid/">Learn more.</a>
+        we only support Social / OpenID login. <a href="http://openid.net/get-an-openid/what-is-openid/">Learn more.</a>
     </div>
 
     <div class="row">
-        <form class="openid-form form-horizontal" method="post" action="/openid/login/" role="form">
-            {% csrf_token %}
-            <input type="hidden" name="openid_identifier" value="https://www.google.com/accounts/o8/id"/>
+        <form class="openid-form form-horizontal">
             <div class="form-group col-sm-4">
-                <p class="form-control-static">https://www.google.com/accounts/o8/id</p>
+                <p class="form-control-static">GitHub</p>
             </div>
             <div class="form-group col-sm-2">
-                <input name="bsignin" type="submit" value="Google" class="btn btn-primary"/>
+                <a class="btn btn-primary" href="{% url 'social:begin' 'github' %}">GitHub</a>
             </div>
         </form>
     </div>
 
     <div class="row">
-        <form class="openid-form form-horizontal" method="post" action="/openid/login/" role="form">
-            {% csrf_token %}
-            <input type="hidden" name="openid_identifier" value="http://yahoo.com"/>
+        <form class="openid-form form-horizontal">
             <div class="form-group col-sm-4">
-                <p class="form-control-static">http://yahoo.com</p>
+                <p class="form-control-static">Google OAuth2</p>
             </div>
             <div class="form-group col-sm-2">
-                <input name="bsignin" type="submit" value="Yahoo!" class="btn btn-primary"/>
+                <a class="btn btn-primary" href="{% url 'social:begin' 'google-oauth2' %}">Google</a>
             </div>
         </form>
     </div>
 
     <div class="row">
-        <form class="openid-form form-horizontal" method="post" action="/openid/login/" role="form">
-            <fieldset>
-                {% csrf_token %}
-                <input type="hidden" name="openid_identifier" value="__username__.wordpress.com"/>
-
-                <div class="form-group col-sm-4">
-                    <div class="input-group">
-                        <input class="username form-control" type="text" placeholder="username"/>
-                        <div class="input-group-addon">.wordpress.com</div>
-                    </div>
-                </div>
-                <div class="form-group col-sm-2">
-                    <input name="bsignin" type="submit" value="WordPress" class="btn btn-primary"/>
-                </div>
-            </fieldset>
+        <form class="openid-form form-horizontal">
+            <div class="form-group col-sm-4">
+                <p class="form-control-static">Twitter</p>
+            </div>
+            <div class="form-group col-sm-2">
+                <a class="btn btn-primary" href="{% url 'social:begin' 'twitter' %}">Twitter</a>
+            </div>
         </form>
     </div>
 
     <div class="row">
-        <form class="openid-form form-horizontal" method="post" action="/openid/login/" role="form">
-            <fieldset>
-                {% csrf_token %}
-                <input type="hidden" name="openid_identifier" value="__username__.myopenid.com"/>
-
-                <div class="form-group col-sm-4">
-                    <div class="input-group">
-                        <input class="username form-control" type="text" placeholder="username"/>
-                        <div class="input-group-addon">.myopenid.com</div>
-                    </div>
-                </div>
-                <div class="form-group col-sm-2">
-                    <input name="bsignin" type="submit" value="MyOpenID" class="btn btn-primary"/>
-                </div>
-            </fieldset>
+        <form class="openid-form form-horizontal">
+            <div class="form-group col-sm-4">
+                <p class="form-control-static">Stack Exchange</p>
+            </div>
+            <div class="form-group col-sm-2">
+                <a class="btn btn-primary" href="{% url 'social:begin' 'stackoverflow' %}">Stack Exchange</a>
+            </div>
         </form>
     </div>
 
     <div class="row">
-        <form class="openid-form form-horizontal" method="post" action="/openid/login/" role="form">
-            <fieldset>
-                {% csrf_token %}
-                <input type="hidden" name="openid_identifier" value="__username__.livejournal.com"/>
-
-                <div class="form-group col-sm-4">
-                    <div class="input-group">
-                        <input class="username form-control" type="text" placeholder="username"/>
-                        <div class="input-group-addon">.livejournal.com</div>
-                    </div>
-                </div>
-                <div class="form-group col-sm-2">
-                    <input name="bsignin" type="submit" value="LiveJournal" class="btn btn-primary"/>
-                </div>
-            </fieldset>
+        <form class="openid-form form-horizontal">
+            <div class="form-group col-sm-4">
+                <p class="form-control-static">Yahoo! OAuth2</p>
+            </div>
+            <div class="form-group col-sm-2">
+                <a class="btn btn-primary" href="{% url 'social:begin' 'yahoo' %}">Yahoo!</a>
+            </div>
         </form>
     </div>
 
     <div class="row">
-        <form class="openid-form form-horizontal" method="post" action="/openid/login/" role="form">
+        <form id="openid-form-other" method="post" action="{% url 'social:begin' 'openid' %}" role="form" class="form-horizontal openid-form">
             <fieldset>
                 {% csrf_token %}
-                <input type="hidden" name="openid_identifier" value="myspace.com/__username__"/>
-
-                <div class="form-group col-sm-4">
-                    <div class="input-group">
-                        <div class="input-group-addon">myspace.com/</div>
-                        <input class="username form-control" type="text" placeholder="username"/>
-                    </div>
-                </div>
-                <div class="form-group col-sm-2">
-                    <input name="bsignin" type="submit" value="MySpace" class="btn btn-primary"/>
-                </div>
-            </fieldset>
-        </form>
-    </div>
-
-    <div class="row">
-        <form class="openid-form form-horizontal" method="post" action="/openid/login/" role="form">
-            <fieldset>
-                {% csrf_token %}
-                <input type="hidden" name="openid_identifier" value="launchpad.net/~__username__"/>
-
-                <div class="form-group col-sm-4">
-                    <div class="input-group">
-                        <div class="input-group-addon">launchpad.net/~</div>
-                        <input class="username form-control" type="text" placeholder="username"/>
-                    </div>
-                </div>
-                <div class="form-group col-sm-2">
-                    <input name="bsignin" type="submit" value="Launchpad" class="btn btn-primary"/>
-                </div>
-            </fieldset>
-        </form>
-    </div>
-
-    <div class="row">
-        <form id="openid-form-other" method="post" action="/openid/login/" role="form" class="form-horizontal openid-form">
-            <fieldset>
-                {% csrf_token %}
-                <p>If your favourite OpenID provider is not in the list above,
-                    you can enter its URL directly:</p>
+                <p><label for="id_openid_identifier">OpenID provider URL:</label></p>
                 <div class="form-group col-sm-6">
-                    <input type="text" id="id_openid_identifier" class="openid form-control" name="openid_identifier" />
+                    <input type="text" id="id_openid_identifier" class="o   penid form-control" name="openid_identifier" />
                 </div>
                 <div class="form-group col-sm-2">
                     <input class="btn btn-primary" name="bsignin" type="submit" value="Login"/>
                 </div>
             </fieldset>
 
-            <p class="help-block">if you don't know the URL of your OpenID provider, this page might
+            <p class="help-block">If you don't know the URL of your OpenID provider, this page might
                 help: {{ 'http://en.wikipedia.org/wiki/OpenID'|urlize }}</p>
         </form>
     </div>

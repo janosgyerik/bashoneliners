@@ -2,4 +2,4 @@
 
 cd $(dirname "$0")
 
-./manage.sh runserver $*
+./manage.sh runserver $* --settings bashoneliners.local_settings

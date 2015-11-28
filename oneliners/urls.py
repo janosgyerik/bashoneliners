@@ -1,57 +1,59 @@
-from django.conf.urls import patterns, url
+from django.conf.urls import url
 
-urlpatterns = patterns('oneliners.views',
-                       url(r'^$', 'oneliners_default', name='index'),
-                       (r'^sourcecode/$', 'sourcecode'),
-                       (r'^mission/$', 'mission'),
-                       (r'^feeds/$', 'feeds'),
+from oneliners import views, ajax
 
-                       url(r'^oneliner/$', 'oneliners_default', name='oneliners_default'),
-                       url(r'^oneliner/newest/$', 'oneliners_newest', name='oneliners_newest'),
-                       url(r'^oneliner/popular/$', 'oneliners_popular', name='oneliners_popular'),
-                       url(r'^oneliner/(?P<pk>\d+)/$', 'oneliner', name='oneliner'),
-                       (r'^oneliner/edit/(?P<pk>\d+)/$', 'oneliner_edit'),
-                       (r'^oneliner/new/$', 'oneliner_new'),
-                       (r'^oneliner/new/question/(?P<question_pk>\d+)/$', 'oneliner_answer'),
-                       (r'^oneliner/new/alternative/(?P<oneliner_pk>\d+)/$', 'oneliner_alternative'),
-                       (r'^oneliner/comment/(?P<pk>\d+)/$', 'oneliner_comment'),
+urlpatterns = [
+    url(r'^$', views.oneliners_default, name='index'),
+    url(r'^sourcecode/$', views.sourcecode),
+    url(r'^mission/$', views.mission),
+    url(r'^feeds/$', views.feeds),
 
-                       (r'^profile/(?P<pk>\d+)/$', 'profile'),
-                       url(r'^profile/(?P<pk>\d+)/oneliners/$', 'profile_oneliners', name='profile_oneliners'),
-                       url(r'^profile/(?P<pk>\d+)/questions/$', 'profile_questions', name='profile_questions'),
-                       (r'^profile/$', 'profile'),
-                       (r'^profile/edit/$', 'profile_edit'),
-                       (r'^profile/oneliners/$', 'profile_oneliners'),
-                       (r'^profile/questions/$', 'profile_questions'),
-                       url(r'^profile/votes/$', 'profile_votes', name='profile_votes'),
+    url(r'^oneliner/$', views.oneliners_default, name='oneliners_default'),
+    url(r'^oneliner/newest/$', views.oneliners_newest, name='oneliners_newest'),
+    url(r'^oneliner/popular/$', views.oneliners_popular, name='oneliners_popular'),
+    url(r'^oneliner/(?P<pk>\d+)/$', views.oneliner, name='oneliner'),
+    url(r'^oneliner/edit/(?P<pk>\d+)/$', views.oneliner_edit),
+    url(r'^oneliner/new/$', views.oneliner_new),
+    url(r'^oneliner/new/question/(?P<question_pk>\d+)/$', views.oneliner_answer),
+    url(r'^oneliner/new/alternative/(?P<oneliner_pk>\d+)/$', views.oneliner_alternative),
+    # (r'^oneliner/comment/(?P<pk>\d+)/$', 'oneliner_comment'),
 
-                       (r'^question/$', 'question_list'),
-                       (r'^question/(?P<pk>\d+)/$', 'question'),
-                       (r'^question/edit/(?P<pk>\d+)/$', 'question_edit'),
-                       (r'^question/new/$', 'question_new'),
+    url(r'^profile/(?P<pk>\d+)/$', views.profile),
+    url(r'^profile/(?P<pk>\d+)/oneliners/$', views.profile_oneliners, name='profile_oneliners'),
+    url(r'^profile/(?P<pk>\d+)/questions/$', views.profile_questions, name='profile_questions'),
+    url(r'^profile/$', views.profile),
+    url(r'^profile/edit/$', views.profile_edit),
+    url(r'^profile/oneliners/$', views.profile_oneliners),
+    url(r'^profile/questions/$', views.profile_questions),
+    url(r'^profile/votes/$', views.profile_votes, name='profile_votes'),
 
-                       (r'^comment/$', 'comment_list'),
+    url(r'^question/$', views.question_list),
+    url(r'^question/(?P<pk>\d+)/$', views.question),
+    url(r'^question/edit/(?P<pk>\d+)/$', views.question_edit),
+    url(r'^question/new/$', views.question_new),
 
-                       (r'^search/$', 'search'),
+    url(r'^comment/$', views.comment_list),
 
-                       (r'^login/$', 'login'),
-                       (r'^logout/$', 'logout'),
+    url(r'^search/$', views.search),
 
-                       (r'^help/markdown/$', 'help_markdown'),
-)
+    url(r'^login/$', views.login),
+    url(r'^logout/$', views.logout),
 
-urlpatterns += patterns('oneliners.ajax',
-                        (r'^ajax/question/(?P<question_pk>\d+)/answered_by/oneliner/(?P<oneliner_pk>\d+)/$',
-                         'question_answered'),
-                        (r'^ajax/oneliner/(?P<oneliner_pk>\d+)/vote/$', 'oneliner_vote'),
-                        (r'^ajax/search/$', 'search'),
-                        (r'^ajax/search/tag/$', 'search_by_tag'),
-)
+    url(r'^help/markdown/$', views.help_markdown),
+]
 
-urlpatterns += patterns('oneliners.feeds',
-                        (r'^feeds/oneliner/$', 'oneliner'),
-                        (r'^feeds/question/$', 'question'),
-                        (r'^feeds/comment/$', 'comment'),
-)
+urlpatterns += [
+    url(r'^ajax/question/(?P<question_pk>\d+)/answered_by/oneliner/(?P<oneliner_pk>\d+)/$',
+     ajax.question_answered),
+    url(r'^ajax/oneliner/(?P<oneliner_pk>\d+)/vote/$', ajax.oneliner_vote),
+    url(r'^ajax/search/$', ajax.search),
+    url(r'^ajax/search/tag/$', ajax.search_by_tag),
+]
 
-# eof
+# TODO : circular imports: the views try to do reverse lookup on oneliners,
+#        which doesn't work until this file is fully interpreted
+# urlpatterns += [
+#     url(r'^feeds/oneliner/$', feeds.oneliner),
+#     url(r'^feeds/question/$', feeds.question),
+#     url(r'^feeds/comment/$', feeds.comment),
+# ]

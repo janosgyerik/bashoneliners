@@ -2,7 +2,6 @@ from functools import wraps
 
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout as django_logout
-from django.contrib.comments.views import comments
 from django.core.paginator import Paginator, InvalidPage, EmptyPage
 from django.core.urlresolvers import reverse
 from django.shortcuts import render_to_response, redirect

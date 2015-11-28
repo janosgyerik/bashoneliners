@@ -1,15 +1,17 @@
 # Install required python packages using pip:
 # pip install -r requirements.txt
-Django==1.5.1
+Django==1.9
 Markdown==2.6.5
-django-openid-auth==0.5
-django-social-auth==0.7.28
+PyJWT==1.4.0
+South==1.0.2
+django-openid-auth==0.7
 httplib2==0.9
 oauth2==1.5.211
 oauthlib==1.0.3
 pep8==1.6.2
 pyflakes==1.0.0
 python-openid==2.2.5
+python-social-auth==0.2.13
 pytz==2015.7
 requests==2.8.1
 requests-oauthlib==0.5.0

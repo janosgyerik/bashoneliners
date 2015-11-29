@@ -2,6 +2,12 @@ See Trello for a more up to date near-term todo list!
 https://trello.com/board/main/4e7da3cf5a94680b35000893
 
 
+unsorted
+--------
+- remove all emailing
+- add sample production and beta settings
+
+
 complete django 1.9 migration
 -----------------------------
 - upgrade to python 3

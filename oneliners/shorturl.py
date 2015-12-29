@@ -19,7 +19,7 @@ def get_goo_gl(url):
     except:
         import sys
 
-        print 'An error occurred:', sys.exc_info()
+        print('An error occurred:', sys.exc_info())
 
     return shortUrl
 

@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'social.apps.django_app.default',
     'oneliners',
     'accounts',
-    'django_openid_auth',
+    # 'django_openid_auth',
 ]
 
 MIDDLEWARE_CLASSES = [

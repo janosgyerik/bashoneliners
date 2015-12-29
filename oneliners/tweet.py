@@ -37,7 +37,7 @@ except AttributeError:
     logger.warn('settings.TWITTER is missing. Will not be able to authenticate to Twitter.')
 # except TypeError:
 # logger.warn('settings.TWITTER is missing. Will not be able to authenticate to Twitter.')
-except KeyError, key:
+except KeyError as key:
     logger.warn('settings.TWITTER[%s] is missing. Will not be able to authenticate to Twitter.', key)
 
 
@@ -71,7 +71,7 @@ def tweet(message, test=False):
     else:
         try:
             return api.update_status(message)
-        except tweepy.error.TweepError, e:
+        except tweepy.error.TweepError as e:
             logger.error('TweepError: %s', e)
 
 

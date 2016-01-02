@@ -10,7 +10,6 @@ unsorted
 
 complete django 1.9 migration
 -----------------------------
-- upgrade to python 3
 - sort out all reported false errors in pycharm
 - unit tests working
 - fix urls in templates

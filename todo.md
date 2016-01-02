@@ -4,21 +4,12 @@ https://trello.com/board/main/4e7da3cf5a94680b35000893
 
 unsorted
 --------
-- remove all emailing
 - add sample production and beta settings
-
-
-complete django 1.9 migration
------------------------------
-- sort out all reported false errors in pycharm
-- unit tests working
-- fix urls in templates
 
 
 cleaning up
 -----------
 - fix robots, verify google webmaster
-- upgrade to latest django
 - verify it works on server
 - verify backups
 - review and clean old todos
@@ -72,10 +63,6 @@ OLD next
     - oneliner.vote_up(user)
     - ...
 - centralize the score counting (all annotate(..) magic in one place)
-- switch to using social-auth
-    - make sure existing accounts remain unaffected
-- format everything with markdown
-    - comments
 - phase out AUTH_PROFILE_MODULE (deprecated in Django 1.5)
 
 
@@ -83,9 +70,9 @@ OLD future releases
 -------------------
 - See all own votes on profile page
 - TOP 50
-- mark as favourite
-- ajax controls to change one-liner or question status from public to private
+- mark as favorite
 - the user who asked the question can mark the best answer
+    - or better: the community
 - api with different query options and output format options
 - logo, better design
 
@@ -93,5 +80,6 @@ OLD future releases
 OLD minor
 ---------
 - replace bashoneliners.com references using Sites
+    - "Sites" still exists in current Django?
 - add twitter user variable, useful in dev
 - get SERVER* info in tweet admin command from settings

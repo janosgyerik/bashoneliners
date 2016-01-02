@@ -81,7 +81,7 @@ class EditOneLinerTests(TestCase):
 
         error_items = form.errors.items()
         self.assertEquals(len(error_items), 1)
-        self.assertEquals(error_items[0][0], 'explanation')
+        self.assertEquals(list(error_items)[0][0], 'explanation')
 
     def test_save_notown_failure(self):
         oneliner0 = self.jacks_oneliner
@@ -97,7 +97,7 @@ class EditOneLinerTests(TestCase):
 
         error_items = form.errors.items()
         self.assertEquals(len(error_items), 1)
-        self.assertEquals(error_items[0][0], '__all__')
+        self.assertEquals(list(error_items)[0][0], '__all__')
 
 
 class VoteTests(TestCase):

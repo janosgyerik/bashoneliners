@@ -374,7 +374,7 @@ class TagTests(TestCase):
         dd = dict(tagcloud)
         self.assertEquals(3, dd['xargs'])
         self.assertEquals(3, dd.get('xargs'))
-        self.assertEquals(2, dd['find'])
+        self.assertFalse(dd.get('find'))  # occurs 2 times, which is < TAGCLOUD_MIN_COUNT
         self.assertFalse(dd.get('BLAH'))
 
 

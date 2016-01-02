@@ -2,7 +2,5 @@
 
 cd $(dirname "$0")/..
 
-echo '### main'
+echo '### oneliners'
 ./manage.sh test oneliners
-
-# eof

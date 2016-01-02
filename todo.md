@@ -15,7 +15,6 @@ cleaning up
 - review and clean old todos
 - review and clean trello
 - review and clean all texts
-- delete maintenance_urls
 - delete dreamhost views
 
 

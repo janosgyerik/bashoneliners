@@ -28,12 +28,12 @@
                     {% if user.is_authenticated %}
                         <li><a href="{% url 'oneliners.views.oneliner_new' %}">Post</a></li>
                     {% endif %}
-                    <li><a href="{% url 'oneliners.views.sourcecode' %}">Source</a></li>
+                    <li><a href="{% url 'sourcecode' %}">Source</a></li>
                 </ul>
 
                 {% if searchform %}
                     <form class="navbar-form navbar-left" role="form" method="get"
-                          action="{% url 'oneliners.views.search' %}">
+                          action="{% url 'search' %}">
                         <input name="query" maxlength="100" placeholder="Search" type="text"
                                class="form-control search-query" id="id_query"/>
                     </form>
@@ -46,13 +46,13 @@
                             {{ user.hackerprofile.get_display_name }}
                             <span class="caret"></span></a>
                         <ul class="dropdown-menu" role="menu">
-                            <li><a href="{% url 'oneliners.views.profile' %}">Profile</a></li>
+                            <li><a href="{% url 'profile' %}">Profile</a></li>
                             <li class="divider"></li>
                             <li><a href="{% url 'oneliners.views.logout' %}">Logout</a></li>
                         </ul>
                     </li>
                     {% else %}
-                        <li><a href="{% url 'oneliners.views.login' %}" class="login">Login</a></li>
+                        <li><a href="{% url 'login' %}" class="login">Login</a></li>
                     {% endif %}
                 </ul>
             </div>

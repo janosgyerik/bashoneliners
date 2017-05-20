@@ -37,10 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'social.apps.django_app.default',
+    'social_django',
     'oneliners',
     'accounts',
-    # 'django_openid_auth',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -49,7 +48,6 @@ MIDDLEWARE_CLASSES = [
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
@@ -67,6 +65,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+		'social_django.context_processors.backends',
             ],
         },
     },
@@ -176,27 +175,20 @@ LOGGING = {
 
 # project specific django settings
 
-from django.conf.global_settings import TEMPLATE_CONTEXT_PROCESSORS
-TEMPLATE_CONTEXT_PROCESSORS += (
-    'social.apps.django_app.context_processors.backends',
-    'social.apps.django_app.context_processors.login_redirect',
-    'oneliners.context_processors.google_analytics',
-)
-
 # AUTH_PROFILE_MODULE = 'oneliners.models.HackerProfile'
 
 AUTHENTICATION_BACKENDS = (
-    'social.backends.github.GithubOAuth2',
-    'social.backends.google.GoogleOpenId',
-    'social.backends.google.GoogleOAuth2',
-    'social.backends.google.GoogleOAuth',
-    'social.backends.twitter.TwitterOAuth',
-    'social.backends.stackoverflow.StackoverflowOAuth2',
-    'social.backends.yahoo.YahooOpenId',
-    'social.backends.yahoo.YahooOAuth2',
-    'social.backends.yahoo.YahooOAuth',
-    'social.backends.launchpad.LaunchpadOpenId',
-    'social.backends.open_id.OpenIdAuth',
+    'social_core.backends.github.GithubOAuth2',
+    'social_core.backends.google.GoogleOpenId',
+    'social_core.backends.google.GoogleOAuth2',
+    'social_core.backends.google.GoogleOAuth',
+    'social_core.backends.twitter.TwitterOAuth',
+    'social_core.backends.stackoverflow.StackoverflowOAuth2',
+    'social_core.backends.yahoo.YahooOpenId',
+    'social_core.backends.yahoo.YahooOAuth2',
+    'social_core.backends.yahoo.YahooOAuth',
+    'social_core.backends.launchpad.LaunchpadOpenId',
+    'social_core.backends.open_id.OpenIdAuth',
     'django.contrib.auth.backends.ModelBackend',
 )
 

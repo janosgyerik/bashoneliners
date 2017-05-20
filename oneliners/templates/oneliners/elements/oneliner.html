@@ -31,7 +31,7 @@
 
                     <p class="author">
                         <small>
-                            &mdash; by <a href="{% url 'oneliners.views.profile' oneliner.user.pk %}"><span>{{ oneliner.user.hackerprofile.get_display_name }}</span></a>
+                            &mdash; by <a href="{% url 'profile' oneliner.user.pk %}"><span>{{ oneliner.user.hackerprofile.get_display_name }}</span></a>
                             on <span>{{ oneliner.created_dt }}</span>
                         </small>
                     </p>

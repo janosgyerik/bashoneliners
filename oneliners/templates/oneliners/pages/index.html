@@ -58,7 +58,7 @@
 
     function search_by_tag() {
     var options = {
-    url: '{% url 'oneliners.ajax.search_by_tag' %}',
+    url: '{% url 'search_by_tag' %}',
     type: 'get',
     data: {
     'tag': selected_tag,

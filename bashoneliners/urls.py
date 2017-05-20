@@ -23,7 +23,7 @@ from django.contrib import admin
 from oneliners.views import oneliners_default
 
 urlpatterns = [
-    url('', include('social.apps.django_app.urls', namespace='social')),
+    url('', include('social_django.urls', namespace='social')),
 
     url(r'^$', oneliners_default, name='index'),
     url(r'^oneliners/', include('oneliners.urls')),

@@ -18,5 +18,3 @@ class HackerProfileAdmin(admin.ModelAdmin):
 admin.site.register(OneLiner, OneLinerAdmin)
 admin.site.register(Question, QuestionAdmin)
 admin.site.register(HackerProfile, HackerProfileAdmin)
-
-# eof

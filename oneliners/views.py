@@ -4,12 +4,10 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout as django_logout
 from django.core.paginator import Paginator, InvalidPage, EmptyPage
 from django.core.urlresolvers import reverse
-from django.shortcuts import render_to_response, redirect
-from django.template import RequestContext
+from django.shortcuts import render, redirect
 from django.db.models import Sum
 from oneliners.models import OneLiner, User, Comment_recent, Tag, Question
-from oneliners.forms import EditHackerProfileForm, PostOneLinerForm, PostCommentOnOneLinerForm, PostQuestionForm, \
-    EditQuestionForm, SearchOneLinerForm, EditOneLinerForm
+from oneliners.forms import EditHackerProfileForm, PostOneLinerForm, SearchOneLinerForm, EditOneLinerForm
 
 
 # decorators
@@ -23,7 +21,7 @@ def render_with_context(custom_params=False):
             else:
                 params = _common_params(request)
                 template_path = view_method(request, *args, **kwargs)
-            return render_to_response(template_path, params, context_instance=RequestContext(request))
+            return render(request, template_path, params)
 
         return wraps(view_method)(_decorator)
 
@@ -123,7 +121,7 @@ def oneliners_newest(request):
     params = _common_oneliners_params(request, items)
     params['active_newest'] = 'active'
     params['ordering'] = 'newest'
-    return ('oneliners/pages/index.html', params)
+    return 'oneliners/pages/index.html', params
 
 
 @render_with_context(custom_params=True)
@@ -132,7 +130,7 @@ def oneliners_popular(request):
     params = _common_oneliners_params(request, items)
     params['active_popular'] = 'active'
     params['ordering'] = 'popular'
-    return ('oneliners/pages/index.html', params)
+    return 'oneliners/pages/index.html', params
 
 
 def oneliner(request, pk):
@@ -140,7 +138,7 @@ def oneliner(request, pk):
     # TODO: move the logic to the model
     items = OneLiner.objects.filter(pk=pk).annotate(score=Sum('vote__value'))
     params['oneliners'] = items
-    return render_to_response('oneliners/pages/oneliner.html', params)
+    return render(request, 'oneliners/pages/oneliner.html', params)
 
 
 @login_required
@@ -152,7 +150,7 @@ def oneliner_edit(request, pk):
         oneliner0 = OneLiner.objects.get(pk=pk, user=request.user)
         oneliner0.score = sum([x.value for x in oneliner0.vote_set.all()])
     except OneLiner.DoesNotExist:
-        return render_to_response('oneliners/pages/access_error.html', params)
+        return render(request, 'oneliners/pages/access_error.html', params)
 
     if request.method == 'POST':
         form = EditOneLinerForm(request.user, request.POST, instance=oneliner0)
@@ -170,7 +168,7 @@ def oneliner_edit(request, pk):
 
     params['form'] = form
 
-    return render_to_response('oneliners/pages/oneliner_edit.html', params, context_instance=RequestContext(request))
+    return render(request, 'oneliners/pages/oneliner_edit.html', params)
 
 
 def oneliner_new(request, question_pk=None, oneliner_pk=None, cancel_url=None):
@@ -222,12 +220,7 @@ def oneliner_new(request, question_pk=None, oneliner_pk=None, cancel_url=None):
     params['question'] = question
     params['oneliner'] = oneliner0
 
-    return render_to_response('oneliners/pages/oneliner_edit.html', params, context_instance=RequestContext(request))
-
-
-def oneliner_answer(request, question_pk):
-    cancel_url = reverse(question, args=(question_pk,))
-    return oneliner_new(request, question_pk=question_pk, cancel_url=cancel_url)
+    return render(request, 'oneliners/pages/oneliner_edit.html', params)
 
 
 def oneliner_alternative(request, oneliner_pk):
@@ -235,101 +228,18 @@ def oneliner_alternative(request, oneliner_pk):
     return oneliner_new(request, oneliner_pk=oneliner_pk, cancel_url=cancel_url)
 
 
-def oneliner_comment(request, pk):
-    params = _common_params(request)
-    params['cancel_url'] = reverse(oneliner, args=(pk,))
-
-    try:
-        oneliner0 = OneLiner.objects.get(pk=pk)
-        oneliner0.score = sum([x.value for x in oneliner0.vote_set.all()])
-    except OneLiner.DoesNotExist:
-        return render_to_response('oneliners/pages/access_error.html', params)
-
-    if request.method == 'POST':
-        if request.user.is_authenticated():
-            data = request.POST.copy()
-            data['name'] = request.user.get_full_name() or request.user.username
-            data['email'] = request.user.email
-            form = PostCommentOnOneLinerForm(oneliner0, data)
-            if form.is_valid():
-                return comments.post_comment(request, next=oneliner0.get_absolute_url())
-        else:
-            form = PostCommentOnOneLinerForm(oneliner0, request.POST)
-    else:
-        form = PostCommentOnOneLinerForm(oneliner0)
-
-    params['form'] = form
-    params['oneliner'] = oneliner0
-
-    return render_to_response('oneliners/pages/oneliner_comment.html', params, context_instance=RequestContext(request))
-
-
 @render_with_context(custom_params=True)
 def question_list(request):
     params = _common_params(request)
     params['questions'] = Question.recent()
-    return ('oneliners/pages/question_list.html', params)
-
-
-def question(request, pk):
-    params = _common_params(request)
-    params['questions'] = Question.objects.filter(pk=pk)
-    return render_to_response('oneliners/pages/question.html', params)
-
-
-@login_required
-def question_edit(request, pk):
-    params = _common_params(request)
-    params['cancel_url'] = reverse(question, args=(pk,))
-
-    try:
-        question0 = Question.objects.get(pk=pk, user=request.user)
-    except Question.DoesNotExist:
-        return render_to_response('oneliners/pages/access_error.html', params)
-
-    if request.method == 'POST':
-        form = EditQuestionForm(request.user, request.POST, instance=question0)
-        if form.is_valid():
-            if form.is_save:
-                form.save()
-                return redirect(question0)
-            elif form.is_delete:
-                question0.delete()
-                return redirect(profile)
-    else:
-        form = EditQuestionForm(request.user, instance=question0)
-
-    params['form'] = form
-
-    return render_to_response('oneliners/pages/question_edit.html', params, context_instance=RequestContext(request))
-
-
-def question_new(request):
-    params = _common_params(request)
-    params['cancel_url'] = reverse(question_list)
-
-    if request.method == 'POST':
-        form = PostQuestionForm(request.user, request.POST)
-        if request.user.is_authenticated():
-            if form.is_valid():
-                new_question = form.save()
-                if new_question.is_published:
-                    return redirect(question_list)
-                else:
-                    return redirect(new_question)
-    else:
-        form = PostQuestionForm(request.user)
-
-    params['form'] = form
-
-    return render_to_response('oneliners/pages/question_edit.html', params, context_instance=RequestContext(request))
+    return 'oneliners/pages/question_list.html', params
 
 
 @render_with_context(custom_params=True)
 def comment_list(request):
     params = _common_params(request)
     params['comments'] = Comment_recent()
-    return ('oneliners/pages/comment_list.html', params)
+    return 'oneliners/pages/comment_list.html', params
 
 
 def profile(request, pk=None):
@@ -355,7 +265,7 @@ def profile_edit(request):
     params['form'] = form
 
     template_path = 'oneliners/pages/profile_edit.html'
-    return render_to_response(template_path, params, context_instance=RequestContext(request))
+    return render(request, template_path, params)
 
 
 def _common_profile_params(request, pk):
@@ -377,7 +287,7 @@ def profile_oneliners(request, pk=None):
     if hacker != request.user:
         oneliners = oneliners.filter(is_published=True)
     params['oneliners'] = oneliners
-    return ('oneliners/pages/profile_oneliners.html', params)
+    return 'oneliners/pages/profile_oneliners.html', params
 
 
 @render_with_context(custom_params=True)
@@ -388,7 +298,7 @@ def profile_questions(request, pk=None):
     if hacker != request.user:
         questions = questions.filter(is_published=True)
     params['questions'] = questions
-    return ('oneliners/pages/profile_questions.html', params)
+    return 'oneliners/pages/profile_questions.html', params
 
 
 @render_with_context(custom_params=True)
@@ -398,7 +308,7 @@ def profile_votes(request):
     oneliners = OneLiner.objects.annotate(score=Sum('vote__value')).filter(vote__user=user)
     params['oneliners'] = oneliners
     params['hacker'] = user
-    return ('oneliners/pages/profile_votes.html', params)
+    return 'oneliners/pages/profile_votes.html', params
 
 
 @render_with_context(custom_params=True)
@@ -410,7 +320,7 @@ def search(request):
         params['oneliners'] = OneLiner.search(form)
         params['data'] = form.data
 
-    return ('oneliners/pages/search.html', params)
+    return 'oneliners/pages/search.html', params
 
 
 @render_with_context()
@@ -442,6 +352,4 @@ def mission(request):
 
 
 def help_markdown(request):
-    return render_to_response('oneliners/help/markdown.html')
-
-# eof
+    return render(request, 'oneliners/help/markdown.html')

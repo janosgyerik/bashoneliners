@@ -73,7 +73,7 @@ class HackerProfile(models.Model):
     def get_display_name(self):
         return self.display_name or self.user.username
 
-    def __unicode__(self):
+    def __str__(self):
         return ', '.join([x for x in (self.user.username, self.user.email) if x])
 
     class Meta:
@@ -220,7 +220,7 @@ class OneLiner(models.Model):
     def get_absolute_url(self):
         return "/oneliners/oneliner/%i/" % self.pk
 
-    def __unicode__(self):
+    def __str__(self):
         return self.summary
 
     class Meta:
@@ -239,7 +239,7 @@ class AlternativeOneLiner(models.Model):
 class Tag(models.Model):
     text = models.SlugField(max_length=50)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.text
 
     @staticmethod
@@ -271,7 +271,7 @@ class Question(models.Model):
     is_answered = models.BooleanField(default=False)
     created_dt = models.DateTimeField(default=now, blank=True)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.summary
 
     def add_answer(self, oneliner):
@@ -368,7 +368,7 @@ class Vote(models.Model):
     def vote_clear(user, oneliner):
         oneliner.vote_set.filter(user=user).delete()
 
-    def __unicode__(self):
+    def __str__(self):
         return '%s %s %s' % (self.user.get_full_name(), ('--', '++')[self.up], self.oneliner.summary)
 
     class Meta:

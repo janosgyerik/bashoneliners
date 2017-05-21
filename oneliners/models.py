@@ -21,7 +21,7 @@ TAGCLOUD_MIN_COUNT = 3
 
 
 def randomstring(length=16):
-    return ''.join(random.choice(string.letters) for i in xrange(length))
+    return ''.join(random.choice(string.ascii_letters) for _ in range(length))
 
 
 def get_query_terms(query):
@@ -73,7 +73,7 @@ class HackerProfile(models.Model):
     def get_display_name(self):
         return self.display_name or self.user.username
 
-    def __unicode__(self):
+    def __str__(self):
         return ', '.join([x for x in (self.user.username, self.user.email) if x])
 
     class Meta:
@@ -107,9 +107,6 @@ class OneLiner(models.Model):
 
     def get_votes_down(self):
         return self.vote_set.filter(value=-1).count()
-
-    def questions(self):
-        return self.answer_set.filter(question__is_published=True)
 
     def alternatives(self):
         return self.alternativeoneliner_set.filter(alternative__is_published=True).annotate(
@@ -220,7 +217,7 @@ class OneLiner(models.Model):
     def get_absolute_url(self):
         return "/oneliners/oneliner/%i/" % self.pk
 
-    def __unicode__(self):
+    def __str__(self):
         return self.summary
 
     class Meta:
@@ -239,7 +236,7 @@ class AlternativeOneLiner(models.Model):
 class Tag(models.Model):
     text = models.SlugField(max_length=50)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.text
 
     @staticmethod
@@ -261,78 +258,6 @@ class Tag(models.Model):
 class OneLinerTag(models.Model):
     oneliner = models.ForeignKey(OneLiner)
     tag = models.ForeignKey(Tag)
-
-
-class Question(models.Model):
-    user = models.ForeignKey(User)
-    summary = models.CharField(max_length=200)
-    explanation = models.TextField()
-    is_published = models.BooleanField(default=True)
-    is_answered = models.BooleanField(default=False)
-    created_dt = models.DateTimeField(default=now, blank=True)
-
-    def __unicode__(self):
-        return self.summary
-
-    def add_answer(self, oneliner):
-        Answer(question=self, oneliner=oneliner).save()
-
-    def oneliners(self):
-        return self.answer_set.filter(oneliner__is_published=True).annotate(score=Sum('oneliner__vote__value'))
-
-    def accept_answer(self, oneliner):
-        self.is_answered = True
-        self.save()
-        self.acceptedanswer_set.all().delete()
-        AcceptedAnswer(question=self, oneliner=oneliner).save()
-
-    def clear_all_answers(self):
-        self.is_answered = False
-        self.save()
-
-    def save(self, *args, **kwargs):
-        if not self.is_answered:
-            AcceptedAnswer.objects.filter(question=self).delete()
-        return super(Question, self).save(*args, **kwargs)
-
-    @staticmethod
-    def get(pk):
-        return Question.objects.get(pk=pk)
-
-    @staticmethod
-    def feed(limit=FEED_LIMIT):
-        return Question.objects.filter(is_published=True)[:limit]
-
-    @staticmethod
-    def recent(limit=RECENT_LIMIT):
-        return Question.objects.filter(is_published=True).exclude(is_answered=True)[:limit]
-
-    @staticmethod
-    def latest():
-        try:
-            return Question.recent(1)[0]
-        except IndexError:
-            pass
-
-    def get_absolute_url(self):
-        return "/oneliners/question/%i/" % self.pk
-
-    class Meta:
-        get_latest_by = 'pk'
-        ordering = ('-id',)
-
-
-class Answer(models.Model):
-    question = models.ForeignKey(Question)
-    oneliner = models.ForeignKey(OneLiner)
-
-
-class AcceptedAnswer(models.Model):
-    question = models.ForeignKey(Question)
-    oneliner = models.ForeignKey(OneLiner)
-
-    class Meta:
-        unique_together = (('question', 'oneliner',),)
 
 
 class Vote(models.Model):
@@ -368,19 +293,9 @@ class Vote(models.Model):
     def vote_clear(user, oneliner):
         oneliner.vote_set.filter(user=user).delete()
 
-    def __unicode__(self):
+    def __str__(self):
         return '%s %s %s' % (self.user.get_full_name(), ('--', '++')[self.up], self.oneliner.summary)
 
     class Meta:
         unique_together = (('user', 'oneliner',),)
 
-
-def Comment_recent(limit=RECENT_LIMIT):
-    return Comment.objects.filter(is_public=True).exclude(is_removed=True).order_by('-submit_date')[:limit]
-
-
-def Comment_feed(limit=FEED_LIMIT):
-    return Comment_recent(limit)
-
-
-# eof

@@ -6,7 +6,7 @@
 
 from django import forms
 
-from oneliners.models import OneLiner, HackerProfile, Question
+from oneliners.models import OneLiner, HackerProfile
 
 
 class CommonOneLinerForm(forms.ModelForm):
@@ -99,65 +99,3 @@ class EditHackerProfileForm(forms.ModelForm):
             'user',
         )
 
-
-class CommonQuestionForm(forms.ModelForm):
-    user = None
-    action = forms.CharField()
-
-    def __init__(self, user, *args, **kwargs):
-        self.user = user
-        super(CommonQuestionForm, self).__init__(*args, **kwargs)
-
-    class Meta:
-        model = Question
-
-        widgets = {
-            'summary': forms.TextInput(attrs={'class': 'span6', }),
-            'explanation': forms.Textarea(attrs={'rows': 5, 'class': 'span6', }),
-        }
-
-        fields = (
-            'summary',
-            'explanation',
-            'is_published',
-            'is_answered',
-        )
-
-
-class PostQuestionForm(CommonQuestionForm):
-    title = 'Post a question'
-    actions = ({'name': 'Post question', 'cssclass': 'btn-primary'},)
-
-    def save(self):
-        self.instance.user = self.user
-        return super(PostQuestionForm, self).save()
-
-
-class EditQuestionForm(CommonQuestionForm):
-    title = 'Edit question'
-    action_save = {'name': 'Save question', 'cssclass': 'btn-primary'}
-    action_delete = {'name': 'Delete question', 'cssclass': 'btn-danger'}
-    actions = (action_save, action_delete)
-    edit = True
-    is_save = False
-    is_delete = False
-
-    def clean_action(self):
-        action = self.cleaned_data['action']
-        if action == self.action_save['name']:
-            self.is_save = True
-        elif action == self.action_delete['name']:
-            self.is_delete = True
-        return action
-
-    def clean(self):
-        if self.instance.user != self.user:
-            raise forms.ValidationError('User %s is not the owner of this Question' % self.user)
-        return self.cleaned_data
-
-
-# class PostCommentOnOneLinerForm(CommentForm): TODO
-class PostCommentOnOneLinerForm:
-    def __init__(self, *args, **kwargs):
-        super(PostCommentOnOneLinerForm, self).__init__(*args, **kwargs)
-        self.fields['comment'].widget = forms.Textarea(attrs={'rows': 5, 'class': 'form-control', })

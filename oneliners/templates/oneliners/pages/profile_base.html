@@ -4,11 +4,13 @@
 
 {% block pageheader %}{{ hacker.hackerprofile.get_display_name|default:'Anonymous' }}
     {% if user == hacker %}
-        <a href="{% url 'oneliners.views.profile_edit' %}" class="btn btn-primary pull-right">Edit your profile</a>
+        <a href="{% url 'profile_edit' %}" class="btn btn-primary pull-right">Edit your profile</a>
     {% endif %}
 {% endblock %}
 
 {% block content %}
+
+    {% include 'oneliners/elements/warnings/relink.html' %}
 
     <table class="profile table table-bordered">
         <tbody>

@@ -1,27 +1,22 @@
 # a simple module to shorten URLs, using configuration from settings
 
+import requests
+import json
+
 from django.conf import settings
 
 
 def get_goo_gl(url):
-    shortUrl = None
-
     try:
-        data = '{longUrl:"%s", key:"%s"}' % (url, settings.GOO_GL_API_KEY)
-        import urllib2
+        data = {'longUrl': url}
+        request_url = '{}?key={}'.format(settings.GOO_GL_API_URL, settings.GOO_GL_API_KEY)
+        headers = {'Content-Type': 'application/json'}
 
-        req = urllib2.Request(settings.GOO_GL_API_URL, data)
-        req.add_header('Content-type', 'application/json')
-        result = urllib2.urlopen(req)
-        import django.utils.simplejson as json
-
-        shortUrl = json.loads(result.read()).get('id')
+        result = requests.post(request_url, data=json.dumps(data), headers=headers)
+        return json.loads(result.content.decode()).get('id')
     except:
         import sys
 
         print('An error occurred:', sys.exc_info())
 
-    return shortUrl
-
-
-# eof
+    return None

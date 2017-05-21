@@ -39,7 +39,7 @@
             as if you're teaching it to your good friend.
             Include enough details so that non-experts can understand it too.
             <br/>Note: all html will be escaped, and the text will be formatted with <a class="help help-markdown"
-                                                                                        href="{% url 'oneliners.views.help_markdown' %}">markdown</a>.
+                                                                                        href="{% url 'help_markdown' %}">markdown</a>.
         </div>
         <div class="input">
             <div class="error">{{ form.explanation.errors }}</div>
@@ -53,7 +53,7 @@
             might not work in some flavors of UNIX,
             or if it works only in Bash 4.0.
             <br/>Note: any html will be escaped, and the text will be formatted with <a class="help help-markdown"
-                                                                                        href="{% url 'oneliners.views.help_markdown' %}">markdown</a>.
+                                                                                        href="{% url 'help_markdown' %}">markdown</a>.
             <div class="input">
                 <div class="error">{{ form.limitations.errors }}</div>
                 <div class="limitations markdown">{{ form.limitations }}</div>

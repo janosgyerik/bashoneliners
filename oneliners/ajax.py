@@ -2,17 +2,8 @@ from django.shortcuts import render_to_response
 from django.contrib.auth.decorators import login_required
 from django.core.validators import validate_slug, ValidationError
 
-from oneliners.models import Question, OneLiner, Vote
+from oneliners.models import OneLiner, Vote
 from oneliners.forms import SearchOneLinerForm
-
-
-@login_required
-def question_answered(request, question_pk, oneliner_pk):
-    question = Question.objects.get(pk=question_pk, user=request.user)
-    oneliner = OneLiner.objects.get(pk=oneliner_pk)
-    question.accept_answer(oneliner)
-
-    return render_to_response('oneliners/ajax/json.js')
 
 
 @login_required
@@ -52,8 +43,7 @@ def search(request):
 
 
 def search_by_tag(request):
-    params = {}
-    params['user'] = request.user
+    params = {'user': request.user}
 
     tagname = request.GET.get('tag')
     ordering = request.GET.get('ordering')
@@ -69,6 +59,3 @@ def search_by_tag(request):
         params['oneliners'] = ()
 
     return render_to_response('oneliners/elements/oneliners.html', params)
-
-
-# eof

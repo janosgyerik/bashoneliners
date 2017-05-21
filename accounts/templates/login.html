@@ -27,9 +27,6 @@
               background: #fff url(http://cdn.sstatic.net/Img/openid/openid-logos.png?v=8);
               background-position: -1px -518px;
           }
-          .openid_large_btn-stack-exchange {
-              background-position: -1px -518px;
-          }
           .openid_large_btn-google {
               background-position: -1px -1px;
           }
@@ -50,9 +47,6 @@
                 </p>
 
                 <div class="openid_btns">
-                    <!--
-                    <a title="login with Stack Exchange" href="{% url "socialauth_begin" "stackexchange" %}?next={{ next|default:'' }}" class="openid_large_btn openid_large_btn-stack_exchange"></a>
-                    -->
                     <a title="login with Google" href="{% url "socialauth_begin" "google" %}?next={{ next|default:'' }}" class="openid_large_btn openid_large_btn-google"></a>
                     <a title="login with Facebook" href="{% url "socialauth_begin" "facebook" %}?next={{ next|default:'' }}" class="openid_large_btn openid_large_btn-facebook"></a>
                     <a title="login with Yahoo" href="{% url "socialauth_begin" "yahoo" %}?next={{ next|default:'' }}" class="openid_large_btn openid_large_btn-yahoo"></a>

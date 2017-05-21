@@ -15,7 +15,6 @@ import os
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.9/howto/deployment/checklist/
 
@@ -27,7 +26,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -37,10 +35,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'social.apps.django_app.default',
+    'social_django',
     'oneliners',
     'accounts',
-    # 'django_openid_auth',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -49,7 +46,6 @@ MIDDLEWARE_CLASSES = [
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
@@ -67,13 +63,13 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'social_django.context_processors.backends',
             ],
         },
     },
 ]
 
 WSGI_APPLICATION = 'bashoneliners.wsgi.application'
-
 
 # Database
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
@@ -84,7 +80,6 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/1.9/ref/settings/#auth-password-validators
@@ -103,7 +98,6 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.9/topics/i18n/
@@ -124,7 +118,6 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 
 STATIC_URL = '/static/'
-
 
 # Example:
 # import logging
@@ -173,38 +166,32 @@ LOGGING = {
     }
 }
 
-
 # project specific django settings
 
-from django.conf.global_settings import TEMPLATE_CONTEXT_PROCESSORS
-TEMPLATE_CONTEXT_PROCESSORS += (
-    'social.apps.django_app.context_processors.backends',
-    'social.apps.django_app.context_processors.login_redirect',
-    'oneliners.context_processors.google_analytics',
-)
+TWITTER = {
+    'consumer_key': '',
+    'consumer_secret': '',
+    'access_token': '',
+    'access_token_secret': '',
+}
 
-# AUTH_PROFILE_MODULE = 'oneliners.models.HackerProfile'
+# url shortening
+GOO_GL_API_URL = 'https://www.googleapis.com/urlshortener/v1/url'
+GOO_GL_API_KEY = ''
 
 AUTHENTICATION_BACKENDS = (
-    'social.backends.github.GithubOAuth2',
-    'social.backends.google.GoogleOpenId',
-    'social.backends.google.GoogleOAuth2',
-    'social.backends.google.GoogleOAuth',
-    'social.backends.twitter.TwitterOAuth',
-    'social.backends.stackoverflow.StackoverflowOAuth2',
-    'social.backends.yahoo.YahooOpenId',
-    'social.backends.yahoo.YahooOAuth2',
-    'social.backends.yahoo.YahooOAuth',
-    'social.backends.launchpad.LaunchpadOpenId',
-    'social.backends.open_id.OpenIdAuth',
+    'social_core.backends.github.GithubOAuth2',
+    'social_core.backends.google.GoogleOpenId',
+    'social_core.backends.google.GoogleOAuth2',
+    'social_core.backends.google.GoogleOAuth',
+    'social_core.backends.twitter.TwitterOAuth',
+    'social_core.backends.yahoo.YahooOpenId',
+    'social_core.backends.yahoo.YahooOAuth2',
+    'social_core.backends.yahoo.YahooOAuth',
+    'social_core.backends.launchpad.LaunchpadOpenId',
+    'social_core.backends.open_id.OpenIdAuth',
     'django.contrib.auth.backends.ModelBackend',
 )
-
-#OPENID_CREATE_USERS = True
-#OPENID_UPDATE_DETAILS_FROM_SREG = True
-
-#LOGIN_URL = '/accounts/login/'
-#LOGIN_REDIRECT_URL = '/'
 
 SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/oneliners/'
 SOCIAL_AUTH_LOGIN_URL = '/'
@@ -235,20 +222,6 @@ SOCIAL_AUTH_GITHUB_SECRET = ''
 SOCIAL_AUTH_TWITTER_KEY = ''
 SOCIAL_AUTH_TWITTER_SECRET = ''
 
-# http://python-social-auth.readthedocs.org/en/latest/backends/stackoverflow.html
-# https://api.stackexchange.com/
-# http://stackapps.com/apps/oauth/register
-# Note: the OAuth Domain must match the domain where the site is running
-SOCIAL_AUTH_STACKOVERFLOW_KEY = ''
-SOCIAL_AUTH_STACKOVERFLOW_SECRET = ''
-SOCIAL_AUTH_STACKOVERFLOW_API_KEY = ''
-
-# Yahoo works out of the box:
-# http://127.0.0.1:8000/login/yahoo
-
-# Launchpad works out of the box:
-# http://127.0.0.1:8000/login/launchpad
-
 # project specific custom settings
 
 # sending emails
@@ -257,11 +230,3 @@ SOCIAL_AUTH_STACKOVERFLOW_API_KEY = ''
 # EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
 EMAIL_FILE_PATH = os.path.join(LOGS_DIR, 'emails.log')
 EMAIL_BACKEND = 'oneliners.email.CustomFileEmailBackend'
-
-# url shortening
-#
-GOO_GL_API_URL = 'https://www.googleapis.com/urlshortener/v1/url'
-GOO_GL_API_KEY = ''
-
-# google analytics
-GOOGLE_ANALYTICS_ID = 'UA-XXXXXXXX-X'

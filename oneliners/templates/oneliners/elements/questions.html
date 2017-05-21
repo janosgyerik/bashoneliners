@@ -1,7 +1,0 @@
-<div class="questions">
-    {% for question in questions %}
-        {% include 'oneliners/elements/question_with_related.html' %}
-    {% empty %}
-        <div class="alert alert-block">No matching questions.</div>
-    {% endfor %}
-</div>

@@ -17,28 +17,17 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.contrib import admin
 
-# admin.autodiscover()
-
-# from dreamhost.views import internal_error
 from oneliners.views import oneliners_default
 
 urlpatterns = [
-    url('', include('social.apps.django_app.urls', namespace='social')),
+    url('', include('social_django.urls', namespace='social')),
 
     url(r'^$', oneliners_default, name='index'),
     url(r'^oneliners/', include('oneliners.urls')),
 
-    # deprecated url handlers kept for a while for old tweets and feeds
-    # url(r'^main/', include('oneliners.urls_deprecated')), TODO
-
-    # Uncomment the admin/doc line below to enable admin documentation:
-    # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 
-    # Uncomment the next line to enable the admin:
-    # url(r'^admin/', include(admin.site.urls)),
     url(r'^admin/', include(admin.site.urls)),
-    # (r'^comments/', include('django.contrib.comments.urls')), # TODO
     # url(r'^accounts/', include('accounts.urls')),
 
     # url(r'^internal_error.html$', internal_error),

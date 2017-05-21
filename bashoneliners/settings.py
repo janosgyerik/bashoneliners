@@ -15,7 +15,6 @@ import os
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.9/howto/deployment/checklist/
 
@@ -26,7 +25,6 @@ SECRET_KEY = '(p^8-@2q(uck=2+fph+1pxx=)4lrl)_!p%7b9m1&#qoy%+9+v6'
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
 
 # Application definition
 
@@ -65,14 +63,13 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-		'social_django.context_processors.backends',
+                'social_django.context_processors.backends',
             ],
         },
     },
 ]
 
 WSGI_APPLICATION = 'bashoneliners.wsgi.application'
-
 
 # Database
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
@@ -83,7 +80,6 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/1.9/ref/settings/#auth-password-validators
@@ -102,7 +98,6 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.9/topics/i18n/
@@ -123,7 +118,6 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 
 STATIC_URL = '/static/'
-
 
 # Example:
 # import logging
@@ -172,10 +166,14 @@ LOGGING = {
     }
 }
 
-
 # project specific django settings
 
-# AUTH_PROFILE_MODULE = 'oneliners.models.HackerProfile'
+TWITTER = {
+    'consumer_key': '',
+    'consumer_secret': '',
+    'access_token': '',
+    'access_token_secret': '',
+}
 
 AUTHENTICATION_BACKENDS = (
     'social_core.backends.github.GithubOAuth2',
@@ -190,12 +188,6 @@ AUTHENTICATION_BACKENDS = (
     'social_core.backends.open_id.OpenIdAuth',
     'django.contrib.auth.backends.ModelBackend',
 )
-
-#OPENID_CREATE_USERS = True
-#OPENID_UPDATE_DETAILS_FROM_SREG = True
-
-#LOGIN_URL = '/accounts/login/'
-#LOGIN_REDIRECT_URL = '/'
 
 SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/oneliners/'
 SOCIAL_AUTH_LOGIN_URL = '/'

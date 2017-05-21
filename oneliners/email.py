@@ -29,18 +29,6 @@ def send_email_template(subject_template, subject_context, message_template, mes
     return send_email(subject, message, *recipients)
 
 
-def send_oneliner_answer(question, oneliner):
-    if question.user.email:
-        send_email_template(
-            'email/answer-sub.txt', {'question': question, },
-            'email/answer-msg.txt', {
-                'question': question,
-                'oneliner': oneliner,
-            },
-            question.user.email
-        )
-
-
 def send_oneliner_alternative(oneliner, new_oneliner):
     if oneliner.user.email:
         send_email_template(
@@ -93,6 +81,3 @@ class CustomFileEmailBackend(BaseEmailBackend):
             return len(email_messages)
         except:
             return 0
-
-
-# eof

@@ -48,12 +48,6 @@
                         </div>
                     {% endif %}
 
-                    {% if user == question.user and not question.is_answered %}
-                        <p><a href="{% url 'oneliners.ajax.question_answered' question.pk oneliner.pk %}"
-                              class="btn btn-primary question-answered" data-parent="question-{{ question.pk }}">
-                            Accept this answer</a></p>
-                    {% endif %}
-
                     {% if user.is_authenticated and not nobuttons %}
                         <p>
                             <a href="{% url 'oneliners.views.oneliner_alternative' oneliner.pk %}"

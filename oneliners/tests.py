@@ -1,6 +1,6 @@
 from django.test import TestCase
 
-from oneliners.models import Tag, AcceptedAnswer, Question, OneLiner, Answer, User
+from oneliners.models import Tag, OneLiner, User
 from oneliners.forms import SearchOneLinerForm, EditOneLinerForm
 
 
@@ -26,18 +26,6 @@ class Util:
     @staticmethod
     def new_vote():
         pass
-
-    @staticmethod
-    def new_question(user):
-        question = Question(user=user)
-        question.save()
-        return question
-
-    @staticmethod
-    def new_answer(question, oneliner):
-        answer = Answer(question=question, oneliner=oneliner)
-        answer.save()
-        return answer
 
 
 class EditOneLinerTests(TestCase):
@@ -250,99 +238,6 @@ class SearchTests(TestCase):
         self.assertTrue(form.is_valid())
         results = OneLiner.search(form)
         self.assertEquals(len(results), 0)
-
-
-class QuestionTests(TestCase):
-    def setUp(self):
-        self.user = Util.new_user('user1')
-
-    def test_create_question(self):
-        Util.new_question(self.user)
-
-    def test_list_questions(self):
-        self.assertTrue(Question.objects.all().count() == 0)
-        Util.new_question(self.user)
-        self.assertTrue(Question.objects.all().count() > 0)
-
-    def test_list_questions_latestfirst(self):
-        Util.new_question(self.user)
-        q2 = Util.new_question(self.user)
-        self.assertTrue(Question.objects.latest() == q2)
-
-    def test_list_excludes_nonpublished(self):
-        Util.new_question(self.user)
-        q2 = Util.new_question(self.user)
-        self.assertEquals(Question.latest(), q2)
-        q2.is_published = False
-        q2.save()
-        self.assertNotEquals(Question.latest(), q2)
-
-    def test_list_excludes_answered(self):
-        Util.new_question(self.user)
-        q2 = Util.new_question(self.user)
-        self.assertEquals(Question.latest(), q2)
-        q2.is_answered = True
-        q2.save()
-        self.assertNotEquals(Question.latest(), q2)
-
-    def test_answer(self):
-        q1 = Util.new_question(self.user)
-        jack = Util.new_user('jack')
-        o1 = Util.new_oneliner(jack, 'echo jack')
-        Util.new_answer(q1, o1)
-
-    def test_multiple_answers(self):
-        q1 = Util.new_question(self.user)
-        jack = Util.new_user('jack')
-        o1 = Util.new_oneliner(jack, 'echo jack')
-        Util.new_answer(q1, o1)
-        mike = Util.new_user('mike')
-        o2 = Util.new_oneliner(mike, 'echo mike')
-        Util.new_answer(q1, o2)
-
-
-class AcceptedAnswerTests(TestCase):
-    def setUp(self):
-        self.jack = Util.new_user('jack')
-        self.oneliner = OneLiner(user=self.jack)
-        self.oneliner.save()
-
-        self.bill = Util.new_user('bill')
-        OneLiner(user=self.bill).save()
-
-        self.mike = Util.new_user('mike')
-        self.question = Question(user=self.mike)
-        self.question.save()
-
-    def test_accept(self):
-        self.assertEqual(AcceptedAnswer.objects.count(), 0)
-        self.assertTrue(not self.question.is_answered)
-
-        self.question.accept_answer(self.oneliner)
-        self.assertTrue(self.question.is_answered)
-        self.assertEqual(AcceptedAnswer.objects.count(), 1)
-
-        self.question.accept_answer(self.oneliner)
-        self.assertTrue(self.question.is_answered)
-        self.assertEqual(AcceptedAnswer.objects.count(), 1)
-
-    def test_accept_clear(self):
-        self.test_accept()
-        self.assertTrue(AcceptedAnswer.objects.count() > 0)
-        self.assertTrue(self.question.is_answered)
-
-        self.question.clear_all_answers()
-        self.assertFalse(AcceptedAnswer.objects.count() > 0)
-        self.assertFalse(self.question.is_answered)
-
-    def test_clear_answers_when_is_answered_is_cleared(self):
-        self.test_accept()
-        self.assertTrue(AcceptedAnswer.objects.count() > 0)
-        self.assertTrue(self.question.is_answered)
-
-        self.question.is_answered = False
-        self.question.save()
-        self.assertFalse(AcceptedAnswer.objects.count() > 0)
 
 
 class TagTests(TestCase):

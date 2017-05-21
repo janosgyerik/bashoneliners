@@ -6,7 +6,7 @@ from django.core.paginator import Paginator, InvalidPage, EmptyPage
 from django.core.urlresolvers import reverse
 from django.shortcuts import render, redirect
 from django.db.models import Sum
-from oneliners.models import OneLiner, User, Comment_recent, Tag, Question
+from oneliners.models import OneLiner, User, Tag
 from oneliners.forms import EditHackerProfileForm, PostOneLinerForm, SearchOneLinerForm, EditOneLinerForm
 
 
@@ -171,24 +171,16 @@ def oneliner_edit(request, pk):
     return render(request, 'oneliners/pages/oneliner_edit.html', params)
 
 
-def oneliner_new(request, question_pk=None, oneliner_pk=None, cancel_url=None):
+def oneliner_new(request, oneliner_pk=None, cancel_url=None):
     params = _common_params(request)
     if not cancel_url:
         cancel_url = reverse(oneliners_newest)
     params['cancel_url'] = cancel_url
 
-    question = None
     oneliner0 = None
     initial = {}
 
-    if question_pk is not None:
-        try:
-            question = Question.objects.get(pk=question_pk)
-            initial['summary'] = question.summary
-        except Question.DoesNotExist:
-            pass
-
-    elif oneliner_pk is not None:
+    if oneliner_pk is not None:
         try:
             oneliner0 = OneLiner.objects.get(pk=oneliner_pk)
             oneliner0.score = sum([x.value for x in oneliner0.vote_set.all()])
@@ -204,9 +196,7 @@ def oneliner_new(request, question_pk=None, oneliner_pk=None, cancel_url=None):
                 if new_oneliner.is_published:
                     tweet(new_oneliner, format_canonical_url(request))
 
-                if question is not None:
-                    question.add_answer(new_oneliner)
-                elif oneliner0 is not None:
+                if oneliner0 is not None:
                     oneliner0.add_alternative(new_oneliner)
 
                 if new_oneliner.is_published:
@@ -217,7 +207,6 @@ def oneliner_new(request, question_pk=None, oneliner_pk=None, cancel_url=None):
         form = PostOneLinerForm(request.user, initial=initial)
 
     params['form'] = form
-    params['question'] = question
     params['oneliner'] = oneliner0
 
     return render(request, 'oneliners/pages/oneliner_edit.html', params)
@@ -226,20 +215,6 @@ def oneliner_new(request, question_pk=None, oneliner_pk=None, cancel_url=None):
 def oneliner_alternative(request, oneliner_pk):
     cancel_url = reverse(oneliner, args=(oneliner_pk,))
     return oneliner_new(request, oneliner_pk=oneliner_pk, cancel_url=cancel_url)
-
-
-@render_with_context(custom_params=True)
-def question_list(request):
-    params = _common_params(request)
-    params['questions'] = Question.recent()
-    return 'oneliners/pages/question_list.html', params
-
-
-@render_with_context(custom_params=True)
-def comment_list(request):
-    params = _common_params(request)
-    params['comments'] = Comment_recent()
-    return 'oneliners/pages/comment_list.html', params
 
 
 def profile(request, pk=None):
@@ -288,17 +263,6 @@ def profile_oneliners(request, pk=None):
         oneliners = oneliners.filter(is_published=True)
     params['oneliners'] = oneliners
     return 'oneliners/pages/profile_oneliners.html', params
-
-
-@render_with_context(custom_params=True)
-def profile_questions(request, pk=None):
-    params = _common_profile_params(request, pk)
-    hacker = params['hacker']
-    questions = Question.objects.filter(user=hacker)
-    if hacker != request.user:
-        questions = questions.filter(is_published=True)
-    params['questions'] = questions
-    return 'oneliners/pages/profile_questions.html', params
 
 
 @render_with_context(custom_params=True)

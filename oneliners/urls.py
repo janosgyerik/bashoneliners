@@ -18,11 +18,9 @@ urlpatterns = [
 
     url(r'^profile/(?P<pk>\d+)/$', views.profile, name='profile'),
     url(r'^profile/(?P<pk>\d+)/oneliners/$', views.profile_oneliners, name='profile_oneliners'),
-    url(r'^profile/(?P<pk>\d+)/questions/$', views.profile_questions, name='profile_questions'),
     url(r'^profile/$', views.profile),
     url(r'^profile/edit/$', views.profile_edit),
     url(r'^profile/oneliners/$', views.profile_oneliners),
-    url(r'^profile/questions/$', views.profile_questions),
     url(r'^profile/votes/$', views.profile_votes, name='profile_votes'),
 
     url(r'^search/$', views.search, name='search'),
@@ -34,17 +32,7 @@ urlpatterns = [
 ]
 
 urlpatterns += [
-    url(r'^ajax/question/(?P<question_pk>\d+)/answered_by/oneliner/(?P<oneliner_pk>\d+)/$',
-     ajax.question_answered),
     url(r'^ajax/oneliner/(?P<oneliner_pk>\d+)/vote/$', ajax.oneliner_vote),
     url(r'^ajax/search/$', ajax.search),
     url(r'^ajax/search/tag/$', ajax.search_by_tag, name='search_by_tag'),
 ]
-
-# TODO : circular imports: the views try to do reverse lookup on oneliners,
-#        which doesn't work until this file is fully interpreted
-# urlpatterns += [
-#     url(r'^feeds/oneliner/$', feeds.oneliner),
-#     url(r'^feeds/question/$', feeds.question),
-#     url(r'^feeds/comment/$', feeds.comment),
-# ]

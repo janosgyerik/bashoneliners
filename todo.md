@@ -53,11 +53,6 @@ OLD next
     - feeds
 - bug: 500 error on /profile/ page when not logged in
 - Implement favoriting
-- Show number of starred questions
-    - update first upstream in jquery-upvote
-    - also better init examples
-    - push new release of jquery-upvote
-- what is bind_question_answered for?
 - replace ugly static methods with more ergonomic ones:
     - oneliner.vote_up(user)
     - ...
@@ -70,8 +65,6 @@ OLD future releases
 - See all own votes on profile page
 - TOP 50
 - mark as favorite
-- the user who asked the question can mark the best answer
-    - or better: the community
 - api with different query options and output format options
 - logo, better design
 

@@ -1,14 +1,10 @@
 from django.contrib import admin
 
-from oneliners.models import HackerProfile, OneLiner, Question
+from oneliners.models import HackerProfile, OneLiner
 
 
 class OneLinerAdmin(admin.ModelAdmin):
     list_display = ('user', 'is_published', 'was_tweeted', 'summary', 'created_dt',)
-
-
-class QuestionAdmin(admin.ModelAdmin):
-    list_display = ('user', 'is_published', 'is_answered', 'summary', 'created_dt',)
 
 
 class HackerProfileAdmin(admin.ModelAdmin):
@@ -16,5 +12,4 @@ class HackerProfileAdmin(admin.ModelAdmin):
 
 
 admin.site.register(OneLiner, OneLinerAdmin)
-admin.site.register(Question, QuestionAdmin)
 admin.site.register(HackerProfile, HackerProfileAdmin)

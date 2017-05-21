@@ -3,10 +3,18 @@ from django.contrib import admin
 from django.db import models
 
 from oneliners.models import HackerProfile, OneLiner
+from social_django.models import UserSocialAuth
+
+
+class UserSocialAuthInline(admin.StackedInline):
+    model = UserSocialAuth
+    show_change_link = True
 
 
 class UserAdmin(admin.ModelAdmin):
-    list_display = ('oneliner_count', 'id', 'username', 'email', 'first_name', 'last_name', 'is_staff')
+    list_display = ('oneliner_count', 'last_login', 'id', 'username', 'email', 'first_name', 'last_name', 'is_staff')
+    list_display_links = ('username',)
+    inlines = (UserSocialAuthInline,)
 
     def get_queryset(self, request):
         qs = super(UserAdmin, self).get_queryset(request)
@@ -16,7 +24,9 @@ class UserAdmin(admin.ModelAdmin):
 
     def oneliner_count(self, obj):
         return obj.oneliner__count
+
     oneliner_count.admin_order_field = 'oneliner_count'
+
 
 admin.site.unregister(User)
 admin.site.register(User, UserAdmin)

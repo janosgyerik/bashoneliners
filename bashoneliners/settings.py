@@ -183,7 +183,6 @@ AUTHENTICATION_BACKENDS = (
     'social_core.backends.google.GoogleOAuth2',
     'social_core.backends.google.GoogleOAuth',
     'social_core.backends.twitter.TwitterOAuth',
-    'social_core.backends.stackoverflow.StackoverflowOAuth2',
     'social_core.backends.yahoo.YahooOpenId',
     'social_core.backends.yahoo.YahooOAuth2',
     'social_core.backends.yahoo.YahooOAuth',
@@ -226,20 +225,6 @@ SOCIAL_AUTH_GITHUB_SECRET = ''
 # Test with http://127.0.0.1:8000/login/twitter
 SOCIAL_AUTH_TWITTER_KEY = ''
 SOCIAL_AUTH_TWITTER_SECRET = ''
-
-# http://python-social-auth.readthedocs.org/en/latest/backends/stackoverflow.html
-# https://api.stackexchange.com/
-# http://stackapps.com/apps/oauth/register
-# Note: the OAuth Domain must match the domain where the site is running
-SOCIAL_AUTH_STACKOVERFLOW_KEY = ''
-SOCIAL_AUTH_STACKOVERFLOW_SECRET = ''
-SOCIAL_AUTH_STACKOVERFLOW_API_KEY = ''
-
-# Yahoo works out of the box:
-# http://127.0.0.1:8000/login/yahoo
-
-# Launchpad works out of the box:
-# http://127.0.0.1:8000/login/launchpad
 
 # project specific custom settings
 

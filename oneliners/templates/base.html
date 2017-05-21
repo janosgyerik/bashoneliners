@@ -26,7 +26,7 @@
                     {% endif %}
                     <li><a href="{% url 'oneliners_default' %}">One-Liners</a></li>
                     {% if user.is_authenticated %}
-                        <li><a href="{% url 'oneliners.views.oneliner_new' %}">Post</a></li>
+                        <li><a href="{% url 'oneliner_new' %}">Post</a></li>
                     {% endif %}
                     <li><a href="{% url 'sourcecode' %}">Source</a></li>
                 </ul>
@@ -48,7 +48,7 @@
                         <ul class="dropdown-menu" role="menu">
                             <li><a href="{% url 'profile' %}">Profile</a></li>
                             <li class="divider"></li>
-                            <li><a href="{% url 'oneliners.views.logout' %}">Logout</a></li>
+                            <li><a href="{% url 'logout' %}">Logout</a></li>
                         </ul>
                     </li>
                     {% else %}

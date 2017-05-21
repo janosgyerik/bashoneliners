@@ -175,6 +175,10 @@ TWITTER = {
     'access_token_secret': '',
 }
 
+# url shortening
+GOO_GL_API_URL = 'https://www.googleapis.com/urlshortener/v1/url'
+GOO_GL_API_KEY = ''
+
 AUTHENTICATION_BACKENDS = (
     'social_core.backends.github.GithubOAuth2',
     'social_core.backends.google.GoogleOpenId',
@@ -226,11 +230,3 @@ SOCIAL_AUTH_TWITTER_SECRET = ''
 # EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
 EMAIL_FILE_PATH = os.path.join(LOGS_DIR, 'emails.log')
 EMAIL_BACKEND = 'oneliners.email.CustomFileEmailBackend'
-
-# url shortening
-#
-GOO_GL_API_URL = 'https://www.googleapis.com/urlshortener/v1/url'
-GOO_GL_API_KEY = ''
-
-# google analytics
-GOOGLE_ANALYTICS_ID = 'UA-XXXXXXXX-X'

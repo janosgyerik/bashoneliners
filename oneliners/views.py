@@ -66,10 +66,7 @@ def format_tweet(oneliner, baseurl):
     from oneliners.shorturl import get_goo_gl
 
     url = get_goo_gl(long_url) or long_url
-    message = '%s %s' % (
-        url,
-        oneliner.line,
-    )
+    message = '{} {}'.format(url, oneliner.line)
     return message
 
 

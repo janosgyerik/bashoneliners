@@ -41,19 +41,6 @@ def send_oneliner_alternative(oneliner, new_oneliner):
         )
 
 
-def send_oneliner_comment(oneliner, sender, comment):
-    if oneliner.user.email:
-        send_email_template(
-            'email/comment-sub.txt', {'oneliner': oneliner, },
-            'email/comment-msg.txt', {
-                'oneliner': oneliner,
-                'sender': sender,
-                'comment': comment,
-            },
-            oneliner.user.email
-        )
-
-
 class CustomFileEmailBackend(BaseEmailBackend):
     def send_messages(self, email_messages):
         from django.utils.timezone import now

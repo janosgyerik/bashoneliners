@@ -43,13 +43,6 @@ function bind_preview_markdown() {
     });
 }
 
-function bind_comments_toggle() {
-    $('.comments-toggle').click(function (e) {
-        $(this).toggleClass('expanded').next().toggle(0);
-        $(this).find('i.glyphicon').toggleClass('glyphicon-chevron-right glyphicon-chevron-down');
-    });
-}
-
 function footer_fix() {
     if ($('body').height() < $(window).height()) {
         $('.footer').addClass('fixed-bottom');
@@ -103,7 +96,6 @@ function bind_search_navbar() {
 $(document).ready(function () {
     bind_help_markdown();
     bind_preview_markdown();
-    bind_comments_toggle();
     bind_upvote();
     footer_fix();
     bind_dblclick_to_select_oneliner();

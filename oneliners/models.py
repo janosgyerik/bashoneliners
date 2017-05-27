@@ -294,7 +294,7 @@ class Vote(models.Model):
         oneliner.vote_set.filter(user=user).delete()
 
     def __str__(self):
-        return '%s %s %s' % (self.user.get_full_name(), ('--', '++')[self.up], self.oneliner.summary)
+        return '{} {} {:+}'.format(self.user.get_full_name(), self.oneliner.summary, self.value)
 
     class Meta:
         unique_together = (('user', 'oneliner',),)

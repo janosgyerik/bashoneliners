@@ -64,6 +64,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'social_django.context_processors.backends',
+                'oneliners.context_processors.google_analytics',
             ],
         },
     },
@@ -178,6 +179,9 @@ TWITTER = {
 # url shortening
 GOO_GL_API_URL = 'https://www.googleapis.com/urlshortener/v1/url'
 GOO_GL_API_KEY = ''
+
+# google analytics
+GOOGLE_ANALYTICS_ID = 'UA-########-#'
 
 AUTHENTICATION_BACKENDS = (
     'social_core.backends.github.GithubOAuth2',

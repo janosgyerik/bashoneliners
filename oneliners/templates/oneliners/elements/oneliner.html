@@ -48,6 +48,7 @@
                         </div>
                     {% endif %}
 
+                    {% if not nobuttons %}
                     {% with text=oneliner.summary|capfirst|add:": "|add:oneliner.line|urlencode %}
                     {% url 'oneliner' oneliner.pk as url %}
                     {% with "http://bashoneliners.com"|add:url|urlencode as url %}
@@ -58,11 +59,12 @@
                     {% endwith %}
                     {% endwith %}
 
-                    {% if user.is_authenticated and not nobuttons %}
+                    {% if user.is_authenticated %}
                             <a href="{% url 'oneliner_alternative' oneliner.pk %}"
                                class="btn btn-default">Post an alternative one-liner</a>
                     {% endif %}
                     </p>
+                    {% endif %}
 
                     {% block related %}
                     {% endblock %}

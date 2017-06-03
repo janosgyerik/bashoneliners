@@ -48,12 +48,21 @@
                         </div>
                     {% endif %}
 
+                    {% with text=oneliner.summary|capfirst|add:": "|add:oneliner.line|urlencode %}
+                    {% url 'oneliner' oneliner.pk as url %}
+                    {% with "http://bashoneliners.com"|add:url|urlencode as url %}
+                    <p>
+                        <a class="twitter-share-button btn btn-info"
+                           href="https://twitter.com/intent/tweet?text={{text}}&url={{url}}&via=bashoneliners">
+                            Tweet</a>
+                    {% endwith %}
+                    {% endwith %}
+
                     {% if user.is_authenticated and not nobuttons %}
-                        <p>
                             <a href="{% url 'oneliner_alternative' oneliner.pk %}"
                                class="btn btn-default">Post an alternative one-liner</a>
-                        </p>
                     {% endif %}
+                    </p>
 
                     {% block related %}
                     {% endblock %}

@@ -52,7 +52,7 @@
         $('#search-errors').empty();
 
         var options = {
-            url: '{% url 'oneliners.ajax.search' %}',
+            url: '{% url 'search_by_keyword' %}',
             type: 'get',
             data: {
                 'is_advanced': 'on',

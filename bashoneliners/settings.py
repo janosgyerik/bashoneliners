@@ -176,13 +176,6 @@ TWITTER = {
     'access_token_secret': '',
 }
 
-# url shortening
-GOO_GL_API_URL = 'https://www.googleapis.com/urlshortener/v1/url'
-GOO_GL_API_KEY = ''
-
-# google analytics
-GOOGLE_ANALYTICS_ID = 'UA-########-#'
-
 AUTHENTICATION_BACKENDS = (
     'social_core.backends.github.GithubOAuth2',
     'social_core.backends.google.GoogleOpenId',
@@ -200,10 +193,20 @@ AUTHENTICATION_BACKENDS = (
 SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/oneliners/'
 SOCIAL_AUTH_LOGIN_URL = '/'
 
+# url shortening
+GOO_GL_API_URL = 'https://www.googleapis.com/urlshortener/v1/url'
+GOO_GL_API_KEY = ''
+
+# google analytics
+GOOGLE_ANALYTICS_ID = 'UA-########-#'
+
 # http://python-social-auth.readthedocs.org/en/latest/backends/google.html#google-openid
 # Go to Google Developer Console: https://console.developers.google.com/
-# Go to API Manager, enable Google+ API
-# Go to API Manager / Credentials
+# Create an app
+# Create credential
+# Authorized JavaScript origins example: http://bashoneliners.com
+# Authorized redirect URIs example: http://www.bashoneliners.com/oauth/complete/google-oauth2/
+# In Library, search for "google+" and enable "Google+ API"
 SOCIAL_AUTH_GOOGLE_OAUTH2_SCOPE = [
     'https://www.googleapis.com/auth/userinfo.email',
 ]
@@ -212,19 +215,29 @@ SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = ''
 
 # http://python-social-auth.readthedocs.org/en/latest/backends/github.html
 # https://github.com/settings/applications/new
+# Settings / Developer setings / OAuth Apps
+# callback url: http://www.bashoneliners.com/oauth/complete/github/
 SOCIAL_AUTH_GITHUB_KEY = ''
 SOCIAL_AUTH_GITHUB_SECRET = ''
 
 # http://python-social-auth.readthedocs.org/en/latest/backends/twitter.html
 # https://realpython.com/blog/python/adding-social-authentication-to-django/
-# Go to https://apps.twitter.com/app/new
-# As callback url specify: http://127.0.0.1:8000/complete/twitter
+# Go to https://developer.twitter.com/en/apps/create
+# As callback url specify: http://127.0.0.1:8000/oauth/complete/twitter/
 # Go to Keys and Access Tokens tab
 # SOCIAL_AUTH_TWITTER_KEY = Consumer Key (API Key)
 # SOCIAL_AUTH_TWITTER_SECRET = Consumer Secret (API Secret)
 # Test with http://127.0.0.1:8000/login/twitter
 SOCIAL_AUTH_TWITTER_KEY = ''
 SOCIAL_AUTH_TWITTER_SECRET = ''
+
+# http://python-social-auth.readthedocs.org/en/latest/backends/stackoverflow.html
+# https://api.stackexchange.com/
+# http://stackapps.com/apps/oauth/register
+# Note: the OAuth Domain must match the domain where the site is running
+SOCIAL_AUTH_STACKOVERFLOW_KEY = ''
+SOCIAL_AUTH_STACKOVERFLOW_SECRET = ''
+SOCIAL_AUTH_STACKOVERFLOW_API_KEY = ''
 
 # project specific custom settings
 

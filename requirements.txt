@@ -2,7 +2,7 @@
 # pip install -r requirements.txt
 appdirs==1.4.3
 defusedxml==0.5.0
-Django==1.11.1
+Django==1.11.17
 Markdown==2.6.8
 oauthlib==2.0.2
 packaging==16.8
@@ -15,6 +15,6 @@ pytz==2017.2
 requests==2.14.2
 requests-oauthlib==0.8.0
 six==1.10.0
-social-auth-app-django==1.2.0
-social-auth-core==1.3.0
+social-auth-app-django==3.1.0
+social-auth-core==3.0.0
 tweepy==3.5.0

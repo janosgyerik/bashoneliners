@@ -76,10 +76,15 @@ function bind_upvote() {
             data: data
         });
     };
-    $('div.upvote').each(function (i, item) {
-        var oneliner_user_id = $(item).attr('data-user-id');
+
+    $('div.upvotejs').each(function (i, item) {
+        const $item = $(item);
+        if ($item.attr('data-voting-disabled') === 'true') {
+            return;
+        }
+        const oneliner_user_id = $item.attr('data-user-id');
         if (oneliner_user_id != App.user_id) {
-            $(item).upvote({ callback: callback });
+            Upvote.create($item.attr('id'), { callback: callback });
         }
     });
 }

@@ -1,0 +1,65 @@
+div.upvotejs {
+  text-align: center;
+}
+
+div.upvotejs a {
+  cursor: default;
+  color: transparent;
+  background-image: url('upvotejs.svg?v=1');
+  background-repeat: no-repeat;
+  overflow: hidden;
+  display: block;
+  margin: 0 auto;
+  margin-bottom: 2px;
+  width: 40px;
+  height: 30px;
+}
+
+div.upvotejs-enabled a {
+  cursor: pointer;
+}
+
+div.upvotejs span.count {
+  display: block;
+  text-align: center;
+  font-size: 20px;
+  font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+  color: #6a737c;
+  margin: 8px 0;
+}
+
+div.upvotejs a.upvote {
+  background-position: 0px -170px;
+}
+
+div.upvotejs a.upvote.upvote-on {
+  background-position: -40px -170px;
+}
+
+div.upvotejs a.downvote {
+  background-position: 0px -220px;
+}
+
+div.upvotejs a.downvote.downvote-on {
+  background-position: -40px -220px;
+}
+
+div.upvotejs a.star {
+  background-position: 0px -120px;
+}
+
+div.upvotejs a.star.star-on {
+  background-position: -40px -120px;
+}
+
+div.upvotejs-unix a.upvote.upvote-on, div.upvotejs-unix a.downvote-on {
+  filter: invert(.5) sepia(1) hue-rotate(165.7518582deg)  saturate(3.8235864)  hue-rotate(-0.81675376deg)  brightness(.47739161);
+}
+
+div.upvotejs-serverfault a.upvote.upvote-on, div.upvotejs-serverfault a.downvote-on {
+  filter: invert(.5) sepia(1) hue-rotate(315.5792014deg) saturate(7.91709017) hue-rotate(346.04745219deg) brightness(.57640233);
+}
+
+div.upvotejs-superuser a.upvote.upvote-on, div.upvotejs-superuser a.downvote-on {
+  filter: invert(.5) sepia(1) hue-rotate(159.50943396deg) saturate(2.94246645) hue-rotate(-4.96258652deg) brightness(.925639);
+}

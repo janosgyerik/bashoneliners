@@ -4,14 +4,16 @@
     {% if oneliner.relateds %}
         {% with oneliner.relateds as alternatives %}
             <div class="related">
-                <h3 class="">Related one-liners</h3>
+                <h3>Related one-liners</h3>
 
                 <div class="oneliners">
                     {% for alternative in alternatives %}
+                        {% with "true" as votingDisabled %}
                         {% with alternative.oneliner as oneliner %}
-                            {% with alternative.score as score %}
+                        {% with alternative.score as score %}
                                 {% include 'oneliners/elements/oneliner.html' %}
-                            {% endwith %}
+                        {% endwith %}
+                        {% endwith %}
                         {% endwith %}
                     {% endfor %}
                 </div>
@@ -22,14 +24,16 @@
     {% if oneliner.alternatives %}
         {% with oneliner.alternatives as alternatives %}
             <div class="related">
-                <h3 class="">Alternative one-liners</h3>
+                <h3>Alternative one-liners</h3>
 
                 <div class="oneliners">
                     {% for alternative in alternatives %}
+                        {% with "true" as votingDisabled %}
                         {% with alternative.alternative as oneliner %}
-                            {% with alternative.score as score %}
-                                {% include 'oneliners/elements/oneliner.html' %}
-                            {% endwith %}
+                        {% with alternative.score as score %}
+                            {% include 'oneliners/elements/oneliner.html' %}
+                        {% endwith %}
+                        {% endwith %}
                         {% endwith %}
                     {% endfor %}
                 </div>

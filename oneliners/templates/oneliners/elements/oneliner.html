@@ -6,7 +6,7 @@
     <table class="oneliner">
         <tr>
             <td style="vertical-align: top; width: 50px">
-                <div class="upvote" data-id="{{ oneliner.pk }}" data-user-id="{{ oneliner.user.id }}">
+                <div class="upvotejs" id="{% if votingDisabled %}disabled-{% endif %}{{ oneliner.pk }}" data-id="{{ oneliner.pk }}" data-user-id="{{ oneliner.user.id }}" data-voting-disabled="{{ votingDisabled }}">
                     <a class="upvote {% upvoted oneliner %}"></a>
                     <span class="count">{{ score|default:'0' }}</span>
                     <a class="downvote {% downvoted oneliner %}"></a>

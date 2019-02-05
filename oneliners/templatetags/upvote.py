@@ -12,7 +12,7 @@ def upvoted(context, oneliner):
         try:
             vote = oneliner.vote_set.get(user=user)
             if vote.value > 0:
-                return 'upvoted'
+                return 'upvote-on'
         except Vote.DoesNotExist:
             pass
     return ''
@@ -25,7 +25,7 @@ def downvoted(context, oneliner):
         try:
             vote = oneliner.vote_set.get(user=user)
             if vote.value < 0:
-                return 'downvoted'
+                return 'downvote-on'
         except Vote.DoesNotExist:
             pass
     return ''

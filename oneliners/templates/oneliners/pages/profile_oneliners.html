@@ -6,12 +6,6 @@
         {% include 'oneliners/elements/profile_nav.html' %}
     {% endwith %}
 
-    <h2 class="page-header">One-Liners
-        {% if user == hacker %}
-            <a href="{% url 'oneliner_new' %}" class="btn pull-right">Post a one-liner</a>
-        {% endif %}
-    </h2>
-
     {% include 'oneliners/elements/oneliners.html' %}
 
 {% endblock %}

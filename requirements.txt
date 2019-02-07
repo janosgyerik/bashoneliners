@@ -10,6 +10,7 @@ pep8==1.7.0
 pyflakes==1.5.0
 PyJWT==1.5.0
 pyparsing==2.2.0
+PySocks==1.6.8
 python3-openid==3.1.0
 pytz==2017.2
 requests==2.14.2
@@ -17,4 +18,4 @@ requests-oauthlib==0.8.0
 six==1.10.0
 social-auth-app-django==3.1.0
 social-auth-core==3.0.0
-tweepy==3.5.0
+tweepy==3.7.0

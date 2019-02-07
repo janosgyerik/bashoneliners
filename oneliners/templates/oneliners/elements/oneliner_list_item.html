@@ -16,11 +16,6 @@
                 <div class="oneliner oneliner-{{ oneliner.pk }}">
                     <h3 class="summary">
                         <a href="{% url 'oneliner' oneliner.pk %}">{{ oneliner.summary|capfirst }}</a>
-                        {% if user == oneliner.user %}
-                            <a class="btn btn-default" href="{% url 'oneliner_edit' oneliner.pk %}">
-                                <i class="glyphicon glyphicon-pencil"></i>{% if not oneliner.is_published %}
-                                <span class="draft">(Not published!)</span>{% endif %}</a>
-                        {% endif %}
                     </h3>
 
                     <pre class="line"><span class="add-on">&nbsp;$&nbsp;</span><span class="oneliner-line">{{ oneliner.line }}</span></pre>
@@ -29,6 +24,11 @@
                         <span>{{ oneliner.created_dt }}</span>
                         &mdash;
                         <a href="{% url 'profile_of' oneliner.user.pk %}"><span>{{ oneliner.user.hackerprofile.get_display_name }}</span></a>
+                        {% if user == oneliner.user %}
+                        <a class="btn btn-default {% if not oneliner.is_published %}btn-warning{% endif %}"
+                           href="{% url 'oneliner_edit' oneliner.pk %}">
+                            <i class="glyphicon glyphicon-pencil"></i></a>
+                        {% endif %}
                     </p>
                 </div>
             </td>

@@ -45,9 +45,9 @@
 
                     {% if not nobuttons %}
                         {% if user == oneliner.user %}
-                            <a class="btn btn-default" href="{% url 'oneliner_edit' oneliner.pk %}">
-                                Edit {% if not oneliner.is_published %}
-                                <span class="draft">(Not published!)</span>{% endif %}</a>
+                            <a class="btn btn-default {% if not oneliner.is_published %}btn-warning{% endif %}"
+                               href="{% url 'oneliner_edit' oneliner.pk %}">
+                                <i class="glyphicon glyphicon-pencil"></i></a>
                         {% endif %}
 
                         {% with text=oneliner.summary|capfirst|add:": "|add:oneliner.line|urlencode %}

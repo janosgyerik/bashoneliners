@@ -218,7 +218,7 @@ class OneLiner(models.Model):
         return ret
 
     def get_absolute_url(self):
-        return "/oneliners/oneliner/%i/" % self.pk
+        return "/oneliners/{}/".format(self.pk)
 
     def __str__(self):
         return self.summary

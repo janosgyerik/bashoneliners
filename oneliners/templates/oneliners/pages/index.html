@@ -43,12 +43,6 @@
 
     {% include 'oneliners/elements/oneliners_nav.html' %}
 
-    <h2 class="page-header">One-Liners
-        {% if user.is_authenticated %}
-            <a href="{% url 'oneliner_new' %}" class="btn btn-primary pull-right">Post a one-liner</a>
-        {% endif %}
-    </h2>
-
     {% include 'oneliners/elements/oneliners_page.html' %}
 
 {% endblock %}

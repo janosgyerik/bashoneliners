@@ -1,8 +1,6 @@
 <div class="oneliners">
     {% for oneliner in oneliners %}
-        {% with oneliner.score as score %}
-            {% include 'oneliners/elements/oneliner_with_related.html' %}
-        {% endwith %}
+        {% include 'oneliners/elements/oneliner_list_item.html' %}
     {% empty %}
         {% block oneliners_empty %}
             <div class="alert alert-block">No matching one-liners.</div>

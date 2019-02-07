@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout as django_logout
 from django.core.paginator import Paginator, InvalidPage, EmptyPage
 from django.core.urlresolvers import reverse
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.db.models import Sum
 from oneliners.models import OneLiner, User, Tag
 from oneliners.forms import EditHackerProfileForm, PostOneLinerForm, SearchOneLinerForm, EditOneLinerForm
@@ -114,7 +114,7 @@ def _common_oneliners_params(request, items):
 
 @render_with_context(custom_params=True)
 def oneliners_newest(request):
-    items = OneLiner.objects.filter(is_published=True).annotate(score=Sum('vote__value'))
+    items = OneLiner.objects.filter(is_published=True).annotate(vote_sum=Sum('vote__value'))
     params = _common_oneliners_params(request, items)
     params['active_newest'] = 'active'
     params['ordering'] = 'newest'
@@ -123,7 +123,7 @@ def oneliners_newest(request):
 
 @render_with_context(custom_params=True)
 def oneliners_popular(request):
-    items = OneLiner.objects.filter(is_published=True).annotate(score=Sum('vote__value')).order_by('-score', '-id')
+    items = OneLiner.objects.filter(is_published=True).annotate(vote_sum=Sum('vote__value')).order_by('-vote_sum', '-id')
     params = _common_oneliners_params(request, items)
     params['active_popular'] = 'active'
     params['ordering'] = 'popular'
@@ -132,9 +132,7 @@ def oneliners_popular(request):
 
 def oneliner(request, pk):
     params = _common_params(request)
-    # TODO: move the logic to the model
-    items = OneLiner.objects.filter(pk=pk).annotate(score=Sum('vote__value'))
-    params['oneliners'] = items
+    params['oneliner'] = get_object_or_404(OneLiner, pk=pk)
     return render(request, 'oneliners/pages/oneliner.html', params)
 
 
@@ -148,7 +146,6 @@ def oneliner_edit(request, pk):
             oneliner0 = OneLiner.objects.get(pk=pk)
         else:
             oneliner0 = OneLiner.objects.get(pk=pk, user=request.user)
-        oneliner0.score = sum([x.value for x in oneliner0.vote_set.all()])
     except OneLiner.DoesNotExist:
         return render(request, 'oneliners/pages/access_error.html', params)
 
@@ -258,7 +255,7 @@ def _common_profile_params(request, pk):
 def profile_oneliners(request, pk=None):
     params = _common_profile_params(request, pk)
     hacker = params['hacker']
-    oneliners = OneLiner.objects.filter(user=hacker).annotate(score=Sum('vote__value'))
+    oneliners = OneLiner.objects.filter(user=hacker).annotate(vote_sum=Sum('vote__value'))
     if hacker != request.user:
         oneliners = oneliners.filter(is_published=True)
     params['oneliners'] = oneliners
@@ -269,7 +266,7 @@ def profile_oneliners(request, pk=None):
 def profile_votes(request):
     params = _common_params(request)
     user = request.user
-    oneliners = OneLiner.objects.annotate(score=Sum('vote__value')).filter(vote__user=user)
+    oneliners = OneLiner.objects.annotate(vote_sum=Sum('vote__value')).filter(vote__user=user)
     params['oneliners'] = oneliners
     params['hacker'] = user
     return 'oneliners/pages/profile_votes.html', params

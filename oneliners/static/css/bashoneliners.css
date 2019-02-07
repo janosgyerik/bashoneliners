@@ -12,6 +12,15 @@ table.oneliner {
     width: 100%;
 }
 
+.oneliner .upvotejs {
+    padding-right: 1em;
+}
+
+.oneliner .upvotejs .score {
+    color: #848d95;
+    font-size: 11px;
+}
+
 .oneliner .line {
     background: #ddd;
 }
@@ -22,16 +31,30 @@ table.oneliner {
     font-weight: bold;
 }
 
+.oneliner td {
+    vertical-align: top;
+}
+
+.summary {
+    margin: .2em 0;
+}
+
 .summary {
     color: inherit;
 }
 
 .summary a {
-    color: inherit;
+    color: #07C;
 }
 
-.summary a:hover {
-    text-decoration: inherit;
+.summary a:visited {
+    color: #005999;
+}
+
+.oneliner .author {
+    text-align: right;
+    font-size: smaller;
+    color: #848d95;
 }
 
 form .required {
@@ -69,6 +92,10 @@ input.openid {
 
 table.profile {
     width: auto;
+}
+
+.nav-profile, .nav-oneliners {
+    margin-bottom: 1em;
 }
 
 .nav-profile li, .nav-oneliners li {

@@ -108,15 +108,18 @@ class OneLiner(models.Model):
     def get_votes_down(self):
         return self.vote_set.filter(value=-1).count()
 
+    def score(self):
+        return self.vote_set.aggregate(score=Sum('value'))['score'] or 0
+
     def alternatives(self):
         return self.alternativeoneliner_set.filter(alternative__is_published=True).annotate(
-            score=Sum('alternative__vote__value'))
+            vote_sum=Sum('alternative__vote__value'))
 
     def add_alternative(self, alternative):
         AlternativeOneLiner(alternative=alternative, oneliner=self).save()
 
     def relateds(self):
-        return self.related_set.filter(oneliner__is_published=True).annotate(score=Sum('oneliner__vote__value'))
+        return self.related_set.filter(oneliner__is_published=True).annotate(vote_sum=Sum('oneliner__vote__value'))
 
     @staticmethod
     def get(pk):
@@ -132,8 +135,8 @@ class OneLiner(models.Model):
 
     @staticmethod
     def filter_by_tag(tagname, order_by=None, limit=RECENT_LIMIT):
-        query = OneLiner.objects.filter(is_published=True).annotate(score=Sum('vote__value')).filter(
-            onelinertag__tag__text=tagname)
+        query = OneLiner.objects.filter(is_published=True).annotate(
+            vote_sum=Sum('vote__value')).filter(onelinertag__tag__text=tagname)
         if order_by:
             query = query.order_by(order_by, '-id')
         return query[:limit]
@@ -175,8 +178,8 @@ class OneLiner(models.Model):
                 qq &= Q(sub_qq)
 
         if len(qq.children) > 0:
-            results = OneLiner.objects.filter(is_published=True).annotate(score=Sum('vote__value')).filter(qq).order_by(
-                '-score', '-id')
+            results = OneLiner.objects.filter(is_published=True).annotate(
+                vote_sum=Sum('vote__value')).filter(qq).order_by('-vote_sum', '-id')
 
             if match_whole_words:
                 results = [x for x in results if

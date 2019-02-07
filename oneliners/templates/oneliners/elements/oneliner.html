@@ -2,37 +2,32 @@
 {% load staticfiles %}
 {% load upvote %}
 
-<div class="well">
+<div class="well" style="padding: 1em">
     <table class="oneliner">
         <tr>
-            <td style="vertical-align: top; width: 50px">
+            <td style="width: 40px">
                 <div class="upvotejs" id="{% if votingDisabled %}disabled-{% endif %}{{ oneliner.pk }}" data-id="{{ oneliner.pk }}" data-user-id="{{ oneliner.user.id }}" data-voting-disabled="{{ votingDisabled }}">
                     <a class="upvote {% upvoted oneliner %}"></a>
-                    <span class="count">{{ score|default:'0' }}</span>
+                    <span class="count">{{ oneliner.score }}</span>
                     <a class="downvote {% downvoted oneliner %}"></a>
-                    <!-- coming soon!
-                    <a class="star {{oneliner.starred}}"></a>
-                    -->
                 </div>
             </td>
 
             <td>
                 <div class="oneliner oneliner-{{ oneliner.pk }}">
+                    {% if includeSummary %}
                     <h3 class="summary">
                         <a href="{% url 'oneliner' oneliner.pk %}">{{ oneliner.summary|capfirst }}</a>
-                        {% if user == oneliner.user %}
-                            <a class="btn btn-default" href="{% url 'oneliner_edit' oneliner.pk %}">
-                                <i class="glyphicon glyphicon-pencil"></i>{% if not oneliner.is_published %}
-                                <span class="draft">(Not published!)</span>{% endif %}</a>
-                        {% endif %}
                     </h3>
+                    {% endif %}
 
                     <pre class="line"><span class="add-on">&nbsp;$&nbsp;</span><span class="oneliner-line">{{ oneliner.line }}</span></pre>
 
                     <p class="author">
                         <small>
-                            &mdash; by <a href="{% url 'profile_of' oneliner.user.pk %}"><span>{{ oneliner.user.hackerprofile.get_display_name }}</span></a>
-                            on <span>{{ oneliner.created_dt }}</span>
+                            <span>{{ oneliner.created_dt }}</span>
+                            &mdash;
+                            <a href="{% url 'profile_of' oneliner.user.pk %}"><span>{{ oneliner.user.hackerprofile.get_display_name }}</span></a>
                         </small>
                     </p>
 
@@ -49,25 +44,28 @@
                     {% endif %}
 
                     {% if not nobuttons %}
-                    {% with text=oneliner.summary|capfirst|add:": "|add:oneliner.line|urlencode %}
-                    {% url 'oneliner' oneliner.pk as url %}
-                    {% with "http://bashoneliners.com"|add:url|urlencode as url %}
-                    <p>
-                        <a class="twitter-share-button btn btn-info"
-                           href="https://twitter.com/intent/tweet?text={{text}}&url={{url}}&via=bashoneliners">
-                            Tweet</a>
-                    {% endwith %}
-                    {% endwith %}
+                        {% if user == oneliner.user %}
+                            <a class="btn btn-default" href="{% url 'oneliner_edit' oneliner.pk %}">
+                                Edit {% if not oneliner.is_published %}
+                                <span class="draft">(Not published!)</span>{% endif %}</a>
+                        {% endif %}
 
-                    {% if user.is_authenticated %}
-                        <a href="{% url 'oneliner_alternative' oneliner.pk %}"
-                           class="btn btn-default">Post an alternative one-liner</a>
-                    {% endif %}
+                        {% with text=oneliner.summary|capfirst|add:": "|add:oneliner.line|urlencode %}
+                            {% url 'oneliner' oneliner.pk as url %}
+                            {% with "http://bashoneliners.com"|add:url|urlencode as url %}
+                            <a class="twitter-share-button btn btn-info"
+                                   href="https://twitter.com/intent/tweet?text={{text}}&url={{url}}&via=bashoneliners">Tweet</a>
+                            {% endwith %}
+                        {% endwith %}
 
-                    {% if user.is_staff and user != oneliner.user %}
-                        <a class="btn btn-danger" href="{% url 'oneliner_edit' oneliner.pk %}">Edit</a>
-                    {% endif %}
-                    </p>
+                        {% if user.is_authenticated %}
+                            <a href="{% url 'oneliner_alternative' oneliner.pk %}"
+                               class="btn btn-default">Post an alternative one-liner</a>
+                        {% endif %}
+
+                        {% if user.is_staff and user != oneliner.user %}
+                            <a class="btn btn-danger" href="{% url 'oneliner_edit' oneliner.pk %}">Edit</a>
+                        {% endif %}
                     {% endif %}
 
                     {% block related %}

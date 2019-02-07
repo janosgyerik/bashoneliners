@@ -1,15 +1,12 @@
 {% extends "base.html" %}
 
-{% block pagetitle %}One-Liner{% endblock %}
+{% block pagetitle %}{{ oneliner.summary }}{% endblock %}
 
-{% block pageheader %}One-Liner
-    {% if user.is_authenticated %}
-        <a href="{% url 'oneliner_new' %}" class="btn btn-primary pull-right">Post a one-liner</a>
-    {% endif %}
+{% block pageheader %}{{ oneliner.summary }}
 {% endblock %}
 
 {% block content %}
 
-    {% include 'oneliners/elements/oneliners.html' %}
+{% include 'oneliners/elements/oneliner_with_related.html' %}
 
 {% endblock %}

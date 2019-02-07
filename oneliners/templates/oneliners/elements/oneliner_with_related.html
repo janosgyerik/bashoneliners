@@ -8,10 +8,14 @@
 
                 <div class="oneliners">
                     {% for alternative in alternatives %}
+                        {% with 1 as includeSummary %}
+                        {% with 1 as nobuttons %}
                         {% with "true" as votingDisabled %}
                         {% with alternative.oneliner as oneliner %}
                         {% with alternative.score as score %}
-                                {% include 'oneliners/elements/oneliner.html' %}
+                            {% include 'oneliners/elements/oneliner.html' %}
+                        {% endwith %}
+                        {% endwith %}
                         {% endwith %}
                         {% endwith %}
                         {% endwith %}
@@ -28,10 +32,14 @@
 
                 <div class="oneliners">
                     {% for alternative in alternatives %}
+                        {% with 1 as includeSummary %}
+                        {% with 1 as nobuttons %}
                         {% with "true" as votingDisabled %}
                         {% with alternative.alternative as oneliner %}
                         {% with alternative.score as score %}
                             {% include 'oneliners/elements/oneliner.html' %}
+                        {% endwith %}
+                        {% endwith %}
                         {% endwith %}
                         {% endwith %}
                         {% endwith %}

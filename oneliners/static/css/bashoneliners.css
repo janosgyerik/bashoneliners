@@ -103,6 +103,10 @@ table.profile {
     float: right;
 }
 
+.nav.tags {
+    margin-bottom: 1em;
+}
+
 .related .well {
     background: #dff0d8;
 }

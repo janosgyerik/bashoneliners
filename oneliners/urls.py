@@ -11,6 +11,7 @@ urlpatterns = [
 
     url(r'^newest/$', views.oneliners_newest, name='oneliners_newest'),
     url(r'^popular/$', views.oneliners_popular, name='oneliners_popular'),
+    url(r'^tags/$', views.oneliners_tags, name='oneliners_tags'),
     url(r'^(?P<pk>\d+)/$', views.oneliner, name='oneliner'),
     url(r'^(?P<pk>\d+)/edit$', views.oneliner_edit, name='oneliner_edit'),
     url(r'^new/$', views.oneliner_new, name='oneliner_new'),

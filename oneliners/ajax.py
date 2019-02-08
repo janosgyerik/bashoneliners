@@ -50,7 +50,7 @@ def search_by_tag(request):
     try:
         validate_slug(tagname)
         if ordering == 'popular':
-            order_by = '-score'
+            order_by = '-vote_sum'
         else:
             order_by = None
         items = OneLiner.filter_by_tag(tagname, order_by=order_by)

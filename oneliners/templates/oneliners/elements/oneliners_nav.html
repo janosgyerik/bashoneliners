@@ -1,4 +1,7 @@
 <ul class="nav nav-tabs nav-oneliners">
+    <li class="{{ active_tags }}">
+        <a href="{% url 'oneliners_tags' %}" data-ordering="popular">Tags</a>
+    </li>
     <li class="{{ active_popular }}">
         <a href="{% url 'oneliners_popular' %}" data-ordering="popular">Popular</a>
     </li>

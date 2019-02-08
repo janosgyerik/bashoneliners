@@ -130,6 +130,15 @@ def oneliners_popular(request):
     return 'oneliners/pages/index.html', params
 
 
+@render_with_context(custom_params=True)
+def oneliners_tags(request):
+    items = OneLiner.objects.filter(is_published=True).annotate(vote_sum=Sum('vote__value')).order_by('-vote_sum', '-id')
+    params = _common_oneliners_params(request, items)
+    params['active_tags'] = 'active'
+    params['ordering'] = 'popular'
+    return 'oneliners/pages/index.html', params
+
+
 def oneliner(request, pk):
     params = _common_params(request)
     params['oneliner'] = get_object_or_404(OneLiner, pk=pk)

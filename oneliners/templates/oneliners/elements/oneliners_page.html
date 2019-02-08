@@ -1,3 +1,11 @@
+{% if active_tags == 'active' %}
+<ul class="nav nav-pills tags">
+    {% for tag in tagcloud %}
+        <li><a href="#">{{ tag.text }}</a></li>
+    {% endfor %}
+</ul>
+{% endif %}
+
 <div class="oneliners">
     {% for oneliner in oneliners_page.object_list %}
         {% include 'oneliners/elements/oneliner_list_item.html' %}

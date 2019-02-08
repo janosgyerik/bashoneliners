@@ -23,6 +23,10 @@
     <!-- Mobile viewport optimized: j.mp/bplateviewport -->
     <meta name="viewport" content="width=device-width,initial-scale=1">
 
+    {% if SERVER_NAME != 'www.bashoneliners.com' %}
+    <meta name="robots" content="noindex">
+    {% endif %}
+
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory: mathiasbynens.be/notes/touch-icons -->
     <link href="{% static 'images/favicon.ico' %}?v=3" rel="icon" type="image/x-icon"/>
     <link href="{% static 'images/favicon.ico' %}?v=3" rel="shortcut icon" type="image/x-icon"/>

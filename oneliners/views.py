@@ -122,6 +122,15 @@ def oneliners_newest(request):
 
 
 @render_with_context(custom_params=True)
+def oneliners_active(request):
+    items = OneLiner.objects.filter(is_published=True).annotate(vote_sum=Sum('vote__value')).order_by('-updated_dt', '-id')
+    params = _common_oneliners_params(request, items)
+    params['active_active'] = 'active'
+    params['ordering'] = 'active'
+    return 'oneliners/pages/index.html', params
+
+
+@render_with_context(custom_params=True)
 def oneliners_popular(request):
     items = OneLiner.objects.filter(is_published=True).annotate(vote_sum=Sum('vote__value')).order_by('-vote_sum', '-id')
     params = _common_oneliners_params(request, items)

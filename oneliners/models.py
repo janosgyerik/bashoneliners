@@ -92,6 +92,7 @@ class OneLiner(models.Model):
     was_tweeted = models.BooleanField(default=False)
 
     created_dt = models.DateTimeField(default=now, blank=True)
+    updated_dt = models.DateTimeField(default=now, blank=True)
 
     def vote_up(self, user):
         Vote.vote_up(user, self)
@@ -213,6 +214,7 @@ class OneLiner(models.Model):
         return [rel.tag.text for rel in self.onelinertag_set.all()]
 
     def save(self, *args, **kwargs):
+        self.updated_dt = now()
         ret = super(OneLiner, self).save(*args, **kwargs)
         self.update_tags()
         return ret

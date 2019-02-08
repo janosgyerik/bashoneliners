@@ -17,10 +17,10 @@ urlpatterns = [
     url(r'^(?P<oneliner_pk>\d+)/alternative$', views.oneliner_alternative, name='oneliner_alternative'),
 
     # legacy
-    url(r'^oneliner/$', RedirectView.as_view(pattern_name='oneliners_default')),
-    url(r'^oneliner/newest/$', RedirectView.as_view(pattern_name='oneliners_newest')),
-    url(r'^oneliner/popular/$', RedirectView.as_view(pattern_name='oneliners_popular')),
-    url(r'^oneliner/(?P<pk>\d+)/$', RedirectView.as_view(pattern_name='oneliner')),
+    url(r'^oneliner/$', RedirectView.as_view(pattern_name='oneliners_default', permanent=True)),
+    url(r'^oneliner/newest/$', RedirectView.as_view(pattern_name='oneliners_newest', permanent=True)),
+    url(r'^oneliner/popular/$', RedirectView.as_view(pattern_name='oneliners_popular', permanent=True)),
+    url(r'^oneliner/(?P<pk>\d+)/$', RedirectView.as_view(pattern_name='oneliner', permanent=True)),
 
     url(r'^users/(?P<pk>\d+)/$', views.profile, name='profile_of'),
     url(r'^users/(?P<pk>\d+)/oneliners/$', views.profile_oneliners, name='profile_oneliners_of'),

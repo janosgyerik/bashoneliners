@@ -182,6 +182,10 @@ dl.rss dd {
     margin-left: 2em;
 }
 
+.page-header .btn {
+    margin-left: 1em;
+}
+
 /* markdown preview */
 
 .preview {

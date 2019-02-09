@@ -70,10 +70,11 @@ function bind_upvote() {
         // TODO: why is this necessary? can we eliminate?
         if (!data) return;
         $.ajax({
-            type: 'get',
             // TODO: clean up hardcoded url
             url: '/oneliners/ajax/oneliner/' + data.id + '/vote/',
-            data: data
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify(data)
         });
     };
 

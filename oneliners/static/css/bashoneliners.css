@@ -96,7 +96,7 @@ table.profile {
 }
 
 .nav-profile, .nav-oneliners {
-    margin-bottom: 1em;
+    margin: 1em 0;
 }
 
 .nav-profile li, .nav-oneliners li {

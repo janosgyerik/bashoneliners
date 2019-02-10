@@ -44,48 +44,48 @@
     var selected_tag;
 
     function search_by_tag() {
-    var options = {
-    url: '{% url 'search_by_tag' %}',
-    type: 'get',
-    data: {
-    'tag': selected_tag,
-    'ordering': ordering
-    },
-    success: search_success
-    };
-    $.ajax(options);
+        var options = {
+            url: '{% url 'search_by_tag' %}',
+            type: 'get',
+            data: {
+                'tag': selected_tag,
+                'ordering': ordering
+            },
+            success: search_success
+        };
+        $.ajax(options);
     }
 
     function search_success(html) {
-    $('.oneliners').html($(html).html());
-    $('.pagination').remove();
-    bind_upvote();
-    //footer_fix();
-    bind_dblclick_to_select_oneliner();
+        $('.oneliners').html($(html).html());
+        $('.pagination').remove();
+        bind_upvote();
+        //footer_fix();
+        bind_dblclick_to_select_oneliner();
     }
 
     $('.tags a').click(function(e) {
-    e.preventDefault();
-    if ($(this).parent().hasClass('active')) {
-    selected_tag = null;
-    $(this).parent().removeClass('active');
-    location.reload();
-    } else {
-    $('.tags li.active').removeClass('active');
-    $(this).parent().addClass('active');
-    selected_tag = $(this).text();
-    search_by_tag();
-    }
+        e.preventDefault();
+        if ($(this).parent().hasClass('active')) {
+            selected_tag = null;
+            $(this).parent().removeClass('active');
+            location.reload();
+        } else {
+            $('.tags li.active').removeClass('active');
+            $(this).parent().addClass('active');
+            selected_tag = $(this).text();
+            search_by_tag();
+        }
     });
 
     $('.nav-oneliners li a').click(function(e) {
-    if (selected_tag) {
-    e.preventDefault();
-    $('.nav-oneliners li').removeClass('active');
-    $(this).parent().addClass('active');
-    ordering = $(this).attr('data-ordering');
-    search_by_tag();
-    }
+        if (selected_tag) {
+            e.preventDefault();
+            $('.nav-oneliners li').removeClass('active');
+            $(this).parent().addClass('active');
+            ordering = $(this).attr('data-ordering');
+            search_by_tag();
+        }
     });
 
 {% endblock %}

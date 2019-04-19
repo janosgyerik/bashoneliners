@@ -195,7 +195,7 @@ def oneliner_new(request, oneliner_pk=None, cancel_url=None):
     oneliner0 = None
     initial = {}
 
-    if oneliner_pk is not None:
+    if oneliner_pk:
         try:
             oneliner0 = OneLiner.objects.get(pk=oneliner_pk)
             oneliner0.score = sum([x.value for x in oneliner0.vote_set.all()])
@@ -208,8 +208,6 @@ def oneliner_new(request, oneliner_pk=None, cancel_url=None):
         if request.user.is_authenticated():
             if form.is_valid():
                 new_oneliner = form.save()
-                if new_oneliner.is_published:
-                    tweet(new_oneliner, format_canonical_url(request))
 
                 if oneliner0 is not None:
                     oneliner0.add_alternative(new_oneliner)

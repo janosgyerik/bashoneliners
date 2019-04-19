@@ -15,16 +15,10 @@ from logging import getLogger
 
 from django.conf import settings
 
+import tweepy
+
 
 logger = getLogger(__name__)
-
-have_tweepy = False
-try:
-    import tweepy
-
-    have_tweepy = True
-except ImportError:
-    logger.warn('Could not import tweepy. Will not be able to tweet.')
 
 have_creds = False
 try:
@@ -34,19 +28,13 @@ try:
     access_token_secret = settings.TWITTER['access_token_secret']
     have_creds = True
 except AttributeError:
-    logger.warn('settings.TWITTER is missing. Will not be able to authenticate to Twitter.')
-# except TypeError:
-# logger.warn('settings.TWITTER is missing. Will not be able to authenticate to Twitter.')
+    logger.warning('settings.TWITTER is missing. Will not be able to authenticate to Twitter.')
 except KeyError as key:
-    logger.warn('settings.TWITTER[%s] is missing. Will not be able to authenticate to Twitter.', key)
+    logger.warning('settings.TWITTER[%s] is missing. Will not be able to authenticate to Twitter.', key)
 
 
 def tweet(message, test=False):
     logger.debug(message)
-
-    if not have_tweepy:
-        logger.error('Cannot tweet because could not load tweepy.')
-        return False
 
     if not have_creds:
         logger.error('Cannot tweet because there is a problem with credentials in settings.TWITTER.')
@@ -73,6 +61,3 @@ def tweet(message, test=False):
             return api.update_status(message)
         except tweepy.error.TweepError as e:
             logger.error('TweepError: %s', e)
-
-
-# eof

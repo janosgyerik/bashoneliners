@@ -17,31 +17,33 @@ from django.conf import settings
 
 import tweepy
 
+TWITTER_CREDENTIAL_KEYS = ('consumer_key', 'consumer_secret', 'access_token', 'access_token_secret')
 
 logger = getLogger(__name__)
 
-have_creds = False
-try:
-    consumer_key = settings.TWITTER['consumer_key']
-    consumer_secret = settings.TWITTER['consumer_secret']
-    access_token = settings.TWITTER['access_token']
-    access_token_secret = settings.TWITTER['access_token_secret']
+
+def get_validated_twitter_credentials():
+    twitter_settings = settings.TWITTER
     have_creds = True
-except AttributeError:
-    logger.warning('settings.TWITTER is missing. Will not be able to authenticate to Twitter.')
-except KeyError as key:
-    logger.warning('settings.TWITTER[%s] is missing. Will not be able to authenticate to Twitter.', key)
+    for key in TWITTER_CREDENTIAL_KEYS:
+        if key not in twitter_settings or not twitter_settings[key]:
+            have_creds = False
+            logger.warning('settings.TWITTER[%s] is missing. Will not be able to authenticate to Twitter.', key)
+
+    return twitter_settings if have_creds else None
 
 
 def tweet(message, test=False):
     logger.debug(message)
 
-    if not have_creds:
-        logger.error('Cannot tweet because there is a problem with credentials in settings.TWITTER.')
+    creds = get_validated_twitter_credentials()
+
+    if not creds:
+        logger.error('Cannot tweet because settings.TWITTER is incomplete.')
         return False
 
-    auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
-    auth.set_access_token(access_token, access_token_secret)
+    auth = tweepy.OAuthHandler(creds['consumer_key'], creds['consumer_secret'])
+    auth.set_access_token(creds['access_token'], creds['access_token_secret'])
     api = tweepy.API(auth)
 
     # shorten the text to make room for #bash
@@ -56,8 +58,8 @@ def tweet(message, test=False):
     if test:
         logger.info(message)
         return True
-    else:
-        try:
-            return api.update_status(message)
-        except tweepy.error.TweepError as e:
-            logger.error('TweepError: %s', e)
+
+    try:
+        return api.update_status(message)
+    except tweepy.error.TweepError as e:
+        logger.error('TweepError: %s', e)

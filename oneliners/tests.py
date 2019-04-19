@@ -1,4 +1,4 @@
-from django.test import TestCase
+from django.test import TestCase, override_settings
 
 from oneliners.models import Tag, OneLiner, User
 from oneliners.forms import SearchOneLinerForm, EditOneLinerForm
@@ -274,4 +274,17 @@ class TagTests(TestCase):
         self.assertFalse(dd.get('BLAH'))
 
 
-# eof
+class TweepyTests(TestCase):
+    from oneliners.tweet import TWITTER_CREDENTIAL_KEYS
+
+    @override_settings(TWITTER={k: 'nonempty' for k in TWITTER_CREDENTIAL_KEYS})
+    def test_get_twitter_credentials_when_present(self):
+        from oneliners.tweet import get_validated_twitter_credentials
+        creds = get_validated_twitter_credentials()
+        self.assertEquals(creds, {'access_token': 'nonempty', 'access_token_secret': 'nonempty',
+                                  'consumer_key': 'nonempty', 'consumer_secret': 'nonempty'})
+
+    @override_settings(TWITTER={'foo': 'bar'})
+    def test_get_none_when_twitter_credentials_incomplete(self):
+        from oneliners.tweet import get_validated_twitter_credentials
+        self.assertIsNone(get_validated_twitter_credentials())

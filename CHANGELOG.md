@@ -5,6 +5,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+### Removed
+
+- Do not Tweet automtically on first post
+
 ## [1.4] - 2019-02-25
 
 ### Added

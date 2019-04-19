@@ -172,8 +172,6 @@ def oneliner_edit(request, pk):
         if form.is_valid():
             if form.is_save:
                 oneliner1 = form.save()
-                if oneliner1.is_published:
-                    tweet(oneliner1, format_canonical_url(request))
                 return redirect(oneliner1)
             elif form.is_delete:
                 oneliner0.delete()

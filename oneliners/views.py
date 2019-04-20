@@ -1,6 +1,6 @@
 from functools import wraps
 
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth import logout as django_logout
 from django.core.paginator import Paginator, InvalidPage, EmptyPage
 from django.core.urlresolvers import reverse
@@ -221,6 +221,14 @@ def oneliner_new(request, oneliner_pk=None, cancel_url=None):
     params['oneliner'] = oneliner0
 
     return render(request, 'oneliners/pages/oneliner_edit.html', params)
+
+
+@user_passes_test(lambda u: u.is_staff)
+def oneliner_tweet(request, pk):
+    oneliner0 = OneLiner.objects.get(pk=pk)
+    tweet(oneliner0, format_canonical_url(request), force=True)
+
+    return oneliner(request, pk)
 
 
 def oneliner_alternative(request, oneliner_pk):

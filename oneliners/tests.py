@@ -8,6 +8,7 @@ class Util:
     @staticmethod
     def new_user(username):
         user = User(username=username)
+        user.set_password(username)
         user.save()
         return user
 
@@ -288,3 +289,41 @@ class TweepyTests(TestCase):
     def test_get_none_when_twitter_credentials_incomplete(self):
         from oneliners.tweet import get_validated_twitter_credentials
         self.assertIsNone(get_validated_twitter_credentials())
+
+
+class OnelinerTweetTests(TestCase):
+    def setUp(self):
+        self.contributor = Util.new_user('contributor')
+        self.oneliner = Util.new_oneliner(self.contributor, 'echo jack')
+
+        self.nonstaff = Util.new_user('nonstaff')
+        self.nonstaff.save()
+
+        self.staff = Util.new_user('staff')
+        self.staff.is_staff = True
+        self.staff.save()
+
+    def tweet_oneliner(self):
+        return self.client.get('/oneliners/{}/tweet'.format(self.oneliner.pk))
+
+    def test_anon_user_is_not_allowed(self):
+        response = self.tweet_oneliner()
+        self.assertEqual(response.status_code, 302)
+        self.assertTrue(response.url.startswith('/accounts/login'))
+
+    def test_nonstaff_user_is_not_allowed(self):
+        self.client.login(username=self.nonstaff.username, password='nonstaff')
+        response = self.tweet_oneliner()
+        self.assertEqual(response.status_code, 302)
+        self.assertTrue(response.url.startswith('/accounts/login'))
+
+    def test_contributor_user_is_not_allowed(self):
+        self.client.login(username=self.contributor.username, password='contributor')
+        response = self.tweet_oneliner()
+        self.assertEqual(response.status_code, 302)
+        self.assertTrue(response.url.startswith('/accounts/login'))
+
+    def test_staff_is_allowed(self):
+        self.client.login(username=self.staff.username, password='staff')
+        response = self.tweet_oneliner()
+        self.assertEqual(response.status_code, 200)

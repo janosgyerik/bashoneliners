@@ -193,10 +193,6 @@ AUTHENTICATION_BACKENDS = (
 SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/oneliners/'
 SOCIAL_AUTH_LOGIN_URL = '/'
 
-# url shortening
-GOO_GL_API_URL = 'https://www.googleapis.com/urlshortener/v1/url'
-GOO_GL_API_KEY = ''
-
 # google analytics
 GOOGLE_ANALYTICS_ID = 'UA-########-#'
 

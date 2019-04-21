@@ -13,7 +13,7 @@ pyparsing==2.2.0
 PySocks==1.6.8
 python3-openid==3.1.0
 pytz==2017.2
-requests==2.14.2
+requests==2.20.0
 requests-oauthlib==0.8.0
 six==1.10.0
 social-auth-app-django==3.1.0

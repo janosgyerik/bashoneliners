@@ -63,7 +63,7 @@
                                class="btn btn-default">Post an alternative one-liner</a>
                         {% endif %}
 
-                        {% if user.is_staff and user != oneliner.user %}
+                        {% if user.is_staff %}
                             <a class="btn btn-danger" href="{% url 'oneliner_edit' oneliner.pk %}">Edit</a>
                             <a class="btn btn-{% if not oneliner.was_tweeted %}danger{% else %}warning{% endif %}" href="{% url 'oneliner_tweet' oneliner.pk %}">Tweet</a>
                         {% endif %}

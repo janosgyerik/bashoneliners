@@ -63,8 +63,8 @@ def _common_params(request):
 
 def tweet(oneliner, long_url, force=False, test=False):
     if not oneliner.was_tweeted or force:
-        from oneliners.shorturl import get_goo_gl
-        url = get_goo_gl(long_url) or long_url
+        from oneliners.url_shortener import shorten
+        url = shorten(long_url) or long_url
 
         from oneliners.tweet import format_message
         message = format_message(oneliner.summary, oneliner.line, url)

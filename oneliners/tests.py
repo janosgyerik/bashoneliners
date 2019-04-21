@@ -1,13 +1,18 @@
-from django.test import TestCase
+from django.test import TestCase, override_settings
 
 from oneliners.models import Tag, OneLiner, User
 from oneliners.forms import SearchOneLinerForm, EditOneLinerForm
+from oneliners.tweet import TWEET_LENGTH_LIMIT
+
+import random
+import string
 
 
 class Util:
     @staticmethod
     def new_user(username):
         user = User(username=username)
+        user.set_password(username)
         user.save()
         return user
 
@@ -274,4 +279,111 @@ class TagTests(TestCase):
         self.assertFalse(dd.get('BLAH'))
 
 
-# eof
+class TweepyTests(TestCase):
+    from oneliners.tweet import TWITTER_CREDENTIAL_KEYS
+
+    @override_settings(TWITTER={k: 'nonempty' for k in TWITTER_CREDENTIAL_KEYS})
+    def test_get_twitter_credentials_when_present(self):
+        from oneliners.tweet import get_validated_twitter_credentials
+        creds = get_validated_twitter_credentials()
+        self.assertEquals(creds, {'access_token': 'nonempty', 'access_token_secret': 'nonempty',
+                                  'consumer_key': 'nonempty', 'consumer_secret': 'nonempty'})
+
+    @override_settings(TWITTER={'foo': 'bar'})
+    def test_get_none_when_twitter_credentials_incomplete(self):
+        from oneliners.tweet import get_validated_twitter_credentials
+        self.assertIsNone(get_validated_twitter_credentials())
+
+
+class OnelinerTweetTests(TestCase):
+    def setUp(self):
+        self.contributor = Util.new_user('contributor')
+        self.oneliner = Util.new_oneliner(self.contributor, 'echo jack')
+
+        self.nonstaff = Util.new_user('nonstaff')
+        self.nonstaff.save()
+
+        self.staff = Util.new_user('staff')
+        self.staff.is_staff = True
+        self.staff.save()
+
+    def tweet_oneliner(self):
+        return self.client.get('/oneliners/{}/tweet'.format(self.oneliner.pk))
+
+    def test_anon_user_is_not_allowed(self):
+        response = self.tweet_oneliner()
+        self.assertEqual(response.status_code, 302)
+        self.assertTrue(response.url.startswith('/accounts/login'))
+
+    def test_nonstaff_user_is_not_allowed(self):
+        self.client.login(username=self.nonstaff.username, password='nonstaff')
+        response = self.tweet_oneliner()
+        self.assertEqual(response.status_code, 302)
+        self.assertTrue(response.url.startswith('/accounts/login'))
+
+    def test_contributor_user_is_not_allowed(self):
+        self.client.login(username=self.contributor.username, password='contributor')
+        response = self.tweet_oneliner()
+        self.assertEqual(response.status_code, 302)
+        self.assertTrue(response.url.startswith('/accounts/login'))
+
+    def test_staff_is_allowed(self):
+        self.client.login(username=self.staff.username, password='staff')
+        response = self.tweet_oneliner()
+        self.assertEqual(response.status_code, 200)
+
+    def test_ellipsize(self):
+        from oneliners.tweet import ellipsize
+        self.assertEqual(ellipsize("foobarbaz", 6), "foo...")
+        self.assertEqual(ellipsize("foobarbaz", 12), "foobarbaz")
+
+    def test_format_message(self):
+        from oneliners.tweet import format_message
+        self.assertEqual(format_message("foo", "bar", "baz"), "foo: bar; baz #bash #linux")
+
+        oneliner = "echo hello world"
+        url = "http://goo.gl/pretty-usual"
+        essential_length = 2 + len(oneliner) + len(url)
+
+        def random_alphabetic(length):
+            return ''.join(random.choices(string.ascii_lowercase, k=length))
+
+        # not too long to include #bash #linux
+        summary = random_alphabetic(TWEET_LENGTH_LIMIT - essential_length - 2 - len(" #bash #linux"))
+        self.assertEqual(format_message(summary, oneliner, url),
+            summary + ": " + oneliner + "; " + url + " #bash #linux")
+
+        # too long to include #linux
+        summary = random_alphabetic(TWEET_LENGTH_LIMIT - essential_length - 2 - len(" #linux"))
+        self.assertEqual(format_message(summary, oneliner, url),
+            summary + ": " + oneliner + "; " + url + " #bash")
+
+        # too long to include #bash #linux
+        summary = random_alphabetic(TWEET_LENGTH_LIMIT - essential_length - 2)
+        self.assertEqual(format_message(summary, oneliner, url),
+            summary + ": " + oneliner + "; " + url)
+
+        # too long to include summary at all
+        summary = random_alphabetic(TWEET_LENGTH_LIMIT - essential_length - 1)
+        self.assertEqual(format_message(summary, oneliner, url),
+            oneliner + "; " + url + " #bash #linux")
+
+        # oneliner not too long to include #bash #linux
+        oneliner = random_alphabetic(TWEET_LENGTH_LIMIT - len(url) - 2 - len(" #bash #linux"))
+        self.assertEqual(format_message(summary, oneliner, url),
+            oneliner + "; " + url + " #bash #linux")
+
+        # oneliner too long to include #linux
+        oneliner = random_alphabetic(TWEET_LENGTH_LIMIT - len(url) - 2 - len(" #linux"))
+        self.assertEqual(format_message(summary, oneliner, url),
+            oneliner + "; " + url + " #bash")
+
+        # oneliner too long to include #bash #linux
+        oneliner = random_alphabetic(TWEET_LENGTH_LIMIT - len(url) - 2)
+        self.assertEqual(format_message(summary, oneliner, url),
+            oneliner + "; " + url)
+
+        # oneliner so long that ellipsis necessary
+        oneliner = random_alphabetic(TWEET_LENGTH_LIMIT - len(url) - 1)
+        self.assertEqual(format_message(summary, oneliner, url),
+            oneliner[:len(oneliner)-4] + "...; " + url)

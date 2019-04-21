@@ -1,6 +1,6 @@
 from functools import wraps
 
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth import logout as django_logout
 from django.core.paginator import Paginator, InvalidPage, EmptyPage
 from django.core.urlresolvers import reverse
@@ -61,25 +61,20 @@ def _common_params(request):
     return params
 
 
-def format_tweet(oneliner, baseurl):
-    long_url = baseurl + oneliner.get_absolute_url()
-    from oneliners.shorturl import get_goo_gl
-
-    url = get_goo_gl(long_url) or long_url
-    message = '{} {}'.format(url, oneliner.line)
-    return message
-
-
-def tweet(oneliner, baseurl, force=False, test=False):
+def tweet(oneliner, long_url, force=False, test=False):
     if not oneliner.was_tweeted or force:
-        from oneliners.tweet import tweet as send_tweet
+        from oneliners.shorturl import get_goo_gl
+        url = get_goo_gl(long_url) or long_url
 
-        message = format_tweet(oneliner, baseurl)
+        from oneliners.tweet import format_message
+        message = format_message(oneliner.summary, oneliner.line, url)
+
+        from oneliners.tweet import send_tweet
         result = send_tweet(message, test=test)
         if result:
             oneliner.was_tweeted = True
             oneliner.save()
-            return result
+        return result
 
 
 def index(request):
@@ -172,8 +167,6 @@ def oneliner_edit(request, pk):
         if form.is_valid():
             if form.is_save:
                 oneliner1 = form.save()
-                if oneliner1.is_published:
-                    tweet(oneliner1, format_canonical_url(request))
                 return redirect(oneliner1)
             elif form.is_delete:
                 oneliner0.delete()
@@ -195,7 +188,7 @@ def oneliner_new(request, oneliner_pk=None, cancel_url=None):
     oneliner0 = None
     initial = {}
 
-    if oneliner_pk is not None:
+    if oneliner_pk:
         try:
             oneliner0 = OneLiner.objects.get(pk=oneliner_pk)
             oneliner0.score = sum([x.value for x in oneliner0.vote_set.all()])
@@ -208,8 +201,6 @@ def oneliner_new(request, oneliner_pk=None, cancel_url=None):
         if request.user.is_authenticated():
             if form.is_valid():
                 new_oneliner = form.save()
-                if new_oneliner.is_published:
-                    tweet(new_oneliner, format_canonical_url(request))
 
                 if oneliner0 is not None:
                     oneliner0.add_alternative(new_oneliner)
@@ -225,6 +216,14 @@ def oneliner_new(request, oneliner_pk=None, cancel_url=None):
     params['oneliner'] = oneliner0
 
     return render(request, 'oneliners/pages/oneliner_edit.html', params)
+
+
+@user_passes_test(lambda u: u.is_staff)
+def oneliner_tweet(request, pk):
+    oneliner0 = OneLiner.objects.get(pk=pk)
+    long_url = format_canonical_url(request, oneliner0.get_absolute_url())
+    tweet(oneliner0, long_url, force=True)
+    return oneliner(request, pk)
 
 
 def oneliner_alternative(request, oneliner_pk):

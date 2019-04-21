@@ -2,7 +2,7 @@
 # pip install -r requirements.txt
 appdirs==1.4.3
 defusedxml==0.5.0
-Django==1.11.17
+Django==1.11.20
 Markdown==2.6.8
 oauthlib==2.0.2
 packaging==16.8

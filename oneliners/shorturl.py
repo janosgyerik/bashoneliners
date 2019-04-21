@@ -7,6 +7,9 @@ from django.conf import settings
 
 
 def get_goo_gl(url):
+    if not settings.GOO_GL_API_KEY:
+        return None
+
     try:
         data = {'longUrl': url}
         request_url = '{}?key={}'.format(settings.GOO_GL_API_URL, settings.GOO_GL_API_KEY)

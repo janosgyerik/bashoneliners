@@ -5,9 +5,14 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+### Added
+
+- Admin can manually tweet one-liners
+- Make tweets include summary, oneliner, url, hashtags
+
 ### Removed
 
-- Do not Tweet automtically on first post
+- Do not Tweet automatically on first post
 
 ## [1.4] - 2019-02-25
 

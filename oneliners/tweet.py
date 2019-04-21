@@ -18,6 +18,7 @@ from django.conf import settings
 import tweepy
 
 TWITTER_CREDENTIAL_KEYS = ('consumer_key', 'consumer_secret', 'access_token', 'access_token_secret')
+TWEET_LENGTH_LIMIT = 140
 
 logger = getLogger(__name__)
 
@@ -33,9 +34,7 @@ def get_validated_twitter_credentials():
     return twitter_settings if have_creds else None
 
 
-def tweet(message, test=False):
-    logger.debug(message)
-
+def send_tweet(message, test=False):
     creds = get_validated_twitter_credentials()
 
     if not creds:
@@ -46,15 +45,6 @@ def tweet(message, test=False):
     auth.set_access_token(creds['access_token'], creds['access_token_secret'])
     api = tweepy.API(auth)
 
-    # shorten the text to make room for #bash
-    if len(message) > 134:
-        message = message[:130] + ' ...'
-    message += ' #bash'
-
-    # if there is still room for #linux, append it
-    if len(message) < 134:
-        message += ' #linux'
-
     if test:
         logger.info(message)
         return True
@@ -63,3 +53,32 @@ def tweet(message, test=False):
         return api.update_status(message)
     except tweepy.error.TweepError as e:
         logger.error('TweepError: %s', e)
+
+
+def format_message(summary, line, url):
+    def with_hashtags(s):
+        for hashtag in '#bash', '#linux':
+            s2 = s + ' ' + hashtag
+            if len(s2) <= TWEET_LENGTH_LIMIT:
+                s = s2
+            else:
+                break
+
+        return s
+
+    message = with_hashtags('{}: {}; {}'.format(summary, line, url))
+    if len(message) <= TWEET_LENGTH_LIMIT:
+        return message
+
+    message = with_hashtags('{}; {}'.format(line, url))
+    if len(message) <= TWEET_LENGTH_LIMIT:
+        return message
+
+    return '{}; {}'.format(ellipsize(line, TWEET_LENGTH_LIMIT - len(url) - 2), url)
+
+
+def ellipsize(s, maxlen):
+    if len(s) <= maxlen:
+        return s
+
+    return '{}...'.format(s[:maxlen-3])

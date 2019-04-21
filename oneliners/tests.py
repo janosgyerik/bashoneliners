@@ -2,6 +2,10 @@ from django.test import TestCase, override_settings
 
 from oneliners.models import Tag, OneLiner, User
 from oneliners.forms import SearchOneLinerForm, EditOneLinerForm
+from oneliners.tweet import TWEET_LENGTH_LIMIT
+
+import random
+import string
 
 
 class Util:
@@ -327,3 +331,59 @@ class OnelinerTweetTests(TestCase):
         self.client.login(username=self.staff.username, password='staff')
         response = self.tweet_oneliner()
         self.assertEqual(response.status_code, 200)
+
+    def test_ellipsize(self):
+        from oneliners.tweet import ellipsize
+        self.assertEqual(ellipsize("foobarbaz", 6), "foo...")
+        self.assertEqual(ellipsize("foobarbaz", 12), "foobarbaz")
+
+    def test_format_message(self):
+        from oneliners.tweet import format_message
+        self.assertEqual(format_message("foo", "bar", "baz"), "foo: bar; baz #bash #linux")
+
+        oneliner = "echo hello world"
+        url = "http://goo.gl/pretty-usual"
+        essential_length = 2 + len(oneliner) + len(url)
+
+        def random_alphabetic(length):
+            return ''.join(random.choices(string.ascii_lowercase, k=length))
+
+        # not too long to include #bash #linux
+        summary = random_alphabetic(TWEET_LENGTH_LIMIT - essential_length - 2 - len(" #bash #linux"))
+        self.assertEqual(format_message(summary, oneliner, url),
+            summary + ": " + oneliner + "; " + url + " #bash #linux")
+
+        # too long to include #linux
+        summary = random_alphabetic(TWEET_LENGTH_LIMIT - essential_length - 2 - len(" #linux"))
+        self.assertEqual(format_message(summary, oneliner, url),
+            summary + ": " + oneliner + "; " + url + " #bash")
+
+        # too long to include #bash #linux
+        summary = random_alphabetic(TWEET_LENGTH_LIMIT - essential_length - 2)
+        self.assertEqual(format_message(summary, oneliner, url),
+            summary + ": " + oneliner + "; " + url)
+
+        # too long to include summary at all
+        summary = random_alphabetic(TWEET_LENGTH_LIMIT - essential_length - 1)
+        self.assertEqual(format_message(summary, oneliner, url),
+            oneliner + "; " + url + " #bash #linux")
+
+        # oneliner not too long to include #bash #linux
+        oneliner = random_alphabetic(TWEET_LENGTH_LIMIT - len(url) - 2 - len(" #bash #linux"))
+        self.assertEqual(format_message(summary, oneliner, url),
+            oneliner + "; " + url + " #bash #linux")
+
+        # oneliner too long to include #linux
+        oneliner = random_alphabetic(TWEET_LENGTH_LIMIT - len(url) - 2 - len(" #linux"))
+        self.assertEqual(format_message(summary, oneliner, url),
+            oneliner + "; " + url + " #bash")
+
+        # oneliner too long to include #bash #linux
+        oneliner = random_alphabetic(TWEET_LENGTH_LIMIT - len(url) - 2)
+        self.assertEqual(format_message(summary, oneliner, url),
+            oneliner + "; " + url)
+
+        # oneliner so long that ellipsis necessary
+        oneliner = random_alphabetic(TWEET_LENGTH_LIMIT - len(url) - 1)
+        self.assertEqual(format_message(summary, oneliner, url),
+            oneliner[:len(oneliner)-4] + "...; " + url)

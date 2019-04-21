@@ -61,25 +61,20 @@ def _common_params(request):
     return params
 
 
-def format_tweet(oneliner, baseurl):
-    long_url = baseurl + oneliner.get_absolute_url()
-    from oneliners.shorturl import get_goo_gl
-
-    url = get_goo_gl(long_url) or long_url
-    message = '{} {}'.format(url, oneliner.line)
-    return message
-
-
-def tweet(oneliner, baseurl, force=False, test=False):
+def tweet(oneliner, long_url, force=False, test=False):
     if not oneliner.was_tweeted or force:
-        from oneliners.tweet import tweet as send_tweet
+        from oneliners.shorturl import get_goo_gl
+        url = get_goo_gl(long_url) or long_url
 
-        message = format_tweet(oneliner, baseurl)
+        from oneliners.tweet import format_message
+        message = format_message(oneliner.summary, oneliner.line, url)
+
+        from oneliners.tweet import send_tweet
         result = send_tweet(message, test=test)
         if result:
             oneliner.was_tweeted = True
             oneliner.save()
-            return result
+        return result
 
 
 def index(request):
@@ -226,8 +221,8 @@ def oneliner_new(request, oneliner_pk=None, cancel_url=None):
 @user_passes_test(lambda u: u.is_staff)
 def oneliner_tweet(request, pk):
     oneliner0 = OneLiner.objects.get(pk=pk)
-    tweet(oneliner0, format_canonical_url(request), force=True)
-
+    long_url = format_canonical_url(request, oneliner0.get_absolute_url())
+    tweet(oneliner0, long_url, force=True)
     return oneliner(request, pk)
 
 

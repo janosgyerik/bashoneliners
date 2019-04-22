@@ -10,6 +10,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Admin can manually tweet one-liners
 - Make tweets include summary, oneliner, url, hashtags
 
+### Changed
+
+- Replace Google Url shortener with tinyurl.com
+
 ### Removed
 
 - Do not Tweet automatically on first post

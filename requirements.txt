@@ -1,8 +1,11 @@
 # Install required python packages using pip:
 # pip install -r requirements.txt
 appdirs==1.4.3
-defusedxml==0.5.0
+certifi==2021.10.8
+chardet==3.0.4
+defusedxml==0.6.0
 Django==1.11.20
+idna==2.7
 Markdown==2.6.8
 oauthlib==2.0.2
 packaging==16.8
@@ -19,3 +22,4 @@ six==1.10.0
 social-auth-app-django==3.1.0
 social-auth-core==3.0.0
 tweepy==3.7.0
+urllib3==1.24.3

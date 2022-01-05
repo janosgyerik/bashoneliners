@@ -52,7 +52,7 @@
 
                         {% with text=oneliner.summary|capfirst|add:": "|add:oneliner.line|urlencode %}
                             {% url 'oneliner' oneliner.pk as url %}
-                            {% with "http://bashoneliners.com"|add:url|urlencode as url %}
+                            {% with "https://bashoneliners.com"|add:url|urlencode as url %}
                             <a class="twitter-share-button btn btn-info"
                                    href="https://twitter.com/intent/tweet?text={{text}}&url={{url}}&via=bashoneliners">Tweet</a>
                             {% endwith %}

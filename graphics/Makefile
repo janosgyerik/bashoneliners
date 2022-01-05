@@ -1,8 +1,8 @@
 # Bash One-Liners graphics generator Makefile v0.1
-# http://bashoneliners.com/
+# https://bashoneliners.com/
 #
 # Copyright 2012, Janos Gyerik
-# http://bashoneliners.com/LICENSE
+# https://bashoneliners.com/LICENSE
 # 
 # Note: requires ImageMagick to resize images
 #

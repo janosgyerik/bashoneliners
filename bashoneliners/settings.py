@@ -200,8 +200,8 @@ GOOGLE_ANALYTICS_ID = 'UA-########-#'
 # Go to Google Developer Console: https://console.developers.google.com/
 # Create an app
 # Create credential
-# Authorized JavaScript origins example: http://bashoneliners.com
-# Authorized redirect URIs example: http://www.bashoneliners.com/oauth/complete/google-oauth2/
+# Authorized JavaScript origins example: https://bashoneliners.com
+# Authorized redirect URIs example: https://bashoneliners.com/oauth/complete/google-oauth2/
 # In Library, search for "google+" and enable "Google+ API"
 SOCIAL_AUTH_GOOGLE_OAUTH2_SCOPE = [
     'https://www.googleapis.com/auth/userinfo.email',
@@ -212,7 +212,7 @@ SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = ''
 # http://python-social-auth.readthedocs.org/en/latest/backends/github.html
 # https://github.com/settings/applications/new
 # Settings / Developer setings / OAuth Apps
-# callback url: http://www.bashoneliners.com/oauth/complete/github/
+# callback url: https://bashoneliners.com/oauth/complete/github/
 SOCIAL_AUTH_GITHUB_KEY = ''
 SOCIAL_AUTH_GITHUB_SECRET = ''
 

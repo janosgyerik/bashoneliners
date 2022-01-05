@@ -4,7 +4,7 @@ from django.core.mail.backends.base import BaseEmailBackend
 
 from django.conf import settings
 
-BASEURL = 'http://bashoneliners.com'
+BASEURL = 'https://bashoneliners.com'
 
 FROM_EMAIL = settings.ADMINS[0][1]
 BCC_EMAIL = FROM_EMAIL

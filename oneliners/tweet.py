@@ -41,18 +41,22 @@ def send_tweet(message, test=False):
         logger.error('Cannot tweet because settings.TWITTER is incomplete.')
         return False
 
-    auth = tweepy.OAuthHandler(creds['consumer_key'], creds['consumer_secret'])
-    auth.set_access_token(creds['access_token'], creds['access_token_secret'])
-    api = tweepy.API(auth)
+    # https://docs.tweepy.org/en/v4.14.0/examples.html
+    api = tweepy.Client(
+        consumer_key=creds['consumer_key'],
+        consumer_secret=creds['consumer_secret'],
+        access_token=creds['access_token'],
+        access_token_secret=creds['access_token_secret'],
+    )
 
     if test:
         logger.info(message)
         return True
 
     try:
-        return api.update_status(message)
-    except tweepy.error.TweepError as e:
-        logger.error('TweepError: %s', e)
+        return api.create_tweet(text=message)
+    except tweepy.errors.TweepyException as e:
+        logger.error('Tweepy error: %s', e)
 
 
 def format_message(summary, line, url):

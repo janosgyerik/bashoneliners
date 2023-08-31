@@ -56,8 +56,8 @@ class EditOneLinerTests(TestCase):
         self.assertTrue(form.is_valid())
         oneliner1 = form.save()
 
-        self.assertEquals(oneliner1.summary, new_summary)
-        self.assertEquals(oneliner1.user, self.jack)
+        self.assertEqual(oneliner1.summary, new_summary)
+        self.assertEqual(oneliner1.user, self.jack)
 
     def test_save_own_failure(self):
         oneliner0 = self.jacks_oneliner
@@ -73,8 +73,8 @@ class EditOneLinerTests(TestCase):
         self.assertFalse(form.is_valid())
 
         error_items = form.errors.items()
-        self.assertEquals(len(error_items), 1)
-        self.assertEquals(list(error_items)[0][0], 'explanation')
+        self.assertEqual(len(error_items), 1)
+        self.assertEqual(list(error_items)[0][0], 'explanation')
 
     def test_save_notown_failure(self):
         oneliner0 = self.jacks_oneliner
@@ -89,8 +89,8 @@ class EditOneLinerTests(TestCase):
         self.assertFalse(form.is_valid())
 
         error_items = form.errors.items()
-        self.assertEquals(len(error_items), 1)
-        self.assertEquals(list(error_items)[0][0], '__all__')
+        self.assertEqual(len(error_items), 1)
+        self.assertEqual(list(error_items)[0][0], '__all__')
 
 
 class VoteTests(TestCase):
@@ -105,30 +105,30 @@ class VoteTests(TestCase):
         self.franks_oneliner = Util.new_oneliner(self.frank, 'echo frank')
 
     def test_multiple_vote_tolerance(self):
-        self.assertEquals(self.jacks_oneliner.get_votes_up(), 0)
+        self.assertEqual(self.jacks_oneliner.get_votes_up(), 0)
         self.jacks_oneliner.vote_up(self.jack)
-        self.assertEquals(self.jacks_oneliner.get_votes_up(), 0)
+        self.assertEqual(self.jacks_oneliner.get_votes_up(), 0)
         self.jacks_oneliner.vote_up(self.mike)
-        self.assertEquals(self.jacks_oneliner.get_votes_up(), 1)
+        self.assertEqual(self.jacks_oneliner.get_votes_up(), 1)
         self.jacks_oneliner.vote_up(self.mike)
-        self.assertEquals(self.jacks_oneliner.get_votes_up(), 1)
+        self.assertEqual(self.jacks_oneliner.get_votes_up(), 1)
         self.jacks_oneliner.vote_up(self.mike)
-        self.assertEquals(self.jacks_oneliner.get_votes_up(), 1)
+        self.assertEqual(self.jacks_oneliner.get_votes_up(), 1)
 
     def test_vote_counts(self):
-        self.assertEquals(self.jacks_oneliner.get_votes_up(), 0)
+        self.assertEqual(self.jacks_oneliner.get_votes_up(), 0)
         self.jacks_oneliner.vote_up(self.jack)
-        self.assertEquals(self.jacks_oneliner.get_votes_up(), 0)
+        self.assertEqual(self.jacks_oneliner.get_votes_up(), 0)
         self.jacks_oneliner.vote_up(self.mike)
-        self.assertEquals(self.jacks_oneliner.get_votes_up(), 1)
+        self.assertEqual(self.jacks_oneliner.get_votes_up(), 1)
         self.jacks_oneliner.vote_up(self.frank)
-        self.assertEquals(self.jacks_oneliner.get_votes_up(), 2)
+        self.assertEqual(self.jacks_oneliner.get_votes_up(), 2)
         self.jacks_oneliner.vote_up(self.frank)
-        self.assertEquals(self.jacks_oneliner.get_votes_up(), 2)
+        self.assertEqual(self.jacks_oneliner.get_votes_up(), 2)
         self.jacks_oneliner.vote_down(self.frank)
-        self.assertEquals(self.jacks_oneliner.get_votes_up(), 1)
-        self.assertEquals(self.jacks_oneliner.get_votes_down(), 1)
-        self.assertEquals(self.jacks_oneliner.get_votes(), (1, 1))
+        self.assertEqual(self.jacks_oneliner.get_votes_up(), 1)
+        self.assertEqual(self.jacks_oneliner.get_votes_down(), 1)
+        self.assertEqual(self.jacks_oneliner.get_votes(), (1, 1))
 
 
 class RecentTests(TestCase):
@@ -145,21 +145,21 @@ class RecentTests(TestCase):
         u3 = Util.new_user('u3')
 
         self.jacks_oneliner.vote_up(u1)
-        self.assertEquals(OneLiner.recent()[0], self.jacks_oneliner)
+        self.assertEqual(OneLiner.recent()[0], self.jacks_oneliner)
 
         self.mikes_oneliner.vote_up(u1)
         self.mikes_oneliner.vote_up(u2)
-        self.assertEquals(OneLiner.recent()[0], self.mikes_oneliner)
+        self.assertEqual(OneLiner.recent()[0], self.mikes_oneliner)
 
         self.jacks_oneliner.vote_up(u2)
         self.jacks_oneliner.vote_up(u3)
-        self.assertEquals(OneLiner.recent()[0], self.jacks_oneliner)
+        self.assertEqual(OneLiner.recent()[0], self.jacks_oneliner)
 
         u4 = Util.new_user('u4')
         u5 = Util.new_user('u5')
         self.mikes_oneliner.vote_down(u4)
         self.mikes_oneliner.vote_down(u5)
-        self.assertEquals(OneLiner.recent()[0], self.jacks_oneliner)
+        self.assertEqual(OneLiner.recent()[0], self.jacks_oneliner)
 
 
 class SearchTests(TestCase):
@@ -179,12 +179,12 @@ class SearchTests(TestCase):
         self.mlimitations_oneliner = Util.new_oneliner(self.jack, '', limitations='mlimitations')
 
     def test_simplesearch(self):
-        self.assertEquals(OneLiner.simplesearch('echo').count(), 2)
-        self.assertEquals(OneLiner.simplesearch('echo jack').count(), 1)
-        self.assertEquals(OneLiner.simplesearch('echo mike').count(), 1)
-        self.assertEquals(OneLiner.simplesearch('jack')[0], self.jacks_oneliner)
-        self.assertEquals(OneLiner.simplesearch('echo jack')[0], self.jacks_oneliner)
-        self.assertEquals(OneLiner.simplesearch('echo mike')[0], self.mikes_oneliner)
+        self.assertEqual(OneLiner.simplesearch('echo').count(), 2)
+        self.assertEqual(OneLiner.simplesearch('echo jack').count(), 1)
+        self.assertEqual(OneLiner.simplesearch('echo mike').count(), 1)
+        self.assertEqual(OneLiner.simplesearch('jack')[0], self.jacks_oneliner)
+        self.assertEqual(OneLiner.simplesearch('echo jack')[0], self.jacks_oneliner)
+        self.assertEqual(OneLiner.simplesearch('echo mike')[0], self.mikes_oneliner)
 
     def get_form(self, data):
         initial = {
@@ -200,49 +200,49 @@ class SearchTests(TestCase):
 
     def test_match_summary(self):
         results = OneLiner.search(self.get_form({'query': 'msummary', }))
-        self.assertEquals(len(results), 1)
-        self.assertEquals(results[0], self.msummary_oneliner)
+        self.assertEqual(len(results), 1)
+        self.assertEqual(results[0], self.msummary_oneliner)
 
         results = OneLiner.search(self.get_form({'query': 'msummary', 'match_summary': False, }))
-        self.assertEquals(len(results), 0)
+        self.assertEqual(len(results), 0)
 
     def test_match_line(self):
         results = OneLiner.search(self.get_form({'query': 'mline', }))
-        self.assertEquals(len(results), 1)
-        self.assertEquals(results[0], self.mline_oneliner)
+        self.assertEqual(len(results), 1)
+        self.assertEqual(results[0], self.mline_oneliner)
 
         results = OneLiner.search(self.get_form({'query': 'mline', 'match_line': False, }))
-        self.assertEquals(len(results), 0)
+        self.assertEqual(len(results), 0)
 
     def test_match_explanation(self):
         results = OneLiner.search(self.get_form({'query': 'mexplanation', }))
-        self.assertEquals(len(results), 1)
-        self.assertEquals(results[0], self.mexplanation_oneliner)
+        self.assertEqual(len(results), 1)
+        self.assertEqual(results[0], self.mexplanation_oneliner)
 
         results = OneLiner.search(self.get_form({'query': 'mexplanation', 'match_explanation': False, }))
-        self.assertEquals(len(results), 0)
+        self.assertEqual(len(results), 0)
 
     def test_match_limitations(self):
         results = OneLiner.search(self.get_form({'query': 'mlimitations', }))
-        self.assertEquals(len(results), 1)
-        self.assertEquals(results[0], self.mlimitations_oneliner)
+        self.assertEqual(len(results), 1)
+        self.assertEqual(results[0], self.mlimitations_oneliner)
 
         results = OneLiner.search(self.get_form({'query': 'mlimitations', 'match_limitations': False, }))
-        self.assertEquals(len(results), 0)
+        self.assertEqual(len(results), 0)
 
     def test_match_whole_words(self):
         results = OneLiner.search(self.get_form({'query': 'vi', }))
-        self.assertEquals(len(results), 2)
+        self.assertEqual(len(results), 2)
 
         results = OneLiner.search(self.get_form({'query': 'vi', 'match_whole_words': True, }))
-        self.assertEquals(len(results), 1)
-        self.assertEquals(results[0], self.vi_oneliner)
+        self.assertEqual(len(results), 1)
+        self.assertEqual(results[0], self.vi_oneliner)
 
     def test_match_nothing(self):
         form = SearchOneLinerForm(data={'query': 'NOTHINGSHOULDMATCH'})
         self.assertTrue(form.is_valid())
         results = OneLiner.search(form)
-        self.assertEquals(len(results), 0)
+        self.assertEqual(len(results), 0)
 
 
 class TagTests(TestCase):
@@ -251,15 +251,15 @@ class TagTests(TestCase):
 
         line = 'find grep xargs'
         oneliner = Util.new_oneliner(user, line)
-        self.assertEquals({'xargs', 'grep', 'find'}, set(oneliner.get_tags()))
+        self.assertEqual({'xargs', 'grep', 'find'}, set(oneliner.get_tags()))
 
         line = '''find /etc -type f -print0 2>/dev/null | xargs -0 grep --color=AUTO -Hn 'nameserver' 2>/dev/null'''
         oneliner = Util.new_oneliner(user, line)
-        self.assertEquals({'xargs', 'grep', 'find'}, set(oneliner.get_tags()))
+        self.assertEqual({'xargs', 'grep', 'find'}, set(oneliner.get_tags()))
 
         line = '''MAX=$(NUM=1;cat author.xml |perl -p -e 's/(Times Cited)/\n$1/g'|grep "Times Cited" |perl -p -e 's/^Times Cited:([0-9]*).*$/$1/g'|sort -nr | while read LINE; do if [ $LINE -ge $NUM ]; then echo "$NUM"; fi; NUM=$[$NUM+1]; done;); echo "$MAX"|tail -1'''
         oneliner = Util.new_oneliner(user, line)
-        self.assertEquals(
+        self.assertEqual(
                 {u'sort', u'do', u'grep', u'then', u'read', u'tail', u'perl',
                  u'while', u'done', u'echo', u'fi', u'cat', u'if'}, set(oneliner.get_tags()))
 
@@ -273,8 +273,8 @@ class TagTests(TestCase):
         tagcloud = Tag.tagcloud()
         tagcloud = tagcloud.values_list('text', 'count')
         dd = dict(tagcloud)
-        self.assertEquals(3, dd['xargs'])
-        self.assertEquals(3, dd.get('xargs'))
+        self.assertEqual(3, dd['xargs'])
+        self.assertEqual(3, dd.get('xargs'))
         self.assertFalse(dd.get('find'))  # occurs 2 times, which is < TAGCLOUD_MIN_COUNT
         self.assertFalse(dd.get('BLAH'))
 
@@ -286,7 +286,7 @@ class TweepyTests(TestCase):
     def test_get_twitter_credentials_when_present(self):
         from oneliners.tweet import get_validated_twitter_credentials
         creds = get_validated_twitter_credentials()
-        self.assertEquals(creds, {'access_token': 'nonempty', 'access_token_secret': 'nonempty',
+        self.assertEqual(creds, {'access_token': 'nonempty', 'access_token_secret': 'nonempty',
                                   'consumer_key': 'nonempty', 'consumer_secret': 'nonempty'})
 
     @override_settings(TWITTER={'foo': 'bar'})

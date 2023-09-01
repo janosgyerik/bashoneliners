@@ -3,9 +3,9 @@ from functools import wraps
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth import logout as django_logout
 from django.core.paginator import Paginator, InvalidPage, EmptyPage
-from django.core.urlresolvers import reverse
-from django.shortcuts import render, redirect, get_object_or_404
 from django.db.models import Sum
+from django.shortcuts import render, redirect, get_object_or_404
+from django.urls import reverse
 from oneliners.models import OneLiner, User, Tag
 from oneliners.forms import EditHackerProfileForm, PostOneLinerForm, SearchOneLinerForm, EditOneLinerForm
 

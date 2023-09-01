@@ -1,13 +1,27 @@
 #!/bin/sh
+#
+# Trigger script by the updated branch name.
+#
+# First time setup:
+#
+# 1. Create symlinks to the real upgrade scripts for each branch, for example:
+#     ./upgrade-beta.sh  # will only be called when "beta" branch is updated
+#     ./upgrade-prod.sh  # will only be called when "prod" branch is updated
+#
+# 2. Put these symlinks in the repository root, NOT in the hooks/ directory
+#
 
-target=beta
-webapp_dir=~/webapps/beta.bashoneliners.com/bashoneliners
-upgrade_script=$webapp_dir/local/upgrade.sh
+set -euo pipefail
 
-while read oldrev newrev refname
-do
-    branch=$(git rev-parse --symbolic --abbrev-ref $refname)
-    if test $target = $branch; then
-        $upgrade_script
+# the post-receive hook receives parameters on stdin
+while read oldrev newrev refname; do
+    branch=$(git rev-parse --symbolic --abbrev-ref "$refname")
+    upgrade_sh=./upgrade-$branch.sh
+    if test -e "$upgrade_sh"; then
+        upgrade_sh=$(readlink "$upgrade_sh" || echo "$upgrade_sh")
+        echo "calling upgrade script: $upgrade_sh"
+        "$upgrade_sh"
+    else
+        echo "NOT calling non-existent upgrade script: $upgrade_sh"
     fi
 done

@@ -50,7 +50,7 @@ post_save.connect(create_user_profile, sender=User)
 
 
 class HackerProfile(models.Model):
-    user = models.OneToOneField(User)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
 
     display_name = models.SlugField(max_length=50, blank=True, null=True, unique=True)
     twitter_name = models.SlugField(max_length=50, blank=True, null=True)
@@ -81,7 +81,7 @@ class HackerProfile(models.Model):
 
 
 class OneLiner(models.Model):
-    user = models.ForeignKey(User)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     summary = models.CharField(max_length=200)
     line = models.TextField()
@@ -231,8 +231,8 @@ class OneLiner(models.Model):
 
 
 class AlternativeOneLiner(models.Model):
-    alternative = models.ForeignKey(OneLiner, related_name='related_set')
-    oneliner = models.ForeignKey(OneLiner)
+    alternative = models.ForeignKey(OneLiner, related_name='related_set', on_delete=models.CASCADE)
+    oneliner = models.ForeignKey(OneLiner, on_delete=models.CASCADE)
 
     class Meta:
         unique_together = (('alternative', 'oneliner',),)
@@ -261,13 +261,13 @@ class Tag(models.Model):
 
 
 class OneLinerTag(models.Model):
-    oneliner = models.ForeignKey(OneLiner)
-    tag = models.ForeignKey(Tag)
+    oneliner = models.ForeignKey(OneLiner, on_delete=models.CASCADE)
+    tag = models.ForeignKey(Tag, on_delete=models.CASCADE)
 
 
 class Vote(models.Model):
-    user = models.ForeignKey(User)
-    oneliner = models.ForeignKey(OneLiner)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    oneliner = models.ForeignKey(OneLiner, on_delete=models.CASCADE)
     value = models.IntegerField(default=0)
 
     created_dt = models.DateTimeField(default=now)

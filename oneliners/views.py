@@ -109,7 +109,7 @@ def _common_oneliners_params(request, items):
 
 @render_with_context(custom_params=True)
 def oneliners_newest(request):
-    items = OneLiner.objects.filter(is_published=True).annotate(vote_sum=Sum('vote__value'))
+    items = OneLiner.objects.filter(is_published=True).annotate(vote_sum=Sum('vote__value')).order_by('-id')
     params = _common_oneliners_params(request, items)
     params['active_newest'] = 'active'
     params['ordering'] = 'newest'
@@ -205,10 +205,7 @@ def oneliner_new(request, oneliner_pk=None, cancel_url=None):
                 if oneliner0 is not None:
                     oneliner0.add_alternative(new_oneliner)
 
-                if new_oneliner.is_published:
-                    return redirect(oneliners_newest)
-                else:
-                    return redirect(new_oneliner)
+                return redirect(new_oneliner)
     else:
         form = PostOneLinerForm(request.user, initial=initial)
 

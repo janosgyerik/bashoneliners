@@ -198,7 +198,7 @@ def oneliner_new(request, oneliner_pk=None, cancel_url=None):
 
     if request.method == 'POST':
         form = PostOneLinerForm(request.user, request.POST)
-        if request.user.is_authenticated():
+        if request.user.is_authenticated:
             if form.is_valid():
                 new_oneliner = form.save()
 
@@ -239,7 +239,7 @@ def profile_edit(request):
     params = _common_params(request)
     params['cancel_url'] = reverse(profile)
 
-    if request.user.is_authenticated():
+    if request.user.is_authenticated:
         hackerprofile = request.user.hackerprofile
         if request.method == 'POST':
             form = EditHackerProfileForm(request.POST, instance=hackerprofile)

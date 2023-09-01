@@ -1,6 +1,6 @@
 import json
 
-from django.shortcuts import render_to_response
+from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from django.core.validators import validate_slug, ValidationError
 from django.http import HttpResponse
@@ -48,7 +48,7 @@ def search(request):
             params['user'] = request.user
             params['data'] = form.data
 
-    return render_to_response('oneliners/elements/oneliners_searchresults.html', params)
+    return render(request, 'oneliners/elements/oneliners_searchresults.html', params)
 
 
 def search_by_tag(request):
@@ -67,4 +67,4 @@ def search_by_tag(request):
     except ValidationError:
         params['oneliners'] = ()
 
-    return render_to_response('oneliners/elements/oneliners.html', params)
+    return render(request, 'oneliners/elements/oneliners.html', params)

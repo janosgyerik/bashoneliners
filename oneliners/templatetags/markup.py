@@ -12,7 +12,7 @@ markup syntaxes to HTML; currently there is support for:
 """
 
 from django import template
-from django.utils.encoding import force_text
+from django.utils.encoding import force_str
 from django.utils.safestring import mark_safe
 
 import markdown as md
@@ -41,7 +41,7 @@ def markdown(value, arg=''):
     extensions = [e for e in arg.split(",") if e]
     if extensions and extensions[0] == "safe":
         extensions = extensions[1:]
-        return mark_safe(md.markdown(force_text(value), extensions=extensions))
+        return mark_safe(md.markdown(force_str(value), extensions=extensions))
     else:
-        return mark_safe(md.markdown(force_text(value)))
+        return mark_safe(md.markdown(force_str(value)))
 

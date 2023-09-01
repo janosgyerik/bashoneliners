@@ -308,7 +308,7 @@ class OnelinerTweetTests(TestCase):
         self.staff.save()
 
     def tweet_oneliner(self):
-        return self.client.get('/oneliners/{}/tweet'.format(self.oneliner.pk))
+        return self.client.get('/oneliners/{}/tweet/'.format(self.oneliner.pk))
 
     def test_anon_user_is_not_allowed(self):
         response = self.tweet_oneliner()

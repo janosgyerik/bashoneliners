@@ -1,47 +1,47 @@
-from django.conf.urls import url
+from django.urls import path
 from django.views.generic import RedirectView
 
-from oneliners import views, ajax
+from . import views, ajax
 
 urlpatterns = [
-    url(r'^$', views.oneliners_default, name='oneliners_default'),
-    url(r'^sourcecode/$', views.sourcecode, name='sourcecode'),
-    url(r'^mission/$', views.mission, name='mission'),
-    url(r'^feeds/$', views.feeds, name='feeds'),
+    path('', views.oneliners_default, name='oneliners_default'),
+    path('sourcecode/', views.sourcecode, name='sourcecode'),
+    path('mission/', views.mission, name='mission'),
+    path('feeds/', views.feeds, name='feeds'),
 
-    url(r'^newest/$', views.oneliners_newest, name='oneliners_newest'),
-    url(r'^active/$', views.oneliners_active, name='oneliners_active'),
-    url(r'^popular/$', views.oneliners_popular, name='oneliners_popular'),
-    url(r'^tags/$', views.oneliners_tags, name='oneliners_tags'),
-    url(r'^(?P<pk>\d+)/$', views.oneliner, name='oneliner'),
-    url(r'^(?P<pk>\d+)/edit$', views.oneliner_edit, name='oneliner_edit'),
-    url(r'^(?P<pk>\d+)/tweet$', views.oneliner_tweet, name='oneliner_tweet'),
-    url(r'^new/$', views.oneliner_new, name='oneliner_new'),
-    url(r'^(?P<oneliner_pk>\d+)/alternative$', views.oneliner_alternative, name='oneliner_alternative'),
+    path('newest/', views.oneliners_newest, name='oneliners_newest'),
+    path('active/', views.oneliners_active, name='oneliners_active'),
+    path('popular/', views.oneliners_popular, name='oneliners_popular'),
+    path('tags/', views.oneliners_tags, name='oneliners_tags'),
+    path('<int:pk>/', views.oneliner, name='oneliner'),
+    path('<int:pk>/edit/', views.oneliner_edit, name='oneliner_edit'),
+    path('<int:pk>/tweet/', views.oneliner_tweet, name='oneliner_tweet'),
+    path('new/', views.oneliner_new, name='oneliner_new'),
+    path('<int:oneliner_pk>/alternative/', views.oneliner_alternative, name='oneliner_alternative'),
 
     # legacy
-    url(r'^oneliner/$', RedirectView.as_view(pattern_name='oneliners_default', permanent=True)),
-    url(r'^oneliner/newest/$', RedirectView.as_view(pattern_name='oneliners_newest', permanent=True)),
-    url(r'^oneliner/popular/$', RedirectView.as_view(pattern_name='oneliners_popular', permanent=True)),
-    url(r'^oneliner/(?P<pk>\d+)/$', RedirectView.as_view(pattern_name='oneliner', permanent=True)),
+    path('oneliner/', RedirectView.as_view(pattern_name='oneliners_default', permanent=True)),
+    path('oneliner/newest/', RedirectView.as_view(pattern_name='oneliners_newest', permanent=True)),
+    path('oneliner/popular/', RedirectView.as_view(pattern_name='oneliners_popular', permanent=True)),
+    path('oneliner/<int:pk>/', RedirectView.as_view(pattern_name='oneliner', permanent=True)),
 
-    url(r'^users/(?P<pk>\d+)/$', views.profile, name='profile_of'),
-    url(r'^users/(?P<pk>\d+)/oneliners/$', views.profile_oneliners, name='profile_oneliners_of'),
-    url(r'^users/$', views.profile, name='profile'),
-    url(r'^users/edit/$', views.profile_edit, name='profile_edit'),
-    url(r'^users/oneliners/$', views.profile_oneliners, name='profile_oneliners'),
-    url(r'^users/votes/$', views.profile_votes, name='profile_votes'),
+    path('users/<int:pk>/', views.profile, name='profile_of'),
+    path('users/<int:pk>/oneliners/', views.profile_oneliners, name='profile_oneliners_of'),
+    path('users/', views.profile, name='profile'),
+    path('users/edit/', views.profile_edit, name='profile_edit'),
+    path('users/oneliners/', views.profile_oneliners, name='profile_oneliners'),
+    path('users/votes/', views.profile_votes, name='profile_votes'),
 
-    url(r'^search/$', views.search, name='search'),
+    path('search/', views.search, name='search'),
 
-    url(r'^login/$', views.login, name='login'),
-    url(r'^logout/$', views.logout, name='logout'),
+    path('login/', views.login, name='login'),
+    path('logout/', views.logout, name='logout'),
 
-    url(r'^help/markdown/$', views.help_markdown, name='help_markdown'),
+    path('help/markdown/', views.help_markdown, name='help_markdown'),
 ]
 
 urlpatterns += [
-    url(r'^ajax/oneliner/(?P<oneliner_pk>\d+)/vote/$', ajax.oneliner_vote, name='oneliner_vote'),
-    url(r'^ajax/search/$', ajax.search, name='search_by_keyword'),
-    url(r'^ajax/search/tag/$', ajax.search_by_tag, name='search_by_tag'),
+    path('ajax/oneliner/<int:oneliner_pk>/vote/', ajax.oneliner_vote, name='oneliner_vote'),
+    path('ajax/search/', ajax.search, name='search_by_keyword'),
+    path('ajax/search/tag/', ajax.search_by_tag, name='search_by_tag'),
 ]

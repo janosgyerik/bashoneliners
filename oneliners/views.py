@@ -223,6 +223,15 @@ def oneliner_tweet(request, pk):
     return oneliner(request, pk)
 
 
+@user_passes_test(lambda u: u.is_staff)
+def oneliner_unpublish(request, pk):
+    oneliner0 = OneLiner.objects.get(pk=pk)
+    oneliner0.unpublished = True
+    oneliner0.is_published = False
+    oneliner0.save()
+    return redirect(oneliner0)
+
+
 def oneliner_alternative(request, oneliner_pk):
     cancel_url = reverse(oneliner, args=(oneliner_pk,))
     return oneliner_new(request, oneliner_pk=oneliner_pk, cancel_url=cancel_url)

@@ -33,7 +33,10 @@ admin.site.register(User, UserAdmin)
 
 
 class OneLinerAdmin(admin.ModelAdmin):
-    list_display = ('user', 'is_published', 'was_tweeted', 'summary', 'created_dt',)
+    list_display = ('user', 'is_published', 'was_tweeted', 'unpublished', 'summary', 'updated_dt')
+    list_display_links = ('summary',)
+    list_filter = ('was_tweeted', 'is_published', 'unpublished')
+    ordering = ('-updated_dt',)
 
 
 class HackerProfileAdmin(admin.ModelAdmin):

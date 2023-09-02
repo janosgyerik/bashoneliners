@@ -94,6 +94,8 @@ class OneLiner(models.Model):
     created_dt = models.DateTimeField(default=now, blank=True)
     updated_dt = models.DateTimeField(default=now, blank=True)
 
+    unpublished = models.BooleanField(default=False)
+
     def vote_up(self, user):
         Vote.vote_up(user, self)
 

@@ -1,8 +1,8 @@
 {% extends "base.html" %}
 
-{% block pagetitle %}{{ oneliner.summary }}{% endblock %}
+{% block pagetitle %}{{ oneliner.summary|capfirst }}{% endblock %}
 
-{% block pageheader %}{{ oneliner.summary }}
+{% block pageheader %}{{ oneliner.summary|capfirst }}
 {% endblock %}
 
 {% block content %}

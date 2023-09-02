@@ -12,7 +12,7 @@ class UserSocialAuthInline(admin.StackedInline):
 
 
 class UserAdmin(admin.ModelAdmin):
-    list_display = ('oneliner_count', 'last_login', 'id', 'username', 'email', 'first_name', 'last_name', 'is_staff')
+    list_display = ('id', 'username', 'first_name', 'last_name', 'is_staff', 'last_login', 'oneliner_count')
     list_display_links = ('username',)
     inlines = (UserSocialAuthInline,)
     ordering = ('-last_login',)

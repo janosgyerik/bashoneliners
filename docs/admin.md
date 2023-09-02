@@ -21,6 +21,11 @@ Automatic tweeting of one-liners on behalf of `@bashoneliners` is temporarily di
 
 Administrators can manually Tweet a worthy one-liner by opening it on the website and using the **Tweet** button.
 
+Banning users
+-------------
+
+On Django admin, edit user, uncheck **Active**. They won't be able to login anymore.
+
 Installing a custom version of Python
 -------------------------------------
 

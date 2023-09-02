@@ -17,6 +17,7 @@ urlpatterns = [
     path('<int:pk>/edit/', views.oneliner_edit, name='oneliner_edit'),
     path('<int:pk>/tweet/', views.oneliner_tweet, name='oneliner_tweet'),
     path('<int:pk>/unpublish/', views.oneliner_unpublish, name='oneliner_unpublish'),
+    path('<int:pk>/snapshot/', views.oneliner_snapshot, name='oneliner_snapshot'),
     path('new/', views.oneliner_new, name='oneliner_new'),
     path('<int:oneliner_pk>/alternative/', views.oneliner_alternative, name='oneliner_alternative'),
 

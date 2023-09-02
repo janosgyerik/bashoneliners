@@ -240,6 +240,25 @@ class AlternativeOneLiner(models.Model):
         unique_together = (('alternative', 'oneliner',),)
 
 
+class OneLinerSnapshot(models.Model):
+    """An immutable snapshot of the content of a oneliner"""
+    oneliner = models.ForeignKey(OneLiner, on_delete=models.CASCADE)
+
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    summary = models.CharField(max_length=200)
+    line = models.TextField()
+    explanation = models.TextField()
+    limitations = models.TextField()
+
+    is_published = models.BooleanField()
+    was_tweeted = models.BooleanField()
+
+    unpublished = models.BooleanField()
+
+    created_dt = models.DateTimeField(default=now)
+
+
 class Tag(models.Model):
     text = models.SlugField(max_length=50)
 

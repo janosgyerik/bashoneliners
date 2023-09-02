@@ -6,6 +6,8 @@ from django.core.paginator import Paginator, InvalidPage, EmptyPage
 from django.db.models import Sum
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
+
+from oneliners import models
 from oneliners.models import OneLiner, User, Tag
 from oneliners.forms import EditHackerProfileForm, PostOneLinerForm, SearchOneLinerForm, EditOneLinerForm
 
@@ -229,6 +231,24 @@ def oneliner_unpublish(request, pk):
     oneliner0.unpublished = True
     oneliner0.is_published = False
     oneliner0.save()
+    return redirect(oneliner0)
+
+
+@user_passes_test(lambda u: u.is_staff)
+def oneliner_snapshot(request, pk):
+    oneliner0 = OneLiner.objects.get(pk=pk)
+    snapshot = models.OneLinerSnapshot(
+        oneliner=oneliner0,
+        user=oneliner0.user,
+        summary=oneliner0.summary,
+        line=oneliner0.line,
+        explanation=oneliner0.explanation,
+        limitations=oneliner0.limitations,
+        is_published=oneliner0.is_published,
+        was_tweeted=oneliner0.was_tweeted,
+        unpublished=oneliner0.unpublished,
+    )
+    snapshot.save()
     return redirect(oneliner0)
 
 

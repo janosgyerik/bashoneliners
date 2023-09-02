@@ -15,11 +15,11 @@ class UserAdmin(admin.ModelAdmin):
     list_display = ('oneliner_count', 'last_login', 'id', 'username', 'email', 'first_name', 'last_name', 'is_staff')
     list_display_links = ('username',)
     inlines = (UserSocialAuthInline,)
+    ordering = ('-last_login',)
 
     def get_queryset(self, request):
         qs = super(UserAdmin, self).get_queryset(request)
         qs = qs.annotate(models.Count('oneliner'))
-        qs = qs.order_by('-oneliner__count')
         return qs
 
     def oneliner_count(self, obj):

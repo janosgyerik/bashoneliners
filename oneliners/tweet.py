@@ -18,7 +18,7 @@ from django.conf import settings
 import tweepy
 
 TWITTER_CREDENTIAL_KEYS = ('consumer_key', 'consumer_secret', 'access_token', 'access_token_secret')
-TWEET_LENGTH_LIMIT = 140
+TWEET_LENGTH_LIMIT = 280
 
 logger = getLogger(__name__)
 

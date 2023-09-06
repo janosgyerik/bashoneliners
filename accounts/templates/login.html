@@ -33,9 +33,6 @@
           .openid_large_btn-facebook {
               background-position: -1px -456px;
           }
-          .openid_large_btn-yahoo {
-              background-position: -1px -63px;
-          }
         </style>
 
         <h1 class="page-header">{% trans 'Login' %}</h1>
@@ -49,7 +46,6 @@
                 <div class="openid_btns">
                     <a title="login with Google" href="{% url "socialauth_begin" "google" %}?next={{ next|default:'' }}" class="openid_large_btn openid_large_btn-google"></a>
                     <a title="login with Facebook" href="{% url "socialauth_begin" "facebook" %}?next={{ next|default:'' }}" class="openid_large_btn openid_large_btn-facebook"></a>
-                    <a title="login with Yahoo" href="{% url "socialauth_begin" "yahoo" %}?next={{ next|default:'' }}" class="openid_large_btn openid_large_btn-yahoo"></a>
                 </div>
             </div>
             <div class="col-lg-4 col-md-3 col-sm-6 well">

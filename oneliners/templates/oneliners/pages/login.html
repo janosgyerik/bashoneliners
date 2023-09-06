@@ -6,13 +6,8 @@
 
 {% block content %}
 
-    <div class="alert alert-info">
-        <strong class="alert-heading">Note:</strong>
-        we only support Social / OpenID login. <a href="http://openid.net/get-an-openid/what-is-openid/">Learn more.</a>
-    </div>
-
     <div class="row">
-        <form class="openid-form form-horizontal">
+        <form class="social-login-form form-horizontal">
             <div class="form-group col-sm-4">
                 <p class="form-control-static">GitHub</p>
             </div>
@@ -23,7 +18,7 @@
     </div>
 
     <div class="row">
-        <form class="openid-form form-horizontal">
+        <form class="social-login-form form-horizontal">
             <div class="form-group col-sm-4">
                 <p class="form-control-static">Google OAuth2</p>
             </div>
@@ -34,7 +29,7 @@
     </div>
 
     <div class="row">
-        <form class="openid-form form-horizontal">
+        <form class="social-login-form form-horizontal">
             <div class="form-group col-sm-4">
                 <p class="form-control-static">Twitter</p>
             </div>
@@ -44,31 +39,4 @@
         </form>
     </div>
 
-    <div class="row">
-        <form id="openid-form-other" method="post" action="{% url 'social:begin' 'openid' %}" role="form" class="form-horizontal openid-form">
-            <fieldset>
-                {% csrf_token %}
-                <p><label for="id_openid_identifier">OpenID provider URL:</label></p>
-                <div class="form-group col-sm-6">
-                    <input type="text" id="id_openid_identifier" class="o   penid form-control" name="openid_identifier" />
-                </div>
-                <div class="form-group col-sm-2">
-                    <input class="btn btn-primary" name="bsignin" type="submit" value="Login"/>
-                </div>
-            </fieldset>
-
-            <p class="help-block">If you don't know the URL of your OpenID provider, this page might
-                help: {{ 'http://en.wikipedia.org/wiki/OpenID'|urlize }}</p>
-        </form>
-    </div>
-
-{% endblock %}
-
-{% block ready %}
-    $('.openid-form').bind('submit', function(e) {
-    var username = $(this).find('input.username').val();
-    var openid_provider_url = $(this).find('input[name="openid_identifier"]').val().replace('__username__', username);
-    $(this).find('input[name="openid_identifier"]').val(openid_provider_url);
-    //e.preventDefault();
-    });
 {% endblock %}

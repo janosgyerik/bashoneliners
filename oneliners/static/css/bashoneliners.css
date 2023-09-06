@@ -77,17 +77,7 @@ form .input .error ul li {
     margin-right: 1em;
 }
 
-input.openid {
-    /*background: url(/openid/logo.gif) no-repeat;*/
-    /*background-position: 0 50%;*/
-    /*padding-left: 2em;*/
-}
-
-.openid-form {
-    margin-left: 1em;
-}
-
-.openid-form .btn-primary {
+.social-login-form {
     margin-left: 1em;
 }
 

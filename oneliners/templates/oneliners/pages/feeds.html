@@ -5,11 +5,10 @@
 
 {% block content %}
 
-    <p>The links below are RSS feed URLs which you can subscribe to using your favourite RSS reader.</p>
+<p>Use your favourite RSS aggregator to stay in touch with the latest commands.</p>
 
-    <dl class="rss">
-        <dt><a href="{% url 'oneliners.feeds.oneliner' %}"><span class="label label-info">RSS</span> One-Liners</a></dt>
-        <dd>Recently posted Bash one-liners.</dd>
-    </dl>
+<dl class="rss">
+    <dt><a href="{% url 'latest_oneliners' %}"><span class="label label-info">RSS</span> Recently posted Bash One-Liners</a></dt>
+</dl>
 
 {% endblock %}

@@ -4,8 +4,7 @@
 
     <p>
         <small>
-            &mdash; by <a
-                href="{% url 'oneliners.views.profile' oneliner.user.pk %}">{{ oneliner.user.hackerprofile.get_display_name }}</a>
+            &mdash; by {{ oneliner.user.hackerprofile.get_display_name }}
             on {{ oneliner.created_dt }}
         </small>
     </p>

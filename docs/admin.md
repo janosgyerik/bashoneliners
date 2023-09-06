@@ -3,6 +3,7 @@ Admin notes
 
 Helpful notes for site operators / administrators.
 
+
 Deploying updates
 -----------------
 
@@ -14,6 +15,7 @@ git push releases master:beta
 
 The remote has a `post-receive` hook script (see under `misc/`), which triggers automated upgrade.
 
+
 Tweeting one-liners
 -------------------
 
@@ -21,10 +23,20 @@ Automatic tweeting of one-liners on behalf of `@bashoneliners` is temporarily di
 
 Administrators can manually Tweet a worthy one-liner by opening it on the website and using the **Tweet** button.
 
+
+Viewing Django logs
+-------------------
+
+See the `logs` directory in the deployment.
+
+Configured in `settings.py`.
+
+
 Banning users
 -------------
 
 On Django admin, edit user, uncheck **Active**. They won't be able to login anymore.
+
 
 Installing a custom version of Python
 -------------------------------------

@@ -271,8 +271,7 @@ class TagTests(TestCase):
         Util.new_oneliner(user, 'xargs xargs while sleep done do')
 
         tagcloud = Tag.tagcloud()
-        tagcloud = tagcloud.values_list('text', 'count')
-        dd = dict(tagcloud)
+        dd = {tag['text']: tag['count'] for tag in tagcloud}
         self.assertEqual(3, dd['xargs'])
         self.assertEqual(3, dd.get('xargs'))
         self.assertFalse(dd.get('find'))  # occurs 2 times, which is < TAGCLOUD_MIN_COUNT

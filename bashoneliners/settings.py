@@ -126,45 +126,38 @@ STATIC_URL = '/static/'
 # logger.debug('something happened')
 LOGS_DIR = os.path.join(BASE_DIR, 'logs')
 LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'formatters': {
-        'verbose': {
-            'format': '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s',
+    "version": 1,
+    "disable_existing_loggers": False,
+    "formatters": {
+        "verbose": {
+            "format": "{levelname} {asctime} {name} {module} {process:d} {thread:d} {message}",
+            "style": "{",
         },
-        'simple': {
-            'format': '%(levelname)s %(asctime)s %(module)s %(message)s',
-        },
-    },
-    'filters': {
-        'require_debug_false': {
-            '()': 'django.utils.log.RequireDebugFalse'
-        }
-    },
-    'handlers': {
-        'mail_admins': {
-            'level': 'ERROR',
-            'filters': ['require_debug_false'],
-            'class': 'django.utils.log.AdminEmailHandler'
-        },
-        'file': {
-            'level': 'DEBUG',
-            'class': 'logging.FileHandler',
-            'filename': os.path.join(LOGS_DIR, 'debug.log'),
-            'formatter': 'simple',
+        "simple": {
+            "format": "{levelname} {message}",
+            "style": "{",
         },
     },
-    'loggers': {
-        'django.request': {
-            'handlers': ['mail_admins'],
-            'level': 'ERROR',
-            'propagate': True,
+    "handlers": {
+        "info-file": {
+            "class": "logging.FileHandler",
+            "filename": os.path.join(LOGS_DIR, "info.log"),
+            "level": "INFO",
+            "formatter": "verbose",
         },
-        'oneliners': {
-            'handlers': ['file'],
-            'level': 'DEBUG',
+        "error-file": {
+            "class": "logging.FileHandler",
+            "filename": os.path.join(LOGS_DIR, "error.log"),
+            "level": "ERROR",
+            "formatter": "verbose",
         },
-    }
+    },
+    "loggers": {
+        "": {
+            "handlers": ["info-file", "error-file"],
+            "level": "DEBUG",
+        },
+    },
 }
 
 # project specific django settings

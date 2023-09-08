@@ -11,7 +11,7 @@
 # 4. Access token and secret are in the My Access Token menu
 #
 
-from logging import getLogger
+import logging
 
 from django.conf import settings
 
@@ -20,7 +20,7 @@ import tweepy
 TWITTER_CREDENTIAL_KEYS = ('consumer_key', 'consumer_secret', 'access_token', 'access_token_secret')
 TWEET_LENGTH_LIMIT = 280
 
-logger = getLogger(__name__)
+logger = logging.getLogger(__name__)
 
 
 def get_validated_twitter_credentials():
@@ -50,13 +50,15 @@ def send_tweet(message, test=False):
     )
 
     if test:
-        logger.info(message)
         return True
 
     try:
-        return api.create_tweet(text=message)
+        logger.info(f"tweet={message}")
+        response = api.create_tweet(text=message)
+        logger.info(f"response={response}")
+        return response
     except tweepy.errors.TweepyException as e:
-        logger.error('Tweepy error: %s', e)
+        logger.error(f"error={e}")
 
 
 def format_message(summary, line, url):

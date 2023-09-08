@@ -73,6 +73,9 @@ class HackerProfile(models.Model):
     def get_display_name(self):
         return self.display_name or self.user.username
 
+    def get_absolute_url(self):
+        return f"/oneliners/users/{self.pk}/"
+
     def __str__(self):
         return ', '.join([x for x in (self.user.username, self.user.email) if x])
 

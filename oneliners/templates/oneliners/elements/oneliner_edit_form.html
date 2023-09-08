@@ -3,7 +3,8 @@
     <div class="oneliner">
         <h3>Summary of the one-liner<span class="required">*</span></h3>
 
-        <div class="help-block">In one sentence, what does it do? What is its purpose?</div>
+        <div class="help-block">Use the <em>imperative mood</em>, as if giving a command or instruction,
+            for example <em>"Extract the n-th field from a single line of comma separated values"</em>.</div>
         <div class="input">
             <div class="error">{{ form.summary.errors }}</div>
             <div class="summary">{{ form.summary }}</div>
@@ -12,14 +13,12 @@
         <h3>The one-liner<span class="required">*</span></h3>
 
         <div class="help-block">
+            Write in a way that's easy to read, follows best practices and common formatting style,
+            and with only essential details.
             Use a space around <code>|</code>,
-            single space after <code>;</code>,
-            and UPPERCASE variable names.
-            Use <code>$()</code> for subshells instead of obsolete <code>``</code>.
-            Do not use unnecessary flags or pointless trailing <code>;</code>.
-            Basically, make it as readable as possible,
-            as concise as possible,
-            without unnecessary elements.
+            a single space after <code>;</code>.
+            Avoid unnecessary flags or trailing <code>;</code>.
+            Please use UPPERCASE for variable names.
         </div>
         <div class="input">
             <div class="error">{{ form.line.errors }}</div>
@@ -32,14 +31,14 @@
         <h3>Explanation<span class="required">*</span></h3>
 
         <div class="help-block">
-            <strong>This is extremely important!</strong>
-            Good explanations make this site stand out,
-            this field is the most appreciated feature mentioned by many visitors.
-            Explain nicely and clearly how the one-liner works,
-            as if you're teaching it to your good friend.
-            Include enough details so that non-experts can understand it too.
-            <br/>Note: all html will be escaped, and the text will be formatted with <a class="help help-markdown"
-                                                                                        href="{% url 'help_markdown' %}">markdown</a>.
+            Explain how the one-liner works as if teaching a beginner.
+            Try to explain every command, flag, and grammar structure.
+            Mention if there are important trade-offs or common pitfalls.
+            Sometimes it's useful to include example inputs and outputs.
+            Use appropriate
+            <a class="help help-markdown" href="{% url 'help_markdown' %}">markdown</a>
+            for code text, code blocks, or blockquotes.
+            Do not use HTML.
         </div>
         <div class="input">
             <div class="error">{{ form.explanation.errors }}</div>
@@ -49,15 +48,14 @@
         <h3>Limitations (optional)</h3>
 
         <div class="help-block">
-            Mention if you know or suspect that the one-liner
-            might not work in some flavors of UNIX,
-            or if it works only in Bash 4.0.
-            <br/>Note: any html will be escaped, and the text will be formatted with <a class="help help-markdown"
-                                                                                        href="{% url 'help_markdown' %}">markdown</a>.
-            <div class="input">
-                <div class="error">{{ form.limitations.errors }}</div>
-                <div class="limitations markdown">{{ form.limitations }}</div>
-            </div>
+            Mention required non-standard tools such as <code>ffmpeg</code>, <code>shuf</code>,
+            or if some features depend on GNU or BSD implementation,
+            such as in some cases with <code>sed</code>, <code>awk</code> and others,
+            or other portability issues across UNIX, Linux, BSD, MSYS flavors.
+        </div>
+        <div class="input">
+            <div class="error">{{ form.limitations.errors }}</div>
+            <div class="limitations markdown">{{ form.limitations }}</div>
         </div>
 
         <h3>Published</h3>

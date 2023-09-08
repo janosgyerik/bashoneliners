@@ -160,14 +160,9 @@ LOGGING = {
     },
 }
 
-# project specific django settings
-
-TWITTER = {
-    'consumer_key': '',
-    'consumer_secret': '',
-    'access_token': '',
-    'access_token_secret': '',
-}
+#
+# project specific Django settings
+#
 
 AUTHENTICATION_BACKENDS = (
     'social_core.backends.github.GithubOAuth2',
@@ -177,7 +172,22 @@ AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
 )
 
+ABSOLUTE_URL_OVERRIDES = {
+    "auth.user": lambda o: f"/oneliners/users/{o.pk}/",
+}
+
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
+
+#
+# project specific non-Django settings
+#
+
+TWITTER = {
+    'consumer_key': '',
+    'consumer_secret': '',
+    'access_token': '',
+    'access_token_secret': '',
+}
 
 SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/oneliners/'
 SOCIAL_AUTH_LOGIN_URL = '/'

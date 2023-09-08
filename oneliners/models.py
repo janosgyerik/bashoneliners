@@ -276,9 +276,9 @@ class Tag(models.Model):
 
     @staticmethod
     def tagcloud():
-        return Tag.objects.annotate(count=Count('onelinertag')).filter(
-            count__gte=TAGCLOUD_MIN_COUNT).order_by('-count').values('text', 'count')
-        # return Tag.objects.annotate(count=Count('onelinertag')).order_by('-count').values_list('text', 'count')
+        tags = Tag.objects.annotate(count=Count('onelinertag')).filter(
+            count__gte=TAGCLOUD_MIN_COUNT).order_by('text').values('text', 'count')
+        return [tag for tag in tags if tag['text'] not in {'do', 'done', 'fi', 'then', 'in', 'copy'}]
 
 
 class OneLinerTag(models.Model):

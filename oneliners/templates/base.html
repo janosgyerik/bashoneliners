@@ -25,7 +25,6 @@
                         <li><a href="/admin/">Admin</a></li>
                     {% endif %}
                     <li><a href="{% url 'oneliners_default' %}">One-Liners</a></li>
-                    <li><a href="{% url 'feeds' %}">Feeds</a></li>
                     {% if user.is_authenticated %}
                         <li><a href="{% url 'oneliner_new' %}">Post</a></li>
                     {% endif %}

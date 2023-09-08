@@ -1,6 +1,8 @@
 from django.contrib.auth.models import User
 from django.contrib import admin
 from django.db import models
+from django.urls import reverse
+from django.utils.html import format_html
 
 from social_django.models import UserSocialAuth
 
@@ -13,7 +15,7 @@ class UserSocialAuthInline(admin.StackedInline):
 
 
 class UserAdmin(admin.ModelAdmin):
-    list_display = ('id', 'username', 'first_name', 'last_name', 'is_staff', 'last_login', 'oneliner_count')
+    list_display = ('id', 'username', 'oneliners', 'is_staff', 'last_login', 'oneliner_count')
     list_display_links = ('username',)
     inlines = (UserSocialAuthInline,)
     ordering = ('-last_login',)
@@ -26,7 +28,12 @@ class UserAdmin(admin.ModelAdmin):
     def oneliner_count(self, obj):
         return obj.oneliner__count
 
-    oneliner_count.admin_order_field = 'oneliner_count'
+    def oneliners(self, obj):
+        url = reverse("profile_oneliners_of", args=(obj.pk,))
+        label = f"oneliners ({obj.oneliner__count})"
+        return format_html(f'<a href="{url}">{label}</a>')
+
+    oneliner_count.admin_order_field = 'oneliner__count'
 
 
 admin.site.unregister(User)

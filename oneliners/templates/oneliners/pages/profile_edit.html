@@ -8,8 +8,6 @@
 
 {% block content %}
 
-    {% include 'oneliners/elements/please_login.html' %}
-
     <form action="#" method="post" role="form">{% csrf_token %}
         <div class="non-field-errors">{{ form.non_field_errors }}</div>
         <h3>{{ form.display_name.label }}</h3>
@@ -45,7 +43,6 @@
         </div>
 
         <div class="form-group">
-            {% include 'oneliners/elements/please_login.html' %}
             <button type="submit" name="action" class="btn btn-primary" value="Save">Save</button>
             <a class="btn btn-default" href="{{ cancel_url }}">Cancel</a>
         </div>

@@ -67,7 +67,6 @@
         </div>
 
         <div class="form-group">
-            {% include 'oneliners/elements/please_login.html' %}
             {% for action in form.actions %}
                 <button class="btn {{ action.cssclass }}" type="submit" name="action" value="{{ action.name }}">
                     {{ action.name }}</button>

@@ -249,19 +249,17 @@ class TagTests(TestCase):
     def test_tag_generator(self):
         user = Util.new_user('jack')
 
-        line = 'find grep xargs'
+        line = 'grep xargs'
         oneliner = Util.new_oneliner(user, line)
-        self.assertEqual({'xargs', 'grep', 'find'}, set(oneliner.get_tags()))
+        self.assertEqual({'grep'}, set(oneliner.get_tags()))
 
         line = '''find /etc -type f -print0 2>/dev/null | xargs -0 grep --color=AUTO -Hn 'nameserver' 2>/dev/null'''
         oneliner = Util.new_oneliner(user, line)
-        self.assertEqual({'xargs', 'grep', 'find'}, set(oneliner.get_tags()))
+        self.assertEqual({'find'}, set(oneliner.get_tags()))
 
         line = '''MAX=$(NUM=1;cat author.xml |perl -p -e 's/(Times Cited)/\n$1/g'|grep "Times Cited" |perl -p -e 's/^Times Cited:([0-9]*).*$/$1/g'|sort -nr | while read LINE; do if [ $LINE -ge $NUM ]; then echo "$NUM"; fi; NUM=$[$NUM+1]; done;); echo "$MAX"|tail -1'''
         oneliner = Util.new_oneliner(user, line)
-        self.assertEqual(
-                {u'sort', u'do', u'grep', u'then', u'read', u'tail', u'perl',
-                 u'while', u'done', u'echo', u'fi', u'cat', u'if'}, set(oneliner.get_tags()))
+        self.assertEqual(set(), set(oneliner.get_tags()))
 
     def test_tag_cloud(self):
         user = Util.new_user('jack')

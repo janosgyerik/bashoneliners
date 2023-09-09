@@ -5,7 +5,6 @@ from . import views, ajax, feeds
 
 urlpatterns = [
     path('', views.oneliners_default, name='oneliners_default'),
-    path('mission/', views.mission, name='mission'),
     path('feeds/', views.feeds, name='feeds'),
     path('feeds/oneliners/', feeds.LatestOneLinersFeed(), name='latest_oneliners'),
 

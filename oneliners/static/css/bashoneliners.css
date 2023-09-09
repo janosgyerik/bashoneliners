@@ -152,16 +152,6 @@ a.help {
     cursor: help;
 }
 
-dl.mission dt {
-    font-variant: small-caps;
-    text-transform: uppercase;
-}
-
-dl.mission dd {
-    margin-bottom: .5em;
-    margin-left: 2em;
-}
-
 dl.rss a:hover {
     text-decoration: none;
 }

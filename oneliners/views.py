@@ -343,10 +343,5 @@ def feeds(request):
     return 'oneliners/pages/feeds.html'
 
 
-@render_with_context()
-def mission(request):
-    return 'oneliners/pages/mission.html'
-
-
 def help_markdown(request):
     return render(request, 'oneliners/help/markdown.html')

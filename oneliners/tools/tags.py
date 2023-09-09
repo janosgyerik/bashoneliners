@@ -28,7 +28,7 @@ def compute_tags_as_first_command(line):
     line = re.sub(r'^[a-zA-Z][a-zA-Z0-9_]+="[^"]*";? *', "", line)
     line = re.sub(r"^[a-zA-Z][a-zA-Z0-9_]+=[^ ]*;? *", "", line)
 
-    match = re.match(r'^(?P<command_name>[a-z][a-z0-9]+)', line)
+    match = re.match(r'^(?P<command_name>[a-z][a-z0-9]+) ', line)
     if match:
         return {match.group('command_name')}
     return set()

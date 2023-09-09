@@ -88,3 +88,35 @@ class TagsAsFirstCommandTests(TestCase):
         line = r'''IFS=" "; read -r first_name _ city _ <<< "John Doe New York Times-Square"'''
         self.assertEqual({"read"}, self.tag_extractor(line))
 
+    def test_finds_first_command_after_single_variable_assignment_with_doublequoted_value_command(self):
+        line = r'''IFS=" "; read -r first_name _ city _ <<< "John Doe New York Times-Square"'''
+        self.assertEqual({"read"}, self.tag_extractor(line))
+
+    def test_finds_empty_set_for_unsopported_patterns(self):
+        # Make sure we don't extract commands incorrectly.
+        bad_examples = (
+            "echo;echo",
+            "k=v;echo",
+        )
+
+        # We should add support for all these patterns, they should return { "echo" }.
+        unsupported_examples = (
+            'fun() { echo; }',
+            'fun() { local a; echo; }',
+            'fun() { local a b; echo; }',
+            'fun() { local a=b; echo; }',
+            'fun() { local a=b b=c; echo; }',
+            '{ echo path; }',
+            '(echo path)',
+            '[ a = b ]; echo $?',
+            '[ a = b ] && echo $?',
+            '[ a = b ] || echo $?',
+            '[[ a = b ]]; echo $?',
+            '[[ a = b ]] && echo $?',
+            '[[ a = b ]] || echo $?',
+            '&> /dev/null echo',
+        )
+
+        for line in bad_examples + unsupported_examples:
+            self.assertEqual(set(), self.tag_extractor(line))
+

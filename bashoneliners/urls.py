@@ -12,6 +12,4 @@ urlpatterns = [
     path('admin/doc/', include('django.contrib.admindocs.urls')),
 
     path(r'admin/', admin.site.urls),
-
-    # path(r'^internal_error.html$', internal_error),
 ]

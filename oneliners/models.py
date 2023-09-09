@@ -1,4 +1,5 @@
 import random
+import re
 import string
 
 from django.db import models
@@ -7,8 +8,8 @@ from django.db.models.signals import post_save
 from django.contrib.auth.models import User
 from django.dispatch import receiver
 from django.utils.timezone import now
-import re
 
+from oneliners.tools import tags as tag_tools
 
 ''' Constants '''
 
@@ -209,9 +210,7 @@ class OneLiner(models.Model):
     def update_tags(self):
         self.onelinertag_set.all().delete()
         if self.is_published:
-            words = re.split(r'[ ;|]+', self.line)
-            tagwords = set([word for word in words if re.match(r'^[a-z_]{2,}$', word)])
-            for tagword in tagwords:
+            for tagword in tag_tools.compute_tags_legacy(self.line):
                 tag = Tag.create_or_get(tagword)
                 OneLinerTag(oneliner=self, tag=tag).save()
 

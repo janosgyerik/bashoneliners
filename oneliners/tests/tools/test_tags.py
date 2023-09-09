@@ -88,6 +88,17 @@ class TagsAsFirstCommandTests(TestCase):
         line = r'''a=b IFS=',' c=d; x=y read -r first_name _ city _ <<< "John,Doe,New York,Times Square"'''
         self.assertEqual({"read"}, self.tag_extractor(line))
 
+    def test_finds_first_command_from_grouping(self):
+        variations = (
+            '{ echo; }',
+            '{ echo foo; }',
+            '{ echo "foo"; }',
+            '{ k=v echo; }',
+            '{ k=v a=b echo; }',
+        )
+        for line in variations:
+            self.assertEqual({"echo"}, self.tag_extractor(line), msg=f"for line: {line}")
+
     def test_finds_empty_set_for_unsopported_patterns(self):
         # Make sure we don't extract commands incorrectly.
         bad_examples = (
@@ -102,7 +113,6 @@ class TagsAsFirstCommandTests(TestCase):
             'fun() { local a b; echo; }',
             'fun() { local a=b; echo; }',
             'fun() { local a=b b=c; echo; }',
-            '{ echo path; }',
             '(echo path)',
             '[ a = b ]; echo $?',
             '[ a = b ] && echo $?',
@@ -114,5 +124,5 @@ class TagsAsFirstCommandTests(TestCase):
         )
 
         for line in bad_examples + unsupported_examples:
-            self.assertEqual(set(), self.tag_extractor(line))
+            self.assertEqual(set(), self.tag_extractor(line), msg=f"for line: {line}")
 

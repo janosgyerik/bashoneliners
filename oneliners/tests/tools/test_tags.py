@@ -88,13 +88,27 @@ class TagsAsFirstCommandTests(TestCase):
         line = r'''a=b IFS=',' c=d; x=y read -r first_name _ city _ <<< "John,Doe,New York,Times Square"'''
         self.assertEqual({"read"}, self.tag_extractor(line))
 
-    def test_finds_first_command_from_grouping(self):
+    def test_finds_first_command_from_group(self):
         variations = (
             '{ echo; }',
+            '{ echo; }; ls',
             '{ echo foo; }',
             '{ echo "foo"; }',
             '{ k=v echo; }',
             '{ k=v a=b echo; }',
+        )
+        for line in variations:
+            self.assertEqual({"echo"}, self.tag_extractor(line), msg=f"for line: {line}")
+
+    def test_finds_first_command_from_subshell_group(self):
+        variations = (
+            '(echo)',
+            '(echo); ls',
+            '(echo); k=v ls',
+            '(echo foo)',
+            '(echo "foo")',
+            '(k=v echo)',
+            '(k=v a=b echo)',
         )
         for line in variations:
             self.assertEqual({"echo"}, self.tag_extractor(line), msg=f"for line: {line}")
@@ -113,7 +127,6 @@ class TagsAsFirstCommandTests(TestCase):
             'fun() { local a b; echo; }',
             'fun() { local a=b; echo; }',
             'fun() { local a=b b=c; echo; }',
-            '(echo path)',
             '[ a = b ]; echo $?',
             '[ a = b ] && echo $?',
             '[ a = b ] || echo $?',

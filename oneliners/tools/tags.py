@@ -14,9 +14,9 @@ def compute_tags_as_first_command(line):
     # v=...; cat ...
     # v=... k=...; x= cat ...
     # { cat ...; }
+    # (cat ...)
 
     # Unsupported patterns that normally should return { "cat" }
-    # (cat ...)
     # sudo cat ...
     # sudo -s cat ...
     # [ ... ]
@@ -32,6 +32,7 @@ def compute_tags_as_first_command(line):
         line = re.sub(r'^[a-zA-Z][a-zA-Z0-9_]*="[^"]*";? *', "", line)
         line = re.sub(r"^[a-zA-Z][a-zA-Z0-9_]*=[^ ]*;? *", "", line)
         line = re.sub(r"^{ ([^{}]+); }.*", r"\1", line)
+        line = re.sub(r"^\(([^()]+)\).*", r"\1", line)
         if line == orig:
             break
 

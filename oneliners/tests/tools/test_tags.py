@@ -64,7 +64,27 @@ class TagsAsFirstCommandTests(TestCase):
         line = r'''echo /etc/*_ver* /etc/*-rel* || cat /etc/*_ver* /etc/*-rel*'''
         self.assertEqual({"echo"}, self.tag_extractor(line))
 
-    def test_finds_first_command_after_single_variable_assignment(self):
+    def test_finds_first_command_after_single_variable_assignment_prefix(self):
         line = r'''IFS=, read -r first_name _ city _ <<< "John,Doe,New York,Times Square"'''
+        self.assertEqual({"read"}, self.tag_extractor(line))
+
+    def test_finds_first_command_after_single_variable_assignment_with_singlequoted_value_prefix(self):
+        line = r'''IFS=' ' read -r first_name _ city _ <<< "John Doe New York Times-Square"'''
+        self.assertEqual({"read"}, self.tag_extractor(line))
+
+    def test_finds_first_command_after_single_variable_assignment_with_doublequoted_value_prefix(self):
+        line = r'''IFS=" " read -r first_name _ city _ <<< "John Doe New York Times-Square"'''
+        self.assertEqual({"read"}, self.tag_extractor(line))
+
+    def test_finds_first_command_after_single_variable_assignment_command(self):
+        line = r'''IFS=,; read -r first_name _ city _ <<< "John,Doe,New York,Times Square"'''
+        self.assertEqual({"read"}, self.tag_extractor(line))
+
+    def test_finds_first_command_after_single_variable_assignment_with_singlequoted_value_command(self):
+        line = r'''IFS=' '; read -r first_name _ city _ <<< "John Doe New York Times-Square"'''
+        self.assertEqual({"read"}, self.tag_extractor(line))
+
+    def test_finds_first_command_after_single_variable_assignment_with_doublequoted_value_command(self):
+        line = r'''IFS=" "; read -r first_name _ city _ <<< "John Doe New York Times-Square"'''
         self.assertEqual({"read"}, self.tag_extractor(line))
 

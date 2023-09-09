@@ -346,11 +346,6 @@ def feeds(request):
 
 
 @render_with_context()
-def sourcecode(request):
-    return 'oneliners/pages/sourcecode.html'
-
-
-@render_with_context()
 def mission(request):
     return 'oneliners/pages/mission.html'
 

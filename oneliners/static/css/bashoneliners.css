@@ -152,11 +152,6 @@ a.help {
     cursor: help;
 }
 
-dl.sourcecode dd {
-    margin-bottom: .5em;
-    margin-left: 2em;
-}
-
 dl.mission dt {
     font-variant: small-caps;
     text-transform: uppercase;

@@ -24,8 +24,13 @@
                         <span>{{ oneliner.created_dt }}</span>
                         &mdash;
                         <a href="{% url 'profile_of' oneliner.user.pk %}"><span>{{ oneliner.user.hackerprofile.get_display_name }}</span></a>
-                        {% if user == oneliner.user or user.is_staff %}
+                        {% if user == oneliner.user %}
                         <a class="btn btn-default {% if not oneliner.is_published %}btn-warning{% endif %}"
+                           href="{% url 'oneliner_edit' oneliner.pk %}">
+                            <i class="glyphicon glyphicon-pencil"></i></a>
+                        {% endif %}
+                        {% if user.is_staff and not oneliner.is_published %}
+                        <a class="btn btn-warning"
                            href="{% url 'oneliner_edit' oneliner.pk %}">
                             <i class="glyphicon glyphicon-pencil"></i></a>
                         {% endif %}

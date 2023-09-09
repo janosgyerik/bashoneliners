@@ -312,19 +312,19 @@ class OnelinerTweetTests(TestCase):
     def test_anon_user_is_not_allowed(self):
         response = self.tweet_oneliner()
         self.assertEqual(response.status_code, 302)
-        self.assertTrue(response.url.startswith('/accounts/login'))
+        self.assertEqual(response.url, '/oneliners/login/?next=/oneliners/1/tweet/')
 
     def test_nonstaff_user_is_not_allowed(self):
         self.client.login(username=self.nonstaff.username, password='nonstaff')
         response = self.tweet_oneliner()
         self.assertEqual(response.status_code, 302)
-        self.assertTrue(response.url.startswith('/accounts/login'))
+        self.assertEqual(response.url, '/oneliners/login/?next=/oneliners/1/tweet/')
 
     def test_contributor_user_is_not_allowed(self):
         self.client.login(username=self.contributor.username, password='contributor')
         response = self.tweet_oneliner()
         self.assertEqual(response.status_code, 302)
-        self.assertTrue(response.url.startswith('/accounts/login'))
+        self.assertEqual(response.url, '/oneliners/login/?next=/oneliners/1/tweet/')
 
     def test_staff_is_allowed(self):
         self.client.login(username=self.staff.username, password='staff')

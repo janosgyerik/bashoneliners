@@ -157,13 +157,10 @@ def oneliner_edit(request, pk):
     params = _common_params(request)
     params['cancel_url'] = reverse(oneliner, args=(pk,))
 
-    try:
-        if request.user.is_staff:
-            oneliner0 = OneLiner.objects.get(pk=pk)
-        else:
-            oneliner0 = OneLiner.objects.get(pk=pk, user=request.user)
-    except OneLiner.DoesNotExist:
-        return render(request, 'oneliners/pages/access_error.html', params)
+    if request.user.is_staff:
+        oneliner0 = get_object_or_404(OneLiner, pk=pk)
+    else:
+        oneliner0 = get_object_or_404(OneLiner, pk=pk, user=request.user)
 
     if request.method == 'POST':
         form = EditOneLinerForm(oneliner0.user, request.POST, instance=oneliner0)

@@ -210,7 +210,7 @@ class OneLiner(models.Model):
     def update_tags(self):
         self.onelinertag_set.all().delete()
         if self.is_published:
-            for tagword in tag_tools.compute_tags_legacy(self.line):
+            for tagword in tag_tools.compute_tags_as_first_command(self.line):
                 tag = Tag.create_or_get(tagword)
                 OneLinerTag(oneliner=self, tag=tag).save()
 

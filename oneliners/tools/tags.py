@@ -5,3 +5,25 @@ def compute_tags_legacy(line):
     words = re.split(r'[ ;|]+', line)
     return {word for word in words if re.match(r'^[a-z_]{2,}$', word)}
 
+
+def compute_tags_as_first_command(line):
+    # Supported patterns:
+    # cat ...
+
+    # Unsupported patterns
+    # v=... cat ...
+    # v=...; cat ...
+    # { cat ...; }
+    # (cat ...)
+    # sudo cat ...
+    # sudo -s cat ...
+    # [ ... ]
+    # [[ ... ]]
+    # fun() { cat ...; }
+    # fun() { local v; cat ...; }
+    # &> /dev/null cat ...
+
+    match = re.match(r'^(?P<command_name>[a-z][a-z0-9]+)', line)
+    if match:
+        return {match.group('command_name')}
+    return set()

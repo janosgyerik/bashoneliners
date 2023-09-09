@@ -12,7 +12,7 @@
                 <p class="form-control-static">GitHub</p>
             </div>
             <div class="form-group col-sm-2">
-                <a class="btn btn-primary" href="{% url 'social:begin' 'github' %}">GitHub</a>
+                <a class="btn btn-primary" href="{% url 'social:begin' 'github' %}?next={{ next|default:'' }}">GitHub</a>
             </div>
         </form>
     </div>
@@ -23,7 +23,7 @@
                 <p class="form-control-static">Google OAuth2</p>
             </div>
             <div class="form-group col-sm-2">
-                <a class="btn btn-primary" href="{% url 'social:begin' 'google-oauth2' %}">Google</a>
+                <a class="btn btn-primary" href="{% url 'social:begin' 'google-oauth2' %}?next={{ next|default:'' }}">Google</a>
             </div>
         </form>
     </div>
@@ -34,7 +34,7 @@
                 <p class="form-control-static">Twitter</p>
             </div>
             <div class="form-group col-sm-2">
-                <a class="btn btn-primary" href="{% url 'social:begin' 'twitter' %}">Twitter</a>
+                <a class="btn btn-primary" href="{% url 'social:begin' 'twitter' %}?next={{ next|default:'' }}">Twitter</a>
             </div>
         </form>
     </div>

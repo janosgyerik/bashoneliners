@@ -184,6 +184,9 @@ ABSOLUTE_URL_OVERRIDES = {
 EMAIL_FILE_PATH = os.path.join(LOGS_DIR, 'messages')
 EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
 
+LOGIN_URL = '/oneliners/login/'
+LOGIN_REDIRECT_URL = '/oneliners/login/'
+
 #
 # project specific non-Django settings
 #

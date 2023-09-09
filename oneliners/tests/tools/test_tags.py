@@ -113,6 +113,23 @@ class TagsAsFirstCommandTests(TestCase):
         for line in variations:
             self.assertEqual({"echo"}, self.tag_extractor(line), msg=f"for line: {line}")
 
+    def test_finds_first_command_from_test_command_variations(self):
+        variations = (
+            '[ a = b ]; echo $?',
+            '[ a = b ] && echo $?',
+            '[ a = b ] || echo $?',
+        )
+        for line in variations:
+            self.assertEqual({"["}, self.tag_extractor(line), msg=f"for line: {line}")
+
+        variations = (
+            '[[ a = b ]]; echo $?',
+            '[[ a = b ]] && echo $?',
+            '[[ a = b ]] || echo $?',
+        )
+        for line in variations:
+            self.assertEqual({"[["}, self.tag_extractor(line), msg=f"for line: {line}")
+
     def test_finds_empty_set_for_unsopported_patterns(self):
         # Make sure we don't extract commands incorrectly.
         bad_examples = (
@@ -120,19 +137,14 @@ class TagsAsFirstCommandTests(TestCase):
             "k=v;echo",
         )
 
-        # We should add support for all these patterns, they should return { "echo" }.
+        # We should add support for all these patterns.
         unsupported_examples = (
+            # These should produce "echo"
             'fun() { echo; }',
             'fun() { local a; echo; }',
             'fun() { local a b; echo; }',
             'fun() { local a=b; echo; }',
             'fun() { local a=b b=c; echo; }',
-            '[ a = b ]; echo $?',
-            '[ a = b ] && echo $?',
-            '[ a = b ] || echo $?',
-            '[[ a = b ]]; echo $?',
-            '[[ a = b ]] && echo $?',
-            '[[ a = b ]] || echo $?',
             '&> /dev/null echo',
         )
 

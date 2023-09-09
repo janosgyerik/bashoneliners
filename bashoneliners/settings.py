@@ -125,8 +125,11 @@ STATIC_URL = '/static/'
 # logger = logging.getLogger(__name__)
 # logger.debug('something happened')
 LOGS_DIR = os.path.join(BASE_DIR, 'logs')
+
 LOGGING = {
     "version": 1,
+    # Merge with default: https://docs.djangoproject.com/en/4.2/ref/logging/#default-logging-configuration
+    # Merge logic explained: https://docs.djangoproject.com/en/4.2/topics/logging/#configuring-logging
     "disable_existing_loggers": False,
     "formatters": {
         "verbose": {
@@ -164,6 +167,8 @@ LOGGING = {
 # project specific Django settings
 #
 
+DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
+
 AUTHENTICATION_BACKENDS = (
     'social_core.backends.github.GithubOAuth2',
     'social_core.backends.google.GoogleOAuth2',
@@ -176,7 +181,8 @@ ABSOLUTE_URL_OVERRIDES = {
     "auth.user": lambda o: f"/oneliners/users/{o.pk}/",
 }
 
-DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
+EMAIL_FILE_PATH = os.path.join(LOGS_DIR, 'messages')
+EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
 
 #
 # project specific non-Django settings
@@ -233,12 +239,3 @@ SOCIAL_AUTH_TWITTER_SECRET = ''
 SOCIAL_AUTH_STACKOVERFLOW_KEY = ''
 SOCIAL_AUTH_STACKOVERFLOW_SECRET = ''
 SOCIAL_AUTH_STACKOVERFLOW_API_KEY = ''
-
-# project specific custom settings
-
-# sending emails
-# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-# EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
-EMAIL_FILE_PATH = os.path.join(LOGS_DIR, 'emails.log')
-EMAIL_BACKEND = 'oneliners.email.CustomFileEmailBackend'

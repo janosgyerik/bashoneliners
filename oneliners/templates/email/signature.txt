@@ -1,2 +1,0 @@
-Happy hacking!
-EOF

@@ -1,1 +1,0 @@
-[answer] {{ question.summary }}

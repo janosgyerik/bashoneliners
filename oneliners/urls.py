@@ -1,5 +1,4 @@
 from django.urls import path
-from django.views.generic import RedirectView
 
 from . import views, ajax, feeds
 
@@ -19,12 +18,6 @@ urlpatterns = [
     path('<int:pk>/snapshot/', views.oneliner_snapshot, name='oneliner_snapshot'),
     path('new/', views.oneliner_new, name='oneliner_new'),
     path('<int:oneliner_pk>/alternative/', views.oneliner_alternative, name='oneliner_alternative'),
-
-    # legacy
-    path('oneliner/', RedirectView.as_view(pattern_name='oneliners_default', permanent=True)),
-    path('oneliner/newest/', RedirectView.as_view(pattern_name='oneliners_newest', permanent=True)),
-    path('oneliner/popular/', RedirectView.as_view(pattern_name='oneliners_popular', permanent=True)),
-    path('oneliner/<int:pk>/', RedirectView.as_view(pattern_name='oneliner', permanent=True)),
 
     path('users/<int:pk>/', views.profile, name='profile_of'),
     path('users/<int:pk>/oneliners/', views.profile_oneliners, name='profile_oneliners_of'),

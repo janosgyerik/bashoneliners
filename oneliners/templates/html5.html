@@ -23,7 +23,11 @@
     <!-- Mobile viewport optimized: j.mp/bplateviewport -->
     <meta name="viewport" content="width=device-width,initial-scale=1">
 
-    {% if SERVER_NAME != 'www.bashoneliners.com' %}
+    <!-- SERVER_NAME={{ SERVER_NAME }} -->
+    <!-- request.META.HTTPS={{ request.META.HTTPS }} -->
+    {% if SERVER_NAME != 'www.bashoneliners.com' or request.META.HTTPS != 'on' %}
+    <!-- Do not index this page or follow links from it.
+     See https://developers.google.com/search/docs/crawling-indexing/robots-meta-tag -->
     <meta name="robots" content="none">
     {% endif %}
 

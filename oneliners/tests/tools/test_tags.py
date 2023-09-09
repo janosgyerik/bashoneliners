@@ -76,20 +76,16 @@ class TagsAsFirstCommandTests(TestCase):
         line = r'''IFS=" " read -r first_name _ city _ <<< "John Doe New York Times-Square"'''
         self.assertEqual({"read"}, self.tag_extractor(line))
 
+    def test_finds_first_command_after_repeated_single_variable_assignment_prefix(self):
+        line = r'''k=v IFS=, read -r first_name _ city _ <<< "John,Doe,New York,Times Square"'''
+        self.assertEqual({"read"}, self.tag_extractor(line))
+
     def test_finds_first_command_after_single_variable_assignment_command(self):
         line = r'''IFS=,; read -r first_name _ city _ <<< "John,Doe,New York,Times Square"'''
         self.assertEqual({"read"}, self.tag_extractor(line))
 
-    def test_finds_first_command_after_single_variable_assignment_with_singlequoted_value_command(self):
-        line = r'''IFS=' '; read -r first_name _ city _ <<< "John Doe New York Times-Square"'''
-        self.assertEqual({"read"}, self.tag_extractor(line))
-
-    def test_finds_first_command_after_single_variable_assignment_with_doublequoted_value_command(self):
-        line = r'''IFS=" "; read -r first_name _ city _ <<< "John Doe New York Times-Square"'''
-        self.assertEqual({"read"}, self.tag_extractor(line))
-
-    def test_finds_first_command_after_single_variable_assignment_with_doublequoted_value_command(self):
-        line = r'''IFS=" "; read -r first_name _ city _ <<< "John Doe New York Times-Square"'''
+    def test_finds_first_command_after_repeated_variable_assignment_prefixes_of_intermixed_styles(self):
+        line = r'''a=b IFS=',' c=d; x=y read -r first_name _ city _ <<< "John,Doe,New York,Times Square"'''
         self.assertEqual({"read"}, self.tag_extractor(line))
 
     def test_finds_empty_set_for_unsopported_patterns(self):

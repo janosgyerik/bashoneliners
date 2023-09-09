@@ -6,15 +6,21 @@
 
 {% block content %}
 
-    <div class="alert alert-error">
-        <p>Ouch! This is our fault :-/</p>
+    <div class="alert alert-danger">
+        <p>Ouch. Sorry, something went wrong and this is our fault :-/</p>
 
-        <p>We really would like to fix this.
-            Can you reproduce the problem anytime?
-            Does it happen only sometimes or always?</p>
+        <p>We really want to fix this, but we need your help!</p>
 
         <p>Please kindly <a href="https://github.com/janosgyerik/bashoneliners/issues/new">create an issue on GitHub</a>,
-            explaining what happened.</p>
+            and make sure to include relevant details such as:</p>
+
+        <ul>
+            <li>If this happened when trying to submit a one-liner, the content of the form fields.</li>
+            <li>If this happened when editing a one-liner, the content of the form fields and the id of the one-liner.</li>
+            <li>Otherwise the URL from which you got here, and any other details you think might be helpful.</li>
+        </ul>
+
+        <p>We <strong>will</strong> look into this either way, and try to fix soon.</p>
     </div>
 
     <p><a href="/">Back to the main page.</a></p>

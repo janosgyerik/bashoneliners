@@ -6,13 +6,15 @@
 
 {% block content %}
 
-    <div class="alert alert-error">
+    <div class="alert alert-danger">
         <p>The page you are trying to reach does not exist (404).</p>
 
         <p>Path: <strong>{{ request_path }}</strong></p>
 
         <p>If you think this is some kind of error,
             please create an issue on <a href="https://github.com/janosgyerik/bashoneliners/issues">GitHub</a>.
+            Please include in the issue this path you could not access (<code>{{ request_path }}</code>),
+            and the URL from which you got here (<code>{{ request.META.HTTP_REFERER|default:"???" }}</code>).
         </p>
     </div>
 

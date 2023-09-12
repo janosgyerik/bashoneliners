@@ -2,41 +2,31 @@
 
 {% block pagetitle %}Login{% endblock %}
 
-{% block pageheader %}Login{% endblock %}
-
 {% block content %}
 
-    <div class="row">
-        <form class="social-login-form form-horizontal">
-            <div class="form-group col-sm-4">
-                <p class="form-control-static">GitHub</p>
-            </div>
-            <div class="form-group col-sm-2">
-                <a class="btn btn-primary" href="{% url 'social:begin' 'github' %}?next={{ next|default:'' }}">GitHub</a>
-            </div>
-        </form>
-    </div>
+<!-- https://mdbootstrap.com/docs/standard/extended/login/ -->
+  <div class="container py-5 login">
+    <div class="row justify-content-center align-items-center">
+      <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+        <div class="card shadow-2-strong" style="border-radius: 1rem;">
+          <div class="card-body p-5 text-center">
 
-    <div class="row">
-        <form class="social-login-form form-horizontal">
-            <div class="form-group col-sm-4">
-                <p class="form-control-static">Google OAuth2</p>
-            </div>
-            <div class="form-group col-sm-2">
-                <a class="btn btn-primary" href="{% url 'social:begin' 'google-oauth2' %}?next={{ next|default:'' }}">Google</a>
-            </div>
-        </form>
-    </div>
+            <a class="btn btn-lg btn-block btn-primary btn-github btn-dark" href="{% url 'social:begin' 'github' %}?next={{ next | default:'' }}">
+                <i class="fab fa-github me-2"></i>
+                Sign in with GitHub</a>
 
-    <div class="row">
-        <form class="social-login-form form-horizontal">
-            <div class="form-group col-sm-4">
-                <p class="form-control-static">Twitter</p>
-            </div>
-            <div class="form-group col-sm-2">
-                <a class="btn btn-primary" href="{% url 'social:begin' 'twitter' %}?next={{ next|default:'' }}">Twitter</a>
-            </div>
-        </form>
+            <a class="btn btn-lg btn-block btn-primary btn-google" href="{% url 'social:begin' 'google-oauth2' %}?next={{ next | default:'' }}">
+                <i class="fab fa-google me-2"></i>
+                Sign in with Google</a>
+
+            <a class="btn btn-lg btn-block btn-primary btn-twitter btn-info" href="{% url 'social:begin' 'twitter' %}?next={{ next | default:'' }}">
+                <i class="fab fa-twitter me-2"></i>
+                Sign in with Twitter</a>
+
+          </div>
+        </div>
+      </div>
     </div>
+  </div>
 
 {% endblock %}

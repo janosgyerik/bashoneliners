@@ -22,7 +22,7 @@
         <div class="input">
             <div class="error">{{ form.line.errors }}</div>
             <div class="input-group">
-                <div class="input-group-addon">$</div>
+              <div class="input-group-text shell-symbol">$</div>
                 {{ form.line }}
             </div>
         </div>
@@ -35,13 +35,15 @@
             Mention if there are important trade-offs or common pitfalls.
             Sometimes it's useful to include example inputs and outputs.
             Use appropriate
-            <a class="help help-markdown" href="{% url 'help_markdown' %}">markdown</a>
+            <a class="help help-markdown" href="{% url 'help_markdown' %}" target="_blank">markdown</a>
             for code text, code blocks, or blockquotes.
             Do not use HTML.
         </div>
         <div class="input">
             <div class="error">{{ form.explanation.errors }}</div>
-            <div class="explanation markdown form-group">{{ form.explanation }}</div>
+            <div class="row">
+                <div class="col-md-6 markdown">{{ form.explanation }}</div>
+            </div>
         </div>
 
         <h3>Limitations (optional)</h3>
@@ -52,9 +54,9 @@
             such as in some cases with <code>sed</code>, <code>awk</code> and others,
             or other portability issues across UNIX, Linux, BSD, MSYS flavors.
         </div>
-        <div class="input">
+        <div class="form-outline">
             <div class="error">{{ form.limitations.errors }}</div>
-            <div class="limitations markdown">{{ form.limitations }}</div>
+            {{ form.limitations }}
         </div>
 
         <h3>Published</h3>
@@ -62,7 +64,9 @@
         <div class="help-block">If checked, the one-liner will be visible in public listings.</div>
         <div class="input">
             <div class="error">{{ form.is_published.errors }}</div>
-            <div class="is_published"><label class="checkbox">{{ form.is_published }} <span>Published</span></label>
+            <div class="form-check">
+                {{ form.is_published }}
+                <label class="form-check-label" for="id_is_published">Published</label>
             </div>
         </div>
 

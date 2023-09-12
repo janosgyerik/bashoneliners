@@ -1,171 +1,93 @@
-body {
-    padding-top: 40px; /* Twitter bootstrap */
+/* Stack Exchange style -- start */
+
+* {
+    font-family: -apple-system, "system-ui", "Segoe UI Adjusted", "Segoe UI", "Liberation Sans", sans-serif;
 }
 
-@media (max-width: 980px) {
-    body {
-        padding-top: 0;
-    }
+h1 {
+    font-size: 27px;
 }
 
-table.oneliner {
-    width: 100%;
+h2 {
+    font-size: 23px;
 }
 
-.oneliner .upvotejs {
-    padding-right: 1em;
+h3 {
+    font-size: 19px;
 }
 
-.oneliner .upvotejs .score {
-    color: #848d95;
-    font-size: 11px;
+/* Stack Exchange style -- end */
+
+.card.oneliner {
+    margin-top: 2em;
+    margin-bottom: 2em;
 }
 
-.oneliner .line {
-    background: #ddd;
-}
-
-.oneliner .line .add-on {
-    color: #253;
-    padding-right: .5em;
-    font-weight: bold;
-}
-
-.oneliner td {
-    vertical-align: top;
-}
-
-.summary {
-    margin: .2em 0;
-}
-
-.summary {
-    color: inherit;
-}
-
-.summary a {
-    font-size: smaller;
-    color: #07C;
-}
-
-.summary a:visited {
-    color: #005999;
+.oneliners .oneliner {
+    background-color: #f8f8f8;
 }
 
 .oneliner .author {
     text-align: right;
-    font-size: smaller;
+    font-size: small;
     color: #848d95;
 }
 
-form .required {
+.oneliner pre.line {
+    overflow-x: auto;
+    white-space: pre-wrap;
+    white-space: -moz-pre-wrap;
+    white-space: -pre-wrap;
+    white-space: -o-pre-wrap;
+    word-wrap: break-word;
+    background-color: #ddd;
+    padding: 4px;
+    border: 1px solid #ccc;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+}
+
+.oneliner .explanation pre, .preview pre {
+    background-color: #f8f8f8;
+    padding: .5em;
+    border: 1px solid #ccc;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+}
+
+.oneliner .explanation blockquote, .markdown-help blockquote {
+    background-color: #f8f8f8;
+    padding: .5em;
+    padding-left: 1em;
+    border-left: 4px solid #eee;
+}
+
+.preview blockquote {
+    background-color: #eee;
+    padding: .5em;
+    padding-left: 1em;
+    border-left: 4px solid #ddd;
+}
+
+.login .btn-google {
+    background-color: #4285F4;
+}
+
+.errorlist {
+    color: #DE546B;
+}
+
+.input .shell-symbol {
+    background-color: #ddd;
+    color: green;
+}
+
+.required {
     color: red;
     padding: 0 .5em;
 }
-
-form .input .error ul {
-    list-style: none;
-    margin-left: 0;
-    padding-left: 0;
-}
-
-form .input .error ul li {
-    color: red;
-}
-
-.form-actions button {
-    margin-right: 1em;
-}
-
-.social-login-form {
-    margin-left: 1em;
-}
-
-table.profile {
-    width: auto;
-}
-
-.nav-profile, .nav-oneliners {
-    margin: 1em 0;
-}
-
-.nav-profile li, .nav-oneliners li {
-    float: right;
-}
-
-.nav.tags {
-    margin-bottom: 1em;
-}
-
-.related .well {
-    background: #dff0d8;
-}
-
-.related .well .summary {
-    color: #468847;
-}
-
-.related .well.comments {
-    background: #eee;
-}
-
-.comments-toggle {
-    cursor: pointer;
-}
-
-.comments {
-    display: none;
-}
-
-.comments.expanded {
-    display: inherit;
-}
-
-.navbar a.login {
-    color: #08c !important;
-}
-
-.footer {
-    background-color: #eee;
-    border: 1px solid transparent;
-}
-
-.fixed-bottom {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-}
-
-.validators {
-    text-align: center;
-}
-
-.validators a {
-    margin-left: .5em;
-}
-
-table.help {
-    width: inherit;
-}
-
-a.help {
-    cursor: help;
-}
-
-dl.rss a:hover {
-    text-decoration: none;
-}
-
-dl.rss dd {
-    margin-bottom: .5em;
-    margin-left: 2em;
-}
-
-.page-header .btn {
-    margin-left: 1em;
-}
-
-/* markdown preview */
 
 .preview {
     background-color: whiteSmoke;

@@ -1,35 +1,36 @@
 {% extends "base.html" %}
 
-{% block pagetitle %}{{ hacker.hackerprofile.get_display_name|default:'Anonymous' }}{% endblock %}
-
-{% block pageheader %}{{ hacker.hackerprofile.get_display_name|default:'Anonymous' }}
-    {% if user == hacker %}
-        <a href="{% url 'profile_edit' %}" class="btn btn-primary pull-right">Edit your profile</a>
-    {% endif %}
-{% endblock %}
+{% block pagetitle %}{{ hacker.hackerprofile.get_display_name }}{% endblock %}
 
 {% block content %}
+<div class="container py-3">
+    <div class="row justify-content-center align-items-center">
+        <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">{{ hacker.hackerprofile.get_display_name }}</h5>
 
-    <table class="profile table table-bordered">
-        <tbody>
-        <tr>
-            <th>Twitter</th>
-            <td>{{ hacker.hackerprofile.twitter_url|default:'(not set)'|urlize }}</td>
-        </tr>
-        <tr>
-            <th>Blog</th>
-            <td>{{ hacker.hackerprofile.blog_url|default:'(not set)'|urlize }}</td>
-        </tr>
-        <tr>
-            <th>Website</th>
-            <td>{{ hacker.hackerprofile.homepage_url|default:'(not set)'|urlize }}</td>
-        </tr>
-        </tbody>
-    </table>
+                    <p class="card-text">
+                        Twitter handle: {{ hacker.hackerprofile.twitter_url | default:'(not set)' | urlize }}</p>
+                    <p class="card-text">
+                        Blog URL: {{ hacker.hackerprofile.blog_url | default:'(not set)' | urlize }}</p>
+                    <p class="card-text">
+                        Homepage URL: {{ hacker.hackerprofile.homepage_url | default:'(not set)' | urlize }}</p>
 
-    <br clear="all"/>
+                    {% if user == hacker %}
+                    <a href="{% url 'profile_edit' %}" class="btn btn-primary">Edit</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-    {% block profiletab %}
-    {% endblock %}
+<div class="card">
+    <div class="card-body">
+        {% block profiletab %}
+        {% endblock %}
+    </div>
+</div>
 
 {% endblock %}

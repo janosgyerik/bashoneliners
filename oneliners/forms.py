@@ -9,6 +9,14 @@ from django import forms
 from oneliners.models import OneLiner, HackerProfile
 
 
+def common_text_input():
+    return forms.TextInput(attrs={'class': 'form-control', })
+
+
+def common_checkbox_input():
+    return forms.CheckboxInput(attrs={'class': 'form-check-input', })
+
+
 class CommonOneLinerForm(forms.ModelForm):
     user = None
     action = forms.CharField()
@@ -23,8 +31,9 @@ class CommonOneLinerForm(forms.ModelForm):
         widgets = {
             'summary': forms.TextInput(attrs={'class': 'form-control', }),
             'line': forms.TextInput(attrs={'class': 'form-control', }),
-            'explanation': forms.Textarea(attrs={'rows': 10, 'class': 'col-sm-6', }),
-            'limitations': forms.Textarea(attrs={'rows': 8, 'class': 'col-sm-6', }),
+            'explanation': forms.Textarea(attrs={'rows': 10, 'class': 'form-control col-md-6', }),
+            'limitations': forms.Textarea(attrs={'rows': 4, 'class': 'form-control', }),
+            'is_published': common_checkbox_input(),
         }
 
         fields = (
@@ -71,28 +80,35 @@ class EditOneLinerForm(CommonOneLinerForm):
 class SearchOneLinerForm(forms.Form):
     query = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'class': 'form-control', }))
     is_advanced = forms.BooleanField(required=False)
-    match_summary = forms.BooleanField(initial=True, required=False)
-    match_line = forms.BooleanField(initial=True, required=False)
-    match_explanation = forms.BooleanField(initial=True, required=False)
-    match_limitations = forms.BooleanField(initial=True, required=False)
-    match_whole_words = forms.BooleanField(initial=False, required=False)
+    match_summary = forms.BooleanField(initial=True, required=False, widget=common_checkbox_input())
+    match_line = forms.BooleanField(initial=True, required=False, widget=common_checkbox_input())
+    match_explanation = forms.BooleanField(initial=True, required=False, widget=common_checkbox_input())
+    match_limitations = forms.BooleanField(initial=True, required=False, widget=common_checkbox_input())
+    match_whole_words = forms.BooleanField(initial=False, required=False, widget=common_checkbox_input())
 
 
 class EditHackerProfileForm(forms.ModelForm):
-    def clean_display_name(self):
-        display_name = self.cleaned_data['display_name']
-        if display_name == '':
-            display_name = None
-        return display_name
+
+    def clean(self):
+        super().clean()
+
+        for name in self.fields:
+            cleaned_value = self.cleaned_data.get(name)
+            if not cleaned_value and not self.data.get(name) or cleaned_value == self.data.get(name):
+                self.fields[name].widget.attrs.update({'class': 'form-control is-valid'})
+            else:
+                self.fields[name].widget.attrs.update({'class': 'form-control is-invalid'})
+
+        return self.cleaned_data
 
     class Meta:
         model = HackerProfile
 
         widgets = {
-            'display_name': forms.TextInput(attrs={'class': 'form-control', }),
-            'twitter_name': forms.TextInput(attrs={'class': 'form-control', }),
-            'blog_url': forms.TextInput(attrs={'class': 'form-control', }),
-            'homepage_url': forms.TextInput(attrs={'class': 'form-control', }),
+            'display_name': common_text_input(),
+            'twitter_name': common_text_input(),
+            'blog_url': common_text_input(),
+            'homepage_url': common_text_input(),
         }
 
         exclude = (

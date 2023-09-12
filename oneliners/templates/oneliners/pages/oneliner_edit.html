@@ -2,7 +2,7 @@
 
 {% block pagetitle %}{{ form.title }}{% endblock %}
 
-{% block pageheader %}{{ form.title }}{% endblock %}
+{% block pageheader %}<h1>{{ form.title }}</h1>{% endblock %}
 
 {% block keywords %}{% endblock %}
 
@@ -13,10 +13,8 @@
     {% if oneliner %}
         <div class="alert alert-info related">
             <p>The new one-liner will be linked to the following one-liner as an alternative:</p>
-            {% with 1 as nobuttons %}
-                {% with oneliner.score as score %}
-                    {% include 'oneliners/elements/oneliner.html' %}
-                {% endwith %}
+            {% with boxed_oneliner=1 %}
+                {% include 'oneliners/elements/oneliner.html' %}
             {% endwith %}
         </div>
     {% endif %}

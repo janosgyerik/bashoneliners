@@ -2,32 +2,65 @@
 
 {% block pagetitle %}Search{% endblock %}
 
-{% block pageheader %}Search{% endblock %}
+{% block pageheader %}{% endblock %}
 
 {% block content %}
+<div class="card">
+    <div class="card-body">
+        <form action="#" method="get" id="search-form" role="form">
+            <input type="hidden" name="is_advanced" value="1"/>
 
-    <div class="well">
-        <form action="#" method="get" class="form-inline" id="search-form" role="form">
             <div class="row">
-                <div class="col-sm-9">
-                    <input type="hidden" name="is_advanced" value="1"/>
-                    {{ searchform.query }}
+                <div class="col-lg-9">
+                    {% with field=searchform.query %}
+                    <div class="form-outline">
+                        {{ field }}
+                        <label class="form-label" for="id_{{field.name}}">{{ field.label }}</label>
+                    </div>
+                    {% endwith %}
                 </div>
-                <div class="col-sm-3">
-                    <input type="submit" value="Search" class="btn btn-primary form-inline"/>
+                <div class="col-lg-3">
+                    <input type="submit" value="Search" class="btn btn-primary"/>
                 </div>
             </div>
-            <div class="form-group">
-                <label class="checkbox-inline">{{ searchform.match_whole_words }}{{ searchform.match_whole_words.label }}</label>
-                <label class="checkbox-inline">{{ searchform.match_summary }}{{ searchform.match_summary.label }}</label>
-                <label class="checkbox-inline">{{ searchform.match_line }}{{ searchform.match_line.label }}</label>
-                <label class="checkbox-inline">{{ searchform.match_explanation }}{{ searchform.match_explanation.label }}</label>
-                <label class="checkbox-inline">{{ searchform.match_limitations }}{{ searchform.match_limitations.label }}</label>
+
+            <div class="row row-cols-lg-auto m-2">
+                {% with field=searchform.match_whole_words %}
+                    <div class="col form-check form-check-inline">
+                        {{ field }}
+                        <label class="form-check-label" for="id_{{field.name}}">{{ field.label }}</label>
+                    </div>
+                {% endwith %}
+                {% with field=searchform.match_summary %}
+                    <div class="col form-check form-check-inline">
+                        {{ field }}
+                        <label class="form-check-label" for="id_{{field.name}}">{{ field.label }}</label>
+                    </div>
+                {% endwith %}
+                {% with field=searchform.match_line %}
+                    <div class="col form-check form-check-inline">
+                        {{ field }}
+                        <label class="form-check-label" for="id_{{field.name}}">{{ field.label }}</label>
+                    </div>
+                {% endwith %}
+                {% with field=searchform.match_explanation %}
+                    <div class="col form-check form-check-inline">
+                        {{ field }}
+                        <label class="form-check-label" for="id_{{field.name}}">{{ field.label }}</label>
+                    </div>
+                {% endwith %}
+                {% with field=searchform.match_limitations %}
+                    <div class="col form-check form-check-inline">
+                        {{ field }}
+                        <label class="form-check-label" for="id_{{field.name}}">{{ field.label }}</label>
+                    </div>
+                {% endwith %}
             </div>
         </form>
     </div>
+</div>
 
-    {% include 'oneliners/elements/oneliners_searchresults.html' %}
+{% include 'oneliners/elements/oneliners_searchresults.html' %}
 
 {% endblock %}
 
@@ -67,6 +100,7 @@
             error: search_error,
             complete: search_completed
         };
+
         $.ajax(options);
     });
 

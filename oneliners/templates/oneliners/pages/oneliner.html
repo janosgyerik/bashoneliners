@@ -2,11 +2,10 @@
 
 {% block pagetitle %}{{ oneliner.summary|capfirst }}{% endblock %}
 
-{% block pageheader %}{{ oneliner.summary|capfirst }}
-{% endblock %}
+{% block pageheader %}{% endblock %}
 
 {% block content %}
 
-{% include 'oneliners/elements/oneliner_with_related.html' %}
+{% include 'oneliners/elements/oneliner.html' %}
 
 {% endblock %}

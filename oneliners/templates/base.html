@@ -6,63 +6,90 @@
 
 {% block navbar %}
 
-    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
-                        aria-expanded="false" aria-controls="navbar">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="/">Bash One-Liners</a>
-            </div>
+<!-- Navbar -->
+<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+  <!-- Container wrapper -->
+  <div class="container">
+    <!-- Navbar brand -->
+    <a class="navbar-brand" href="/">Bash One-Liners</a>
 
-            <div id="navbar" class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    {% if user.is_superuser %}
-                        <li><a href="/admin/">Admin</a></li>
-                    {% endif %}
-                    <li><a href="{% url 'oneliners_default' %}">One-Liners</a></li>
-                    {% if user.is_authenticated %}
-                        <li><a href="{% url 'oneliner_new' %}">Post</a></li>
-                    {% endif %}
-                </ul>
+    <!-- Toggle button -->
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-mdb-toggle="collapse"
+      data-mdb-target="#navbarButtonsExample"
+      aria-controls="navbarButtonsExample"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <i class="fas fa-bars"></i>
+    </button>
 
-                {% if searchform %}
-                    <form class="navbar-form navbar-left" role="form" method="get"
-                          action="{% url 'search' %}">
-                        <input name="query" maxlength="100" placeholder="Search" type="text"
-                               class="form-control search-query" id="id_query"/>
-                    </form>
-                {% endif %}
+    <!-- Collapsible wrapper -->
+    <div class="collapse navbar-collapse" id="navbarButtonsExample">
+      <!-- Left links -->
+      <div class="navbar-nav me-auto mb-2 mb-lg-0 align-items-center">
+        {% if user.is_superuser %}
+        <a class="nav-link mx-2" href="/admin/">Admin</a>
+        {% endif %}
+        <a class="nav-link mx-2" href="{% url 'oneliners_default' %}">One-Liners</a>
+        {% if user.is_authenticated %}
+        <a class="nav-link mx-2" href="{% url 'oneliner_new' %}">Post</a>
+        {% endif %}
+        <form class="d-flex input-group w-auto mx-2" action="{% url 'search' %}" method="get">
+          <input
+            name="query"
+            id="id_query"
+            type="search"
+            class="form-control rounded"
+            placeholder="Search"
+            aria-label="Search"
+            aria-describedby="search-addon"
+          />
+          <span class="input-group-text text-white border-0" id="search-addon">
+            <i class="fas fa-search"></i>
+          </span>
+        </form>
+      </div>
+      <!-- Left links -->
 
-                <ul class="nav navbar-nav navbar-right">
-                    {% if user.is_authenticated %}
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle login" data-toggle="dropdown" role="button" aria-expanded="false">
-                            {{ user.hackerprofile.get_display_name }}
-                            <span class="caret"></span></a>
-                        <ul class="dropdown-menu" role="menu">
-                            <li><a href="{% url 'profile' %}">Profile</a></li>
-                            <li class="divider"></li>
-                            <li><a href="{% url 'logout' %}">Logout</a></li>
-                        </ul>
-                    </li>
-                    {% else %}
-                        <li><a href="{% url 'login' %}" class="login">Login</a></li>
-                    {% endif %}
-                </ul>
-            </div>
-        </div>
+      <div class="d-flex">
+        {% if user.is_authenticated %}
+        <button
+          type="button"
+          class="btn btn-link dropdown-toggle"
+          id="navbarDropdownMenuLink"
+          role="button"
+          data-mdb-toggle="dropdown"
+          aria-expanded="false"
+        >
+          {{ user.hackerprofile.get_display_name }}
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <li><a class="dropdown-item" href="{% url 'profile' %}">Profile</a></li>
+            <li><a class="dropdown-item" href="{% url 'logout' %}">Logout</a></li>
+        </ul>
+        {% else %}
+        <a href="{% url 'login' %}">
+          <button type="button" class="btn btn-link">
+          Login
+          </button>
+        </a>
+        {% endif %}
+      </div>
     </div>
+    <!-- Collapsible wrapper -->
+  </div>
+  <!-- Container wrapper -->
+</nav>
+<!-- Navbar -->
 
 {% endblock %}
 
 {% block main %}
 
-    <div class="page-header"><h1>{% block pageheader %}{% endblock %}</h1></div>
+    {% block pageheader %}{% endblock %}
 
     {% block content %}{% endblock %}
 

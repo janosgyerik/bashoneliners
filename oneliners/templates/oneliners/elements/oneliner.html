@@ -1,80 +1,100 @@
 {% load markup %}
-{% load static %}
 {% load upvote %}
 
-<div class="well" style="padding: 1em">
-    <table class="oneliner">
-        <tr>
-            <td style="width: 40px">
-                <div class="upvotejs" id="{% if votingDisabled %}disabled-{% endif %}{{ oneliner.pk }}" data-id="{{ oneliner.pk }}" data-user-id="{{ oneliner.user.id }}" data-voting-disabled="{{ votingDisabled }}">
-                    <a class="upvote {% upvoted oneliner %}"></a>
-                    <span class="count">{{ oneliner.score }}</span>
-                    <a class="downvote {% downvoted oneliner %}"></a>
+<div class="card oneliner oneliner-detailed">
+  <div class="card-body">
+      <div class="d-flex align-items-start">
+        <div class="flex-shrink-0 upvotejs" id="{{ oneliner.pk }}" data-id="{{ oneliner.pk }}" data-user-id="{{ oneliner.user.id }}">
+            <a class="upvote {% upvoted oneliner %}"></a>
+            <span class="count">{{ oneliner.score }}</span>
+            <a class="downvote {% downvoted oneliner %}"></a>
+        </div>
+
+        <div class="flex-grow-1 ms-4">
+            <h2 class="h5">
+                {% if boxed_oneliner %}
+                <a href="{% url 'oneliner' oneliner.pk %}">{{ oneliner.summary|capfirst }}</a>
+                {% else %}
+                {{ oneliner.summary | capfirst }}
+                {% endif %}
+            </h2>
+            <pre class="line">{{ oneliner.line }}</pre>
+
+            <p class="author">
+                <span class="date">{{ oneliner.created_dt }}</span>
+                &mdash;
+                <a href="{% url 'profile_of' oneliner.user.pk %}"><span>{{ oneliner.user.hackerprofile.get_display_name }}</span></a>
+            </p>
+
+            <h3 class="h6">Explanation</h3>
+            <div class="explanation">
+                {{ oneliner.explanation | markdown:"safe" }}
+            </div>
+
+            {% if oneliner.limitations %}
+                <h3 class="h6">Limitations</h3>
+                <div class="explanation">
+                    {{ oneliner.limitations | markdown:"safe" }}
                 </div>
-            </td>
+            {% endif %}
 
-            <td>
-                <div class="oneliner oneliner-{{ oneliner.pk }}">
-                    {% if includeSummary %}
-                    <h3 class="summary">
-                        <a href="{% url 'oneliner' oneliner.pk %}">{{ oneliner.summary|capfirst }}</a>
-                    </h3>
-                    {% endif %}
+            {% if not boxed_oneliner %}
+                {% if user == oneliner.user %}
+                    <a class="btn btn-primary {% if not oneliner.is_published %}btn-warning{% endif %}"
+                       href="{% url 'oneliner_edit' oneliner.pk %}">Edit</a>
+                {% endif %}
 
-                    <pre class="line"><span class="add-on">&nbsp;$&nbsp;</span><span class="oneliner-line">{{ oneliner.line }}</span></pre>
+                {% with text=oneliner.summary|capfirst|add:": "|add:oneliner.line|urlencode %}
+                    {% url 'oneliner' oneliner.pk as url %}
+                    {% with "https://bashoneliners.com"|add:url|urlencode as url %}
+                    <a class="twitter-share-button btn btn-info"
+                           href="https://twitter.com/intent/tweet?text={{text}}&url={{url}}&via=bashoneliners">Tweet</a>
+                    {% endwith %}
+                {% endwith %}
 
-                    <p class="author">
-                        <small>
-                            <span>{{ oneliner.created_dt }}</span>
-                            &mdash;
-                            <a href="{% url 'profile_of' oneliner.user.pk %}"><span>{{ oneliner.user.hackerprofile.get_display_name }}</span></a>
-                        </small>
-                    </p>
+                {% if user.is_authenticated %}
+                    <a href="{% url 'oneliner_alternative' oneliner.pk %}"
+                       class="btn btn-secondary">Post an alternative one-liner</a>
+                {% endif %}
 
-                    <div class="explanation">
-                        <h4>Explanation</h4>
-                        {{ oneliner.explanation|markdown:"safe" }}
-                    </div>
-
-                    {% if oneliner.limitations %}
-                        <div class="limitations">
-                            <h4>Limitations</h4>
-                            {{ oneliner.limitations|markdown:"safe" }}
-                        </div>
-                    {% endif %}
-
-                    {% if not nobuttons %}
-                        {% if user == oneliner.user %}
-                            <a class="btn btn-default {% if not oneliner.is_published %}btn-warning{% endif %}"
-                               href="{% url 'oneliner_edit' oneliner.pk %}">
-                                <i class="glyphicon glyphicon-pencil"></i></a>
-                        {% endif %}
-
-                        {% with text=oneliner.summary|capfirst|add:": "|add:oneliner.line|urlencode %}
-                            {% url 'oneliner' oneliner.pk as url %}
-                            {% with "https://bashoneliners.com"|add:url|urlencode as url %}
-                            <a class="twitter-share-button btn btn-info"
-                                   href="https://twitter.com/intent/tweet?text={{text}}&url={{url}}&via=bashoneliners">Tweet</a>
-                            {% endwith %}
-                        {% endwith %}
-
-                        {% if user.is_authenticated %}
-                            <a href="{% url 'oneliner_alternative' oneliner.pk %}"
-                               class="btn btn-default">Post an alternative one-liner</a>
-                        {% endif %}
-
-                        {% if user.is_staff %}
-                            <a class="btn btn-danger" href="{% url 'oneliner_edit' oneliner.pk %}">Edit</a>
-                            <a class="btn btn-{% if not oneliner.was_tweeted %}danger{% else %}warning{% endif %}" href="{% url 'oneliner_tweet' oneliner.pk %}">Tweet</a>
-                            <a class="btn btn-{% if not oneliner.unpublished %}danger{% else %}warning{% endif %}" href="{% url 'oneliner_unpublish' oneliner.pk %}">Unpublish</a>
-                            <a class="btn btn-danger" href="{% url 'oneliner_snapshot' oneliner.pk %}">Snapshot</a>
-                        {% endif %}
-                    {% endif %}
-
-                    {% block related %}
-                    {% endblock %}
-                </div>
-            </td>
-        </tr>
-    </table>
+                {% if user.is_staff %}
+                    <a class="btn btn-danger" href="{% url 'oneliner_edit' oneliner.pk %}">Edit</a>
+                    <a class="btn btn-{% if not oneliner.was_tweeted %}danger{% else %}warning{% endif %}" href="{% url 'oneliner_tweet' oneliner.pk %}">Tweet</a>
+                    <a class="btn btn-{% if not oneliner.unpublished %}danger{% else %}warning{% endif %}" href="{% url 'oneliner_unpublish' oneliner.pk %}">Unpublish</a>
+                    <a class="btn btn-danger" href="{% url 'oneliner_snapshot' oneliner.pk %}">Snapshot</a>
+                {% endif %}
+            {% endif %}
+        </div>
+    </div>
+  </div>
 </div>
+
+{% if not boxed_oneliner %}
+    {% if oneliner.relateds %}
+        {% with alternatives=oneliner.relateds voting_enabled=1 %}
+            <h2 class="h5">Related one-liners</h2>
+
+            <div class="oneliners">
+                {% for alternative in alternatives %}
+                    {% with oneliner=alternative.oneliner %}
+                        {% include 'oneliners/elements/oneliner_list_item.html' %}
+                    {% endwith %}
+                {% endfor %}
+            </div>
+        {% endwith %}
+    {% endif %}
+
+    {% if oneliner.alternatives %}
+        {% with alternatives=oneliner.alternatives voting_enabled=1 %}
+            <h2 class="h5">Alternative one-liners</h2>
+
+            <div class="oneliners">
+                {% for alternative in alternatives %}
+                    {% with oneliner=alternative.alternative %}
+                        {% include 'oneliners/elements/oneliner_list_item.html' %}
+                    {% endwith %}
+                {% endfor %}
+            </div>
+        {% endwith %}
+    {% endif %}
+{% endif %}

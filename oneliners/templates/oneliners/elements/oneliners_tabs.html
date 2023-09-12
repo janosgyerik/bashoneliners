@@ -1,0 +1,14 @@
+<ul class="nav nav-tabs nav-justified mb-3" role="tablist">
+    <li class="nav-item" role="presentation">
+        <a class="nav-link {{ active_newest }}" href="{% url 'oneliners_newest' %}" role="tab" data-ordering="newest">Newest</a>
+    </li>
+    <li class="nav-item" role="presentation">
+        <a class="nav-link {{ active_active }}" href="{% url 'oneliners_active' %}" role="tab" data-ordering="active">Active</a>
+    </li>
+    <li class="nav-item" role="presentation">
+        <a class="nav-link {{ active_popular }}" href="{% url 'oneliners_popular' %}" role="tab" data-ordering="popular">Popular</a>
+    </li>
+    <li class="nav-item" role="presentation">
+        <a class="nav-link {{ active_tags }}" href="{% url 'oneliners_tags' %}" role="tab" data-ordering="popular">Tags</a>
+    </li>
+</ul>

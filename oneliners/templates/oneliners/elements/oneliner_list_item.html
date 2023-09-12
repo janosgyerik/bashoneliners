@@ -1,42 +1,33 @@
-{% load markup %}
-{% load static %}
 {% load upvote %}
 
-<div class="well" style="padding: 0.5em">
-    <table class="oneliner oneliner-list-item">
-        <tr>
-            <td style="width: 40px">
-                <div class="upvotejs" id="{% if votingDisabled %}disabled-{% endif %}{{ oneliner.pk }}" data-id="{{ oneliner.pk }}" data-user-id="{{ oneliner.user.id }}" data-voting-disabled="{{ votingDisabled }}">
-                    <span class="count">{{ oneliner.score }}</span>
-                    <span class="score">score</span>
-                </div>
-            </td>
+<div class="card oneliner">
+  <div class="card-body">
+      <div class="d-flex align-items-start">
+      {% if voting_enabled %}
+        <div class="flex-shrink-0 upvotejs" id="{{ oneliner.pk }}" data-id="{{ oneliner.pk }}" data-user-id="{{ oneliner.user.id }}">
+            <a class="upvote {% upvoted oneliner %}"></a>
+            <span class="count">{{ oneliner.score }}</span>
+            <a class="downvote {% downvoted oneliner %}"></a>
+        </div>
+      {% else %}
+        <div class="flex-shrink-0 upvotejs" data-voting-disabled="true">
+            <span class="count">{{ oneliner.score }}</span>
+        </div>
+      {% endif %}
 
-            <td>
-                <div class="oneliner oneliner-{{ oneliner.pk }}">
-                    <h3 class="summary">
-                        <a href="{% url 'oneliner' oneliner.pk %}">{{ oneliner.summary|capfirst }}</a>
-                    </h3>
+        <div class="flex-grow-1 ms-4">
+            <h2 class="h5">
+                {% if not oneliner.is_published %}<span class="badge badge-warning">not published</span>{% endif %}
+                <a href="{% url 'oneliner' oneliner.pk %}">{{ oneliner.summary|capfirst }}</a>
+            </h2>
+            <pre class="line">{{ oneliner.line }}</pre>
 
-                    <pre class="line"><span class="add-on">&nbsp;$&nbsp;</span><span class="oneliner-line">{{ oneliner.line }}</span></pre>
-
-                    <p class="author">
-                        <span>{{ oneliner.created_dt }}</span>
-                        &mdash;
-                        <a href="{% url 'profile_of' oneliner.user.pk %}"><span>{{ oneliner.user.hackerprofile.get_display_name }}</span></a>
-                        {% if user == oneliner.user %}
-                        <a class="btn btn-default {% if not oneliner.is_published %}btn-warning{% endif %}"
-                           href="{% url 'oneliner_edit' oneliner.pk %}">
-                            <i class="glyphicon glyphicon-pencil"></i></a>
-                        {% endif %}
-                        {% if user.is_staff and not oneliner.is_published %}
-                        <a class="btn btn-warning"
-                           href="{% url 'oneliner_edit' oneliner.pk %}">
-                            <i class="glyphicon glyphicon-pencil"></i></a>
-                        {% endif %}
-                    </p>
-                </div>
-            </td>
-        </tr>
-    </table>
+            <p class="author align-items-center">
+                <span class="date">{{ oneliner.created_dt }}</span>
+                &mdash;
+                <a href="{% url 'profile_of' oneliner.user.pk %}">{{ oneliner.user.hackerprofile.get_display_name }}</a>
+            </p>
+        </div>
+    </div>
+  </div>
 </div>

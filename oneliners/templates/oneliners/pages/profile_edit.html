@@ -1,55 +1,41 @@
 {% extends "base.html" %}
 
-{% block pagetitle %}{{ user.hackerprofile.get_display_name|default:'Anonymous' }}{% endblock %}
-{% block pageheader %}{{ user.hackerprofile.get_display_name|default:'Anonymous' }}{% endblock %}
-
-{% block keywords %}{% endblock %}
-{% block description %}{% endblock %}
+{% block pagetitle %}Edit profile{% endblock %}
 
 {% block content %}
 
-    <form action="#" method="post" role="form">{% csrf_token %}
-        <div class="non-field-errors">{{ form.non_field_errors }}</div>
-        <h3>{{ form.display_name.label }}</h3>
+<div class="container py-3">
+    <div class="row justify-content-center align-items-center">
+        <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Edit profile</h5>
 
-        <div class="input">
-            <div class="error">{{ form.display_name.errors }}</div>
-            <div class="help-block">Name to show instead of your username: {{ user.username }}</div>
-            <div class="display_name">{{ form.display_name }}</div>
-        </div>
+                    <form action="#" method="post" role="form" class="row g-4">{% csrf_token %}
+                        {% for field in form %}
+                        <div class="col-md-12">
+                            <div class="form-outline">
+                                {{ field }}
+                                <label class="form-label" for="id_{{field.name}}">{{ field.label }}</label>
+                                {% for error in field.errors %}
+                                <div class="invalid-feedback">{{ error }}</div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        {% endfor %}
 
-        <h3>{{ form.twitter_name.label }}</h3>
-
-        <div class="input">
-            <div class="error">{{ form.twitter_name.errors }}</div>
-            <div class="input-group">
-                <div class="input-group-addon">@</div>
-                <div id="prependedInput" class="twitter_name">{{ form.twitter_name }}</div>
+                        <div class="col-md-12">
+                            <button type="submit" class="btn btn-primary btn-block mb-4">Update</button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
-
-        <h3>{{ form.blog_url.label }}</h3>
-
-        <div class="input">
-            <div class="error">{{ form.blog_url.errors }}</div>
-            <div class="blog_url">{{ form.blog_url }}</div>
-        </div>
-
-        <h3>{{ form.homepage_url.label }}</h3>
-
-        <div class="input form-group">
-            <div class="error">{{ form.homepage_url.errors }}</div>
-            <div class="homepage_url">{{ form.homepage_url }}</div>
-        </div>
-
-        <div class="form-group">
-            <button type="submit" name="action" class="btn btn-primary" value="Save">Save</button>
-            <a class="btn btn-default" href="{{ cancel_url }}">Cancel</a>
-        </div>
-    </form>
+    </div>
+</div>
 
 {% endblock %}
 
 {% block ready %}
-    $('#id_display_name').focus();
+$('#id_display_name').focus();
 {% endblock %}

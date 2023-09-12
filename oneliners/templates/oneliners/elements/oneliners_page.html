@@ -1,7 +1,7 @@
 {% if active_tags == 'active' %}
 <ul class="nav nav-pills tags">
     {% for tag in tagcloud %}
-        <li><a href="#">{{ tag.text }}</a></li>
+        <li class="nav-item"><a class="nav-link" href="#">{{ tag.text }}</a></li>
     {% endfor %}
 </ul>
 {% endif %}

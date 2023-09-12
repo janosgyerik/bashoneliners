@@ -2,16 +2,6 @@
 
 {% block pagetitle %}bashoneliners.com{% endblock %}
 
-{% block pageheader %}
-    bashoneliners.com
-    {% if SERVER_NAME != 'www.bashoneliners.com' %}
-        <a href="https://bashoneliners.com/" class="btn btn-success pull-right">bashoneliners.com</a>
-    {% endif %}
-    {% if SERVER_NAME != 'beta.bashoneliners.com' and user.is_superuser %}
-        <a href="https://beta.bashoneliners.com/" class="btn btn-info pull-right">beta</a>
-    {% endif %}
-{% endblock %}
-
 {% block keywords %}bash, ksh, shell, script, one-liner, oneliner, tips, tricks, snippets, linux, unix, vote,
     open-source, django, python, git, github{% endblock %}
 
@@ -30,6 +20,18 @@ You can login with common social logins such as Google and GitHub and share your
 This is an open-source project, built with love, Django, Python, jQuery, Git, GitHub, HTML5, Bootstrap from Twitter.
 {% endblock %}
 
+{% block pageheader %}
+<h1>
+    bashoneliners.com
+    {% if SERVER_NAME != 'www.bashoneliners.com' %}
+        <a href="https://bashoneliners.com/" class="btn btn-primary">go to prod</a>
+    {% endif %}
+    {% if SERVER_NAME != 'beta.bashoneliners.com' and user.is_superuser %}
+        <a href="https://beta.bashoneliners.com/" class="btn btn-secondary">go to beta</a>
+    {% endif %}
+</h1>
+{% endblock %}
+
 {% block content %}
 
 Welcome to bashoneliners.com,
@@ -46,7 +48,7 @@ or using the <a href="{% url 'feeds' %}">feeds</a>.
 If you find any problems,
 <a href="https://github.com/janosgyerik/bashoneliners/issues">please report on GitHub Issues</a>.
 
-    {% include 'oneliners/elements/oneliners_nav.html' %}
+    {% include 'oneliners/elements/oneliners_tabs.html' %}
 
     {% include 'oneliners/elements/oneliners_page.html' %}
 

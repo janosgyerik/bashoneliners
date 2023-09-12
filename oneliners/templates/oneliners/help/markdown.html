@@ -1,6 +1,13 @@
+{% extends "base.html" %}
+
 {% load markup %}
 
-<table class="table table-bordered table-striped help">
+{% block pagetitle %}Markdown Help{% endblock %}
+{% block pageheader %}<h1>Markdown Help</h1>{% endblock %}
+
+{% block content %}
+
+<table class="table table-bordered table-striped help markdown-help">
     <thead>
     <tr>
         <th>Syntax</th>
@@ -10,27 +17,27 @@
     <tbody>
     <tr>
         <td>*emphasis* or _emphasis_</td>
-        <td>{{ '*emphasis* or _emphasis_'|markdown }}</td>
+        <td>{{ '*emphasis* or _emphasis_' | markdown }}</td>
     </tr>
     <tr>
         <td>**strong emphasis** or __strong emphasis__</td>
-        <td>{{ '**strong emphasis** or __strong emphasis__'|markdown }}</td>
+        <td>{{ '**strong emphasis** or __strong emphasis__' | markdown }}</td>
     </tr>
     <tr>
         <td>\*escaped markup\*</td>
-        <td>{{ '\*escaped markup\*'|markdown }}</td>
+        <td>{{ '\*escaped markup\*' | markdown }}</td>
     </tr>
     <tr>
         <td>`span of code`</td>
-        <td>{{ '`span of code`'|markdown }}</td>
+        <td>{{ '`span of code`' | markdown }}</td>
     </tr>
     <tr>
         <td>``There is a literal backtick (`) here.``</td>
-        <td>{{ '``There is a literal backtick (`) here.``'|markdown }}</td>
+        <td>{{ '``There is a literal backtick (`) here.``' | markdown }}</td>
     </tr>
     <tr>
         <td>&lt;http://example.com/&gt;</td>
-        <td>{{ '<http://example.com/>'|markdown }}</td>
+        <td>{{ '<http://example.com/>' | markdown }}</td>
     </tr>
     <tr>
         <td>&gt; start lines with<br/>
@@ -73,5 +80,4 @@
     </tbody>
 </table>
 
-<p>For more details please refer to the documentation of markdown:<br/>
-    {{ '<http://daringfireball.net/projects/markdown/syntax>'|markdown }}</p>
+{% endblock %}

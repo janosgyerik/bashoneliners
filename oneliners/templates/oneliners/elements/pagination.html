@@ -1,19 +1,11 @@
 {% if page.paginator.num_pages > 1 %}
-    <nav class="text-center">
-        <ul class="pagination">
-            <!--
-	{% if page.has_previous %}
-	<li><a href="?page={{ page.previous_page_number }}">&larr;</a></li>
-	{% endif %}
-            -->
+    <nav>
+        <ul class="pagination pagination-lg justify-content-center">
             {% for num in page.paginator.page_range %}
-                <li class="{% if num == page.number %}active{% endif %}"><a href="?page={{ num }}">{{ num }}</a></li>
+                <li class="page-item {% if num == page.number %}active{% endif %}">
+                    <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+                </li>
             {% endfor %}
-            <!--
-	{% if page.has_next %}
-	<li><a href="?page={{ page.next_page_number }}">&rarr;</a></li>
-	{% endif %}
-            -->
         </ul>
     </nav>
 {% endif %}

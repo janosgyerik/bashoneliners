@@ -2,10 +2,16 @@
 
 {% block profiletab %}
 
-    {% with 'active' as active_oneliners %}
+    {% with active_oneliners="active" %}
         {% include 'oneliners/elements/profile_nav.html' %}
     {% endwith %}
 
-    {% include 'oneliners/elements/oneliners.html' %}
+    {% if hacker == user %}
+        {% include 'oneliners/elements/oneliners.html' %}
+    {% else %}
+        {% with voting_enabled=1 %}
+            {% include 'oneliners/elements/oneliners.html' %}
+        {% endwith %}
+    {% endif %}
 
 {% endblock %}

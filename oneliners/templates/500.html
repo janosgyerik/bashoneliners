@@ -1,28 +1,28 @@
 {% extends "base.html" %}
 
-{% block pagetitle %}Internal Server Error{% endblock %}
+{% block pagetitle %}Oops, something went wrong...{% endblock %}
 
-{% block pageheader %}Internal Server Error{% endblock %}
+{% block pageheader %}<h1>Oops, something went wrong...</h1>{% endblock %}
 
 {% block content %}
 
-    <div class="alert alert-danger">
-        <p>Ouch. Sorry, something went wrong and this is our fault :-/</p>
+<div class="alert alert-danger">
+    <p>Sorry, this is our fault :-/</p>
 
-        <p>We really want to fix this, but we need your help!</p>
+    <p>We really want to fix this, but we need your help!</p>
 
-        <p>Please kindly <a href="https://github.com/janosgyerik/bashoneliners/issues/new">create an issue on GitHub</a>,
-            and make sure to include relevant details such as:</p>
+    <p>Please <a href="https://github.com/janosgyerik/bashoneliners/issues/new">create an issue on GitHub</a>,
+        and include relevant details:</p>
 
-        <ul>
-            <li>If this happened when trying to submit a one-liner, the content of the form fields.</li>
-            <li>If this happened when editing a one-liner, the content of the form fields and the id of the one-liner.</li>
-            <li>Otherwise the URL from which you got here, and any other details you think might be helpful.</li>
-        </ul>
+    <ul>
+        <li>If this happened when trying to submit a one-liner, the content of the form fields.</li>
+        <li>If this happened when editing a one-liner, the content of the form fields and the id of the one-liner.</li>
+        <li>Otherwise the URL from which you got here, and any other details you think might be helpful.</li>
+    </ul>
 
-        <p>We <strong>will</strong> look into this either way, and try to fix soon.</p>
-    </div>
+    <p>We <strong><em>will</em></strong> look into this either way, and try to fix soon.</p>
+</div>
 
-    <p><a href="/">Back to the main page.</a></p>
+<p><a href="/">Back to the main page.</a></p>
 
 {% endblock %}

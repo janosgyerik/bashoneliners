@@ -38,6 +38,13 @@ Banning users
 On Django admin, edit user, uncheck **Active**. They won't be able to login anymore.
 
 
+SEO
+---
+
+Review Google's recommendations, at and around:
+https://developers.google.com/search/docs/fundamentals/creating-helpful-content
+
+
 Installing a custom version of Python
 -------------------------------------
 

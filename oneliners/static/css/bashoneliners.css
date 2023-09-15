@@ -100,3 +100,7 @@ h3 {
     border-radius: 3px;
     overflow: auto;
 }
+
+.nav-pills.tags a {
+    text-transform: none;
+}

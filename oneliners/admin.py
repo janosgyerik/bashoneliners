@@ -9,11 +9,15 @@ from social_django.models import UserSocialAuth
 from oneliners import models as site_models
 
 
+admin.site.unregister(User)
+
+
 class UserSocialAuthInline(admin.StackedInline):
     model = UserSocialAuth
     show_change_link = True
 
 
+@admin.register(User)
 class UserAdmin(admin.ModelAdmin):
     list_display = ('id', 'username', 'oneliners', 'is_staff', 'last_login', 'oneliner_count')
     list_display_links = ('username',)
@@ -34,10 +38,6 @@ class UserAdmin(admin.ModelAdmin):
         return format_html(f'<a href="{url}">{label}</a>')
 
     oneliner_count.admin_order_field = 'oneliner__count'
-
-
-admin.site.unregister(User)
-admin.site.register(User, UserAdmin)
 
 
 @admin.register(site_models.OneLiner)

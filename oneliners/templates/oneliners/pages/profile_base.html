@@ -19,9 +19,9 @@
                         {% endif %}
                     </p>
                     <p class="card-text">
-                        Blog URL: {{ hacker.hackerprofile.blog_url | default:'(not set)' | urlize }}</p>
+                        Blog: {{ hacker.hackerprofile.blog_url | default:'(not set)' | urlize }}</p>
                     <p class="card-text">
-                        Homepage URL: {{ hacker.hackerprofile.homepage_url | default:'(not set)' | urlize }}</p>
+                        Homepage: {{ hacker.hackerprofile.homepage_url | default:'(not set)' | urlize }}</p>
 
                     {% if user == hacker %}
                     <a href="{% url 'profile_edit' %}" class="btn btn-primary">Edit</a>

@@ -11,7 +11,13 @@
                     <h5 class="card-title">{{ hacker.hackerprofile.get_display_name }}</h5>
 
                     <p class="card-text">
-                        Twitter handle: {{ hacker.hackerprofile.twitter_url | default:'(not set)' | urlize }}</p>
+                        Twitter:
+                        {% if hacker.hackerprofile.twitter_name %}
+                            <a href="{{ hacker.hackerprofile.twitter_url }}">@{{ hacker.hackerprofile.twitter_name }}</a>
+                        {% else %}
+                            (not set)
+                        {% endif %}
+                    </p>
                     <p class="card-text">
                         Blog URL: {{ hacker.hackerprofile.blog_url | default:'(not set)' | urlize }}</p>
                     <p class="card-text">

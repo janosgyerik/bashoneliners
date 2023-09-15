@@ -1,0 +1,12 @@
+User-agent: *
+Disallow: /admin/
+Disallow: /oauth/
+Disallow: /oneliners/ajax/
+Disallow: /oneliners/login/
+Disallow: /oneliners/search/
+Disallow: /oneliners/users/
+
+{% if request.META.SERVER_NAME != 'www.bashoneliners.com' or request.META.HTTPS != 'on' %}
+User-agent: *
+Disallow: /
+{% endif %}

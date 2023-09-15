@@ -1,7 +1,9 @@
 from django.contrib import admin
 from django.urls import include, path
+from django.views.generic.base import TemplateView
 
 from oneliners.views import oneliners_default
+
 
 urlpatterns = [
     path('oauth/', include('social_django.urls', namespace='social')),
@@ -11,5 +13,7 @@ urlpatterns = [
 
     path('admin/doc/', include('django.contrib.admindocs.urls')),
 
-    path(r'admin/', admin.site.urls),
+    path('admin/', admin.site.urls),
+
+    path('robots.txt', TemplateView.as_view(template_name="robots.txt", content_type="text/plain")),
 ]

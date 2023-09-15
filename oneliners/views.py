@@ -174,7 +174,7 @@ def oneliner_edit(request, pk):
                 return redirect(oneliner1)
             elif form.is_delete:
                 oneliner0.delete()
-                return redirect(profile)
+                return redirect(profile, oneliner0.user.pk)
     else:
         form = EditOneLinerForm(request.user, instance=oneliner0)
 

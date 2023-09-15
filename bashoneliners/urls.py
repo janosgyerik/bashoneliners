@@ -1,14 +1,14 @@
 from django.contrib import admin
 from django.urls import include, path
+from django.views.generic.base import RedirectView
 from django.views.generic.base import TemplateView
-
-from oneliners.views import oneliners_default
 
 
 urlpatterns = [
     path('oauth/', include('social_django.urls', namespace='social')),
 
-    path('', oneliners_default, name='index'),
+    path('', RedirectView.as_view(url='oneliners/newest/', permanent=True), name='index'),
+
     path('oneliners/', include('oneliners.urls')),
 
     path('admin/doc/', include('django.contrib.admindocs.urls')),

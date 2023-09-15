@@ -1,9 +1,10 @@
 from django.urls import path
+from django.views.generic.base import RedirectView
 
 from . import views, ajax, feeds
 
 urlpatterns = [
-    path('', views.oneliners_default, name='oneliners_default'),
+    path('', RedirectView.as_view(url='newest/', permanent=True), name='oneliners_default'),
     path('feeds/', views.feeds, name='feeds'),
     path('feeds/oneliners/', feeds.LatestOneLinersFeed(), name='latest_oneliners'),
 

@@ -62,3 +62,12 @@ class OneLinerSnapshotAdmin(admin.ModelAdmin):
 @admin.register(site_models.HackerProfile)
 class HackerProfileAdmin(admin.ModelAdmin):
     list_display = ('get_username', 'get_email', 'get_date_joined', 'display_name', 'twitter_name',)
+
+
+@admin.register(site_models.Vote)
+class VoteAdmin(admin.ModelAdmin):
+    list_display = ('user', 'oneliner', 'vote', 'created_dt')
+    list_filter = ('value', )
+
+    def vote(self, obj):
+        return 'Up' if obj.value > 0 else 'Down'

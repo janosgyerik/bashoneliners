@@ -47,6 +47,6 @@ set -x
 
 "$python" -m venv "$virtualenv"
 
-./pip.sh install -r requirements.txt
-
 ./pip.sh install --upgrade pip
+
+./pip.sh install -r requirements.txt

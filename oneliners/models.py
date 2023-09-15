@@ -11,14 +11,10 @@ from django.utils.timezone import now
 
 from oneliners.tools import tags as tag_tools
 
-''' Constants '''
-
 RECENT_LIMIT = 25
 SEARCH_LIMIT = 25
 FEED_LIMIT = 10
 TAGCLOUD_MIN_COUNT = 3
-
-''' Helper methods '''
 
 
 def randomstring(length=16):

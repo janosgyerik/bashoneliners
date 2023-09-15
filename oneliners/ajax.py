@@ -11,6 +11,7 @@ from oneliners.forms import SearchOneLinerForm
 HTTP_BAD_REQUEST = HttpResponse(status=400)
 HTTP_NO_CONTENT = HttpResponse(status=204)
 
+
 @login_required
 def oneliner_vote(request, oneliner_pk):
     if request.method != 'POST':

@@ -12,7 +12,7 @@ from oneliners.models import OneLiner, User, Tag
 from oneliners.forms import EditHackerProfileForm, PostOneLinerForm, SearchOneLinerForm, EditOneLinerForm
 
 
-# decorators
+ITEMS_PER_PAGE = 25
 
 
 def render_with_context(custom_params=False):
@@ -91,7 +91,7 @@ def oneliners_default(request):
 def _common_oneliners_params(request, items):
     params = _common_params(request)
 
-    paginator = Paginator(items, 25)  # Show 25 items per page
+    paginator = Paginator(items, ITEMS_PER_PAGE)  # Show 25 items per page
 
     # Make sure page request is an int. If not, deliver first page.
     try:
@@ -110,9 +110,13 @@ def _common_oneliners_params(request, items):
     return params
 
 
+def published_oneliners():
+    return OneLiner.objects.filter(is_published=True).annotate(vote_sum=Sum('vote__value'))
+
+
 @render_with_context(custom_params=True)
 def oneliners_newest(request):
-    items = OneLiner.objects.filter(is_published=True).annotate(vote_sum=Sum('vote__value')).order_by('-id')
+    items = published_oneliners().order_by('-id')
     params = _common_oneliners_params(request, items)
     params['active_newest'] = 'active'
     params['ordering'] = 'newest'
@@ -121,7 +125,7 @@ def oneliners_newest(request):
 
 @render_with_context(custom_params=True)
 def oneliners_active(request):
-    items = OneLiner.objects.filter(is_published=True).annotate(vote_sum=Sum('vote__value')).order_by('-updated_dt', '-id')
+    items = published_oneliners().order_by('-updated_dt')[:ITEMS_PER_PAGE]
     params = _common_oneliners_params(request, items)
     params['active_active'] = 'active'
     params['ordering'] = 'active'
@@ -130,7 +134,7 @@ def oneliners_active(request):
 
 @render_with_context(custom_params=True)
 def oneliners_popular(request):
-    items = OneLiner.objects.filter(is_published=True).annotate(vote_sum=Sum('vote__value')).order_by('-vote_sum', '-id')
+    items = published_oneliners().order_by('-vote_sum', '-id')[:ITEMS_PER_PAGE]
     params = _common_oneliners_params(request, items)
     params['active_popular'] = 'active'
     params['ordering'] = 'popular'
@@ -139,7 +143,7 @@ def oneliners_popular(request):
 
 @render_with_context(custom_params=True)
 def oneliners_tags(request):
-    items = OneLiner.objects.filter(is_published=True).annotate(vote_sum=Sum('vote__value')).order_by('-vote_sum', '-id')
+    items = published_oneliners().order_by('-vote_sum', '-id')[:ITEMS_PER_PAGE]
     params = _common_oneliners_params(request, items)
     params['active_tags'] = 'active'
     params['ordering'] = 'popular'

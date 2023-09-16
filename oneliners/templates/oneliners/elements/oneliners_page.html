@@ -14,6 +14,6 @@
     {% endfor %}
 </div>
 
-{% with oneliners_page as page %}
+{% with page=oneliners_page page_range=oneliners_page_range %}
     {% include 'oneliners/elements/pagination.html' %}
 {% endwith %}

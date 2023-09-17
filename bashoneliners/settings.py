@@ -151,7 +151,7 @@ ABSOLUTE_URL_OVERRIDES = {
 }
 
 # Make Django write to file when it would email Admin.
-EMAIL_FILE_PATH = os.path.join(LOGS_DIR, 'messages')
+EMAIL_FILE_PATH = os.path.join(LOGS_DIR, 'emails')
 EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
 
 LOGIN_URL = '/oneliners/login/'

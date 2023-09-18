@@ -15,5 +15,7 @@ urlpatterns = [
 
     path('admin/', admin.site.urls),
 
+    path('legal/privacy-policy', TemplateView.as_view(template_name="legal/privacy-policy.html")),
+
     path('robots.txt', TemplateView.as_view(template_name="robots.txt", content_type="text/plain")),
 ]

@@ -5,6 +5,7 @@ Disallow: /oneliners/ajax/
 Disallow: /oneliners/login/
 Disallow: /oneliners/search/
 Disallow: /oneliners/users/
+Disallow: /legal/
 
 {% if request.META.SERVER_NAME != 'www.bashoneliners.com' or request.META.HTTPS != 'on' %}
 User-agent: *

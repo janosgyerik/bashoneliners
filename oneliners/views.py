@@ -30,11 +30,8 @@ def render_with_context(custom_params=False):
     return _inner
 
 
-# helper methods
-
-
 def format_canonical_url(request, relpath=''):
-    return 'http://%s:%s%s' % (request.META.get('SERVER_NAME'), request.META.get('SERVER_PORT'), relpath)
+    return 'https://%s%s' % (request.META.get('SERVER_NAME'), relpath)
 
 
 def _common_params(request):

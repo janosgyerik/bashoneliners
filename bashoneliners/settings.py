@@ -143,6 +143,9 @@ AUTHENTICATION_BACKENDS = (
     'social_core.backends.google.GoogleOAuth2',
     'social_core.backends.google.GoogleOAuth',
     'social_core.backends.twitter.TwitterOAuth',
+    # TODO: check if we can enable this backend in test code and clean up here.
+    # Required to be able to create staff users in tests.
+    'django.contrib.auth.backends.ModelBackend',
 )
 
 # Enable Visit on site link on Django Admin from User entries.

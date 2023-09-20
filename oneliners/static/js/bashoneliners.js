@@ -3,7 +3,7 @@ function popup_error() {
 }
 
 function bind_preview_markdown() {
-    var converter = new Showdown.converter();
+    const converter = new showdown.Converter();
     $('.markdown').each(function () {
         var inputPane = $(this).find('textarea').eq(0);
         var previewPane = $('<div class="preview form-control col-md-6"/>');

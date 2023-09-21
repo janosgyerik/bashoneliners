@@ -324,6 +324,7 @@ class OnelinerTweetTests(TestCase):
         self.assertEqual(response.status_code, 302)
         self.assertEqual(response.url, '/oneliners/login/?next=/oneliners/1/tweet/')
 
+    @override_settings(AUTHENTICATION_BACKENDS=['django.contrib.auth.backends.ModelBackend'])
     def test_staff_is_allowed(self):
         self.client.login(username=self.staff.username, password='staff')
         response = self.tweet_oneliner()

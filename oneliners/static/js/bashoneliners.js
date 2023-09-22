@@ -18,7 +18,7 @@ function bind_preview_markdown() {
 
 function bind_dblclick_to_select_oneliner() {
     if (window.getSelection) {
-        $('.oneliner-line').dblclick(function (e) {
+        $('.oneliner .line').dblclick(function (e) {
             var element = $(this)[0];
             var selection = window.getSelection();
             var range = document.createRange();

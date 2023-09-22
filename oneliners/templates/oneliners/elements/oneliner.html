@@ -21,7 +21,7 @@
             <pre class="line">{{ oneliner.line }}</pre>
 
             <p class="author">
-                <span class="date">{{ oneliner.created_dt }}</span>
+                <span class="date">{{ oneliner.published_dt }}</span>
                 &mdash;
                 <a href="{% url 'profile_of' oneliner.user.pk %}"><span>{{ oneliner.user.hackerprofile.get_display_name }}</span></a>
             </p>

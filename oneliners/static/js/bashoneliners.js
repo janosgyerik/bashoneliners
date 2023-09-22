@@ -34,11 +34,16 @@ function bind_upvote() {
 
     var callback = function (data) {
         if (!data) return;
+
         $.ajax({
             url: '/oneliners/ajax/oneliner/' + data.id + '/vote/',
             type: 'POST',
-            contentType: 'application/json',
-            data: JSON.stringify(data)
+            data: {
+                upvoted: data.newState.upvoted,
+                downvoted: data.newState.downvoted,
+                id: data.id,
+                csrfmiddlewaretoken: App.csrftoken
+            }
         });
     };
 

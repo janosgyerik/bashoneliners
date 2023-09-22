@@ -22,12 +22,9 @@ def oneliner_vote(request, oneliner_pk):
     except OneLiner.DoesNotExist:
         return HTTP_BAD_REQUEST
 
-    payload = json.loads(request.body)
-    state = payload['newState']
-
-    if state['upvoted']:
+    if request.POST.get('upvoted') == 'true':
         Vote.vote_up(request.user, oneliner)
-    elif state['downvoted']:
+    elif request.POST.get('downvoted') == 'true':
         Vote.vote_down(request.user, oneliner)
     else:
         Vote.vote_clear(request.user, oneliner)

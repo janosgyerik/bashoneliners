@@ -56,14 +56,16 @@
     <!-- Custom scripts -->
     <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script type="text/javascript">window.jQuery || document.write('<script src="{% static 'js/jquery-3.7.1.min.js' %}"><\/script>')</script>
-    <script type="text/javascript" src="{% static 'js/django-jquery-csrf.js' %}?v=1"></script>
     <script type="text/javascript" src="{% static 'showdownjs/showdown.min.js' %}?v=1"></script>
     <script type="text/javascript" src="{% static 'upvotejs/upvotejs.vanilla.js' %}?v=1"></script>
-    <script type="text/javascript" src="{% static 'js/bashoneliners.js' %}?v=2"></script>
+    <script type="text/javascript" src="{% static 'js/bashoneliners.js' %}?v=3"></script>
+    {% csrf_token %}
     <script type="text/javascript">
         <!--
-        var App = window.App = {};
-        App.user_id = '{{ user.id }}';
+        const App = window.App = {
+            user_id: '{{ user.id }}',
+            csrftoken: document.querySelector('[name=csrfmiddlewaretoken]').value
+        };
         $(document).ready(function () {
             {% block ready %}{% endblock %}
         });

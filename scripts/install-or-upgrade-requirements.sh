@@ -2,4 +2,4 @@
 
 cd "$(dirname "$0")"/..
 
-./pip.sh install -r requirements.txt
+./pip.sh install -U -r requirements.txt

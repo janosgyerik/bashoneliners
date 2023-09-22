@@ -1,7 +1,3 @@
-function popup_error() {
-    alert('Oops! Whatever you were trying to do, it\'s not working now... Please try again later!\n\nIf the problem doesn\'t go away soon, send an email to info@bashoneliners.com');
-}
-
 function bind_preview_markdown() {
     const converter = new showdown.Converter();
     $('.markdown').each(function () {
@@ -37,10 +33,8 @@ function bind_upvote() {
     if (App.user_id == 'None') return;
 
     var callback = function (data) {
-        // TODO: why is this necessary? can we eliminate?
         if (!data) return;
         $.ajax({
-            // TODO: clean up hardcoded url
             url: '/oneliners/ajax/oneliner/' + data.id + '/vote/',
             type: 'POST',
             contentType: 'application/json',
@@ -60,18 +54,8 @@ function bind_upvote() {
     });
 }
 
-function bind_search_navbar() {
-    $('.navbar-search .search-query').focus(function () {
-        $(this).addClass('input-large');
-    });
-    $('.navbar-search .search-query').blur(function () {
-        $(this).removeClass('input-large');
-    });
-}
-
 $(document).ready(function () {
     bind_preview_markdown();
     bind_upvote();
     bind_dblclick_to_select_oneliner();
-    bind_search_navbar();
 });

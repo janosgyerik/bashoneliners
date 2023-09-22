@@ -283,8 +283,9 @@ class TweepyTests(TestCase):
     def test_get_twitter_credentials_when_present(self):
         from oneliners.tweet import get_validated_twitter_credentials
         creds = get_validated_twitter_credentials()
-        self.assertEqual(creds, {'access_token': 'nonempty', 'access_token_secret': 'nonempty',
-                                  'consumer_key': 'nonempty', 'consumer_secret': 'nonempty'})
+        self.assertEqual(creds, {
+            'access_token': 'nonempty', 'access_token_secret': 'nonempty',
+            'consumer_key': 'nonempty', 'consumer_secret': 'nonempty'})
 
     @override_settings(TWITTER={'foo': 'bar'})
     def test_get_none_when_twitter_credentials_incomplete(self):
@@ -348,40 +349,48 @@ class OnelinerTweetTests(TestCase):
 
         # not too long to include #bash #linux
         summary = random_alphabetic(TWEET_LENGTH_LIMIT - essential_length - 2 - len(" #bash #linux"))
-        self.assertEqual(format_message(summary, oneliner, url),
+        self.assertEqual(
+            format_message(summary, oneliner, url),
             summary + ": " + oneliner + "; " + url + " #bash #linux")
 
         # too long to include #linux
         summary = random_alphabetic(TWEET_LENGTH_LIMIT - essential_length - 2 - len(" #linux"))
-        self.assertEqual(format_message(summary, oneliner, url),
+        self.assertEqual(
+            format_message(summary, oneliner, url),
             summary + ": " + oneliner + "; " + url + " #bash")
 
         # too long to include #bash #linux
         summary = random_alphabetic(TWEET_LENGTH_LIMIT - essential_length - 2)
-        self.assertEqual(format_message(summary, oneliner, url),
+        self.assertEqual(
+            format_message(summary, oneliner, url),
             summary + ": " + oneliner + "; " + url)
 
         # too long to include summary at all
         summary = random_alphabetic(TWEET_LENGTH_LIMIT - essential_length - 1)
-        self.assertEqual(format_message(summary, oneliner, url),
+        self.assertEqual(
+            format_message(summary, oneliner, url),
             oneliner + "; " + url + " #bash #linux")
 
         # oneliner not too long to include #bash #linux
         oneliner = random_alphabetic(TWEET_LENGTH_LIMIT - len(url) - 2 - len(" #bash #linux"))
-        self.assertEqual(format_message(summary, oneliner, url),
+        self.assertEqual(
+            format_message(summary, oneliner, url),
             oneliner + "; " + url + " #bash #linux")
 
         # oneliner too long to include #linux
         oneliner = random_alphabetic(TWEET_LENGTH_LIMIT - len(url) - 2 - len(" #linux"))
-        self.assertEqual(format_message(summary, oneliner, url),
+        self.assertEqual(
+            format_message(summary, oneliner, url),
             oneliner + "; " + url + " #bash")
 
         # oneliner too long to include #bash #linux
         oneliner = random_alphabetic(TWEET_LENGTH_LIMIT - len(url) - 2)
-        self.assertEqual(format_message(summary, oneliner, url),
+        self.assertEqual(
+            format_message(summary, oneliner, url),
             oneliner + "; " + url)
 
         # oneliner so long that ellipsis necessary
         oneliner = random_alphabetic(TWEET_LENGTH_LIMIT - len(url) - 1)
-        self.assertEqual(format_message(summary, oneliner, url),
-            oneliner[:len(oneliner)-4] + "...; " + url)
+        self.assertEqual(
+            format_message(summary, oneliner, url),
+            oneliner[:len(oneliner) - 4] + "...; " + url)

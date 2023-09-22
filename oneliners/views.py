@@ -314,6 +314,17 @@ def profile_votes(request):
     return 'oneliners/pages/profile_votes.html', params
 
 
+@user_passes_test(lambda u: u.is_staff)
+@render_with_context(custom_params=True)
+def profile_votes_of(request, pk=None):
+    params = _common_params(request)
+    hacker = User.objects.get(pk=pk)
+    oneliners = OneLiner.objects.annotate(vote_sum=Sum('vote__value')).filter(vote__user=hacker)
+    params['oneliners'] = oneliners
+    params['hacker'] = hacker
+    return 'oneliners/pages/profile_votes.html', params
+
+
 @render_with_context(custom_params=True)
 def search(request):
     params = _common_params(request)

@@ -3,6 +3,10 @@
         <li class="nav-item" role="presentation">
             <a class="nav-link {{ active_votes }}" href="{% url 'profile_votes' %}" role="tab">Votes</a>
         </li>
+    {% elif user.is_staff %}
+        <li class="nav-item" role="presentation">
+            <a class="nav-link {{ active_votes }}" href="{% url 'profile_votes_of' hacker.pk %}" role="tab">Votes</a>
+        </li>
     {% endif %}
     <li class="nav-item" role="presentation">
         <a class="nav-link {{ active_oneliners }}" href="{% url 'profile_oneliners_of' hacker.pk %}" role="tab">One-Liners</a>

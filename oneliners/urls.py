@@ -22,6 +22,7 @@ urlpatterns = [
 
     path('users/<int:pk>/', views.profile, name='profile_of'),
     path('users/<int:pk>/oneliners/', views.profile_oneliners, name='profile_oneliners_of'),
+    path('users/<int:pk>/votes/', views.profile_votes_of, name='profile_votes_of'),
     path('users/', views.profile, name='profile'),
     path('users/edit/', views.profile_edit, name='profile_edit'),
     path('users/oneliners/', views.profile_oneliners, name='profile_oneliners'),

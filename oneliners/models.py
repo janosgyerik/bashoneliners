@@ -91,10 +91,11 @@ class OneLiner(models.Model):
     is_published = models.BooleanField(default=True)
     was_tweeted = models.BooleanField(default=False)
 
+    unpublished = models.BooleanField(default=False)
+
+    published_dt = models.DateTimeField(null=True, blank=True)
     created_dt = models.DateTimeField(default=now, blank=True)
     updated_dt = models.DateTimeField(default=now, blank=True)
-
-    unpublished = models.BooleanField(default=False)
 
     def vote_up(self, user):
         Vote.vote_up(user, self)
@@ -215,8 +216,13 @@ class OneLiner(models.Model):
 
     def save(self, *args, **kwargs):
         self.updated_dt = now()
+
+        if self.is_published and self.published_dt is None:
+            self.published_dt = now()
+
         ret = super(OneLiner, self).save(*args, **kwargs)
         self.update_tags()
+
         return ret
 
     def get_absolute_url(self):

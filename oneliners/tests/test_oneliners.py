@@ -394,3 +394,48 @@ class OnelinerTweetTests(TestCase):
         self.assertEqual(
             format_message(summary, oneliner, url),
             oneliner[:len(oneliner) - 4] + "...; " + url)
+
+
+class UpdatingTests(TestCase):
+    def setUp(self):
+        self.user = Util.new_user('user')
+
+    def test_save_sets_published_dt_when_is_published_is_set(self):
+        oneliner0 = OneLiner(
+            user=self.user, line="dummy line", summary="dummy summary",
+            explanation="dummy explanation", is_published=True)
+        oneliner0.save()
+
+        oneliner = OneLiner.get(pk=oneliner0.pk)
+        self.assertTrue(oneliner.is_published)
+        self.assertIsNotNone(oneliner.published_dt)
+
+    def test_save_does_not_set_published_dt_when_is_published_not_set(self):
+        oneliner0 = OneLiner(
+            user=self.user, line="dummy line", summary="dummy summary",
+            explanation="dummy explanation", is_published=False)
+        oneliner0.save()
+
+        oneliner = OneLiner.get(pk=oneliner0.pk)
+        self.assertFalse(oneliner.is_published)
+        self.assertIsNone(oneliner.published_dt)
+
+        oneliner.save()
+        oneliner2 = OneLiner.get(pk=oneliner0.pk)
+        self.assertFalse(oneliner2.is_published)
+        self.assertIsNone(oneliner2.published_dt)
+
+    def test_save_does_not_update_published_dt_when_already_set(self):
+        oneliner0 = OneLiner(
+            user=self.user, line="dummy line", summary="dummy summary",
+            explanation="dummy explanation", is_published=True)
+        oneliner0.save()
+
+        oneliner1 = OneLiner.get(pk=oneliner0.pk)
+        oneliner1_published_dt = oneliner1.published_dt
+        oneliner1_updated_dt = oneliner1.updated_dt
+        oneliner1.save()
+
+        oneliner2 = OneLiner.get(pk=oneliner0.pk)
+        self.assertEqual(oneliner1_published_dt, oneliner2.published_dt)
+        self.assertGreater(oneliner2.updated_dt, oneliner1_updated_dt)

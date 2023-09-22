@@ -3,30 +3,29 @@
 {% block pagetitle %}{{ hacker.hackerprofile.get_display_name }}{% endblock %}
 
 {% block content %}
-<div class="container py-3">
-    <div class="row justify-content-center align-items-center">
-        <div class="col-12 col-md-8 col-lg-6 col-xl-5">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">{{ hacker.hackerprofile.get_display_name }}</h5>
 
-                    <p class="card-text">
-                        Twitter:
-                        {% if hacker.hackerprofile.twitter_name %}
-                            <a href="{{ hacker.hackerprofile.twitter_url }}">@{{ hacker.hackerprofile.twitter_name }}</a>
-                        {% else %}
-                            (not set)
-                        {% endif %}
-                    </p>
-                    <p class="card-text">
-                        Blog: {{ hacker.hackerprofile.blog_url | default:'(not set)' | urlize }}</p>
-                    <p class="card-text">
-                        Homepage: {{ hacker.hackerprofile.homepage_url | default:'(not set)' | urlize }}</p>
+<div class="row justify-content-center align-items-center py-3">
+    <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">{{ hacker.hackerprofile.get_display_name }}</h5>
 
-                    {% if user == hacker %}
-                    <a href="{% url 'profile_edit' %}" class="btn btn-primary">Edit</a>
+                <p class="card-text">
+                    Twitter:
+                    {% if hacker.hackerprofile.twitter_name %}
+                        <a href="{{ hacker.hackerprofile.twitter_url }}">@{{ hacker.hackerprofile.twitter_name }}</a>
+                    {% else %}
+                        (not set)
                     {% endif %}
-                </div>
+                </p>
+                <p class="card-text">
+                    Blog: {{ hacker.hackerprofile.blog_url | default:'(not set)' | urlize }}</p>
+                <p class="card-text">
+                    Homepage: {{ hacker.hackerprofile.homepage_url | default:'(not set)' | urlize }}</p>
+
+                {% if user == hacker %}
+                    <p><a href="{% url 'profile_edit' %}" class="btn btn-primary">Edit</a></p>
+                {% endif %}
             </div>
         </div>
     </div>

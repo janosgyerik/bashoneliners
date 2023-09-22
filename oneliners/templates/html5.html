@@ -7,8 +7,8 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
     <title>{% block title %}{% endblock %}</title>
     <!-- bashoneliners icon -->
-    <link rel="icon" href="{% static 'images/favicon.ico' %}?v=3" type="image/x-icon"/>
-    <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}?v=3" type="image/x-icon"/>
+    <link rel="icon" href="{% static 'images/favicon.ico' %}?v=3" type="image/x-icon" />
+    <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}?v=3" type="image/x-icon" />
     <!-- Font Awesome -->
     <link
       rel="stylesheet"
@@ -21,18 +21,18 @@
     />
     <!-- MDB -->
     <link rel="stylesheet" href="{% static 'mdb/css/mdb.min.css' %}?v=1" />
-    <link rel="stylesheet" href="{% static 'css/mdb-fixes.css' %}?v=1" />
+    <link rel="stylesheet" href="{% static 'css/mdb-fixes.css' %}?v=2" />
 
     <!-- bashoneliners -->
     <link rel="stylesheet" href="{% static 'upvotejs/upvotejs.css' %}?v=1" />
-    <link rel="stylesheet" href="{% static 'css/bashoneliners.css' %}?v=1" />
+    <link rel="stylesheet" href="{% static 'css/bashoneliners.css' %}?v=2" />
 
     <meta name="description" content="{% block description %}{% endblock %}">
     <meta name="author" content="Janos Gyerik info@bashoneliners.com">
 
-    <!-- SERVER_NAME={{ SERVER_NAME }} -->
+    <!-- request.META.SERVER_NAME={{ request.META.SERVER_NAME }} -->
     <!-- request.META.HTTPS={{ request.META.HTTPS }} -->
-    {% if SERVER_NAME != 'www.bashoneliners.com' or request.META.HTTPS != 'on' %}
+    {% if request.META.SERVER_NAME != 'www.bashoneliners.com' or request.META.HTTPS != 'on' %}
     <!-- Do not index this page or follow links from it.
      See https://developers.google.com/search/docs/crawling-indexing/robots-meta-tag -->
     <meta name="robots" content="none">

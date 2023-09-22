@@ -1,5 +1,5 @@
 {% load markup %}
-{% with obj as oneliner %}
+{% with oneliner=obj %}
     <pre>{{ oneliner.line }}</pre>
 
     <p>
@@ -11,13 +11,13 @@
 
     <div class="explanation">
         <h4>Explanation</h4>
-        {{ oneliner.explanation|markdown:"safe"|linebreaks }}
+        {{ oneliner.explanation | markdown:"safe" | linebreaks }}
     </div>
 
     {% if oneliner.limitations %}
         <div class="limitations">
             <h4>Limitations</h4>
-            {{ oneliner.limitations|markdown:"safe"|linebreaks }}
+            {{ oneliner.limitations | markdown:"safe" | linebreaks }}
         </div>
     {% endif %}
 {% endwith %}

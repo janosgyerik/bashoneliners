@@ -5,13 +5,14 @@
 {% block pageheading %}{% endblock %}
 
 {% block content %}
+
 <div class="card">
     <div class="card-body">
         <form action="#" method="get" id="search-form" role="form">
             <input type="hidden" name="is_advanced" value="1"/>
 
             <div class="row">
-                <div class="col-lg-9">
+                <div class="col-md-9 py-2">
                     {% with field=searchform.query %}
                     <div class="form-outline">
                         {{ field }}
@@ -19,8 +20,8 @@
                     </div>
                     {% endwith %}
                 </div>
-                <div class="col-lg-3">
-                    <input type="submit" value="Search" class="btn btn-primary"/>
+                <div class="col-md-3 py-2">
+                    <input type="submit" value="Search" class="btn btn-primary btn-block"/>
                 </div>
             </div>
 

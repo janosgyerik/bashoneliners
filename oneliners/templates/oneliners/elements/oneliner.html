@@ -13,9 +13,9 @@
         <div class="flex-grow-1 ms-4">
             <h2 class="h5">
                 {% if boxed_oneliner %}
-                <a href="{% url 'oneliner' oneliner.pk %}">{{ oneliner.summary|capfirst }}</a>
+                    <a href="{% url 'oneliner' oneliner.pk %}">{{ oneliner.summary | capfirst }}</a>
                 {% else %}
-                {{ oneliner.summary | capfirst }}
+                    {{ oneliner.summary | capfirst }}
                 {% endif %}
             </h2>
             <pre class="line">{{ oneliner.line }}</pre>
@@ -40,28 +40,28 @@
 
             {% if not boxed_oneliner %}
                 {% if user == oneliner.user %}
-                    <a class="btn btn-primary {% if not oneliner.is_published %}btn-warning{% endif %}"
+                    <a class="d-block d-md-inline-block btn btn-primary {% if not oneliner.is_published %}btn-warning{% endif %}"
                        href="{% url 'oneliner_edit' oneliner.pk %}">Edit</a>
                 {% endif %}
 
                 {% with text=oneliner.summary|capfirst|add:": "|add:oneliner.line|urlencode %}
                     {% url 'oneliner' oneliner.pk as url %}
                     {% with "https://bashoneliners.com"|add:url|urlencode as url %}
-                    <a class="twitter-share-button btn btn-info"
+                    <a class="twitter-share-button d-block d-md-inline-block btn btn-info"
                            href="https://twitter.com/intent/tweet?text={{text}}&url={{url}}&via=bashoneliners">Tweet</a>
                     {% endwith %}
                 {% endwith %}
 
                 {% if user.is_authenticated %}
                     <a href="{% url 'oneliner_alternative' oneliner.pk %}"
-                       class="btn btn-secondary">Post an alternative one-liner</a>
+                       class="d-block d-md-inline-block btn btn-secondary">Post an alternative one-liner</a>
                 {% endif %}
 
                 {% if user.is_staff %}
-                    <a class="btn btn-danger" href="{% url 'oneliner_edit' oneliner.pk %}">Edit</a>
-                    <a class="btn btn-{% if not oneliner.was_tweeted %}danger{% else %}warning{% endif %}" href="{% url 'oneliner_tweet' oneliner.pk %}">Tweet</a>
-                    <a class="btn btn-{% if not oneliner.unpublished %}danger{% else %}warning{% endif %}" href="{% url 'oneliner_unpublish' oneliner.pk %}">Unpublish</a>
-                    <a class="btn btn-danger" href="{% url 'oneliner_snapshot' oneliner.pk %}">Snapshot</a>
+                    <a class="d-block d-md-inline-block btn btn-danger" href="{% url 'oneliner_edit' oneliner.pk %}">Edit</a>
+                    <a class="d-block d-md-inline-block btn btn-{% if not oneliner.was_tweeted %}danger{% else %}warning{% endif %}" href="{% url 'oneliner_tweet' oneliner.pk %}">Tweet</a>
+                    <a class="d-block d-md-inline-block btn btn-{% if not oneliner.unpublished %}danger{% else %}warning{% endif %}" href="{% url 'oneliner_unpublish' oneliner.pk %}">Unpublish</a>
+                    <a class="d-block d-md-inline-block btn btn-danger" href="{% url 'oneliner_snapshot' oneliner.pk %}">Snapshot</a>
                 {% endif %}
             {% endif %}
         </div>

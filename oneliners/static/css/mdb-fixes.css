@@ -6,3 +6,16 @@
 h3 {
     margin: .5em 0;
 }
+
+.nav-pills.tags a {
+    text-transform: none;
+}
+
+.card.oneliner {
+    margin-top: 2em;
+    margin-bottom: 2em;
+}
+
+.oneliner .btn {
+    margin: .5em 0;
+}

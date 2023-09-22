@@ -31,7 +31,7 @@ def render_with_context(custom_params=False):
 
 
 def format_canonical_url(request, relpath=''):
-    return 'https://%s%s' % (request.META.get('SERVER_NAME'), relpath)
+    return f"https://{request.META.get('SERVER_NAME')}{relpath}"
 
 
 def _common_params(request):
@@ -54,7 +54,6 @@ def _common_params(request):
     params = {
         'user': request.user,
         'searchform': searchform,
-        'SERVER_NAME': request.META['SERVER_NAME'],
         'next': request.GET.get('next')
     }
 

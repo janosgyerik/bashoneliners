@@ -4,31 +4,29 @@
 
 {% block content %}
 
-<div class="container py-3">
-    <div class="row justify-content-center align-items-center">
-        <div class="col-12 col-md-8 col-lg-6 col-xl-5">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">Edit profile</h5>
+<div class="row justify-content-center align-items-center py-3">
+    <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Edit profile</h5>
 
-                    <form action="#" method="post" role="form" class="row g-4">{% csrf_token %}
-                        {% for field in form %}
-                        <div class="col-md-12">
-                            <div class="form-outline">
-                                {{ field }}
-                                <label class="form-label" for="id_{{field.name}}">{{ field.label }}</label>
-                                {% for error in field.errors %}
-                                <div class="invalid-feedback">{{ error }}</div>
-                                {% endfor %}
-                            </div>
+                <form action="#" method="post" role="form" class="row g-4">{% csrf_token %}
+                    {% for field in form %}
+                    <div class="col-md-12">
+                        <div class="form-outline">
+                            {{ field }}
+                            <label class="form-label" for="id_{{field.name}}">{{ field.label }}</label>
+                            {% for error in field.errors %}
+                            <div class="invalid-feedback">{{ error }}</div>
+                            {% endfor %}
                         </div>
-                        {% endfor %}
+                    </div>
+                    {% endfor %}
 
-                        <div class="col-md-12">
-                            <button type="submit" class="btn btn-primary btn-block mb-4">Update</button>
-                        </div>
-                    </form>
-                </div>
+                    <div class="col-md-12">
+                        <button type="submit" class="btn btn-primary btn-block mb-4">Update</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

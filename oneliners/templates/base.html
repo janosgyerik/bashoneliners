@@ -2,7 +2,7 @@
 
 {% load static %}
 
-{% block title %}{% block pagetitle %}{% endblock %} | Bash One-Liners{% endblock %}
+{% block title %}{% block pagetitle %}{% endblock %} | bashoneliners.com{% endblock %}
 
 {% block navbar %}
 
@@ -31,12 +31,15 @@
       <!-- Left links -->
       <div class="navbar-nav me-auto mb-2 mb-lg-0 align-items-center">
         {% if user.is_superuser %}
-        <a class="nav-link mx-2" href="/admin/">Admin</a>
+          <a class="nav-link mx-2" href="/admin/">Admin</a>
         {% endif %}
+
         <a class="nav-link mx-2" href="{% url 'oneliners_default' %}">One-Liners</a>
+
         {% if user.is_authenticated %}
-        <a class="nav-link mx-2" href="{% url 'oneliner_new' %}">Post</a>
+          <a class="nav-link mx-2" href="{% url 'oneliner_new' %}">Post</a>
         {% endif %}
+
         <form class="d-flex input-group w-auto mx-2" action="{% url 'search' %}" method="get">
           <input
             name="query"
@@ -56,26 +59,20 @@
 
       <div class="d-flex">
         {% if user.is_authenticated %}
-        <button
-          type="button"
-          class="btn btn-link dropdown-toggle"
-          id="navbarDropdownMenuLink"
-          role="button"
-          data-mdb-toggle="dropdown"
-          aria-expanded="false"
-        >
-          {{ user.hackerprofile.get_display_name }}
-        </button>
-        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-            <li><a class="dropdown-item" href="{% url 'profile' %}">Profile</a></li>
-            <li><a class="dropdown-item" href="{% url 'logout' %}">Logout</a></li>
-        </ul>
+          <button
+            type="button"
+            class="btn btn-link dropdown-toggle"
+            id="navbarDropdownMenuLink"
+            role="button"
+            data-mdb-toggle="dropdown"
+            aria-expanded="false"
+          >{{ user.hackerprofile.get_display_name }}</button>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+              <li><a class="dropdown-item" href="{% url 'profile' %}">Profile</a></li>
+              <li><a class="dropdown-item" href="{% url 'logout' %}">Logout</a></li>
+          </ul>
         {% else %}
-        <a href="{% url 'login' %}">
-          <button type="button" class="btn btn-link">
-          Login
-          </button>
-        </a>
+          <a href="{% url 'login' %}"><button type="button" class="btn btn-link">Login</button></a>
         {% endif %}
       </div>
     </div>

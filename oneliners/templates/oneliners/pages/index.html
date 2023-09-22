@@ -23,10 +23,10 @@ This is an open-source project, built with love, Django, Python, jQuery, Git, Gi
 {% block pageheading %}
 <h1>
     bashoneliners.com
-    {% if SERVER_NAME != 'www.bashoneliners.com' %}
+    {% if request.META.SERVER_NAME != 'www.bashoneliners.com' %}
         <a href="https://bashoneliners.com/" class="btn btn-primary">go to prod</a>
     {% endif %}
-    {% if SERVER_NAME != 'beta.bashoneliners.com' and user.is_superuser %}
+    {% if request.META.SERVER_NAME != 'beta.bashoneliners.com' and user.is_superuser %}
         <a href="https://beta.bashoneliners.com/" class="btn btn-secondary">go to beta</a>
     {% endif %}
 </h1>

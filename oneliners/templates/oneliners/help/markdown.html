@@ -7,6 +7,8 @@
 
 {% block content %}
 
+For a complete list of supported formats, see {{ 'http://demo.showdownjs.com/' | urlize }}.
+
 <table class="table table-bordered table-striped help markdown-help">
     <thead>
     <tr>
@@ -36,8 +38,21 @@
         <td>{{ '``There is a literal backtick (`) here.``' | markdown }}</td>
     </tr>
     <tr>
-        <td>&lt;http://example.com/&gt;</td>
-        <td>{{ '<http://example.com/>' | markdown }}</td>
+        <td>&lt;https://example.com/&gt;</td>
+        <td>{{ '<https://example.com/>' | markdown }}</td>
+    </tr>
+    <tr>
+        <td>```<br/>
+            fenced<br/>
+            code block<br/>
+            ```
+        </td>
+        <td>
+<pre>
+fenced
+code block
+</pre>
+        </td>
     </tr>
     <tr>
         <td>&gt; start lines with<br/>

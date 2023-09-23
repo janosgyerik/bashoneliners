@@ -3,8 +3,13 @@
     <div class="oneliner">
         <h3>Summary of the one-liner<span class="required">*</span></h3>
 
-        <div class="help-block">Use the <em>imperative mood</em>, as if giving a command or instruction,
-            for example <em>"Extract the n-th field from a single line of comma separated values"</em>.</div>
+        <div class="help-block">
+            <ul>
+                <li>A simple, short, informative, specific sentence that summarizes the purpose of the one-liner.</li>
+                <li>Use the imperative mood, as if giving an instruction.</li>
+                <li>Example: <em>Extract the n-th field from a single line of comma separated values</em></li>
+            </ul>
+        </div>
         <div class="input">
             <div class="error">{{ form.summary.errors }}</div>
             <div class="summary">{{ form.summary }}</div>
@@ -13,11 +18,13 @@
         <h3>The one-liner<span class="required">*</span></h3>
 
         <div class="help-block">
-            Write in a way that's easy to read, follows best practices and common formatting style,
-            and with only essential details.
-            Use a space around <code>|</code>,
-            a single space after <code>;</code>.
-            Avoid unnecessary flags or trailing <code>;</code>.
+            <ul>
+                <li>Useful and interesting, not trying to be cryptic or clever.</li>
+                <li>Correct and follows best practices.</li>
+                <li>Easy to read and understand, follows common formatting style.</li>
+                <li>Use one space around <code>|</code>, one space after <code>;</code></li>
+                <li>Has only essential details, matching the summary. No unnecessary commands or flags.</li>
+            </ul>
         </div>
         <div class="input">
             <div class="error">{{ form.line.errors }}</div>
@@ -30,14 +37,17 @@
         <h3>Explanation<span class="required">*</span></h3>
 
         <div class="help-block">
-            Explain how the one-liner works as if teaching a beginner.
-            Try to explain every command, flag, and grammar structure.
-            Mention if there are important trade-offs or common pitfalls.
-            Sometimes it's useful to include example inputs and outputs.
-            Use appropriate
-            <a class="help help-markdown" href="{% url 'help_markdown' %}" target="_blank" rel="noopener noreferrer">markdown</a>
-            for code text, code blocks, or blockquotes.
-            Do not use HTML.
+            Explain how the one-liner works as if teaching a beginner. Patiently and not condescendingly.
+            <ul>
+                <li>Explain every command in the one-liner.</li>
+                <li>Explain every flag used in the one-liner.</li>
+                <li>Explain non-trivial Bash grammar.</li>
+                <li>When applicable: mention important trade-offs or common pitfalls.</li>
+                <li>When helpful: include example input and output.</li>
+                <li>Use appropriate
+                    <a class="help help-markdown" href="{% url 'help_markdown' %}" target="_blank" rel="noopener noreferrer">markdown</a>
+                    for code text, code blocks, or blockquotes. Do not use HTML.</li>
+            </ul>
         </div>
         <div class="input">
             <div class="error">{{ form.explanation.errors }}</div>
@@ -49,10 +59,11 @@
         <h3>Limitations (optional)</h3>
 
         <div class="help-block">
-            Mention required non-standard tools such as <code>ffmpeg</code>, <code>shuf</code>,
-            or if some features depend on GNU or BSD implementation,
-            such as in some cases with <code>sed</code>, <code>awk</code> and others,
-            or other portability issues across UNIX, Linux, BSD, MSYS flavors.
+            <ul>
+                <li>Mention any non-standard programs that a user may need to install.</li>
+                <li>Mention dependence on particular Bash versions.</li>
+                <li>Mention portability concerns such as GNU vs BSD or Linux vs UNIX vs MSYS.</li>
+            </ul>
         </div>
         <div class="form-outline">
             <div class="error">{{ form.limitations.errors }}</div>

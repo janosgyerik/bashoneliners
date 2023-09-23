@@ -48,7 +48,8 @@
                     {% url 'oneliner' oneliner.pk as url %}
                     {% with "https://bashoneliners.com"|add:url|urlencode as url %}
                     <a class="twitter-share-button d-block d-md-inline-block btn btn-info"
-                           href="https://twitter.com/intent/tweet?text={{text}}&url={{url}}&via=bashoneliners">Tweet</a>
+                           href="https://twitter.com/intent/tweet?text={{text}}&url={{url}}&via=bashoneliners">
+                        <i class="fab fa-twitter me-2"></i>Tweet</a>
                     {% endwith %}
                 {% endwith %}
 

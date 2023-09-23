@@ -5,28 +5,36 @@
 {% block content %}
 
 <!-- https://mdbootstrap.com/docs/standard/extended/login/ -->
-  <div class="container py-5 login">
+<div class="container py-5 login">
     <div class="row justify-content-center align-items-center">
-      <div class="col-12 col-md-8 col-lg-6 col-xl-5">
-        <div class="card shadow-2-strong" style="border-radius: 1rem;">
-          <div class="card-body p-5 text-center">
+        <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+            <div class="card shadow-2-strong text-center" style="border-radius: 1rem;">
+                <div class="card-body p-5 text-center">
+                    <a class="btn btn-lg btn-block btn-primary btn-github btn-dark"
+                       href="{% url 'social:begin' 'github' %}?next={{ next | default:'' }}">
+                        <i class="fab fa-github me-2"></i>
+                        Sign in with GitHub</a>
+                    <a class="btn btn-lg btn-block btn-primary btn-google"
+                       href="{% url 'social:begin' 'google-oauth2' %}?next={{ next | default:'' }}">
+                        <i class="fab fa-google me-2"></i>
+                        Sign in with Google</a>
+                    <a class="btn btn-lg btn-block btn-primary btn-twitter btn-info"
+                       href="{% url 'social:begin' 'twitter' %}?next={{ next | default:'' }}">
+                        <i class="fab fa-twitter me-2"></i>
+                        Sign in with Twitter</a>
+                </div>
 
-            <a class="btn btn-lg btn-block btn-primary btn-github btn-dark" href="{% url 'social:begin' 'github' %}?next={{ next | default:'' }}">
-                <i class="fab fa-github me-2"></i>
-                Sign in with GitHub</a>
-
-            <a class="btn btn-lg btn-block btn-primary btn-google" href="{% url 'social:begin' 'google-oauth2' %}?next={{ next | default:'' }}">
-                <i class="fab fa-google me-2"></i>
-                Sign in with Google</a>
-
-            <a class="btn btn-lg btn-block btn-primary btn-twitter btn-info" href="{% url 'social:begin' 'twitter' %}?next={{ next | default:'' }}">
-                <i class="fab fa-twitter me-2"></i>
-                Sign in with Twitter</a>
-
-          </div>
+                <div class="card-footer text-muted">
+                    By signing in, you agree to our
+                    <a href="{% url 'terms-of-service' %}">terms of service</a>
+                    and acknowledge that you have read and understand our
+                    <a href="{% url 'privacy-policy' %}">privacy policy</a>
+                    and
+                    <a href="{% url 'code-of-conduct' %}">code of conduct</a>.
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
+</div>
 
 {% endblock %}

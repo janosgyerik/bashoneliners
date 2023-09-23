@@ -39,7 +39,12 @@ urlpatterns = [
 
     path('admin/', admin.site.urls),
 
-    path('legal/privacy-policy', TemplateView.as_view(template_name="legal/privacy-policy.html")),
+    path('legal/terms-of-service',
+         TemplateView.as_view(template_name="legal/terms-of-service.html"), name='terms-of-service'),
+    path('legal/privacy-policy',
+         TemplateView.as_view(template_name="legal/privacy-policy.html"), name='privacy-policy'),
+    path('legal/code-of-conduct',
+         TemplateView.as_view(template_name="legal/code-of-conduct.html"), name='code-of-conduct'),
 
     path('robots.txt', TemplateView.as_view(template_name="robots.txt", content_type="text/plain")),
 

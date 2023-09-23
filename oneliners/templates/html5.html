@@ -33,23 +33,38 @@
     <!-- request.META.SERVER_NAME={{ request.META.SERVER_NAME }} -->
     <!-- request.META.HTTPS={{ request.META.HTTPS }} -->
     {% if request.META.SERVER_NAME != 'www.bashoneliners.com' or request.META.HTTPS != 'on' %}
-    <!-- Do not index this page or follow links from it.
-     See https://developers.google.com/search/docs/crawling-indexing/robots-meta-tag -->
-    <meta name="robots" content="none">
+        <!-- Do not index this page or follow links from it.
+         See https://developers.google.com/search/docs/crawling-indexing/robots-meta-tag -->
+        <meta name="robots" content="none">
+    {% elif not user.is_staff %}
+        <!-- Google Tag Manager -->
+        <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','GTM-MWK2FR6W');</script>
+        <!-- End Google Tag Manager -->
     {% endif %}
   </head>
 
   <body>
 
-{% block navbar %}{% endblock %}
+    {% if request.META.SERVER_NAME == 'www.bashoneliners.com' and request.META.HTTPS == 'on' and not user.is_staff %}
+        <!-- Google Tag Manager (noscript) -->
+        <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MWK2FR6W"
+        height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+        <!-- End Google Tag Manager (noscript) -->
+    {% endif %}
 
-<div class="container main">
-    {% block main %}{% endblock %}
-</div>
+    {% block navbar %}{% endblock %}
 
-<footer class="footer">
-    {% block footer %}{% endblock %}
-</footer>
+    <div class="container main">
+        {% block main %}{% endblock %}
+    </div>
+
+    <footer class="footer">
+        {% block footer %}{% endblock %}
+    </footer>
 
     <!-- MDB -->
     <script type="text/javascript" src="{% static 'mdb/js/mdb.min.js' %}?v=1"></script>

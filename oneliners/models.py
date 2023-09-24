@@ -1,6 +1,7 @@
 import random
 import re
 import string
+from typing import List
 
 from django.db import models
 from django.db.models import Count, Q, Sum
@@ -214,6 +215,14 @@ class OneLiner(models.Model):
     def get_tags(self):
         return [rel.tag.text for rel in self.onelinertag_set.all()]
 
+    def set_categories(self, categories: List['Category']):
+        self.onelinercategory_set.all().delete()
+        for category in categories:
+            OnelinerCategory(oneliner=self, category=category).save()
+
+    def get_categories(self):
+        return [rel.category for rel in self.onelinercategory_set.all()]
+
     def save(self, *args, **kwargs):
         self.updated_dt = now()
 
@@ -221,6 +230,7 @@ class OneLiner(models.Model):
             self.published_dt = now()
 
         ret = super(OneLiner, self).save(*args, **kwargs)
+
         self.update_tags()
 
         return ret
@@ -329,3 +339,27 @@ class Vote(models.Model):
     class Meta:
         unique_together = (('user', 'oneliner',),)
 
+
+class Category(models.Model):
+    class CategoryType(models.TextChoices):
+        FUNCTION = 'function', 'Function'
+        AUDIENCE = 'audience', 'Audience'
+        SCENARIO = 'scenario', 'Scenario'
+        FEATURE = 'language-feature', 'Language feature'
+        COMPLEXITY = 'complexity', 'Complexity'
+
+    type = models.CharField(max_length=30, choices=CategoryType.choices)
+    name = models.SlugField(max_length=30)
+    display_name = models.CharField(max_length=50)
+    description = models.TextField()
+
+    created_dt = models.DateTimeField(default=now, blank=True)
+    updated_dt = models.DateTimeField(default=now, blank=True)
+
+
+class OnelinerCategory(models.Model):
+    oneliner = models.ForeignKey(OneLiner, on_delete=models.CASCADE)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE)
+
+    class Meta:
+        unique_together = [['oneliner', 'category']]

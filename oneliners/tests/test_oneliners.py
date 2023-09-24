@@ -1,5 +1,6 @@
 from django.test import TestCase, override_settings
 
+import oneliners.models
 from oneliners.models import Tag, OneLiner, User
 from oneliners.forms import SearchOneLinerForm, EditOneLinerForm
 from oneliners.tweet import TWEET_LENGTH_LIMIT
@@ -439,3 +440,23 @@ class UpdatingTests(TestCase):
         oneliner2 = OneLiner.get(pk=oneliner0.pk)
         self.assertEqual(oneliner1_published_dt, oneliner2.published_dt)
         self.assertGreater(oneliner2.updated_dt, oneliner1_updated_dt)
+
+
+class OnelinerCategoriesTests(TestCase):
+    def setUp(self):
+        self.user = Util.new_user('user')
+        oneliner = OneLiner(user=self.user, line="dummy line", summary="dummy summary", explanation="dummy explanation")
+        oneliner.save()
+        self.oneliner = oneliner
+
+    def test_get_categories_returns_empty_when_none_created(self):
+        self.assertEqual([], self.oneliner.get_categories())
+
+    def test_set_categories_sets_categories(self):
+        c1 = oneliners.models.Category()
+        c1.save()
+        c2 = oneliners.models.Category()
+        c2.save()
+        categories = [c1, c2]
+        self.oneliner.set_categories(categories)
+        self.assertEqual(categories, self.oneliner.get_categories())

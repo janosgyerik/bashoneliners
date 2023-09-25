@@ -38,17 +38,28 @@ class Category:
 
 @dataclasses.dataclass(frozen=True)
 class CategorizationResult:
-    raw_query: str
-    raw_response: str
-    raw_response_content: str
-    is_success: bool
-    categories: List[Category]
+    raw_query: str = ''
+    raw_response: str = ''
+    raw_response_content: str = ''
+    is_success: bool = False
+    categories: List[Category] = dataclasses.field(default_factory=[])
 
 
 class CategorizationComputer(abc.ABC):
     @abc.abstractmethod
-    def compute(self, content: str) -> CategorizationResult:
+    def compute_internal(self, content: str) -> CategorizationResult:
         raise NotImplementedError
+
+    def compute(self, content: str) -> CategorizationResult:
+        try:
+            result = self.compute_internal(content)
+        except Exception as e:
+            raise CategorizationError(e)
+
+        if not result.categories:
+            raise CategorizationError("Generator returned no categories")
+
+        return result
 
 
 class OpenAiCategoriesParser:
@@ -61,7 +72,7 @@ class OpenAiCategoriesParser:
             try:
                 items['tags'] = [s.replace(' ', '-') for s in items['tags']]
                 yield Category.parse(items)
-            except:
+            except CategorizationError as e:
                 pass
 
 
@@ -70,13 +81,7 @@ class OpenAiCategorizationComputer(CategorizationComputer):
         self.api_key = api_key
         self.categories_parser = OpenAiCategoriesParser()
 
-    def compute(self, content: str) -> CategorizationResult:
-        try:
-            return self._compute(content)
-        except Exception as e:
-            raise CategorizationError(e)
-
-    def _compute(self, content: str) -> CategorizationResult:
+    def compute_internal(self, content: str) -> CategorizationResult:
         openai.api_key = self.api_key
         query = self._format_query(content)
         response = openai.ChatCompletion.create(

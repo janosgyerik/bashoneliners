@@ -3,7 +3,7 @@ from django.test import TestCase
 from oneliners import categorization as lib
 
 
-class CategorizationTests(TestCase):
+class CategoryParsingTests(TestCase):
 
     def test_category_type_parse_supports_lowercase_function(self):
         self.assertEqual(lib.CategoryType.FUNCTION, lib.CategoryType.parse("function"))
@@ -82,3 +82,32 @@ class OpenAiCategoriesParserTests(TestCase):
         c1 = lib.Category(lib.CategoryType.FUNCTION, ["system-monitoring", "memory-usage"])
         c2 = lib.Category(lib.CategoryType.AUDIENCE, ["intermediate", "advanced"])
         self.assertEqual([c1, c2], categories)
+
+
+class CategorizationComputerTests(TestCase):
+    def _fake_categorization_computer(self, fun):
+        class CategorizationComputer(lib.CategorizationComputer):
+            def compute_internal(self, content: str):
+                return fun(content)
+
+        return CategorizationComputer()
+
+    def test_compute_with_validation_raises_CategorizationError_when_compute_throws(self):
+        def compute(_: str) -> lib.CategorizationResult:
+            raise ValueError('unexpected error')
+
+        computer = self._fake_categorization_computer(compute)
+        with self.assertRaises(lib.CategorizationError) as context:
+            computer.compute('dummy')
+
+        self.assertRegexpMatches(str(context.exception), r'unexpected error')
+
+    def test_compute_with_validation_raises_CategorizationError_when_compute_returns_no_categories(self):
+        def compute(_: str) -> lib.CategorizationResult:
+            return lib.CategorizationResult(categories=[])
+
+        computer = self._fake_categorization_computer(compute)
+        with self.assertRaises(lib.CategorizationError) as context:
+            computer.compute('dummy')
+
+        self.assertRegexpMatches(str(context.exception), r'no categories')

@@ -24,7 +24,8 @@
                     Homepage: {{ hacker.hackerprofile.homepage_url | default:'(not set)' | urlize }}</p>
 
                 {% if user == hacker %}
-                    <p><a href="{% url 'profile_edit' %}" class="btn btn-primary">Edit</a></p>
+                    <p><a href="{% url 'profile_edit' %}" class="btn btn-primary">
+                        <i class="fas fa-pencil me-2"></i>Edit</a></p>
                 {% endif %}
             </div>
         </div>

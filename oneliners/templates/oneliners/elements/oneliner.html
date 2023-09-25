@@ -41,7 +41,7 @@
             {% if not boxed_oneliner %}
                 {% if user == oneliner.user %}
                     <a class="d-block d-md-inline-block btn btn-primary {% if not oneliner.is_published %}btn-warning{% endif %}"
-                       href="{% url 'oneliner_edit' oneliner.pk %}">Edit</a>
+                       href="{% url 'oneliner_edit' oneliner.pk %}"><i class="fas fa-pencil me-2"></i>Edit</a>
                 {% endif %}
 
                 {% with text=oneliner.summary|capfirst|add:": "|add:oneliner.line|urlencode %}
@@ -55,7 +55,8 @@
 
                 {% if user.is_authenticated %}
                     <a href="{% url 'oneliner_alternative' oneliner.pk %}"
-                       class="d-block d-md-inline-block btn btn-secondary">Post an alternative one-liner</a>
+                       class="d-block d-md-inline-block btn btn-secondary">
+                        <i class="far fa-lightbulb me-2"></i>Post an alternative one-liner</a>
                 {% endif %}
 
                 {% if user.is_staff %}

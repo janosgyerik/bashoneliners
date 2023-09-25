@@ -460,3 +460,13 @@ class OnelinerCategoriesTests(TestCase):
         categories = [c1, c2]
         self.oneliner.set_categories(categories)
         self.assertEqual(categories, self.oneliner.get_categories())
+
+    def test_has_categories_returns_False_when_has_none(self):
+        self.assertFalse(self.oneliner.has_categories())
+
+    def test_has_categories_returns_True_when_has_some(self):
+        c1 = oneliners.models.Category()
+        c1.save()
+        self.oneliner.set_categories([c1])
+        self.assertTrue(self.oneliner.has_categories())
+

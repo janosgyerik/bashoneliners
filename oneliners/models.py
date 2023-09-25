@@ -223,6 +223,9 @@ class OneLiner(models.Model):
     def get_categories(self):
         return [rel.category for rel in self.onelinercategory_set.all()]
 
+    def has_categories(self):
+        return self.onelinercategory_set.count() > 0
+
     def save(self, *args, **kwargs):
         self.updated_dt = now()
 

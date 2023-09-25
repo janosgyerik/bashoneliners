@@ -1,6 +1,7 @@
 from django.test import TestCase, override_settings
 
 import oneliners.models
+from oneliners import categorization
 from oneliners.models import Tag, OneLiner, User
 from oneliners.forms import SearchOneLinerForm, EditOneLinerForm
 from oneliners.tweet import TWEET_LENGTH_LIMIT
@@ -470,3 +471,35 @@ class OnelinerCategoriesTests(TestCase):
         self.oneliner.set_categories([c1])
         self.assertTrue(self.oneliner.has_categories())
 
+
+class CategorizationAdapterTests(TestCase):
+    def setUp(self):
+        self.adapter = oneliners.models.CategorizationAdapter()
+
+    def test_convert_category_creates_if_new(self):
+        self.assertFalse(oneliners.models.Category.objects.exists())
+        external = categorization.Category(category_type=categorization.CategoryType.FUNCTION, tags=['c1', 'c2'])
+
+        categories = self.adapter.convert_category(external)
+        self.assertEqual(2, len(categories))
+
+        c1, c2 = categories
+
+        self.assertEqual(oneliners.models.Category.CategoryType.FUNCTION, c1.type)
+        self.assertEqual('c1', c1.name)
+
+        self.assertEqual(oneliners.models.Category.CategoryType.FUNCTION, c2.type)
+        self.assertEqual('c2', c2.name)
+
+        self.assertTrue(oneliners.models.Category.objects.exists())
+        self.assertEqual(2, oneliners.models.Category.objects.count())
+
+    def test_convert_category_does_not_create_if_exists(self):
+        self.assertFalse(oneliners.models.Category.objects.exists())
+        external = categorization.Category(category_type=categorization.CategoryType.FUNCTION, tags=['c1', 'c2'])
+
+        self.adapter.convert_category(external)
+        self.assertEqual(2, oneliners.models.Category.objects.count())
+
+        self.adapter.convert_category(external)
+        self.assertEqual(2, oneliners.models.Category.objects.count())

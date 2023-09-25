@@ -11,6 +11,7 @@ from django.dispatch import receiver
 from django.utils.timezone import now
 
 from oneliners.tools import tags as tag_tools
+from oneliners import categorization
 
 RECENT_LIMIT = 25
 SEARCH_LIMIT = 25
@@ -224,7 +225,7 @@ class OneLiner(models.Model):
         return [rel.category for rel in self.onelinercategory_set.all()]
 
     def has_categories(self):
-        return self.onelinercategory_set.count() > 0
+        return self.onelinercategory_set.exists()
 
     def save(self, *args, **kwargs):
         self.updated_dt = now()
@@ -359,6 +360,12 @@ class Category(models.Model):
     created_dt = models.DateTimeField(default=now, blank=True)
     updated_dt = models.DateTimeField(default=now, blank=True)
 
+    def __str__(self):
+        return f"{self.type}::{self.name}"
+
+    class Meta:
+        unique_together = [['type', 'name']]
+
 
 class OnelinerCategory(models.Model):
     oneliner = models.ForeignKey(OneLiner, on_delete=models.CASCADE)
@@ -366,3 +373,23 @@ class OnelinerCategory(models.Model):
 
     class Meta:
         unique_together = [['oneliner', 'category']]
+
+
+class CategorizationAdapter:
+    def convert_category(self, category: categorization.Category) -> List[Category]:
+        type_ = Category.CategoryType[category.category_type.name]
+        categories = []
+        for tag in category.tags:
+            known_categories = Category.objects.filter(type=type_, name=tag)
+            if known_categories.exists():
+                category = known_categories.first()
+            else:
+                category = Category(
+                    type=type_,
+                    name=tag,
+                    display_name=tag,
+                )
+                category.save()
+            categories.append(category)
+
+        return categories

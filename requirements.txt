@@ -3,3 +3,4 @@ Django
 Markdown
 social-auth-app-django
 tweepy
+openai

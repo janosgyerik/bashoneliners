@@ -204,9 +204,6 @@ LOGIN_REDIRECT_URL = '/oneliners/login/'
 # Project specific non-Django settings.
 #
 
-# Google Analytics.
-# TODO
-
 # Credentials for posting Tweets on behalf of @bashoneliners.
 # Only admin uses it.
 TWITTER = {
@@ -292,3 +289,6 @@ SOCIAL_AUTH_GITHUB_SECRET = ''
 SOCIAL_AUTH_TWITTER_KEY = ''
 # **Regenerate** (never visible again)
 SOCIAL_AUTH_TWITTER_SECRET = ''
+
+# https://platform.openai.com/account/api-keys
+OPENAI_API_KEY = ''

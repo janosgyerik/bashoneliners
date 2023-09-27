@@ -11,7 +11,9 @@
         </div>
       {% else %}
         <div class="flex-shrink-0 upvotejs" data-voting-disabled="true">
+            <a class="upvote {% upvoted oneliner %}"></a>
             <span class="count">{{ oneliner.score }}</span>
+            <a class="downvote {% downvoted oneliner %}"></a>
         </div>
       {% endif %}
 

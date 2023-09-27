@@ -297,7 +297,7 @@ def _common_profile_params(request, pk):
 def profile_oneliners(request, pk=None):
     params = _common_profile_params(request, pk)
     hacker = params['hacker']
-    oneliners = OneLiner.objects.filter(user=hacker).annotate(vote_sum=Sum('vote__value'))
+    oneliners = OneLiner.objects.filter(user=hacker).annotate(vote_sum=Sum('vote__value')).order_by('-id')
     if hacker != request.user and not request.user.is_staff:
         oneliners = oneliners.filter(is_published=True)
     params['oneliners'] = oneliners
@@ -308,7 +308,7 @@ def profile_oneliners(request, pk=None):
 def profile_votes(request):
     params = _common_params(request)
     user = request.user
-    oneliners = OneLiner.objects.annotate(vote_sum=Sum('vote__value')).filter(vote__user=user)
+    oneliners = OneLiner.objects.annotate(vote_sum=Sum('vote__value')).filter(vote__user=user).order_by('-id')
     params['oneliners'] = oneliners
     params['hacker'] = user
     return 'oneliners/pages/profile_votes.html', params

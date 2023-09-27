@@ -1,7 +1,9 @@
 import abc
 import dataclasses
+from datetime import datetime
 import enum
 import json
+import time
 from typing import List, Dict, Any, Iterable
 
 import openai
@@ -80,8 +82,10 @@ class OpenAiCategorizationComputer(CategorizationComputer):
     def __init__(self, api_key):
         self.api_key = api_key
         self.categories_parser = OpenAiCategoriesParser()
+        self.last_use_timestamp = None
 
     def compute_internal(self, content: str) -> CategorizationResult:
+        self._wait_for_api_rate_limits()
         openai.api_key = self.api_key
         query = self._format_query(content)
         response = openai.ChatCompletion.create(
@@ -147,3 +151,15 @@ class OpenAiCategorizationComputer(CategorizationComputer):
         """
         Categorize this Bash one-liner: """%s"""
         ''' % content
+
+    def _wait_for_api_rate_limits(self):
+        if not self.last_use_timestamp:
+            self.last_use_timestamp = int(datetime.now().timestamp())
+            return
+
+        elapsed_seconds = int(datetime.now().timestamp()) - self.last_use_timestamp
+        if elapsed_seconds < 20:
+            print(f"Last API call {elapsed_seconds} seconds ago. Waiting a bit...")
+            time.sleep(elapsed_seconds)
+
+        self.last_use_timestamp = int(datetime.now().timestamp())

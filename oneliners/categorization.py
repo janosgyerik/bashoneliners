@@ -69,7 +69,11 @@ class OpenAiCategoriesParser:
         return list(self._parse(raw_response))
 
     def _parse(self, raw_response) -> Iterable[Category]:
-        d = json.loads(raw_response)
+        try:
+            d = json.loads(raw_response)
+        except json.decoder.JSONDecodeError:
+            raise CategorizationError(f"Could not parse as JSON: {raw_response}")
+
         for items in d['categories']:
             try:
                 items['tags'] = [s.replace(' ', '-') for s in items['tags']]
@@ -149,7 +153,7 @@ class OpenAiCategorizationComputer(CategorizationComputer):
           "tags": ["CSV", "Bash"]
         }
         """
-        Categorize this Bash one-liner: """%s"""
+        Categorize this Bash one-liner, formatted as valid JSON: """%s"""
         ''' % content
 
     def _wait_for_api_rate_limits(self):

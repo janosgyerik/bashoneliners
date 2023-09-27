@@ -12,20 +12,25 @@ import string
 
 class Util:
     @staticmethod
-    def new_user(username):
+    def new_user(username=None):
+        if username is None:
+            username = f"dummy username {User.objects.count() + 1}"
         user = User(username=username)
         user.set_password(username)
         user.save()
         return user
 
     @staticmethod
-    def new_oneliner(user, line, summary=None, explanation=None, limitations=None):
-        if summary is None:
-            summary = '(incorrectly omitted)'
-        if explanation is None:
-            explanation = '(incorrectly omitted)'
-        if limitations is None:
-            limitations = '(this is optional)'
+    def new_oneliner(
+            user=None,
+            line="dummy line",
+            summary="dummy summary",
+            explanation="dummy explanation",
+            limitations="dummy limitations",
+    ):
+        if user is None:
+            user = Util.new_user()
+
         oneliner = OneLiner(user=user, line=line, summary=summary, explanation=explanation, limitations=limitations)
         oneliner.save()
         return oneliner
@@ -445,18 +450,15 @@ class UpdatingTests(TestCase):
 
 class OnelinerCategoriesTests(TestCase):
     def setUp(self):
-        self.user = Util.new_user('user')
-        oneliner = OneLiner(user=self.user, line="dummy line", summary="dummy summary", explanation="dummy explanation")
-        oneliner.save()
-        self.oneliner = oneliner
+        self.oneliner = Util.new_oneliner()
 
     def test_get_categories_returns_empty_when_none_created(self):
         self.assertEqual([], self.oneliner.get_categories())
 
     def test_set_categories_sets_categories(self):
-        c1 = oneliners.models.Category()
+        c1 = oneliners.models.Category(type=oneliners.models.Category.CategoryType.FUNCTION, name="c1")
         c1.save()
-        c2 = oneliners.models.Category()
+        c2 = oneliners.models.Category(type=oneliners.models.Category.CategoryType.FUNCTION, name="c2")
         c2.save()
         categories = [c1, c2]
         self.oneliner.set_categories(categories)
@@ -470,6 +472,40 @@ class OnelinerCategoriesTests(TestCase):
         c1.save()
         self.oneliner.set_categories([c1])
         self.assertTrue(self.oneliner.has_categories())
+
+
+class CategoryTests(TestCase):
+    def test_category_cloud_returns_empty_when_not_enough_categories(self):
+        oneliner = Util.new_oneliner()
+
+        c1 = oneliners.models.Category(type=oneliners.models.Category.CategoryType.FUNCTION, name="c1")
+        c1.save()
+        c2 = oneliners.models.Category(type=oneliners.models.Category.CategoryType.AUDIENCE, name="c2")
+        c2.save()
+        categories = [c1, c2]
+        oneliner.set_categories(categories)
+        cloud = oneliners.models.Category.cloud()
+        self.assertEqual(0, cloud.count())
+
+    def test_category_cloud_shows_entries_used_at_least_3_times(self):
+        used_3_times = oneliners.models.Category(type=oneliners.models.Category.CategoryType.FUNCTION, name="used3")
+        used_3_times.save()
+        used_2_times = oneliners.models.Category(type=oneliners.models.Category.CategoryType.AUDIENCE, name="used2")
+        used_2_times.save()
+
+        for _ in range(3):
+            oneliner = Util.new_oneliner()
+            oneliner.save()
+            oneliner.set_categories([used_3_times])
+
+        for _ in range(2):
+            oneliner = Util.new_oneliner()
+            oneliner.save()
+            oneliner.set_categories([used_2_times])
+
+        cloud = oneliners.models.Category.cloud()
+        self.assertEqual(1, cloud.count())
+        self.assertEqual("used3", cloud[0]["name"])
 
 
 class CategorizationAdapterTests(TestCase):

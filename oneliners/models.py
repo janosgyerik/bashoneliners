@@ -363,6 +363,12 @@ class Category(models.Model):
     def __str__(self):
         return f"{self.type}::{self.name}"
 
+    @staticmethod
+    def cloud():
+        categories = Category.objects.annotate(count=Count('onelinercategory')).filter(
+            count__gte=3).order_by('type', 'name').values('type', 'name', 'display_name', 'description', 'count')
+        return categories
+
     class Meta:
         unique_together = [['type', 'name']]
 

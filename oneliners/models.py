@@ -148,6 +148,14 @@ class OneLiner(models.Model):
         return query[:limit]
 
     @staticmethod
+    def filter_by_category(category_name, order_by=None, limit=RECENT_LIMIT):
+        query = OneLiner.objects.filter(is_published=True).annotate(
+            vote_sum=Sum('vote__value')).filter(onelinercategory__category__name=category_name)
+        if order_by:
+            query = query.order_by(order_by, '-id')
+        return query[:limit]
+
+    @staticmethod
     def simplesearch(query=None, limit=SEARCH_LIMIT):
         qq = Q()
         for term in get_query_terms(query):

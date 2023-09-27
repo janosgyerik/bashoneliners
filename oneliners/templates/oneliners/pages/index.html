@@ -50,6 +50,7 @@ These one-liners should help you automate tasks, troubleshoot problems, whether 
 {% block ready %}
     var ordering = '{{ ordering }}';
     var selected_tag;
+    var selected_category;
 
     function search_by_tag() {
         var options = {
@@ -64,12 +65,39 @@ These one-liners should help you automate tasks, troubleshoot problems, whether 
         $.ajax(options);
     }
 
+    function search_by_category() {
+        var options = {
+            url: '{% url 'search_by_category' %}',
+            type: 'get',
+            data: {
+                'category': selected_category,
+                'ordering': ordering
+            },
+            success: search_success
+        };
+        $.ajax(options);
+    }
+
     function search_success(html) {
         $('.oneliners').html($(html).html());
         $('.pagination').remove();
         bind_upvote();
         bind_dblclick_to_select_oneliner();
     }
+
+    $('.categories a').click(function(e) {
+        e.preventDefault();
+        if ($(this).parent().hasClass('active')) {
+            selected_tag = null;
+            $(this).parent().removeClass('active');
+            location.reload();
+        } else {
+            $('.categories li.active').removeClass('active');
+            $(this).parent().addClass('active');
+            selected_category = $(this).text();
+            search_by_category();
+        }
+    });
 
     $('.tags a').click(function(e) {
         e.preventDefault();

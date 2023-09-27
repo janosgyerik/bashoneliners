@@ -4,6 +4,12 @@
         <li class="nav-item"><a class="nav-link" href="#">{{ tag.text }}</a></li>
     {% endfor %}
 </ul>
+{% elif active_categories == 'active' %}
+<ul class="nav nav-pills categories">
+    {% for category in category_cloud %}
+        <li class="nav-item"><a class="nav-link" href="#">{{ category.display_name }}</a></li>
+    {% endfor %}
+</ul>
 {% endif %}
 
 <div class="oneliners">

@@ -11,6 +11,10 @@ h3 {
     text-transform: none;
 }
 
+.nav-pills.categories a {
+    text-transform: none;
+}
+
 .card.oneliner {
     margin-top: 2em;
     margin-bottom: 2em;

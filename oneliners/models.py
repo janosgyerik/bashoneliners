@@ -374,7 +374,7 @@ class Category(models.Model):
     type = models.CharField(max_length=30, choices=CategoryType.choices)
     name = models.SlugField(max_length=30)
     display_name = models.CharField(max_length=50)
-    description = models.TextField()
+    description = models.TextField(blank=True)
 
     created_dt = models.DateTimeField(default=now, blank=True)
     updated_dt = models.DateTimeField(default=now, blank=True)
@@ -390,6 +390,7 @@ class Category(models.Model):
 
     class Meta:
         unique_together = [['type', 'name']]
+        verbose_name_plural = 'categories'
 
 
 class OnelinerCategory(models.Model):
@@ -398,6 +399,7 @@ class OnelinerCategory(models.Model):
 
     class Meta:
         unique_together = [['oneliner', 'category']]
+        verbose_name_plural = 'oneliner categories'
 
 
 class CategorizationAdapter:

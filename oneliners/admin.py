@@ -71,3 +71,22 @@ class VoteAdmin(admin.ModelAdmin):
 
     def vote(self, obj):
         return 'Up' if obj.value > 0 else 'Down'
+
+
+class OnelinerCategoryInline(admin.StackedInline):
+    model = site_models.OnelinerCategory
+
+
+@admin.register(site_models.Category)
+class CategoryAdmin(admin.ModelAdmin):
+    list_display = ('name', 'onelinercategory_count', 'created_dt')
+    inlines = [OnelinerCategoryInline]
+    ordering = ['name']
+
+    def get_queryset(self, request):
+        qs = super().get_queryset(request)
+        qs = qs.annotate(models.Count('onelinercategory'))
+        return qs
+
+    def onelinercategory_count(self, obj):
+        return obj.onelinercategory__count

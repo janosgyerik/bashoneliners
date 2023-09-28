@@ -1,7 +1,13 @@
+import logging
+import sys
+
 from django.conf import settings
 from django.core.management.base import BaseCommand, CommandError
 
 from oneliners import categorization, models
+
+# Is there a better way to activate logging to stdout in Django management commands?
+logging.getLogger().addHandler(logging.StreamHandler(sys.stdout))
 
 
 class Command(BaseCommand):

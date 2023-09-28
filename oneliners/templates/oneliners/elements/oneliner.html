@@ -28,13 +28,13 @@
 
             <h3 class="h6">Explanation</h3>
             <div class="explanation">
-                {{ oneliner.explanation | markdown:"safe" }}
+                {{ oneliner.explanation | markdown:"safe,fenced_code" }}
             </div>
 
             {% if oneliner.limitations %}
                 <h3 class="h6">Limitations</h3>
                 <div class="explanation">
-                    {{ oneliner.limitations | markdown:"safe" }}
+                    {{ oneliner.limitations | markdown:"safe,fenced_code" }}
                 </div>
             {% endif %}
 

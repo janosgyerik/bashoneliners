@@ -299,6 +299,9 @@ class OneLinerSnapshot(models.Model):
 class Tag(models.Model):
     text = models.SlugField(max_length=50)
 
+    created_dt = models.DateTimeField(default=now, blank=True)
+    updated_dt = models.DateTimeField(default=now, blank=True)
+
     def __str__(self):
         return self.text
 

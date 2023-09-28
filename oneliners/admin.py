@@ -90,3 +90,22 @@ class CategoryAdmin(admin.ModelAdmin):
 
     def onelinercategory_count(self, obj):
         return obj.onelinercategory__count
+
+
+class OnelinerCommandInline(admin.StackedInline):
+    model = site_models.OneLinerTag
+
+
+@admin.register(site_models.Tag)
+class CommandAdmin(admin.ModelAdmin):
+    list_display = ('text', 'onelinercommand_count', 'created_dt')
+    inlines = [OnelinerCommandInline]
+    ordering = ['text']
+
+    def get_queryset(self, request):
+        qs = super().get_queryset(request)
+        qs = qs.annotate(models.Count('onelinertag'))
+        return qs
+
+    def onelinercommand_count(self, obj):
+        return obj.onelinertag__count

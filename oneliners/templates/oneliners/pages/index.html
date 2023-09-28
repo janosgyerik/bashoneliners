@@ -113,14 +113,4 @@ These one-liners should help you automate tasks, troubleshoot problems, whether 
         }
     });
 
-    $('.nav-oneliners li a').click(function(e) {
-        if (selected_command) {
-            e.preventDefault();
-            $('.nav-oneliners li').removeClass('active');
-            $(this).parent().addClass('active');
-            ordering = $(this).attr('data-ordering');
-            search_by_command();
-        }
-    });
-
 {% endblock %}

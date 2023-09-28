@@ -1,7 +1,7 @@
-{% if active_tags == 'active' %}
-<ul class="nav nav-pills tags">
-    {% for tag in tagcloud %}
-        <li class="nav-item"><a class="nav-link" href="#">{{ tag.text }}</a></li>
+{% if active_commands == 'active' %}
+<ul class="nav nav-pills commands">
+    {% for command in command_cloud %}
+        <li class="nav-item"><a class="nav-link" href="#">{{ command.text }}</a></li>
     {% endfor %}
 </ul>
 {% elif active_categories == 'active' %}

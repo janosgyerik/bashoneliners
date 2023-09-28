@@ -49,18 +49,18 @@ def search(request):
     return render(request, 'oneliners/elements/oneliners_searchresults.html', params)
 
 
-def search_by_tag(request):
+def search_by_command(request):
     params = {'user': request.user}
 
-    tagname = request.GET.get('tag')
+    command = request.GET.get('command')
     ordering = request.GET.get('ordering')
     try:
-        validate_slug(tagname)
+        validate_slug(command)
         if ordering == 'popular':
             order_by = '-vote_sum'
         else:
             order_by = None
-        items = OneLiner.filter_by_tag(tagname, order_by=order_by)
+        items = OneLiner.filter_by_command(command, order_by=order_by)
         params['oneliners'] = items
     except ValidationError:
         params['oneliners'] = ()

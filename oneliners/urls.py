@@ -11,8 +11,8 @@ urlpatterns = [
     path('newest/', views.oneliners_newest, name='oneliners_newest'),
     path('active/', views.oneliners_active, name='oneliners_active'),
     path('popular/', views.oneliners_popular, name='oneliners_popular'),
-    path('tags/', views.oneliners_tags, name='oneliners_tags'),
     path('categories/', views.oneliners_categories, name='oneliners_categories'),
+    path('commands/', views.oneliners_commands, name='oneliners_commands'),
     path('<int:pk>/', views.oneliner, name='oneliner'),
     path('<int:pk>/edit/', views.oneliner_edit, name='oneliner_edit'),
     path('<int:pk>/tweet/', views.oneliner_tweet, name='oneliner_tweet'),
@@ -40,6 +40,6 @@ urlpatterns = [
 urlpatterns += [
     path('ajax/oneliner/<int:oneliner_pk>/vote/', ajax.oneliner_vote, name='oneliner_vote'),
     path('ajax/search/', ajax.search, name='search_by_keyword'),
-    path('ajax/search/tag/', ajax.search_by_tag, name='search_by_tag'),
+    path('ajax/search/command/', ajax.search_by_command, name='search_by_command'),
     path('ajax/search/category/', ajax.search_by_category, name='search_by_category'),
 ]

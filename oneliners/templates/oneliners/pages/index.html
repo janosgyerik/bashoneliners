@@ -49,15 +49,15 @@ These one-liners should help you automate tasks, troubleshoot problems, whether 
 
 {% block ready %}
     var ordering = '{{ ordering }}';
-    var selected_tag;
+    var selected_command;
     var selected_category;
 
-    function search_by_tag() {
+    function search_by_command() {
         var options = {
-            url: '{% url 'search_by_tag' %}',
+            url: '{% url 'search_by_command' %}',
             type: 'get',
             data: {
-                'tag': selected_tag,
+                'command': selected_command,
                 'ordering': ordering
             },
             success: search_success
@@ -88,7 +88,7 @@ These one-liners should help you automate tasks, troubleshoot problems, whether 
     $('.categories a').click(function(e) {
         e.preventDefault();
         if ($(this).parent().hasClass('active')) {
-            selected_tag = null;
+            selected_command = null;
             $(this).parent().removeClass('active');
             location.reload();
         } else {
@@ -99,27 +99,27 @@ These one-liners should help you automate tasks, troubleshoot problems, whether 
         }
     });
 
-    $('.tags a').click(function(e) {
+    $('.commands a').click(function(e) {
         e.preventDefault();
         if ($(this).parent().hasClass('active')) {
-            selected_tag = null;
+            selected_command = null;
             $(this).parent().removeClass('active');
             location.reload();
         } else {
-            $('.tags li.active').removeClass('active');
+            $('.commands li.active').removeClass('active');
             $(this).parent().addClass('active');
-            selected_tag = $(this).text();
-            search_by_tag();
+            selected_command = $(this).text();
+            search_by_command();
         }
     });
 
     $('.nav-oneliners li a').click(function(e) {
-        if (selected_tag) {
+        if (selected_command) {
             e.preventDefault();
             $('.nav-oneliners li').removeClass('active');
             $(this).parent().addClass('active');
             ordering = $(this).attr('data-ordering');
-            search_by_tag();
+            search_by_command();
         }
     });
 

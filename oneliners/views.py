@@ -103,7 +103,7 @@ def _common_oneliners_params(request, items):
 
     params['oneliners_page'] = page
     params['oneliners_page_range'] = paginator.get_elided_page_range(page.number, on_each_side=1, on_ends=1)
-    params['tagcloud'] = Tag.tagcloud()
+    params['command_cloud'] = Tag.tagcloud()
     params['category_cloud'] = models.Category.cloud().filter(type="function")
     return params
 
@@ -140,10 +140,10 @@ def oneliners_popular(request):
 
 
 @render_with_context(custom_params=True)
-def oneliners_tags(request):
+def oneliners_commands(request):
     items = published_oneliners().order_by('-vote_sum', '-id')[:ITEMS_PER_PAGE]
     params = _common_oneliners_params(request, items)
-    params['active_tags'] = 'active'
+    params['active_commands'] = 'active'
     params['ordering'] = 'popular'
     return 'oneliners/pages/index.html', params
 

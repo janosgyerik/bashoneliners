@@ -38,6 +38,16 @@
                 </div>
             {% endif %}
 
+            <div class="categories mb-2">
+                {% for category in oneliner.get_categories %}
+                    {% if category.type == "function" %}
+                        <a href="{% url 'category' category.pk %}">
+                            <span class="badge rounded-pill badge-light">{{ category.name }}</span>
+                        </a>
+                    {% endif %}
+                {% endfor %}
+            </div>
+
             {% if not boxed_oneliner %}
                 {% if user == oneliner.user %}
                     <a class="d-block d-md-inline-block btn btn-primary {% if not oneliner.is_published %}btn-warning{% endif %}"

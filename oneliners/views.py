@@ -7,6 +7,7 @@ from django.db.models import Sum
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
 
+import oneliners.models
 from oneliners import models
 from oneliners.models import OneLiner, User, Tag
 from oneliners.forms import EditHackerProfileForm, PostOneLinerForm, SearchOneLinerForm, EditOneLinerForm
@@ -106,6 +107,16 @@ def _common_oneliners_params(request, items):
     params['command_cloud'] = Tag.tagcloud()
     params['category_cloud'] = models.Category.cloud().filter(type="function")
     return params
+
+
+@render_with_context(custom_params=True)
+def category(request, pk):
+    category_name = get_object_or_404(oneliners.models.Category, pk=pk).name
+    items = OneLiner.filter_by_category(category_name, '-id')
+    params = _common_oneliners_params(request, items)
+    params['active_newest'] = 'active'
+    params['ordering'] = 'newest'
+    return 'oneliners/pages/index.html', params
 
 
 def published_oneliners():

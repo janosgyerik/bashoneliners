@@ -87,13 +87,13 @@ These one-liners should help you automate tasks, troubleshoot problems, whether 
 
     $('.categories a').click(function(e) {
         e.preventDefault();
-        if ($(this).parent().hasClass('active')) {
-            selected_command = null;
-            $(this).parent().removeClass('active');
+        if ($(this).hasClass('active')) {
+            selected_category = null;
+            $(this).removeClass('active');
             location.reload();
         } else {
-            $('.categories li.active').removeClass('active');
-            $(this).parent().addClass('active');
+            $('.categories li a.active').removeClass('active');
+            $(this).addClass('active');
             selected_category = $(this).text();
             search_by_category();
         }
@@ -101,13 +101,13 @@ These one-liners should help you automate tasks, troubleshoot problems, whether 
 
     $('.commands a').click(function(e) {
         e.preventDefault();
-        if ($(this).parent().hasClass('active')) {
+        if ($(this).hasClass('active')) {
             selected_command = null;
-            $(this).parent().removeClass('active');
+            $(this).removeClass('active');
             location.reload();
         } else {
-            $('.commands li.active').removeClass('active');
-            $(this).parent().addClass('active');
+            $('.commands li a.active').removeClass('active');
+            $(this).addClass('active');
             selected_command = $(this).text();
             search_by_command();
         }

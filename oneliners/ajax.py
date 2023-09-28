@@ -85,3 +85,25 @@ def search_by_category(request):
         params['oneliners'] = ()
 
     return render(request, 'oneliners/elements/oneliners.html', params)
+
+
+def search_by_filters(request):
+    params = {'user': request.user}
+
+    try:
+        category = request.GET.get('category')
+        command = request.GET.get('command')
+        ordering = request.GET.get('ordering')
+        if ordering == 'popular':
+            order_by = '-vote_sum'
+        elif ordering == 'active':
+            order_by = '-updated_dt'
+        else:
+            order_by = '-id'
+
+        items = OneLiner.filter_by_category_and_command(category, command, order_by=order_by)
+        params['oneliners'] = items
+    except ValidationError:
+        params['oneliners'] = ()
+
+    return render(request, 'oneliners/elements/oneliners.html', params)

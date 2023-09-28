@@ -139,24 +139,6 @@ def oneliners_popular(request):
     return 'oneliners/pages/index.html', params
 
 
-@render_with_context(custom_params=True)
-def oneliners_commands(request):
-    items = published_oneliners().order_by('-vote_sum', '-id')[:ITEMS_PER_PAGE]
-    params = _common_oneliners_params(request, items)
-    params['active_commands'] = 'active'
-    params['ordering'] = 'popular'
-    return 'oneliners/pages/index.html', params
-
-
-@render_with_context(custom_params=True)
-def oneliners_categories(request):
-    items = published_oneliners().order_by('-vote_sum', '-id')[:ITEMS_PER_PAGE]
-    params = _common_oneliners_params(request, items)
-    params['active_categories'] = 'active'
-    params['ordering'] = 'popular'
-    return 'oneliners/pages/index.html', params
-
-
 def oneliner(request, pk):
     params = _common_params(request)
     params['oneliner'] = get_object_or_404(OneLiner, pk=pk)

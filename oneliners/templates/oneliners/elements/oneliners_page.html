@@ -1,16 +1,32 @@
-{% if active_commands == 'active' %}
-<ul class="nav nav-pills commands">
-    {% for command in command_cloud %}
-        <li class="nav-item"><a class="nav-link" href="#">{{ command.text }}</a></li>
-    {% endfor %}
-</ul>
-{% elif active_categories == 'active' %}
-<ul class="nav nav-pills categories">
+<button
+  class="btn btn-secondary"
+  type="button"
+  data-mdb-toggle="collapse"
+  data-mdb-target="#categories"
+  aria-expanded="false"
+  aria-controls="categories"
+>Categories<i class="fas fa-angle-down ms-2"></i></button>
+
+<button
+  class="btn btn-secondary"
+  type="button"
+  data-mdb-toggle="collapse"
+  data-mdb-target="#commands"
+  aria-expanded="false"
+  aria-controls="commands"
+>Commands<i class="fas fa-angle-down ms-2"></i></button>
+
+<ul class="nav nav-pills categories collapse" id="categories">
     {% for category in category_cloud %}
         <li class="nav-item"><a class="nav-link" href="#">{{ category.display_name }}</a></li>
     {% endfor %}
 </ul>
-{% endif %}
+
+<ul class="nav nav-pills commands collapse" id="commands">
+    {% for command in command_cloud %}
+        <li class="nav-item"><a class="nav-link" href="#">{{ command.text }}</a></li>
+    {% endfor %}
+</ul>
 
 <div class="oneliners">
     {% for oneliner in oneliners_page.object_list %}

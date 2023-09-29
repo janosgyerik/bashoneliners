@@ -235,6 +235,9 @@ class OneLiner(models.Model):
     def get_tags(self):
         return [rel.tag.text for rel in self.onelinertag_set.all()]
 
+    def get_commands(self):
+        return self.get_tags()
+
     def set_categories(self, categories: List['Category']):
         self.onelinercategory_set.all().delete()
         for category in categories:

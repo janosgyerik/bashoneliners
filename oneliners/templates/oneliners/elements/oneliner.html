@@ -48,6 +48,14 @@
                 {% endfor %}
             </div>
 
+            {% if user.is_staff %}
+            <div class="commands mb-2 alert alert-warning">
+                {% for command in oneliner.get_commands %}
+                    <span class="badge rounded-pill badge-light">{{ command }}</span>
+                {% endfor %}
+            </div>
+            {% endif %}
+
             {% if not boxed_oneliner %}
                 {% if user == oneliner.user %}
                     <a class="d-block d-md-inline-block btn btn-primary {% if not oneliner.is_published %}btn-warning{% endif %}"

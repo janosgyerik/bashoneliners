@@ -52,7 +52,7 @@
     {% if request.META.SERVER_NAME == 'www.bashoneliners.com' and request.META.HTTPS == 'on' and not user.is_staff %}
         <!-- Google Tag Manager (noscript) -->
         <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MWK2FR6W"
-        height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+        height="0" width="0" style="display:none;visibility:hidden" title="Google Tag Manager"></iframe></noscript>
         <!-- End Google Tag Manager (noscript) -->
     {% endif %}
 
@@ -73,7 +73,7 @@
                     <div class="col-md-3 col-lg-4 col-xl-3 mx-auto">
                         <!-- Content -->
                         <h6 class="text-uppercase fw-bold mb-4">
-                            <img src="{% static 'images/favicon.ico' %}">
+                            <img alt="favicon" src="{% static 'images/favicon.ico' %}">
                             bashoneliners.com
                         </h6>
                     </div>

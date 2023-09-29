@@ -1,3 +1,6 @@
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=janosgyerik_bashoneliners&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=janosgyerik_bashoneliners)
+
+
 Setup
 -----
 

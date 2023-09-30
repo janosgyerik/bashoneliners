@@ -10,7 +10,7 @@ from django.contrib.auth.models import User
 from django.dispatch import receiver
 from django.utils.timezone import now
 
-from oneliners.tools import tags as tag_tools
+from oneliners.tools import commands as commands_tools
 from oneliners import categorization
 
 RECENT_LIMIT = 25
@@ -161,7 +161,7 @@ class OneLiner(models.Model):
         if category_name:
             query = query.filter(onelinercategory__category__name=category_name)
         if command:
-            query = query.filter(onelinertag__tag__text=command)
+            query = query.filter(onelinercommand__command__name=command)
         if order_by:
             query = query.order_by(order_by, '-id')
         return query[:limit]
@@ -225,19 +225,6 @@ class OneLiner(models.Model):
             if match_limitations and re.search(r'\b%s\b' % term, self.limitations):
                 return True
 
-    def update_tags(self):
-        self.onelinertag_set.all().delete()
-        if self.is_published:
-            for tagword in tag_tools.compute_tags_as_first_command(self.line):
-                tag = Tag.create_or_get(tagword)
-                OneLinerTag(oneliner=self, tag=tag).save()
-
-    def get_tags(self):
-        return [rel.tag.text for rel in self.onelinertag_set.all()]
-
-    def get_commands(self):
-        return self.get_tags()
-
     def set_categories(self, categories: List['Category']):
         self.onelinercategory_set.all().delete()
         for category in categories:
@@ -249,6 +236,26 @@ class OneLiner(models.Model):
     def has_categories(self):
         return self.onelinercategory_set.exists()
 
+    def set_commands(self, commands: List['Command']):
+        self.onelinercommand_set.all().delete()
+        for command in commands:
+            OnelinerCommand(oneliner=self, command=command).save()
+
+    def get_commands(self):
+        return [rel.command for rel in self.onelinercommand_set.all()]
+
+    def has_commands(self):
+        return self.onelinercommand_set.exists()
+
+    def update_commands(self):
+        if self.is_published:
+            self.onelinertag_set.all().delete()
+            commands = []
+            for raw_command in commands_tools.extract_commands_from_line(self.line):
+                command, _ = Command.objects.get_or_create(name=raw_command)
+                commands.append(command)
+            self.set_commands(commands)
+
     def save(self, *args, **kwargs):
         self.updated_dt = now()
 
@@ -257,7 +264,7 @@ class OneLiner(models.Model):
 
         ret = super(OneLiner, self).save(*args, **kwargs)
 
-        self.update_tags()
+        self.update_commands()
 
         return ret
 
@@ -426,3 +433,29 @@ class CategorizationAdapter:
             categories.append(category)
 
         return categories
+
+
+class Command(models.Model):
+    name = models.SlugField(max_length=20, unique=True)
+    description = models.TextField(blank=True)
+
+    created_dt = models.DateTimeField(default=now, blank=True)
+    updated_dt = models.DateTimeField(default=now, blank=True)
+
+    def __str__(self):
+        return self.name
+
+    @staticmethod
+    def cloud():
+        commands = Command.objects.annotate(count=Count('onelinercommand')).filter(
+            count__gte=3).order_by('name').values('name', 'description', 'count')
+        return commands
+
+
+class OnelinerCommand(models.Model):
+    oneliner = models.ForeignKey(OneLiner, on_delete=models.CASCADE)
+    command = models.ForeignKey(Command, on_delete=models.CASCADE)
+
+    class Meta:
+        unique_together = [['oneliner', 'command']]
+

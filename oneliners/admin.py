@@ -12,6 +12,10 @@ from oneliners import models as site_models
 admin.site.unregister(User)
 
 
+class OnelinerCommandInline(admin.StackedInline):
+    model = site_models.OnelinerCommand
+
+
 class UserSocialAuthInline(admin.StackedInline):
     model = UserSocialAuth
     show_change_link = True
@@ -42,6 +46,7 @@ class UserAdmin(admin.ModelAdmin):
 
 @admin.register(site_models.OneLiner)
 class OneLinerAdmin(admin.ModelAdmin):
+    inlines = [OnelinerCommandInline]
     list_display = ('user', 'is_published', 'was_tweeted', 'unpublished', 'summary', 'updated_dt')
     list_display_links = ('summary',)
     list_filter = ('was_tweeted', 'is_published', 'unpublished')
@@ -92,20 +97,16 @@ class CategoryAdmin(admin.ModelAdmin):
         return obj.onelinercategory__count
 
 
-class OnelinerCommandInline(admin.StackedInline):
-    model = site_models.OneLinerTag
-
-
-@admin.register(site_models.Tag)
+@admin.register(site_models.Command)
 class CommandAdmin(admin.ModelAdmin):
-    list_display = ('text', 'onelinercommand_count', 'created_dt')
+    list_display = ('name', 'onelinercommand_count', 'created_dt')
     inlines = [OnelinerCommandInline]
-    ordering = ['text']
+    ordering = ['name']
 
     def get_queryset(self, request):
         qs = super().get_queryset(request)
-        qs = qs.annotate(models.Count('onelinertag'))
+        qs = qs.annotate(models.Count('onelinercommand'))
         return qs
 
     def onelinercommand_count(self, obj):
-        return obj.onelinertag__count
+        return obj.onelinercommand__count

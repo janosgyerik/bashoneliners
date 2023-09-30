@@ -104,7 +104,7 @@ def _common_oneliners_params(request, items):
 
     params['oneliners_page'] = page
     params['oneliners_page_range'] = paginator.get_elided_page_range(page.number, on_each_side=1, on_ends=1)
-    params['command_cloud'] = Tag.tagcloud()
+    params['command_cloud'] = models.Command.cloud()
     params['category_cloud'] = models.Category.cloud().filter(type="function")
     return params
 

@@ -6,6 +6,7 @@ from django.core.paginator import Paginator, InvalidPage, EmptyPage
 from django.db.models import Sum
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
+from django.views.decorators.http import require_http_methods
 
 import oneliners.models
 from oneliners import models
@@ -109,6 +110,7 @@ def _common_oneliners_params(request, items):
     return params
 
 
+@require_http_methods(["GET"])
 @render_with_context(custom_params=True)
 def category(request, pk):
     category_name = get_object_or_404(oneliners.models.Category, pk=pk).name

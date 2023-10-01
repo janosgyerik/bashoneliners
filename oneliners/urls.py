@@ -39,7 +39,5 @@ urlpatterns = [
 urlpatterns += [
     path('ajax/oneliner/<int:oneliner_pk>/vote/', ajax.oneliner_vote, name='oneliner_vote'),
     path('ajax/search/', ajax.search, name='search_by_keyword'),
-    path('ajax/search/command/', ajax.search_by_command, name='search_by_command'),
-    path('ajax/search/category/', ajax.search_by_category, name='search_by_category'),
     path('ajax/search/filters/', ajax.search_by_filters, name='search_by_filters'),
 ]

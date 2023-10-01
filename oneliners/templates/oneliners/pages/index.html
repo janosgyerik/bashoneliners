@@ -52,32 +52,6 @@ These one-liners should help you automate tasks, troubleshoot problems, whether 
     var selected_command;
     var selected_category;
 
-    function search_by_command() {
-        var options = {
-            url: '{% url 'search_by_command' %}',
-            type: 'get',
-            data: {
-                'command': selected_command,
-                'ordering': ordering
-            },
-            success: search_success
-        };
-        $.ajax(options);
-    }
-
-    function search_by_category() {
-        var options = {
-            url: '{% url 'search_by_category' %}',
-            type: 'get',
-            data: {
-                'category': selected_category,
-                'ordering': ordering
-            },
-            success: search_success
-        };
-        $.ajax(options);
-    }
-
     function search_by_filters() {
         var options = {
             url: '{% url 'search_by_filters' %}',

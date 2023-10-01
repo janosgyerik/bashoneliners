@@ -114,7 +114,7 @@ def _common_oneliners_params(request, items):
 @render_with_context(custom_params=True)
 def category(request, pk):
     category_name = get_object_or_404(oneliners.models.Category, pk=pk).name
-    items = OneLiner.filter_by_category(category_name, '-id')
+    items = OneLiner.filter_by_category(category_name, '-published_dt')
     params = _common_oneliners_params(request, items)
     params['active_newest'] = 'active'
     params['ordering'] = 'newest'

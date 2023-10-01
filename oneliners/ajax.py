@@ -58,10 +58,12 @@ def search_by_filters(request):
         category = request.GET.get('category')
         command = request.GET.get('command')
         ordering = request.GET.get('ordering')
-        if ordering == 'popular':
-            order_by = '-vote_sum'
+        if ordering == 'newest':
+            order_by = '-published_dt'
         elif ordering == 'active':
             order_by = '-updated_dt'
+        elif ordering == 'popular':
+            order_by = '-vote_sum'
         else:
             order_by = '-id'
 

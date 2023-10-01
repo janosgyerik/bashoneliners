@@ -121,6 +121,17 @@ def category(request, pk):
     return 'oneliners/pages/index.html', params
 
 
+@require_http_methods(["GET"])
+@render_with_context(custom_params=True)
+def command(request, pk):
+    command_name = get_object_or_404(oneliners.models.Command, pk=pk).name
+    items = OneLiner.filter_by_command(command_name, '-published_dt')
+    params = _common_oneliners_params(request, items)
+    params['active_newest'] = 'active'
+    params['ordering'] = 'newest'
+    return 'oneliners/pages/index.html', params
+
+
 def published_oneliners():
     return OneLiner.objects.filter(is_published=True).annotate(vote_sum=Sum('vote__value'))
 

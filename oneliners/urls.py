@@ -12,6 +12,7 @@ urlpatterns = [
     path('active/', views.oneliners_active, name='oneliners_active'),
     path('popular/', views.oneliners_popular, name='oneliners_popular'),
     path('categories/<int:pk>/', views.category, name='category'),
+    path('commands/<int:pk>/', views.command, name='command'),
     path('<int:pk>/', views.oneliner, name='oneliner'),
     path('<int:pk>/edit/', views.oneliner_edit, name='oneliner_edit'),
     path('<int:pk>/tweet/', views.oneliner_tweet, name='oneliner_tweet'),

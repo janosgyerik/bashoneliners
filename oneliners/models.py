@@ -16,7 +16,6 @@ from oneliners import categorization
 RECENT_LIMIT = 25
 SEARCH_LIMIT = 25
 FEED_LIMIT = 10
-TAGCLOUD_MIN_COUNT = 3
 
 
 def randomstring(length=16):
@@ -142,7 +141,7 @@ class OneLiner(models.Model):
     @staticmethod
     def filter_by_command(command, order_by=None, limit=RECENT_LIMIT):
         query = OneLiner.objects.filter(is_published=True).annotate(
-            vote_sum=Sum('vote__value')).filter(onelinertag__tag__text=command)
+            vote_sum=Sum('vote__value')).filter(onelinercommand__command__name=command)
         if order_by:
             query = query.order_by(order_by, '-id')
         return query[:limit]
@@ -249,7 +248,7 @@ class OneLiner(models.Model):
 
     def update_commands(self):
         if self.is_published:
-            self.onelinertag_set.all().delete()
+            self.onelinercommand_set.all().delete()
             commands = []
             for raw_command in commands_tools.extract_commands_from_line(self.line):
                 command, _ = Command.objects.get_or_create(name=raw_command)
@@ -304,36 +303,6 @@ class OneLinerSnapshot(models.Model):
     unpublished = models.BooleanField()
 
     created_dt = models.DateTimeField(default=now)
-
-
-class Tag(models.Model):
-    text = models.SlugField(max_length=50)
-
-    created_dt = models.DateTimeField(default=now, blank=True)
-    updated_dt = models.DateTimeField(default=now, blank=True)
-
-    def __str__(self):
-        return self.text
-
-    @staticmethod
-    def create_or_get(text):
-        try:
-            return Tag.objects.get(text=text)
-        except Tag.DoesNotExist:
-            tag = Tag(text=text)
-            tag.save()
-            return tag
-
-    @staticmethod
-    def tagcloud():
-        tags = Tag.objects.annotate(count=Count('onelinertag')).filter(
-            count__gte=TAGCLOUD_MIN_COUNT).order_by('text').values('text', 'count')
-        return [tag for tag in tags if tag['text'] not in {'do', 'done', 'fi', 'then', 'in', 'copy'}]
-
-
-class OneLinerTag(models.Model):
-    oneliner = models.ForeignKey(OneLiner, on_delete=models.CASCADE)
-    tag = models.ForeignKey(Tag, on_delete=models.CASCADE)
 
 
 class Vote(models.Model):

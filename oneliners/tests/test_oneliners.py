@@ -2,7 +2,7 @@ from django.test import TestCase, override_settings
 
 import oneliners.models
 from oneliners import categorization
-from oneliners.models import Tag, OneLiner, User
+from oneliners.models import OneLiner, User
 from oneliners.forms import SearchOneLinerForm, EditOneLinerForm
 from oneliners.tweet import TWEET_LENGTH_LIMIT
 

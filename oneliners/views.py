@@ -10,7 +10,7 @@ from django.views.decorators.http import require_http_methods
 
 import oneliners.models
 from oneliners import models
-from oneliners.models import OneLiner, User, Tag
+from oneliners.models import OneLiner, User
 from oneliners.forms import EditHackerProfileForm, PostOneLinerForm, SearchOneLinerForm, EditOneLinerForm
 
 

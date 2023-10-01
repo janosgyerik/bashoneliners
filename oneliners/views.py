@@ -125,7 +125,7 @@ def published_oneliners():
 
 @render_with_context(custom_params=True)
 def oneliners_newest(request):
-    items = published_oneliners().order_by('-id')
+    items = published_oneliners().order_by('-published_dt')
     params = _common_oneliners_params(request, items)
     params['active_newest'] = 'active'
     params['ordering'] = 'newest'

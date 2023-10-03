@@ -20,12 +20,12 @@
         <div class="flex-grow-1 ms-4">
             <h2 class="h5">
                 {% if not oneliner.is_published %}<span class="badge badge-warning">not published</span>{% endif %}
-                <a href="{% url 'oneliner' oneliner.pk %}">{{ oneliner.summary|capfirst }}</a>
+                <a href="{% url 'oneliner' oneliner.pk %}">{{ oneliner.summary | capfirst }}</a>
             </h2>
             <pre class="line">{{ oneliner.line }}</pre>
 
             <p class="author align-items-center">
-                <span class="date">{{ oneliner.published_dt | date:"F j, Y" }}</span>
+                <span class="date">{{ oneliner.published_dt | date:"F j, Y" | default:"Not published" }}</span>
                 &mdash;
                 <a href="{% url 'profile_of' oneliner.user.pk %}">{{ oneliner.user.hackerprofile.get_display_name }}</a>
             </p>

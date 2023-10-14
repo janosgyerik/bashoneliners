@@ -25,7 +25,7 @@ class Command(BaseCommand):
         categorizer = categorization.OpenAiCategorizationComputer(api_key)
         adapter = models.CategorizationAdapter()
 
-        oneliners = models.OneLiner.objects.filter(onelinercategory__isnull=True)
+        oneliners = models.OneLiner.objects.filter(onelinercategory__isnull=True, is_published=True)
         if not options['all']:
             pklist = options['pk']
             oneliners = oneliners.filter(pk__in=pklist)

@@ -4,6 +4,8 @@ from django.urls import include, path, reverse
 from django.views.generic.base import RedirectView
 from django.views.generic.base import TemplateView
 
+from django_distill import distill_path
+
 from oneliners import models
 
 posts_sitemap = {
@@ -39,14 +41,19 @@ urlpatterns = [
 
     path('admin/', admin.site.urls),
 
-    path('legal/terms-of-service',
-         TemplateView.as_view(template_name="legal/terms-of-service.html"), name='terms-of-service'),
-    path('legal/privacy-policy',
-         TemplateView.as_view(template_name="legal/privacy-policy.html"), name='privacy-policy'),
-    path('legal/code-of-conduct',
-         TemplateView.as_view(template_name="legal/code-of-conduct.html"), name='code-of-conduct'),
+    distill_path(
+        'legal/terms-of-service/',
+        TemplateView.as_view(template_name="legal/terms-of-service.html"), name='terms-of-service'),
+    distill_path(
+        'legal/privacy-policy/',
+        TemplateView.as_view(template_name="legal/privacy-policy.html"), name='privacy-policy'),
+    distill_path(
+        'legal/code-of-conduct/',
+        TemplateView.as_view(template_name="legal/code-of-conduct.html"), name='code-of-conduct'),
 
-    path('robots.txt', TemplateView.as_view(template_name="robots.txt", content_type="text/plain")),
+    distill_path(
+        'robots.txt', TemplateView.as_view(template_name="robots.txt", content_type="text/plain"),
+        name='robots'),
 
     path("sitemap.xml", sitemap, {"sitemaps": sitemaps}, name="django.contrib.sitemaps.views.sitemap"),
 ]

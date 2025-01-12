@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     # Required by sitemaps.
     'django.contrib.sites',
     'django.contrib.sitemaps',
+    'django_distill',
 ]
 
 SITE_ID = 1

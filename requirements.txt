@@ -4,3 +4,4 @@ Markdown
 social-auth-app-django
 tweepy
 openai
+django_distill

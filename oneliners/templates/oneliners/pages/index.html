@@ -45,7 +45,10 @@ useful, easy to read, follows best practices, with clear, detailed, accurate exp
 These one-liners should help you automate tasks, troubleshoot problems, whether it be in system administration,
     file management, networking or programming.</p>
 
+    {% flag_enabled 'ONELINERS_TABS' as flag_oneliners_tabs %}
+    {% if flag_oneliners_tabs %}
     {% include 'oneliners/elements/oneliners_tabs.html' %}
+    {% endif %}
 
     {% include 'oneliners/elements/oneliners_page.html' %}
 

@@ -40,6 +40,7 @@ AUTHENTICATION_BACKENDS = ['django.contrib.auth.backends.ModelBackend']
 FLAGS = {
     'DEPLOYMENT_LINKS': [{'condition': 'boolean', 'value': True}],
     'LOGIN': [{'condition': 'boolean', 'value': True}],
+    'ONELINERS_TABS': [{'condition': 'boolean', 'value': True}],
 }
 
 # 1. Login to Twitter

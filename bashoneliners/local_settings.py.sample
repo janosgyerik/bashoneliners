@@ -37,6 +37,10 @@ ALLOWED_HOSTS = ['127.0.0.1']
 
 AUTHENTICATION_BACKENDS = ['django.contrib.auth.backends.ModelBackend']
 
+FLAGS = {
+    'DEPLOYMENT_LINKS': [{'condition': 'boolean', 'value': True}],
+}
+
 # 1. Login to Twitter
 # 2. Go to https://dev.twitter.com/apps/new and fill the form
 #    - Application Type should be Client

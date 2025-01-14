@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 
+{% load feature_flags %}
+
 {% block pagetitle %}Bash One-Liners{% endblock %}
 
 {% block keywords %}bash, ksh, shell, script, one-liner, oneliner, tips, tricks, snippets, linux, unix, vote,
@@ -23,11 +25,14 @@ This is an open-source project, built with love, Django, Python, jQuery, Git, Gi
 {% block pageheading %}
 <h1>
     bashoneliners.com
+    {% flag_enabled 'DEPLOYMENT_LINKS' as flag_deployment_links %}
+    {% if flag_deployment_links %}
     {% if request.META.SERVER_NAME != 'www.bashoneliners.com' %}
         <a href="https://bashoneliners.com/" class="btn btn-primary">go to prod</a>
     {% endif %}
     {% if request.META.SERVER_NAME != 'beta.bashoneliners.com' and user.is_superuser %}
         <a href="https://beta.bashoneliners.com/" class="btn btn-secondary">go to beta</a>
+    {% endif %}
     {% endif %}
 </h1>
 {% endblock %}

@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'django.contrib.sitemaps',
     'django_distill',
+    'flags',
 ]
 
 SITE_ID = 1
@@ -200,6 +201,10 @@ EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
 
 LOGIN_URL = '/oneliners/login/'
 LOGIN_REDIRECT_URL = '/oneliners/login/'
+
+FLAGS = {
+    # 'DEPLOYMENT_LINKS': [{'condition': 'boolean', 'value': True}],
+}
 
 #
 # Project specific non-Django settings.

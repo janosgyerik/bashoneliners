@@ -44,6 +44,9 @@
     {% endfor %}
 </div>
 
+{% flag_enabled 'PAGINATION' as flag_pagination %}
+{% if flag_pagination %}
 {% with page=oneliners_page page_range=oneliners_page_range %}
     {% include 'oneliners/elements/pagination.html' %}
 {% endwith %}
+{% endif %}

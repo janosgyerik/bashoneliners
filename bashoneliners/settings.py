@@ -209,6 +209,7 @@ FLAGS = {
     # 'SEARCH': [{'condition': 'boolean', 'value': True}],
     # 'CATEGORIES_FILTER': [{'condition': 'boolean', 'value': True}],
     # 'COMMANDS_FILTER': [{'condition': 'boolean', 'value': True}],
+    # 'PAGINATION': [{'condition': 'boolean', 'value': True}],
 }
 
 #

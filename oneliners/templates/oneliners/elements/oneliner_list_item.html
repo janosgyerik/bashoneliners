@@ -1,7 +1,10 @@
 {% load upvote %}
+{% load feature_flags %}
 
 <div class="card oneliner">
   <div class="card-body">
+      {% flag_enabled 'VOTING' as flag_voting %}
+      {% if flag_voting %}
       <div class="d-flex align-items-start">
       {% if voting_enabled %}
         <div class="flex-shrink-0 upvotejs" id="{{ oneliner.pk }}" data-id="{{ oneliner.pk }}" data-user-id="{{ oneliner.user.id }}">
@@ -18,18 +21,11 @@
       {% endif %}
 
         <div class="flex-grow-1 ms-4">
-            <h2 class="h5">
-                {% if not oneliner.is_published %}<span class="badge badge-warning">not published</span>{% endif %}
-                <a href="{% url 'oneliner' oneliner.pk %}">{{ oneliner.summary | capfirst }}</a>
-            </h2>
-            <pre class="line">{{ oneliner.line }}</pre>
-
-            <p class="author align-items-center">
-                <span class="date">{{ oneliner.published_dt | date:"F j, Y" | default:"Not published" }}</span>
-                &mdash;
-                <a href="{% url 'profile_of' oneliner.user.pk %}">{{ oneliner.user.hackerprofile.get_display_name }}</a>
-            </p>
+        {% include 'oneliners/elements/oneliner_list_item_oneliner.html' %}
         </div>
     </div>
+      {% else %}
+        {% include 'oneliners/elements/oneliner_list_item_oneliner.html' %}
+      {% endif %}
   </div>
 </div>

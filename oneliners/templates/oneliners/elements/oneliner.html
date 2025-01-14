@@ -1,14 +1,18 @@
 {% load markup %}
 {% load upvote %}
+{% load feature_flags %}
 
 <div class="card oneliner oneliner-detailed">
   <div class="card-body">
       <div class="d-flex align-items-start">
+        {% flag_enabled 'VOTING' as flag_voting %}
+        {% if flag_voting %}
         <div class="flex-shrink-0 upvotejs" id="{{ oneliner.pk }}" data-id="{{ oneliner.pk }}" data-user-id="{{ oneliner.user.id }}">
             <a class="upvote {% upvoted oneliner %}"></a>
             <span class="count">{{ oneliner.score }}</span>
             <a class="downvote {% downvoted oneliner %}"></a>
         </div>
+        {% endif %}
 
         <div class="flex-grow-1 ms-4">
             <h2 class="h5">

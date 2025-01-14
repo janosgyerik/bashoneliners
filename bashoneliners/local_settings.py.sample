@@ -2,7 +2,7 @@
 
 from bashoneliners.settings import *
 
-DEBUG = False
+DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
@@ -33,7 +33,9 @@ SECRET_KEY = '__regenerate_this__'
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
-ALLOWED_HOSTS = ['www.example.com']
+ALLOWED_HOSTS = ['127.0.0.1']
+
+AUTHENTICATION_BACKENDS = ['django.contrib.auth.backends.ModelBackend']
 
 # 1. Login to Twitter
 # 2. Go to https://dev.twitter.com/apps/new and fill the form

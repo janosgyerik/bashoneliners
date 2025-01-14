@@ -206,6 +206,7 @@ FLAGS = {
     # 'DEPLOYMENT_LINKS': [{'condition': 'boolean', 'value': True}],
     # 'LOGIN': [{'condition': 'boolean', 'value': True}],
     # 'ONELINERS_TABS': [{'condition': 'boolean', 'value': True}],
+    # 'PROFILE_TABS': [{'condition': 'boolean', 'value': True}],
     # 'SEARCH': [{'condition': 'boolean', 'value': True}],
     # 'CATEGORIES_FILTER': [{'condition': 'boolean', 'value': True}],
     # 'COMMANDS_FILTER': [{'condition': 'boolean', 'value': True}],

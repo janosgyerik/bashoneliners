@@ -1,3 +1,7 @@
+{% load feature_flags %}
+
+{% flag_enabled 'PROFILE_TABS' as flag_profile_tabs %}
+{% if flag_profile_tabs %}
 <ul class="nav nav-tabs nav-justified mb-3" role="tablist">
     {% if hacker == user %}
         <li class="nav-item" role="presentation">
@@ -12,4 +16,4 @@
         <a class="nav-link {{ active_oneliners }}" href="{% url 'profile_oneliners_of' hacker.pk %}" role="tab">One-Liners</a>
     </li>
 </ul>
-
+{% endif %}

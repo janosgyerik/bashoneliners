@@ -1,6 +1,7 @@
 {% extends "html5.html" %}
 
 {% load static %}
+{% load feature_flags %}
 
 {% block title %}{% block pagetitle %}{% endblock %} | bashoneliners.com{% endblock %}
 
@@ -72,7 +73,10 @@
               <li><a class="dropdown-item" href="{% url 'logout' %}">Logout</a></li>
           </ul>
         {% else %}
+          {% flag_enabled 'LOGIN' as flag_login %}
+          {% if flag_login %}
           <a href="{% url 'login' %}"><button type="button" class="btn btn-link">Login</button></a>
+          {% endif %}
         {% endif %}
       </div>
     </div>

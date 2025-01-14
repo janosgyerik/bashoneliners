@@ -204,6 +204,7 @@ LOGIN_REDIRECT_URL = '/oneliners/login/'
 
 FLAGS = {
     # 'DEPLOYMENT_LINKS': [{'condition': 'boolean', 'value': True}],
+    # 'LOGIN': [{'condition': 'boolean', 'value': True}],
 }
 
 #

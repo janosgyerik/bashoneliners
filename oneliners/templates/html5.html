@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 {% load static %}
+{% load feature_flags %}
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
@@ -30,20 +31,19 @@
     <meta name="description" content="{% block description %}{% endblock %}">
     <meta name="author" content="Janos Gyerik info@bashoneliners.com">
 
-    <!-- request.META.SERVER_NAME={{ request.META.SERVER_NAME }} -->
-    <!-- request.META.HTTPS={{ request.META.HTTPS }} -->
-    {% if request.META.SERVER_NAME != 'www.bashoneliners.com' or request.META.HTTPS != 'on' %}
-        <!-- Do not index this page or follow links from it.
-         See https://developers.google.com/search/docs/crawling-indexing/robots-meta-tag -->
-        <meta name="robots" content="none">
-    {% elif not user.is_staff %}
-        <!-- Google Tag Manager -->
-        <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-        })(window,document,'script','dataLayer','GTM-MWK2FR6W');</script>
-        <!-- End Google Tag Manager -->
+    {% flag_enabled 'DJANGO_SITE' as flag_django_site %}
+    {% if flag_django_site %}
+        <!-- request.META.SERVER_NAME={{ request.META.SERVER_NAME }} -->
+        <!-- request.META.HTTPS={{ request.META.HTTPS }} -->
+        {% if request.META.SERVER_NAME != 'www.bashoneliners.com' or request.META.HTTPS != 'on' %}
+            <!-- Do not index this page or follow links from it.
+             See https://developers.google.com/search/docs/crawling-indexing/robots-meta-tag -->
+            <meta name="robots" content="none">
+        {% elif not user.is_staff %}
+          {% include 'google_tag_manager.html' %}
+        {% endif %}
+    {% else %}
+        {% include 'google_tag_manager.html' %}
     {% endif %}
   </head>
 

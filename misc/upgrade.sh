@@ -16,4 +16,9 @@ git reset --hard "releases/$branch"
 ./manage.sh collectstatic --noinput
 ./manage.sh migrate
 
+# Restart Django site
 touch ../tmp/restart.txt
+
+# Export static site to ../public/
+./manage.sh distill-local ../public/ --force
+cp ../public.bak/goo* ../public/.htaccess ../public/

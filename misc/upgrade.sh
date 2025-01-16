@@ -21,4 +21,4 @@ touch ../tmp/restart.txt
 
 # Export static site to ../public/
 ./manage.sh distill-local ../public/ --force
-cp ../public.bak/goo* ../public/.htaccess ../public/
+cp ../public.bak/goo* ../public.bak/.htaccess ../public/

@@ -17,3 +17,17 @@ def get_oneliners():
 def get_users():
     yield from get_objects(User.objects)
 
+
+def get_category_command_pairs():
+    categories = ['undefined']
+    commands = categories[:]
+    categories += [c['display_name'] for c in models.Category.cloud().filter(type="function")]
+    commands += [c['name'] for c in models.Command.cloud()]
+
+    for command in commands:
+        for category in categories:
+            yield {
+                'category': category,
+                'command': command,
+            }
+

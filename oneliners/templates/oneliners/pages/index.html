@@ -60,6 +60,8 @@ These one-liners should help you automate tasks, troubleshoot problems, whether 
     var selected_category;
 
     function search_by_filters() {
+        {% flag_enabled 'DJANGO_SITE' as flag_django_site %}
+        {% if flag_django_site %}
         var options = {
             url: '{% url 'search_by_filters' %}',
             type: 'get',
@@ -70,6 +72,13 @@ These one-liners should help you automate tasks, troubleshoot problems, whether 
             },
             success: search_success
         };
+        {% else %}
+        var options = {
+            url: '{% url 'search_by_filters' %}' + 'category/' + selected_category + '/command/' + selected_command + '/',
+            type: 'get',
+            success: search_success
+        };
+        {% endif %}
         $.ajax(options);
     }
 
@@ -83,7 +92,7 @@ These one-liners should help you automate tasks, troubleshoot problems, whether 
     $('.categories a').click(function(e) {
         e.preventDefault();
         if ($(this).hasClass('active')) {
-            selected_category = null;
+            selected_category = undefined;
             $(this).removeClass('active');
         } else {
             $('.categories li a.active').removeClass('active');
@@ -96,7 +105,7 @@ These one-liners should help you automate tasks, troubleshoot problems, whether 
     $('.commands a').click(function(e) {
         e.preventDefault();
         if ($(this).hasClass('active')) {
-            selected_command = null;
+            selected_command = undefined;
             $(this).removeClass('active');
         } else {
             $('.commands li a.active').removeClass('active');

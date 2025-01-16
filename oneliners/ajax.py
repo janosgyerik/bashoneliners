@@ -73,3 +73,23 @@ def search_by_filters(request):
         params['oneliners'] = ()
 
     return render(request, 'oneliners/elements/oneliners.html', params)
+
+
+@require_http_methods(["GET"])
+def search_by_filters_static(request, category, command):
+    params = {'user': request.user}
+
+    if command == 'undefined':
+        command = None
+
+    if category == 'undefined':
+        category = None
+
+    try:
+        order_by = '-published_dt'
+        items = OneLiner.filter_by_category_and_command(category, command, order_by=order_by)
+        params['oneliners'] = items
+    except ValidationError:
+        params['oneliners'] = ()
+
+    return render(request, 'oneliners/elements/oneliners.html', params)

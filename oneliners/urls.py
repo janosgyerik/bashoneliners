@@ -5,7 +5,6 @@ from django_distill import distill_path
 
 from . import views, ajax, feeds, distill
 
-
 urlpatterns = [
     path('', RedirectView.as_view(url='newest/', permanent=True), name='oneliners_default'),
     path('feeds/', views.feeds, name='feeds'),
@@ -44,4 +43,10 @@ urlpatterns += [
     path('ajax/oneliner/<int:oneliner_pk>/vote/', ajax.oneliner_vote, name='oneliner_vote'),
     path('ajax/search/', ajax.search, name='search_by_keyword'),
     path('ajax/search/filters/', ajax.search_by_filters, name='search_by_filters'),
+    distill_path(
+        'ajax/search/filters/category/<str:category>/command/<str:command>/',
+        ajax.search_by_filters_static,
+        name='search_by_filters_static',
+        distill_func=distill.get_category_command_pairs,
+    ),
 ]

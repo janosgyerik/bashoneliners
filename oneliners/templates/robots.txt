@@ -1,3 +1,5 @@
+{% load feature_flags %}
+
 User-agent: *
 Disallow: /admin/
 Disallow: /oauth/
@@ -7,7 +9,10 @@ Disallow: /oneliners/search/
 Disallow: /oneliners/users/
 Disallow: /legal/
 
+{% flag_enabled 'DJANGO_SITE' as flag_django_site %}
+{% if flag_django_site %}
 {% if request.META.SERVER_NAME != 'www.bashoneliners.com' or request.META.HTTPS != 'on' %}
 User-agent: *
 Disallow: /
+{% endif %}
 {% endif %}

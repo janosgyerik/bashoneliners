@@ -18,6 +18,10 @@ def get_onliners_per_category():
     yield from get_objects(models.Category.objects)
 
 
+def get_onliners_per_command():
+    yield from get_objects(models.Command.objects)
+
+
 def get_users():
     yield from get_objects(User.objects)
 

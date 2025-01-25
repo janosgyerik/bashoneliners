@@ -15,7 +15,8 @@ urlpatterns = [
     path('popular/', views.oneliners_popular, name='oneliners_popular'),
     distill_path(
         'categories/<int:pk>/', views.category, name='category', distill_func=distill.get_onliners_per_category),
-    path('commands/<int:pk>/', views.command, name='command'),
+    distill_path(
+        'commands/<int:pk>/', views.command, name='command', distill_func=distill.get_onliners_per_command),
     distill_path('<int:pk>/', views.oneliner, name='oneliner', distill_func=distill.get_oneliners),
     path('<int:pk>/edit/', views.oneliner_edit, name='oneliner_edit'),
     path('<int:pk>/tweet/', views.oneliner_tweet, name='oneliner_tweet'),

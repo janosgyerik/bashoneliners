@@ -14,6 +14,10 @@ def get_oneliners():
     yield from get_objects(models.OneLiner.objects)
 
 
+def get_onliners_per_category():
+    yield from get_objects(models.Category.objects)
+
+
 def get_users():
     yield from get_objects(User.objects)
 

@@ -13,7 +13,8 @@ urlpatterns = [
     distill_path('newest/', views.oneliners_newest, name='oneliners_newest'),
     path('active/', views.oneliners_active, name='oneliners_active'),
     path('popular/', views.oneliners_popular, name='oneliners_popular'),
-    path('categories/<int:pk>/', views.category, name='category'),
+    distill_path(
+        'categories/<int:pk>/', views.category, name='category', distill_func=distill.get_onliners_per_category),
     path('commands/<int:pk>/', views.command, name='command'),
     distill_path('<int:pk>/', views.oneliner, name='oneliner', distill_func=distill.get_oneliners),
     path('<int:pk>/edit/', views.oneliner_edit, name='oneliner_edit'),

@@ -17,6 +17,7 @@ posts_sitemap = {
 class StaticViewSitemap(sitemaps.Sitemap):
     priority = 0.5
     changefreq = "daily"
+    protocol = "https"
 
     def items(self):
         return ['feeds', 'oneliners_newest']
@@ -26,7 +27,7 @@ class StaticViewSitemap(sitemaps.Sitemap):
 
 
 sitemaps = {
-    "blog": sitemaps.GenericSitemap(posts_sitemap, priority=0.6),
+    "blog": sitemaps.GenericSitemap(posts_sitemap, priority=0.6, protocol="https"),
     "pages": StaticViewSitemap,
 }
 

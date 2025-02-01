@@ -1,5 +1,7 @@
 . ./virtualenv.sh
 
+distill_out=tmp/distill
+
 msg() {
     echo "* $*"
 }

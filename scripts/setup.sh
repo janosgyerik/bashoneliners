@@ -4,7 +4,7 @@ set -euo pipefail
 
 expected_python_version_pattern='^Python [0-9]\.[0-9]+'
 
-cd $(dirname "$0")/..
+cd "$(dirname "$0")"/..
 
 info() {
     echo "* $*"

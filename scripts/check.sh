@@ -1,20 +1,20 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-set -e
+set -euo pipefail
 
-cd $(dirname "$0")/..
+cd "$(dirname "$0")"/..
 . scripts/include.sh
 
 # directories to scan for coding style violations
-dirs=${apps[@]}
+dirs=("${apps[@]}")
 
 # E121 continuation line indentation is not a multiple of four
 # E123 closing bracket does not match indentation of opening bracket's line
 # E126 continuation line over-indented for hanging indent
 # E128 continuation line under-indented for visual indent
 # E501 line too long > 79 characters
-echo '###' pep8 for: $dirs
-pep8 $dirs | grep -v \
+echo "### pep8 for: ${dirs[*]}"
+pep8 "${dirs[@]}" | grep -v \
     -e E121 \
     -e E123 \
     -e E126 \
@@ -22,6 +22,6 @@ pep8 $dirs | grep -v \
     -e E501 || :
 echo
 
-echo '###' pyflakes for: $dirs
-pyflakes $dirs || :
+echo "### pyflakes for: ${dirs[*]}"
+pyflakes "${dirs[@]}" || :
 echo
